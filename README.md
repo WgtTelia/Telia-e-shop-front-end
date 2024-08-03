@@ -1,3 +1,5 @@
+# Telia E-shop Frontend
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -28,6 +30,46 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Project Features
+
+This project leverages the [App Directory](https://nextjs.org/docs/getting-started/project-structure), utilizing features like:
+
+*React Server Components
+*Nested, Grouped, and Parallel routes
+*[Suspense loading states](https://react.dev/reference/react/Suspense)
+*Error boundaries
+
+Absolute imports are configured (see [Next.js docs](https://nextjs.org/docs/pages/building-your-application/configuring/absolute-imports-and-module-aliases))
+
+_App Directory Structure_
+
+Routes are defined by directory structure within the app folder.
+Files with specific names handle layout, loading states, error handling, etc.
+See the [Next.js docs on Route Handlers for detailed information](https://nextjs.org/docs/app/building-your-application/routing/route-handlers).
+
+## ESLint and Prettier
+
+Code quality and consistency are maintained with ESLint and Prettier.
+Run formatting with: npm run format
+Run linting with: npm run lint
+
+## Testing
+
+This project uses Jest and Testing Library for unit and integration tests.
+Key libraries:
+jest
+@testing-library/react
+@testing-library/jest-dom
+@testing-library/user-event
+
+[Jest with Next.js](https://nextjs.org/docs/app/building-your-application/testing/jest#creating-your-first-test)
+
+Custom Jest matchers are used ([see](https://github.com/testing-library/jest-dom#custom-matchers))
+
+_Run tests_:
+All tests: npm run test
+Watch mode: npm run test:watch
 
 ## Deploy on Vercel
 
