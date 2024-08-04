@@ -13,6 +13,7 @@ yarn dev
 # or
 pnpm dev
 # or
+# or
 bun dev
 ```
 
@@ -63,7 +64,7 @@ jest
 @testing-library/jest-dom
 @testing-library/user-event
 
-[Jest with Next.js](https://nextjs.org/docs/app/building-your-application/testing/jest#creating-your-first-test)
+[Jest](https://testing-library.com/docs/ecosystem-jest-dom/) with [Next.js](https://nextjs.org/docs/app/building-your-application/testing/jest#creating-your-first-test)
 
 Custom Jest matchers are used ([see](https://github.com/testing-library/jest-dom#custom-matchers))
 
