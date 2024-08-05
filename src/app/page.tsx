@@ -7,10 +7,15 @@ export default function Home() {
       <div>
         <h1>Home</h1>
         <Link href='/about'>About</Link>
-        <div className="flex align-middle justify-center rounded-md px-4 py-2 bg-slate-700">
-          <p className="text-2xl">My first <span className="text-blue-400">test styles</span></p>
+        <div className='bg-white p-6'>
+          <div className='bg-grey-100 outline-grey-200 rounded-md px-4 py-2 align-middle outline outline-2 mb-6'>
+            <div className='align-center flex flex-row items-center justify-center gap-3'>
+              <div className='outline-success-light outline-3 bg-success h-[8px] w-[8px] rounded-lg outline'></div>
+              <p className='text-success'>In stock</p>
+            </div>
+          </div>
+          <TestButton />
         </div>
-        <TestButton />
       </div>
     </main>
   );
