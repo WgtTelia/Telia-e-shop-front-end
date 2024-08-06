@@ -1,5 +1,5 @@
+import { TestButton } from '@/components/TestButton';
 import Link from 'next/link';
-import { TestButton } from 'src/components/TestButton';
 
 export default function Home() {
   return (
@@ -8,9 +8,9 @@ export default function Home() {
         <h1>Home</h1>
         <Link href='/about'>About</Link>
         <div className='bg-white p-6'>
-          <div className='bg-grey-100 outline-grey-200 rounded-md px-4 py-2 align-middle outline outline-2 mb-6'>
+          <div className='mb-6 rounded-md bg-grey-100 px-4 py-2 align-middle outline outline-2 outline-grey-200'>
             <div className='align-center flex flex-row items-center justify-center gap-3'>
-              <div className='outline-success-light outline-3 bg-success h-[8px] w-[8px] rounded-lg outline'></div>
+              <div className='outline-3 h-[8px] w-[8px] rounded-lg bg-success outline outline-success-light'></div>
               <p className='text-success'>In stock</p>
             </div>
           </div>

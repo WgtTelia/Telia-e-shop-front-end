@@ -36,14 +36,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 This project leverages the [App Directory](https://nextjs.org/docs/getting-started/project-structure), utilizing features like:
 
-* React Server Components
-* Nested, Grouped, and Parallel routes
-* [Suspense loading states](https://react.dev/reference/react/Suspense)
-* Error boundaries
+- React Server Components
+- Nested, Grouped, and Parallel routes
+- [Suspense loading states](https://react.dev/reference/react/Suspense)
+- Error boundaries
 
 Absolute imports are configured (see [Next.js docs](https://nextjs.org/docs/pages/building-your-application/configuring/absolute-imports-and-module-aliases))
 
- ### App Directory Structure
+### App Directory Structure
 
 Routes are defined by directory structure within the app folder.
 Files with specific names handle layout, loading states, error handling, etc.
@@ -61,10 +61,11 @@ Run linting with: `npm run lint`
 
 This project uses Jest and Testing Library for unit and integration tests.
 Key libraries:
-* `jest`
-* `@testing-library/react`
-* `@testing-library/jest-dom`
-* `@testing-library/user-event`
+
+- `jest`
+- `@testing-library/react`
+- `@testing-library/jest-dom`
+- `@testing-library/user-event`
 
 [Jest](https://testing-library.com/docs/ecosystem-jest-dom/) with [Next.js](https://nextjs.org/docs/app/building-your-application/testing/jest#creating-your-first-test)
 
