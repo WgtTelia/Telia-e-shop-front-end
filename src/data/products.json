@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "brand": "Apple",
+    "model": "iPhone 15",
+    "image": "/images/apple_iPhone15.png",
+    "description": "Capture stunning photos with the new 48MP Main camera. Immerse yourself in the A16 Bionic chip's exceptional performance and power efficiency. Explore a world of vibrant colors on the durable Ceramic Shield front display.",
+    "pricePerMonth": 30,
+    "inStock": true,
+    "type": "Mobile phones",
+    "colors": ["black", "gold", "purple", "pink"]
+  }
+]

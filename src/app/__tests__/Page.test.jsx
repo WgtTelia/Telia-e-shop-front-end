@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import Home from '@/app/page';
+import productData from '@/data/products.json';
 
 describe('Page', () => {
   it('renders a heading', () => {
@@ -11,8 +12,19 @@ describe('Page', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  it('renders homepage unchanged', () => {
-    const { container } = render(<Home />);
-    expect(container).toMatchSnapshot();
+  it('renders product images correctly', () => {
+    render(<Home />);
+    productData.forEach((product) => {
+      const imageElement = screen.getByAltText(product.model);
+      expect(imageElement).toBeInTheDocument();
+    });
+  });
+
+  it('renders product images with correct alt text', () => {
+    render(<Home />);
+    productData.forEach((product) => {
+      const imageElement = screen.getByAltText(product.model);
+      expect(imageElement).toHaveAttribute('alt', product.model);
+    });
   });
 });
