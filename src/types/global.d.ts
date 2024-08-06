@@ -1,4 +1,4 @@
-declare interface ColorOption {
+    interface ColorOption {
   color: string;
   stockAmount: number;
 }
