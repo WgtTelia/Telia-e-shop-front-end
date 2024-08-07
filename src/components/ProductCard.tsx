@@ -18,6 +18,33 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     availableColors[0]
   );
 
+  const getStockStyles = (stockAmount: number) => {
+    if (stockAmount === 0) {
+      return {
+        backgroundColor: '#980233',
+        outlineColor: '#FFDDE8',
+        textColor: '#980233',
+        text: 'Not in stock',
+      };
+    } else if (stockAmount <= 10) {
+      return {
+        backgroundColor: '#FFA500',
+        outlineColor: '#FFF2CC',
+        textColor: '#FFA500',
+        text: 'Low stock',
+      };
+    } else {
+      return {
+        backgroundColor: '#02562B',
+        outlineColor: '#C5EFD9',
+        textColor: '#02562B',
+        text: 'In stock',
+      };
+    }
+  };
+
+  const stockStyles = getStockStyles(selectedColor.stockAmount);
+
   return (
     <div className='rounded-lg bg-grey-100 outline outline-1 outline-grey-200'>
       <div className='flex w-[320px] flex-col gap-4 p-6'>
@@ -51,30 +78,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <hr />
       <div className='flex items-center justify-center gap-2 py-2'>
         <div
-          className={`h-[8px] w-[8px] rounded-full outline outline-2 ${
-            selectedColor.stockAmount === 0
-              ? 'bg-danger outline-danger-light'
-              : selectedColor.stockAmount <= 10
-                ? 'bg-warning outline-warning-light'
-                : 'bg-success outline-success-light'
-          }`}
+          className='h-[8px] w-[8px] rounded-full outline outline-2'
+          style={{
+            backgroundColor: stockStyles.backgroundColor,
+            outlineColor: stockStyles.outlineColor,
+          }}
         ></div>
-        <p
-          className={
-            selectedColor.stockAmount === 0
-              ? 'text-danger'
-              : selectedColor.stockAmount <= 10
-                ? 'text-warning'
-                : 'text-success'
-          }
-        >
-          {selectedColor.stockAmount === 0
-            ? 'Not in stock'
-            : selectedColor.stockAmount <= 10
-              ? 'Low stock'
-              : 'In stock'}
-        </p>
-      </div>
+        <p style={{ color: stockStyles.textColor }}>{stockStyles.text}</p>
+      </div>  
     </div>
   );
 };
