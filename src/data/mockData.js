@@ -43,19 +43,23 @@ export const products = [
     "availableColors": [
       {
         "color": "Green",
-        "stockAmount": 10
+        "stockAmount": 10,
+        "image": "/images/samsung_Galaxy_S23_FE.png"
       },
       {
         "color": "Lavender",
-        "stockAmount": 20
+        "stockAmount": 20,
+        "image": "/images/samsung_Galaxy_S23_FE_lavender.png"
       },
       {
         "color": "White",
-        "stockAmount": 15
+        "stockAmount": 15,
+        "image": "/images/samsung_Galaxy_S23_FE_white.png"
       },
       {
         "color": "Black",
-        "stockAmount": 5
+        "stockAmount": 6,
+        "image": "/images/samsung_Galaxy_S23_FE_gray.png"
       }
     ],
     "shortDescription": "A feature-packed Galaxy smartphone with a sleek design and a high-quality camera.",
@@ -70,15 +74,18 @@ export const products = [
     "availableColors": [
       {
         "color": "Blue",
-        "stockAmount": 0
+        "stockAmount": 0,
+        "image": "/images/xiaomi_Redmi_Note_13_blue.png"
       },
       {
         "color": "Black",
-        "stockAmount": 0
+        "stockAmount": 0,
+        "image": "/images/xiaomi_Redmi_Note_13.png"
       },
       {
-        "color": "Yellow",
-        "stockAmount": 0
+        "color": "White",
+        "stockAmount": 5,
+        "image": "/images/xiaomi_Redmi_Note_13_white.png"
       }
     ],
     "shortDescription": "A budget-friendly smartphone with a large display and a powerful camera.",
@@ -93,19 +100,23 @@ export const products = [
     "availableColors": [
       {
         "color": "Black",
-        "stockAmount": 25
+        "stockAmount": 25,
+        "image": "/images/sony_Xperia_10_V_black.png"
       },
       {
         "color": "White",
-        "stockAmount": 20
+        "stockAmount": 20,
+        "image": "/images/sony_Xperia_10_V_white.png"
       },
       {
         "color": "Lavender",
-        "stockAmount": 15
+        "stockAmount": 15,
+        "image": "/images/sony_Xperia_10_V.png"
       },
       {
         "color": "Green",
-        "stockAmount": 15
+        "stockAmount": 15,
+        "image": "/images/sony_Xperia_10_V_green.png"
       }
     ],
     "shortDescription": "A compact and stylish smartphone with a high-quality camera and a long-lasting battery.",
@@ -120,11 +131,13 @@ export const products = [
     "availableColors": [
       {
         "color": "Grey",
-        "stockAmount": 100
+        "stockAmount": 100,
+        "image": "/images/oneplus_Nord_3_gray.png"
       },
       {
         "color": "Green",
-        "stockAmount": 100
+        "stockAmount": 100,
+        "image": "/images/oneplus_Nord_3_green.png"
       }
     ],
     "shortDescription": "A mid-range smartphone with a fast processor, a large display, and a high-quality camera.",
