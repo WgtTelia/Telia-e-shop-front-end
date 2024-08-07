@@ -2,14 +2,18 @@
   "extends": [
     "next",
     "next/core-web-vitals",
-    "eslint:recommended",
     "plugin:react/recommended",
-    "prettier",
     "plugin:testing-library/react",
-    "plugin:jest-dom/recommended"
+    "plugin:jest-dom/recommended",
+    "prettier"
   ],
   "rules": {
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "import/no-unresolved": "error",
+    "import/named": "error",
+    "import/namespace": "error",
+    "import/default": "error",
+    "import/export": "error"
   },
   "env": {
     "jest": true
