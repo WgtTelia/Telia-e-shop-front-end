@@ -1,31 +1,6 @@
 import React from 'react';
 import { ButtonCTA } from '@/components/ButtonCTA';
-
-const colorMapping: { [key: string]: string } = {
-  black: '#000000',
-  pink: '#FFC0CB',
-  yellow: '#FFFF00',
-  blue: '#0000FF',
-  green: '#008000',
-  lavender: '#E6E6FA',
-  white: '#FFFFFF',
-  grey: '#808080',
-};
-
-function mapColorToHex(color: string): string {
-  return colorMapping[color.toLowerCase()] || '#000000';
-}
-
-function generateColorDots(availableColors: ColorOption[]): JSX.Element[] {
-  return availableColors.map((colorOption) => (
-    <div
-      key={colorOption.color}
-      title={colorOption.color}
-      className='h-[12px] w-[12px] cursor-pointer rounded-full outline outline-grey-200'
-      style={{ backgroundColor: mapColorToHex(colorOption.color) }}
-    />
-  ));
-}
+import { ColorDots } from '@/components/ColorDots';
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   productId,
@@ -52,7 +27,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <h3 className='text-sm uppercase text-grey-800'>{brandName}</h3>
             <h2 className='text-xl font-bold text-grey-900'>{modelName}</h2>
           </div>
-          <div className='flex gap-2'>{generateColorDots(availableColors)}</div>
+          <ColorDots availableColors={availableColors} />
         </figcaption>
       </figure>
       <p>{shortDescription}</p>
