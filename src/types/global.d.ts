@@ -1,6 +1,7 @@
-    interface ColorOption {
+interface ColorOption {
   color: string;
   stockAmount: number;
+  image?: string;
 }
 declare interface ProductCardProps {
   productId: number;

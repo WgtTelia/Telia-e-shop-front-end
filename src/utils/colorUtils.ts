@@ -1,11 +1,11 @@
 export const colorMapping: { [key: string]: string } = {
-  black: '#000000',
+  black: '#232222',
   pink: '#FFC0CB',
-  yellow: '#FFFF00',
-  blue: '#0000FF',
-  green: '#008000',
-  lavender: '#E6E6FA',
-  white: '#FFFFFF',
+  yellow: '#FFEA7A',
+  blue: '#4682B4',
+  green: '#87A96B',
+  lavender: '#B9B9FB',
+  white: '#FAFAFA',
   grey: '#808080',
 };
 

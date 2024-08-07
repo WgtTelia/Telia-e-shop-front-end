@@ -7,19 +7,28 @@ export const products = [
     "availableColors": [
       {
         "color": "Black",
-        "stockAmount": 50
+        "stockAmount": 50,
+        "image": "/images/apple_iPhone_15.png"
       },
       {
         "color": "Pink",
-        "stockAmount": 25
+        "stockAmount": 25,
+        "image": "/images/apple_iPhone_15_pink.png"
       },
       {
         "color": "Yellow",
-        "stockAmount": 10
+        "stockAmount": 10,
+        "image": "/images/apple_iPhone_15_yellow.png"
       },
       {
         "color": "Blue",
-        "stockAmount": 15
+        "stockAmount": 15,
+        "image": "/images/apple_iPhone_15_blue.png"
+      },
+      {
+        "color": "Green",
+        "stockAmount": 0,
+        "image": "/images/apple_iPhone_15_green.png"
       }
     ],
     "shortDescription": "The latest iPhone model with advanced features and a powerful processor.",
