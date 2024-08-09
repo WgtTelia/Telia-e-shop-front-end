@@ -3,6 +3,7 @@
     "next",
     "next/core-web-vitals",
     "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended",
     "prettier"
@@ -17,5 +18,7 @@
   },
   "env": {
     "jest": true
-  }
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"]
 }
