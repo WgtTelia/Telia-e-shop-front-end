@@ -1,31 +1,34 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ButtonCTA } from '@/components/ButtonCTA';
+import { OrderNowBtn } from '@/components/OrderNowBtn';
 import { ColorDots } from '@/components/ColorDots';
 import { StockStatus } from '@/components/StockStatus';
+import Image from 'next/image';
 
 export const ProductCard: React.FC<ProductCardProps> = ({
-  productId,
   brandName,
   modelName,
   productImage,
   availableColors,
   shortDescription,
   pricePerMonth,
-  productType,
 }) => {
   const [selectedColor, setSelectedColor] = useState<ColorOption>(
     availableColors[0]
   );
 
   return (
-    <div className='rounded-lg bg-grey-100 outline outline-1 outline-grey-200'>
-      <div className='flex w-[320px] flex-col gap-4 p-6'>
+    <div className='ratio:[318/336] w-[318px] rounded-lg bg-grey-100 outline outline-1 outline-grey-200'>
+      <div className='flex flex-col gap-4 p-6'>
         <figure className='grid h-[116px] grid-cols-2 items-center justify-center'>
           <div className='mx-auto max-w-[100px]'>
-            <img
-              src={selectedColor ? selectedColor.image : productImage}
+            <Image
+              src={
+                selectedColor && typeof selectedColor.image === 'string'
+                  ? selectedColor.image
+                  : productImage
+              }
               alt={`${brandName} ${modelName} ${
                 selectedColor ? selectedColor.color : availableColors[0]
               }`}
@@ -48,7 +51,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <p className='font-base font-bold text-grey-900'>
             {pricePerMonth}€/month
           </p>
-          <ButtonCTA onClick={() => alert('Added to cart')} />
+          <OrderNowBtn onClick={() => alert('Added to cart')} />
         </div>
       </div>
       <hr />

@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { ButtonCTA } from '@/components/ButtonCTA';
+import { OrderNowBtn } from './OrderNowBtn';
 
-describe('ButtonCTA', () => {
+describe('OrderNowBtn', () => {
   it('renders the button text', () => {
-    render(<ButtonCTA onClick={() => {}} />);
+    render(<OrderNowBtn onClick={() => {}} />);
 
     const buttonText = screen.getByText(/Order now/i);
 
@@ -12,7 +12,7 @@ describe('ButtonCTA', () => {
 
   it('calls the onClick function when the button is clicked', () => {
     const onClick = jest.fn();
-    render(<ButtonCTA onClick={onClick} />);
+    render(<OrderNowBtn onClick={onClick} />);
 
     const button = screen.getByRole('button');
     fireEvent.click(button);
