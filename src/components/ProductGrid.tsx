@@ -4,7 +4,7 @@ import { products } from '@/data/mockData';
 
 export const ProductGrid = () => {
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className='flex flex-wrap gap-4'>
       {products.map((product: ProductCardProps) => (
         <ProductCard
           key={product.productId}
