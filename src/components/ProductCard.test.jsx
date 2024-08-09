@@ -1,14 +1,16 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import PropTypes from 'prop-types';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ProductCard } from './ProductCard';
 
 const mockProps = {
   productId: '1',
   brandName: 'Apple',
   modelName: 'iPhone 13',
-  productImage: 'iphone.jpg',
+  productImage: '/iphone.jpg',
   availableColors: [
-    { color: 'black', stockAmount: 10, image: 'black-iphone.jpg' },
-    { color: 'white', stockAmount: 5, image: 'white-iphone.jpg' },
+    { color: 'black', stockAmount: 10, image: '/black-iphone.jpg' },
+    { color: 'white', stockAmount: 5, image: '/white-iphone.jpg' },
   ],
   shortDescription: 'The latest iPhone with a powerful A15 Bionic chip.',
   pricePerMonth: 39,
@@ -19,33 +21,55 @@ jest.mock('@/components/OrderNowBtn', () => ({
   OrderNowBtn: () => <div data-testid="order-now-btn">Order now</div>,
 }));
 
-jest.mock('@/components/ColorDots', () => ({
-  ColorDots: ({ availableColors, onColorSelect }) => <div data-testid="color-dots">
-    {availableColors.map((colorOption) => (
-      <div
-        key={colorOption.color}
-        data-testid={`color-dot-${colorOption.color}`}
-        onClick={() => onColorSelect(colorOption)}
-      >
-        {colorOption.color}
-      </div>
-    ))}
-  </div>,
-}));
+jest.mock('@/components/ColorDots', () => {
+  const ColorDots = ({ availableColors, onColorSelect }) => (
+    <div data-testid="color-dots">
+      {availableColors.map((colorOption) => (
+        <div
+          key={colorOption.color}
+          data-testid={`color-dot-${colorOption.color}`}
+          onClick={() => onColorSelect(colorOption)}
+        >
+          {colorOption.color}
+        </div>
+      ))}
+    </div>
+  );
+
+  ColorDots.propTypes = {
+    availableColors: PropTypes.arrayOf(
+      PropTypes.shape({
+        color: PropTypes.string.isRequired,
+        stockAmount: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    onColorSelect: PropTypes.func.isRequired,
+  };
+
+  return { ColorDots };
+});
+
 
 jest.mock('@/components/StockStatus', () => ({
   StockStatus: () => <div data-testid="stock-status">Stock Status</div>,
 }));
 
 describe('ProductCard', () => {
+  let selectedColor;
+
+  beforeEach(() => {
+    selectedColor = mockProps.availableColors[0];
+  });
+
   it('renders the OrderNowBtn, ColorDots, and StockStatus components', () => {
     render(<ProductCard {...mockProps} />);
 
-    const OrderNowBtn = screen.getByTestId('order-now-btn');
+    const orderNowBtn = screen.getByTestId('order-now-btn');
     const colorDots = screen.getByTestId('color-dots');
     const stockStatus = screen.getByTestId('stock-status');
 
-    expect(OrderNowBtn).toBeInTheDocument();
+    expect(orderNowBtn).toBeInTheDocument();
     expect(colorDots).toBeInTheDocument();
     expect(stockStatus).toBeInTheDocument();
   });
@@ -54,7 +78,7 @@ describe('ProductCard', () => {
     render(<ProductCard {...mockProps} />);
 
     const productImage = screen.getByAltText(
-      `${mockProps.brandName} ${mockProps.modelName} ${mockProps.availableColors[0].color}`
+      `${mockProps.brandName} ${mockProps.modelName} ${selectedColor.color}`
     );
     const brandName = screen.getByText(mockProps.brandName);
     const modelName = screen.getByText(mockProps.modelName);
@@ -72,27 +96,32 @@ describe('ProductCard', () => {
     render(<ProductCard {...mockProps} />);
 
     const productImage = screen.getByAltText(
-      `${mockProps.brandName} ${mockProps.modelName} ${mockProps.availableColors[0].color}`
+      `${mockProps.brandName} ${mockProps.modelName} ${selectedColor.color}`
     );
 
-    expect(productImage).toHaveAttribute('src', mockProps.availableColors[0].image);
+    expect(productImage).toHaveAttribute(
+      'src',
+      expect.stringMatching(new RegExp(`${selectedColor.color}-iphone\\.jpg`))
+    );
   });
 
-  it('updates image upon selecting another color option', () => {
+  it('updates image upon selecting another color option', async () => {
     render(<ProductCard {...mockProps} />);
 
-    mockProps.availableColors.forEach((colorOption) => {
+    mockProps.availableColors.forEach(async (colorOption) => {
       const colorDot = screen.getByTestId(`color-dot-${colorOption.color}`);
-      fireEvent.click(colorDot);
+      await waitFor(() => userEvent.click(colorDot));
 
-      const phoneImage = screen.getByAltText(
+      const phoneImageVariant = screen.getByAltText(
         `${mockProps.brandName} ${mockProps.modelName} ${colorOption.color}`
       );
 
-      expect(phoneImage).toHaveAttribute('src', colorOption.image);
-    })
-
-
-  })
+      expect(phoneImageVariant).toHaveAttribute(
+        'src',
+        expect.stringMatching(new RegExp(`${colorOption.color}-iphone\\.jpg`))
+      );
+      ;
+    });
+  });
 
 });

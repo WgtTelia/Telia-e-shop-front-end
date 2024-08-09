@@ -22,8 +22,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     <div className='ratio:[318/336] w-[318px] rounded-lg bg-grey-100 outline outline-1 outline-grey-200'>
       <div className='flex flex-col gap-4 p-6'>
         <figure className='grid h-[116px] grid-cols-2 items-center justify-center'>
-          <div className='mx-auto max-w-[100px]'>
+          <div className='mx-auto max-w-[100px] max-h-[116px]'>
             <Image
+              width={100}
+              height={116}
               src={
                 selectedColor && typeof selectedColor.image === 'string'
                   ? selectedColor.image
@@ -32,7 +34,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               alt={`${brandName} ${modelName} ${
                 selectedColor ? selectedColor.color : availableColors[0]
               }`}
-              className='w-full'
+              className="max-h-[116px]"
             />
           </div>
           <figcaption className='flex flex-col gap-3'>

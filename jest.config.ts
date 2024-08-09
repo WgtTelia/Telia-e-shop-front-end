@@ -12,6 +12,9 @@ const createJestConfig = nextJest({
 });
 
 const config: Config = {
+  //enables typescript support
+  preset: 'ts-jest',
+
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
