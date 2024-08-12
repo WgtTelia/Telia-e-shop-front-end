@@ -1,30 +1,40 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from "tailwindcss"
 
-const config: Config = {
+const config = {
+  darkMode: ["class"],
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
+  prefix: "",
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
-      colors: {
-        primary: '#4E0174', //for main CTA button
-        'primary-light': '#6D02A3', // for filters
-        'grey-900': '#313132', //for price text and model name
-        'grey-800': '#5D5D5F', //for brand names
-        'grey-200': '#D6D6D6', //for card outline
-        'grey-100': '#F5F5FA', //for card background
-        success: '#02562B', //in stock color
-        'success-light': '#C5EFD9', //in stock, halo color
-        warning: '#FFA500', //low stock color
-        'warning-light': '#FFF2CC', //low stock, halo color
-        danger: '#980233', //out of stock color
-        'danger-light': '#FFDDE8', //out of stock, halo color
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [],
-};
-export default config;
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config
+
+export default config
