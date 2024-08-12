@@ -16,6 +16,14 @@
     "import/default": "error",
     "import/export": "error"
   },
+  "overrides": [
+    {
+      "files": ["src/components/ui/**/*.{ts,tsx}"],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    }
+  ],
   "env": {
     "jest": true
   },
