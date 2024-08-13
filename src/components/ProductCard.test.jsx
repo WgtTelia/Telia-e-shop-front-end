@@ -18,12 +18,12 @@ const mockProps = {
 };
 
 jest.mock('@/components/OrderNowBtn', () => ({
-  OrderNowBtn: () => <div data-testid="order-now-btn">Order now</div>,
+  OrderNowBtn: () => <div data-testid='order-now-btn'>Order now</div>,
 }));
 
 jest.mock('@/components/ColorDots', () => {
   const ColorDots = ({ availableColors, onColorSelect }) => (
-    <div data-testid="color-dots">
+    <div data-testid='color-dots'>
       {availableColors.map((colorOption) => (
         <div
           key={colorOption.color}
@@ -50,9 +50,8 @@ jest.mock('@/components/ColorDots', () => {
   return { ColorDots };
 });
 
-
 jest.mock('@/components/StockStatus', () => ({
-  StockStatus: () => <div data-testid="stock-status">Stock Status</div>,
+  StockStatus: () => <div data-testid='stock-status'>Stock Status</div>,
 }));
 
 describe('ProductCard', () => {
@@ -110,18 +109,19 @@ describe('ProductCard', () => {
 
     mockProps.availableColors.forEach(async (colorOption) => {
       const colorDot = screen.getByTestId(`color-dot-${colorOption.color}`);
-      await waitFor(() => userEvent.click(colorDot));
 
-      const phoneImageVariant = screen.getByAltText(
-        `${mockProps.brandName} ${mockProps.modelName} ${colorOption.color}`
-      );
+      await userEvent.click(colorDot);
 
-      expect(phoneImageVariant).toHaveAttribute(
-        'src',
-        expect.stringMatching(new RegExp(`${colorOption.color}-iphone\\.jpg`))
-      );
-      ;
+      await waitFor(() => {
+        const phoneImageVariant = screen.getByAltText(
+          `${mockProps.brandName} ${mockProps.modelName} ${colorOption.color}`
+        );
+
+        expect(phoneImageVariant).toHaveAttribute(
+          'src',
+          expect.stringMatching(new RegExp(`${colorOption.color}-iphone\\.jpg`))
+        );
+      });
     });
   });
-
 });

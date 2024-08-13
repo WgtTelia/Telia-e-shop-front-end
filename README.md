@@ -73,9 +73,12 @@ Custom Jest matchers are used ([see](https://github.com/testing-library/jest-dom
 
 ### Run tests:
 
-All tests: `npm run test`
+- **All tests with verbose output:** `npm run test`
 
-Watch mode: `npm run test:watch`
+  - _Verbose mode provides more detailed information about each test, including any console logs and other debugging output._
+
+- **Watch mode:** `npm run test:watch`
+  - _Reruns tests automatically whenever you make changes to your code._
 
 ## Deploy on Vercel
 

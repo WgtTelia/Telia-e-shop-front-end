@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-helvetica-neue)'],
+      },
       colors: {
         primary: '#4E0174', //for main CTA button
         'primary-light': '#6D02A3', // for filters
