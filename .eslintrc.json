@@ -6,6 +6,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended",
+    "plugin:jest/recommended",
     "prettier"
   ],
   "rules": {
@@ -14,7 +15,10 @@
     "import/named": "error",
     "import/namespace": "error",
     "import/default": "error",
-    "import/export": "error"
+    "import/export": "error",
+    "@definitelytyped/no-single-element-tuple-type": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-empty-interface": "off"
   },
   "overrides": [
     {
@@ -23,10 +27,24 @@
         "react/prop-types": "off"
       }
     }
+    // {
+    //   "files": ["**/*.test.ts?(x)"],
+    //   "env": {
+    //     "jest": true,
+    //     "jest/globals": true
+    //   },
+    //   "extends": [
+    //     "plugin:testing-library/react",
+    //     "plugin:jest-dom/recommended"
+    //   ],
+    //   "rules": {
+    //     "react/prop-types": "off"
+    //   }
+    // }
   ],
   "env": {
     "jest": true
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"]
+  "plugins": ["@typescript-eslint", "jest"]
 }
