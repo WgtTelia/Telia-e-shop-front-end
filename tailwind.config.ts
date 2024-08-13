@@ -35,7 +35,7 @@ const config = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       fontFamily: {
-        sans: ['var(--font-sans)', ...fontFamily.sans],
+        sans: ['var(--font-helvetica-neue)', ...fontFamily.sans],
       },
       colors: {
         primary: '#4E0174', //for main CTA button
