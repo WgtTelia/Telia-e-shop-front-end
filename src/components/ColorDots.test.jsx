@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ColorDots } from './ColorDots';
 
-jest.mock('@/utils/colorUtils', () => ({
+jest.mock('@/lib/colorUtils', () => ({
   mapColorToHex: jest.fn((color) => {
     if (color === 'red') return '#FF0000';
     if (color === 'green') return '#00FF00';
@@ -37,7 +37,10 @@ describe('ColorDots', () => {
     const greenDot = screen.getByTitle(/green/i);
     fireEvent.click(greenDot);
 
-    expect(mockProps.onColorSelect).toHaveBeenCalledWith({ color: 'green', stockAmount: 5 });
+    expect(mockProps.onColorSelect).toHaveBeenCalledWith({
+      color: 'green',
+      stockAmount: 5,
+    });
   });
 
   it('sets the background color of each dot based on the color mapping', () => {

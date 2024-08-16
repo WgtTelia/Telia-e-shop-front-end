@@ -1,10 +1,9 @@
-import PropTypes from 'prop-types';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ProductCard } from './ProductCard';
 
 const mockProps = {
-  productId: '1',
+  productId: 1,
   brandName: 'Apple',
   modelName: 'iPhone 13',
   productImage: '/iphone.jpg',
@@ -22,7 +21,13 @@ jest.mock('@/components/OrderNowBtn', () => ({
 }));
 
 jest.mock('@/components/ColorDots', () => {
-  const ColorDots = ({ availableColors, onColorSelect }) => (
+  const ColorDots = ({
+    availableColors,
+    onColorSelect,
+  }: {
+    availableColors: ColorOption[];
+    onColorSelect: (color: ColorOption) => void;
+  }) => (
     <div data-testid='color-dots'>
       {availableColors.map((colorOption) => (
         <div
@@ -36,17 +41,6 @@ jest.mock('@/components/ColorDots', () => {
     </div>
   );
 
-  ColorDots.propTypes = {
-    availableColors: PropTypes.arrayOf(
-      PropTypes.shape({
-        color: PropTypes.string.isRequired,
-        stockAmount: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    onColorSelect: PropTypes.func.isRequired,
-  };
-
   return { ColorDots };
 });
 
@@ -55,7 +49,7 @@ jest.mock('@/components/StockStatus', () => ({
 }));
 
 describe('ProductCard', () => {
-  let selectedColor;
+  let selectedColor: ColorOption;
 
   beforeEach(() => {
     selectedColor = mockProps.availableColors[0];

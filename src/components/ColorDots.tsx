@@ -1,12 +1,15 @@
 import React from 'react';
-import { mapColorToHex } from '@/utils/colorUtils';
+import { mapColorToHex } from '@/lib/colorUtils';
 
 interface ColorDotsProps {
   availableColors: ColorOption[];
   onColorSelect: (color: ColorOption) => void;
 }
 
-export const ColorDots: React.FC<ColorDotsProps> = ({ availableColors, onColorSelect }) => {
+export const ColorDots: React.FC<ColorDotsProps> = ({
+  availableColors,
+  onColorSelect,
+}) => {
   return (
     <div className='flex gap-2'>
       {availableColors.map((colorOption) => (
