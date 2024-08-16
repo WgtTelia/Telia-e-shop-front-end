@@ -1,6 +1,5 @@
 import { ProductGrid } from '@/components/ProductGrid';
 import { Filters } from '@/components/Filters';
-import { Button } from '@/components/ui/button';
 
 export default function Home() {
   return (
@@ -14,9 +13,6 @@ export default function Home() {
           digital lifestyle. From sleek designs to powerful features, our
           selection offers something for everyone.
         </p>
-        <div>
-          <Button variant='outline'>Test</Button>
-        </div>
       </header>
       <div className='w-full md:grid md:grid-cols-[1fr_4fr]'>
         <Filters />
