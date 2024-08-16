@@ -10,7 +10,7 @@ export const OrderNowBtn: React.FC<OrderNowBtnProps> = ({ onClick }) => {
   return (
     <Button onClick={onClick}>
       Order now
-      <FaArrowRight />
+      <FaArrowRight className='ps-1' />
     </Button>
   );
 };
