@@ -27,20 +27,6 @@
         "react/prop-types": "off"
       }
     }
-    // {
-    //   "files": ["**/*.test.ts?(x)"],
-    //   "env": {
-    //     "jest": true,
-    //     "jest/globals": true
-    //   },
-    //   "extends": [
-    //     "plugin:testing-library/react",
-    //     "plugin:jest-dom/recommended"
-    //   ],
-    //   "rules": {
-    //     "react/prop-types": "off"
-    //   }
-    // }
   ],
   "env": {
     "jest": true
