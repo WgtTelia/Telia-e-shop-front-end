@@ -40,6 +40,12 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      fontSize: {
+        'hero-title': '2rem',
+        'hero-title-md': '2.625rem',
+        'hero-title-lg': '3rem',
+      },
+
       fontFamily: {
         sans: ['var(--font-helvetica-neue)', ...fontFamily.sans],
       },

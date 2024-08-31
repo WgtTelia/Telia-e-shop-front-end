@@ -1,14 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import Header, { bannerImages } from './Header';
+import { resizeWindow } from '@/lib/utils';
 
 jest.mock('next/image', () => jest.requireActual('next/image'));
 
 describe('Header component', () => {
-  const resizeWindow = (width: number) => {
-    global.innerWidth = width;
-    global.dispatchEvent(new Event('resize'));
-  };
-
   const checkBannerImage = (
     width: number,
     altText: string,
@@ -43,9 +39,10 @@ describe('Header component', () => {
       expect(imgElement).toHaveAttribute('height', image.height.toString());
     });
   });
-  it('renders the correct banner image based on screen size', async () => {
-    render(<Header />);
 
+  it('renders the correct banner image based on screen size', async () => {
+    expect.assertions(6);
+    render(<Header />);
     checkBannerImage(375, 'Banner for small screens', 'block sm:hidden');
     checkBannerImage(
       768,
