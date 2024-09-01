@@ -43,11 +43,11 @@ const Header = () => {
             key={index}
             src={image.src}
             alt={image.alt}
+            placeholder='empty'
             className={`${image.classes} h-auto w-full`}
             width={image.width}
             height={image.height}
-            priority={index === 0 || index === 2}
-            loading={index === 1 ? 'eager' : undefined}
+            priority
           />
         ))}
       </div>
