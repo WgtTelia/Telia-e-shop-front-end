@@ -47,9 +47,9 @@ const config = {
         sans: ['var(--font-helvetica-neue)', ...fontFamily.sans],
       },
       padding: {
-        'main-content': '2.5rem 1rem 4rem', // sm (DEFAULT)
-        'main-content-md': '2.5rem 1.5rem 5rem', // md
-        'main-content-lg': '3rem 3rem 6rem', // lg
+        'main-content': '2.5rem 1rem 4rem',
+        'main-content-md': '2.5rem 1.5rem 5rem',
+        'main-content-lg': '3rem 3rem 6rem',
       },
       colors: {
         primary: '#4E0174', //for main CTA button
