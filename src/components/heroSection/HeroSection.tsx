@@ -7,7 +7,7 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ title, description }) => {
   return (
-    <section className='mb-10 flex flex-col gap-y-5'>
+    <section className='flex w-full flex-col gap-y-5'>
       <h1 className='text-hero-title md:text-hero-title-md lg:text-hero-title-lg font-bold'>
         {title}
       </h1>

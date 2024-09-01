@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className='flex min-h-screen flex-col items-center justify-between gap-6 p-6 md:gap-12 md:p-12'>
+      <main className='p-main-content md:p-main-content-md lg:p-main-content-lg flex min-h-screen w-full flex-col items-center gap-y-10 lg:gap-y-12'>
         <HeroSection
           title='Mobile Phones & Accessories'
           description='Discover the latest mobile phones and accessories to enhance your digital lifestyle. From sleek designs to powerful features, our selection offers something for everyone.'

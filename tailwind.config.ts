@@ -17,10 +17,8 @@ const config = {
       md: '768px',
       lg: '1440px',
     },
-
     container: {
       center: true,
-      padding: '2rem',
       screens: {
         lg: '1440px',
       },
@@ -45,9 +43,13 @@ const config = {
         'hero-title-md': '2.625rem',
         'hero-title-lg': '3rem',
       },
-
       fontFamily: {
         sans: ['var(--font-helvetica-neue)', ...fontFamily.sans],
+      },
+      padding: {
+        'main-content': '2.5rem 1rem 4rem', // sm (DEFAULT)
+        'main-content-md': '2.5rem 1.5rem 5rem', // md
+        'main-content-lg': '3rem 3rem 6rem', // lg
       },
       colors: {
         primary: '#4E0174', //for main CTA button
