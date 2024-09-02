@@ -1,14 +1,11 @@
 import React from 'react';
 
-interface BannerSectionProps {
+interface HeroSectionProps {
   title: string;
   description: string;
 }
 
-const BannerSection: React.FC<BannerSectionProps> = ({
-  title,
-  description,
-}) => {
+const HeroSection: React.FC<HeroSectionProps> = ({ title, description }) => {
   return (
     <section className='flex w-full flex-col gap-y-5'>
       <h1 className='text-hero-title font-bold md:text-hero-title-md lg:text-hero-title-lg'>
@@ -19,4 +16,4 @@ const BannerSection: React.FC<BannerSectionProps> = ({
   );
 };
 
-export default BannerSection;
+export default HeroSection;
