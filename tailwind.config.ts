@@ -12,11 +12,15 @@ const config = {
   ],
   prefix: '',
   theme: {
+    screens: {
+      sm: '375px',
+      md: '768px',
+      lg: '1440px',
+    },
     container: {
       center: true,
-      padding: '2rem',
       screens: {
-        '2xl': '1400px',
+        lg: '1440px',
       },
     },
     extend: {
@@ -34,8 +38,18 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      fontSize: {
+        'hero-title': '2rem',
+        'hero-title-md': '2.625rem',
+        'hero-title-lg': '3rem',
+      },
       fontFamily: {
         sans: ['var(--font-helvetica-neue)', ...fontFamily.sans],
+      },
+      padding: {
+        'main-content': '2.5rem 1rem 4rem',
+        'main-content-md': '2.5rem 1.5rem 5rem',
+        'main-content-lg': '3rem 3rem 6rem',
       },
       colors: {
         primary: '#4E0174', //for main CTA button
