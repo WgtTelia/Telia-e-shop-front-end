@@ -1,14 +1,14 @@
 import React from 'react';
 import { act, render, screen } from '@testing-library/react';
-import HeroSection from './HeroSection';
+import BannerSection from './BannerSection';
 import { resizeWindow } from '@/lib/utils';
 
-describe('HeroSection component', () => {
+describe('BannerSection component', () => {
   it('renders the title and description correctly', () => {
     const testTitle = 'Test Title';
     const testDescription = 'Test Description...';
 
-    render(<HeroSection title={testTitle} description={testDescription} />);
+    render(<BannerSection title={testTitle} description={testDescription} />);
 
     const titleElement = screen.getByRole('heading', { level: 1 });
     expect(titleElement).toHaveTextContent(testTitle);
@@ -21,7 +21,7 @@ describe('HeroSection component', () => {
   });
 
   it('applies correct styles on medium screens', async () => {
-    render(<HeroSection title='Test Title' description='Test Description' />);
+    render(<BannerSection title='Test Title' description='Test Description' />);
 
     await act(async () => {
       resizeWindow(769);
@@ -32,7 +32,7 @@ describe('HeroSection component', () => {
   });
 
   it('applies correct styles on large screens', async () => {
-    render(<HeroSection title='Test Title' description='Test Description' />);
+    render(<BannerSection title='Test Title' description='Test Description' />);
 
     await act(async () => {
       resizeWindow(1024);

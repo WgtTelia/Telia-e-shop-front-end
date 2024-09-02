@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import Header, { bannerImages } from './Header';
+import Header from './Header';
 import { resizeWindow } from '@/lib/utils';
+import { bannerImages } from 'public/banners/bannerImages';
 
 jest.mock('next/image', () => jest.requireActual('next/image'));
 
@@ -18,9 +19,9 @@ describe('Header component', () => {
 
   it('renders the logo', () => {
     render(<Header />);
-    const logoImage = screen.getByRole('img', { name: 'logo' });
+    const logoImage = screen.getByRole('img', { name: 'Company logo' });
     expect(logoImage).toBeInTheDocument();
-    expect(logoImage).toHaveAttribute('alt', 'logo');
+    expect(logoImage).toHaveAttribute('alt', 'Company logo');
   });
 
   it('renders the navigation element', () => {
