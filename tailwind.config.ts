@@ -54,6 +54,8 @@ const config = {
       colors: {
         primary: '#4E0174', //for main CTA button
         'primary-light': '#6D02A3', // for filters
+        'primary-dark': '#29003E', // close and results button
+        'primary-active': '#E4B6FB', // filters and sort active
         'grey-900': '#313132', //for price text and model name
         'grey-800': '#5D5D5F', //for brand names
         'grey-200': '#D6D6D6', //for card outline

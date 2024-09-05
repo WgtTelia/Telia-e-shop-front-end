@@ -8,9 +8,8 @@ interface OrderNowBtnProps {
 
 export const OrderNowBtn: React.FC<OrderNowBtnProps> = ({ onClick }) => {
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} icon={<FaArrowRight />} iconPosition='right'>
       Order now
-      <FaArrowRight className='ps-1' />
     </Button>
   );
 };
