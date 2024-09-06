@@ -36,8 +36,6 @@ describe('Header component', () => {
       const imgElement = screen.getByAltText(image.alt);
       expect(imgElement).toBeInTheDocument();
       expect(imgElement).toHaveClass(image.classes);
-      expect(imgElement).toHaveAttribute('width', image.width.toString());
-      expect(imgElement).toHaveAttribute('height', image.height.toString());
     });
   });
 

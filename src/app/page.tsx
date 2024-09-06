@@ -3,6 +3,13 @@ import HeroSection from '@/components/header/HeroSection';
 import Header from '@/components/header/Header';
 import { Filters } from '@/components/Filters';
 import FilterButtonsContainer from '@/components/filters/FilterButtonsContainer';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Mobile Phones & Accessories | Telia',
+  description:
+    'Discover the latest mobile phones and accessories to enhance your digital lifestyle. From sleek designs to powerful features, our selection offers something for everyone.',
+};
 
 export default function Home() {
   return (

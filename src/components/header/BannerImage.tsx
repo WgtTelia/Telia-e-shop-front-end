@@ -12,10 +12,8 @@ const BannerImage = () => {
           alt={image.alt}
           placeholder='blur'
           className={`${image.classes} h-auto w-full`}
-          width={image.width}
-          height={image.height}
           loading={image.loading}
-          priority={image.priority}
+          priority
         />
       ))}
     </>
