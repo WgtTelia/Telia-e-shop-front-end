@@ -46,7 +46,6 @@ export interface ButtonProps
   asChild?: boolean;
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
-  selected?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -57,7 +56,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       size,
       icon,
       iconPosition,
-      selected,
       asChild = false,
       children,
       ...props
@@ -67,10 +65,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : 'button';
     return (
       <Comp
-        className={cn(
-          buttonVariants({ variant, size, className }),
-          selected && 'selected-style'
-        )}
+        className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
       >
