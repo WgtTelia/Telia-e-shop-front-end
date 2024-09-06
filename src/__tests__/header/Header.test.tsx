@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import Header from './Header';
 import { resizeWindow } from '@/lib/utils';
 import { bannerImages } from 'public/banners/bannerImages';
+import Header from '@/components/header/Header';
 
 jest.mock('next/image', () => jest.requireActual('next/image'));
 

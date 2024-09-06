@@ -15,23 +15,27 @@ export default function Home() {
           title='Mobile Phones & Accessories'
           description='Discover the latest mobile phones and accessories to enhance your digital lifestyle. From sleek designs to powerful features, our selection offers something for everyone.'
         />
-        <div>
-          <Button
-            variant='filter'
-            icon={<PiSlidersHorizontalBold />}
-            iconPosition='left'
-          >
-            Filter by
-          </Button>
-          <Button variant='filter' icon={<LuArrowDownUp />} iconPosition='left'>
-            Most popular
-          </Button>
-          <Button variant='close'>Close</Button>
+        <section className='w-full md:grid md:grid-cols-[1fr_4fr]'>
+          <div>
+            <Button
+              variant='filter'
+              icon={<PiSlidersHorizontalBold />}
+              iconPosition='left'
+            >
+              Filter by
+            </Button>
+            <Button
+              variant='filter'
+              icon={<LuArrowDownUp />}
+              iconPosition='left'
+            >
+              Most popular
+            </Button>
+            {/* <Button variant='close'>Close</Button>
           <Button variant='results'>
             See Results (12)
-          </Button>
-        </div>
-        <section className='w-full md:grid md:grid-cols-[1fr_4fr]'>
+          </Button> */}
+          </div>
           <Filters />
           <ProductGrid />
         </section>
