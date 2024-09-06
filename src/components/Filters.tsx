@@ -1,3 +1,3 @@
 export const Filters = () => {
-  return <div>Filters</div>;
+  return <div className='hidden lg:col-span-1 lg:block'>Filters</div>;
 };

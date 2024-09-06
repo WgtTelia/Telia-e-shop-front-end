@@ -10,11 +10,12 @@ const BannerImage = () => {
           key={index}
           src={image.src}
           alt={image.alt}
-          placeholder='empty'
+          placeholder='blur'
           className={`${image.classes} h-auto w-full`}
           width={image.width}
           height={image.height}
-          priority
+          loading={image.loading}
+          priority={image.priority}
         />
       ))}
     </>
