@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { ButtonProps } from '@/components/ui/button';
-import FilterButtonsContainer from '@/components/filters/FilterButtonsContainer';
+import { FilterButtonsContainer } from '@/components/filters/FilterButtonsContainer';
 
 jest.mock('react-icons/pi', () => ({
   PiSlidersHorizontalBold: () => <div data-testid='filter-icon' />,

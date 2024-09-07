@@ -1,9 +1,9 @@
 'use client';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import { PiSlidersHorizontalBold } from 'react-icons/pi';
 import { LuArrowDownUp } from 'react-icons/lu';
 
-const FilterButtonsContainer: React.FC = () => {
+export const FilterButtonsContainer: React.FC = () => {
   const handleFilterClick = () => {
     alert('Filter button clicked');
     // logic to open the filter modal here or modalContext
@@ -37,5 +37,3 @@ const FilterButtonsContainer: React.FC = () => {
     </div>
   );
 };
-
-export default FilterButtonsContainer;

@@ -1,8 +1,8 @@
 import { ProductGrid } from '@/components/ProductGrid';
-import HeroSection from '@/components/header/HeroSection';
-import Header from '@/components/header/Header';
+import { HeroSection } from '@/components/header/HeroSection';
+import { Header } from '@/components/header/Header';
 import { Filters } from '@/components/Filters';
-import FilterButtonsContainer from '@/components/filters/FilterButtonsContainer';
+import { FilterButtonsContainer } from '@/components/filters/FilterButtonsContainer';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

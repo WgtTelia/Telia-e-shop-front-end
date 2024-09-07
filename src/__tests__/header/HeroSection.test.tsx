@@ -1,7 +1,7 @@
 import React from 'react';
 import { act, render, screen } from '@testing-library/react';
 import { resizeWindow } from '@/lib/utils';
-import HeroSection from '@/components/header/HeroSection';
+import { HeroSection } from '@/components/header/HeroSection';
 
 describe('BannerSection component', () => {
   it('renders the title and description correctly', () => {

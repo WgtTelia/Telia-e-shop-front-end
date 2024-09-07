@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { bannerImages } from 'public/banners/bannerImages';
 import React from 'react';
 
-const BannerImage = () => {
+export const BannerImage = () => {
   return (
     <>
       {bannerImages.map((image, index) => (

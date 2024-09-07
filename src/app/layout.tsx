@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import React from 'react';
 import localFont from 'next/font/local';
-import Script from 'next/script';
 
 const helveticaNeue = localFont({
   src: [
@@ -74,10 +73,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className={`${helveticaNeue.variable} font-sans`}>
-      <Script
-        src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'
-        strategy='afterInteractive'
-      />
       <body>{children}</body>
     </html>
   );
