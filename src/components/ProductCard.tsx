@@ -39,8 +39,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
           <figcaption className='flex flex-col gap-3'>
             <div className='flex flex-col gap-1'>
-              <h3 className='text-sm uppercase text-grey-800'>{brandName}</h3>
-              <h2 className='text-xl font-bold text-grey-900'>{modelName}</h2>
+              <h2 className='text-sm uppercase text-grey-800'>{brandName}</h2>
+              <h3 className='text-xl font-bold text-grey-900'>{modelName}</h3>
             </div>
             <ColorDots
               availableColors={availableColors}
