@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { OrderNowBtn } from '@/components/OrderNowBtn';
 import { ColorDots } from '@/components/ColorDots';
 import { StockStatus } from '@/components/StockStatus';
 import Image from 'next/image';
+import { PlaceOrderModal } from '@/components/OrderForm/PlaceOrderModal';
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   brandName,
@@ -48,12 +48,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             />
           </figcaption>
         </figure>
-        <p className="min-h-[72px]">{shortDescription}</p>
+        <p className='min-h-[72px]'>{shortDescription}</p>
         <div className='flex items-center justify-between'>
           <p className='font-base font-bold text-grey-900'>
             {pricePerMonth}€/month
           </p>
-          <OrderNowBtn onClick={() => alert('Added to cart')} />
+          <PlaceOrderModal />
         </div>
       </div>
       <hr />
