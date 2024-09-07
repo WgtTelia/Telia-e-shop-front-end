@@ -48,7 +48,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             />
           </figcaption>
         </figure>
-        <p>{shortDescription}</p>
+        <p className="min-h-[72px]">{shortDescription}</p>
         <div className='flex items-center justify-between'>
           <p className='font-base font-bold text-grey-900'>
             {pricePerMonth}€/month
