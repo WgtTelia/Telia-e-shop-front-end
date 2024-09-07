@@ -1,7 +1,7 @@
-import { ProductGrid } from '@/components/ProductGrid';
+import { ProductGrid } from '@/components/product/ProductGrid';
 import { HeroSection } from '@/components/header/HeroSection';
 import { Header } from '@/components/header/Header';
-import { Filters } from '@/components/Filters';
+import { Filters } from '@/components/filters/Filters';
 import { FilterButtonsContainer } from '@/components/filters/FilterButtonsContainer';
 import type { Metadata } from 'next';
 

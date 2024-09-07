@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
+import { ProductCard } from '@/components/product/ProductCard';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ProductCard } from './ProductCard';
 
 const mockProps = {
   productId: 1,
@@ -17,11 +17,11 @@ const mockProps = {
   productType: 'phone',
 };
 
-jest.mock('@/components/OrderNowBtn', () => ({
+jest.mock('@/components/product/OrderNowBtn', () => ({
   OrderNowBtn: () => <div data-testid='order-now-btn'>Order now</div>,
 }));
 
-jest.mock('@/components/ColorDots', () => {
+jest.mock('@/components/product/ColorDots', () => {
   const ColorDots = ({
     availableColors,
     onColorSelect,
@@ -45,7 +45,7 @@ jest.mock('@/components/ColorDots', () => {
   return { ColorDots };
 });
 
-jest.mock('@/components/StockStatus', () => ({
+jest.mock('@/components/product/StockStatus', () => ({
   StockStatus: () => <div data-testid='stock-status'>Stock Status</div>,
 }));
 

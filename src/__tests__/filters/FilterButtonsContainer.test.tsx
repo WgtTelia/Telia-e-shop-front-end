@@ -11,7 +11,7 @@ jest.mock('react-icons/lu', () => ({
   LuArrowDownUp: () => <div data-testid='sort-icon' />,
 }));
 
-jest.mock('../../components/ui/button', () => ({
+jest.mock('@/components/ui/button', () => ({
   Button: ({ children, icon, iconPosition }: ButtonProps) => (
     <button>
       <span
