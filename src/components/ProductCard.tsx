@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { OrderNowBtn } from '@/components/OrderNowBtn';
+import Image from 'next/image';
 import { ColorDots } from '@/components/ColorDots';
 import { StockStatus } from '@/components/StockStatus';
-import Image from 'next/image';
+import { PlaceOrderModal } from '@/components/PlaceOrderModal';
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   brandName,
@@ -17,6 +17,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [selectedColor, setSelectedColor] = useState<ColorOption>(
     availableColors[0]
   );
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className='ratio:[318/336] w-[318px] rounded-lg bg-grey-100 outline outline-1 outline-grey-200'>
@@ -53,7 +54,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <p className='font-base font-bold text-grey-900'>
             {pricePerMonth}€/month
           </p>
-          <OrderNowBtn onClick={() => alert('Added to cart')} />
+          <PlaceOrderModal isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
       </div>
       <hr />

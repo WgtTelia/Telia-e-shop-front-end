@@ -3,7 +3,7 @@ import { FaArrowRight } from 'react-icons/fa6';
 import { Button } from './ui/button';
 
 interface OrderNowBtnProps {
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const OrderNowBtn: React.FC<OrderNowBtnProps> = ({ onClick }) => {
