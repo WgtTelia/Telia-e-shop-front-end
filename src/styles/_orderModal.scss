@@ -17,8 +17,9 @@
     font-size: 1.75rem;
     margin-top: 0.5rem;
   }
+}
 
-  &-description {
-    margin-top: 32px !important;
-  }
+.success-message {
+    border-radius: 8px;
+    border-left-width: 6px;
 }

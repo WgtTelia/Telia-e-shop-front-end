@@ -1,12 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { OrderNowBtn } from '@/components/OrderNowBtn';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
+  DialogDescription,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
@@ -18,8 +18,10 @@ interface PlaceOrderModalProps {
 }
 
 export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <OrderNowBtn />
       </DialogTrigger>
@@ -37,12 +39,11 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = () => {
             <DialogTitle className='order-modal-title'>
               Finalise Your Order
             </DialogTitle>
-            <DialogDescription className='order-modal-description'>
-              Please leave your contact details below. We&apos;ll contact you
-              very shortly to finalise your order.
+            <DialogDescription className="hidden">
+              Please fill in the form below to complete your order.
             </DialogDescription>
           </DialogHeader>
-          <PlaceOrderForm />
+          <PlaceOrderForm onClose={() => setIsOpen(false)} />
         </div>
       </DialogContent>
     </Dialog>

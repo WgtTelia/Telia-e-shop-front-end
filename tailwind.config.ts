@@ -62,6 +62,7 @@ const config = {
         'grey-200': '#D6D6D6', //for card outline
         'grey-100': '#F5F5FA', //for card background
         success: '#02562B', //in stock color
+        'success-medium': '#018842', //success text
         'success-light': '#C5EFD9', //in stock, halo color
         warning: '#FFA500', //low stock color
         'warning-light': '#FFF2CC', //low stock, halo color
