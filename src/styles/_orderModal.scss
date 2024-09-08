@@ -1,24 +1,24 @@
 .order-modal {
-    border-radius: 0px;
-    max-width: 100%;
+  border-radius: 0px;
+  max-width: 100%;
 
-    @media (min-width: 769px) {
-        width: 90%;
-        max-width: 888px;
-        max-height: 640px;
-    }
+  @media (min-width: 769px) {
+    width: 90%;
+    max-width: 888px;
+    max-height: 640px;
+  }
 
-    .dialog-close-btn {
-        width: 32px;
-        height: 32px;
-    }
+  .dialog-close-btn {
+    width: 32px;
+    height: 32px;
+  }
 
-    &-title {
-        font-size: 1.75rem;
-        margin-top: 0.5rem;
-    }
+  &-title {
+    font-size: 1.75rem;
+    margin-top: 0.5rem;
+  }
 
-    &-description {
-        margin-top: 32px!important;
-    }
+  &-description {
+    margin-top: 32px !important;
+  }
 }
