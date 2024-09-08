@@ -1,14 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
+import { TextInput } from '@/components/forms/TextInput';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -39,50 +32,23 @@ export const PlaceOrderForm = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className='mt-4 flex flex-col gap-[20px]'
       >
-        <FormField
-          control={form.control}
+        <TextInput
+          label='* Name and surname'
           name='nameAndSurname'
-          render={({ field, fieldState }) => (
-            <FormItem>
-              <FormLabel className={fieldState.error ? 'text-danger' : ''}>
-                * Name and surname
-              </FormLabel>
-              <FormControl>
-                <Input {...field} className='text-grey-400' />
-              </FormControl>
-              <FormMessage className='text-danger' />
-            </FormItem>
-          )}
+          register={form.register}
+          error={form.formState.errors.nameAndSurname?.message}
         />
-        <FormField
-          control={form.control}
+        <TextInput
+          label='* Email'
           name='email'
-          render={({ field, fieldState }) => (
-            <FormItem>
-              <FormLabel className={fieldState.error ? 'text-danger' : ''}>
-                * Email address
-              </FormLabel>
-              <FormControl>
-                <Input {...field} className='text-grey-400' />
-              </FormControl>
-              <FormMessage className='text-danger' />
-            </FormItem>
-          )}
+          register={form.register}
+          error={form.formState.errors.email?.message}
         />
-        <FormField
-          control={form.control}
+        <TextInput
+          label='* Phone number'
           name='phoneNumber'
-          render={({ field, fieldState }) => (
-            <FormItem>
-              <FormLabel className={fieldState.error ? 'text-danger' : ''}>
-                * Phone number
-              </FormLabel>
-              <FormControl>
-                <Input {...field} className='text-grey-400' />
-              </FormControl>
-              <FormMessage className='text-danger' />
-            </FormItem>
-          )}
+          register={form.register}
+          error={form.formState.errors.phoneNumber?.message}
         />
         <Button
           type='submit'
