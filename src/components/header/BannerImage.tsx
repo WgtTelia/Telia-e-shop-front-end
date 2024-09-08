@@ -1,35 +1,38 @@
 import React from 'react';
 import { getImageProps } from 'next/image';
+import { bannerImages } from 'public/banners/bannerImages';
 import smallBannerImage from 'public/banners/BreakpointSmall.webp';
-import mediumBannerImage from 'public/banners/BreakpointMedium.webp';
-import largeBannerImage from 'public/banners/BreakpointLarge.webp';
 
 export const BannerImage = () => {
-  const common = { alt: 'Banner Image', sizes: '100vw' };
+  const commonProps = { alt: 'Banner Image', sizes: '100vw' };
+
+  const sources = bannerImages.map(
+    ({ media, src, width, height, quality, dataTestId }) => {
+      const {
+        props: { srcSet },
+      } = getImageProps({
+        ...commonProps,
+        width,
+        height,
+        quality,
+        src,
+      });
+
+      return (
+        <source
+          key={media}
+          media={media}
+          srcSet={srcSet}
+          data-testid={dataTestId}
+        />
+      );
+    }
+  );
 
   const {
-    props: { srcSet: desktop },
+    props: { srcSet: mobileSrcSet, ...restProps },
   } = getImageProps({
-    ...common,
-    width: 1440,
-    height: 400,
-    quality: 80,
-    src: largeBannerImage,
-  });
-  const {
-    props: { srcSet: tablet },
-  } = getImageProps({
-    ...common,
-    width: 768,
-    height: 350,
-    quality: 70,
-    src: mediumBannerImage,
-  });
-
-  const {
-    props: { srcSet: mobile, ...rest },
-  } = getImageProps({
-    ...common,
+    ...commonProps,
     width: 375,
     height: 300,
     quality: 60,
@@ -38,15 +41,9 @@ export const BannerImage = () => {
 
   return (
     <picture>
-      <source
-        media='(min-width: 1440px)'
-        srcSet={desktop}
-        data-testid='desktop'
-      />
-      <source media='(min-width: 768px)' srcSet={tablet} data-testid='tablet' />
-      <source media='(min-width: 375px)' srcSet={mobile} data-testid='mobile' />
+      {sources}
       <img
-        {...rest}
+        {...restProps}
         style={{ width: '100%', height: 'auto' }}
         alt='Fallback banner image'
         loading='eager'
