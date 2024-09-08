@@ -54,8 +54,11 @@ const config = {
       colors: {
         primary: '#4E0174', //for main CTA button
         'primary-light': '#6D02A3', // for filters
+        'primary-dark': '#29003E', // for the CTA in order modal
         'grey-900': '#313132', //for price text and model name
         'grey-800': '#5D5D5F', //for brand names
+        'grey-400': '#222222', //for input text
+        'grey-300': '#7A7A7A', //for input outline
         'grey-200': '#D6D6D6', //for card outline
         'grey-100': '#F5F5FA', //for card background
         success: '#02562B', //in stock color
@@ -64,6 +67,7 @@ const config = {
         'warning-light': '#FFF2CC', //low stock, halo color
         danger: '#980233', //out of stock color
         'danger-light': '#FFDDE8', //out of stock, halo color
+        'off-black': '#1E1E20', //for the modal X and header
       },
     },
   },

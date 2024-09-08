@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import React from 'react';
 import localFont from 'next/font/local';
+import '@/styles/main.scss';
 
 const helveticaNeue = localFont({
   src: [
