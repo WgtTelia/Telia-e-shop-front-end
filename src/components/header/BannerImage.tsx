@@ -42,6 +42,7 @@ export const BannerImage = () => {
   return (
     <picture>
       {sources}
+      <source media='(min-width: 375px)' srcSet={mobileSrcSet} />
       <img
         {...restProps}
         style={{ width: '100%', height: 'auto' }}
