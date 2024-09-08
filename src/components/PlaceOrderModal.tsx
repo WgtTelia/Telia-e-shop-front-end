@@ -15,10 +15,19 @@ import { PlaceOrderForm } from '@/components/forms/PlaceOrderForm';
 interface PlaceOrderModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  brandName: string;
+  modelName: string;
+  selectedColor: ColorOption;
 }
 
-export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
+  isOpen,
+  setIsOpen,
+  brandName,
+  modelName,
+  selectedColor,
+}) => {
+  // const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -39,11 +48,16 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = () => {
             <DialogTitle className='order-modal-title'>
               Finalise Your Order
             </DialogTitle>
-            <DialogDescription className="hidden">
+            <DialogDescription className='hidden'>
               Please fill in the form below to complete your order.
             </DialogDescription>
           </DialogHeader>
-          <PlaceOrderForm onClose={() => setIsOpen(false)} />
+          <PlaceOrderForm
+            onClose={() => setIsOpen(false)}
+            brandName={brandName}
+            modelName={modelName}
+            selectedColor={selectedColor}
+          />
         </div>
       </DialogContent>
     </Dialog>

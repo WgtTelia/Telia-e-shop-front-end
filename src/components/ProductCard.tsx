@@ -49,12 +49,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             />
           </figcaption>
         </figure>
-        <p className="min-h-[72px]">{shortDescription}</p>
+        <p className='min-h-[72px]'>{shortDescription}</p>
         <div className='flex items-center justify-between'>
           <p className='font-base font-bold text-grey-900'>
             {pricePerMonth}€/month
           </p>
-          <PlaceOrderModal isOpen={isOpen} setIsOpen={setIsOpen} />
+          <PlaceOrderModal
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            brandName={brandName}
+            modelName={modelName}
+            selectedColor={selectedColor}
+          />
         </div>
       </div>
       <hr />

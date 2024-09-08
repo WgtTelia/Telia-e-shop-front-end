@@ -8,6 +8,13 @@ import { z } from 'zod';
 import { nameRegex, phoneRegex } from '@/lib/formRegex';
 import { SuccessMessage } from '@/components/forms/SuccessMessage';
 
+interface PlaceOrderFormProps {
+  onClose: () => void;
+  brandName: string;
+  modelName: string;
+  selectedColor: ColorOption;
+}
+
 const FormSchema = z.object({
   nameAndSurname: z.string().refine((value) => nameRegex.test(value), {
     message:
@@ -19,14 +26,19 @@ const FormSchema = z.object({
   }),
 });
 
-export const PlaceOrderForm = ({ onClose }: { onClose: () => void }) => {
+export const PlaceOrderForm: React.FC<PlaceOrderFormProps> = ({
+  onClose,
+  brandName,
+  modelName,
+  selectedColor,
+}) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    console.log(data);
+    console.log({ brandName, modelName, selectedColor, ...data });
     setIsSubmitted(true);
   };
 
