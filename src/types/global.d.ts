@@ -13,3 +13,8 @@ declare interface ProductCardProps {
   pricePerMonth: number;
   productType: string;
 }
+
+declare interface HeroSectionProps {
+  title: string;
+  description: string;
+}

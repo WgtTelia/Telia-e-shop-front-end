@@ -1,22 +1,9 @@
 import { render, screen } from '@testing-library/react';
+import { Header } from '@/components/header/Header';
 import { resizeWindow } from '@/lib/utils';
-import { bannerImages } from 'public/banners/bannerImages';
-import {Header} from '@/components/header/Header';
-
-jest.mock('next/image', () => jest.requireActual('next/image'));
+import { BannerImage } from '@/components/header/BannerImage';
 
 describe('Header component', () => {
-  const checkBannerImage = (
-    width: number,
-    altText: string,
-    className: string
-  ) => {
-    resizeWindow(width);
-    const bannerImage = screen.getByAltText(altText);
-    expect(bannerImage).toBeInTheDocument();
-    expect(bannerImage).toHaveClass(className);
-  };
-
   it('renders the logo', () => {
     render(<Header />);
     const logoImage = screen.getByRole('img', { name: 'Company logo' });
@@ -30,24 +17,30 @@ describe('Header component', () => {
     expect(navElement).toBeInTheDocument();
   });
 
-  it('ensures all banner images are rendered with correct attributes', () => {
-    render(<Header />);
-    bannerImages.forEach((image) => {
-      const imgElement = screen.getByAltText(image.alt);
-      expect(imgElement).toBeInTheDocument();
-      expect(imgElement).toHaveClass(image.classes);
-    });
+  it('renders the correct banner image for desktop devices', () => {
+    resizeWindow(1440);
+    render(<BannerImage />);
+
+    const desktopSource = screen.getByTestId('desktop');
+    expect(desktopSource).toBeInTheDocument();
+    expect(desktopSource).toHaveAttribute('media', '(min-width: 1440px)');
   });
 
-  it('renders the correct banner image based on screen size', async () => {
-    expect.assertions(6);
-    render(<Header />);
-    checkBannerImage(375, 'Banner for small screens', 'block sm:hidden');
-    checkBannerImage(
-      768,
-      'Banner for medium screens',
-      'hidden sm:block md:hidden'
-    );
-    checkBannerImage(1440, 'Banner for large screens', 'hidden md:block');
+  it('renders the correct banner image for tablet devices', () => {
+    resizeWindow(768);
+    render(<BannerImage />);
+
+    const tabletSource = screen.getByTestId('tablet');
+    expect(tabletSource).toBeInTheDocument();
+    expect(tabletSource).toHaveAttribute('media', '(min-width: 768px)');
+  });
+
+  it('renders the correct banner image for mobile devices', () => {
+    resizeWindow(375);
+    render(<BannerImage />);
+
+    const mobileSource = screen.getByTestId('mobile');
+    expect(mobileSource).toBeInTheDocument();
+    expect(mobileSource).toHaveAttribute('media', '(min-width: 375px)');
   });
 });
