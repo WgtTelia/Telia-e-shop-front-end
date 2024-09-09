@@ -10,6 +10,8 @@
     "prettier"
   ],
   "rules": {
+    "no-unused-vars": "warn",
+    "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "import/no-unresolved": "error",
     "import/named": "error",
@@ -18,16 +20,10 @@
     "import/export": "error",
     "@definitelytyped/no-single-element-tuple-type": "off",
     "@typescript-eslint/ban-types": "off",
-    "@typescript-eslint/no-empty-interface": "off"
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "no-console": ["warn", { "allow": ["warn", "error"] }]
   },
-  "overrides": [
-    {
-      "files": ["src/components/ui/**/*.{ts,tsx}"],
-      "rules": {
-        "react/prop-types": "off"
-      }
-    }
-  ],
   "env": {
     "jest": true
   },

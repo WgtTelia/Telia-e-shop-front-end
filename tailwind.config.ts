@@ -52,15 +52,16 @@ const config = {
         'main-content-lg': '3rem 3rem 6rem',
       },
       colors: {
-        primary: '#4E0174', //for main CTA button
+        primary: '#4E0174', // for main CTA button
         'primary-light': '#6D02A3', // for filters
-        'primary-dark': '#29003E', // for the CTA in order modal
-        'grey-900': '#313132', //for price text and model name
-        'grey-800': '#5D5D5F', //for brand names
+        'primary-dark': '#29003E', // close and results button, CTA in order modal
+        'primary-active': '#E4B6FB', // filters and sort active
+        'grey-900': '#313132', // for price text and model name
+        'grey-800': '#5D5D5F', // for brand names
         'grey-400': '#222222', //for input text
         'grey-300': '#7A7A7A', //for input outline
-        'grey-200': '#D6D6D6', //for card outline
-        'grey-100': '#F5F5FA', //for card background
+        'grey-200': '#D6D6D6', // for card outline
+        'grey-100': '#F5F5FA', // for card background
         success: '#02562B', //in stock color
         'success-medium': '#018842', //success text
         'success-light': '#C5EFD9', //in stock, halo color

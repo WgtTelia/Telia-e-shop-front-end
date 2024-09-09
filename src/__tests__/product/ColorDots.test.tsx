@@ -1,5 +1,5 @@
+import { ColorDots } from '@/components/product/ColorDots';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { ColorDots } from './ColorDots';
 
 jest.mock('@/lib/colorUtils', () => ({
   mapColorToHex: jest.fn((color) => {

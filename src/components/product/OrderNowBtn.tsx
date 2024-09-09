@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa6';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
 
 interface OrderNowBtnProps {
   onClick?: () => void;
@@ -8,9 +8,8 @@ interface OrderNowBtnProps {
 
 export const OrderNowBtn: React.FC<OrderNowBtnProps> = ({ onClick }) => {
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} icon={<FaArrowRight />} iconPosition='right'>
       Order now
-      <FaArrowRight className='ps-1' />
     </Button>
   );
 };
