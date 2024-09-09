@@ -19,17 +19,14 @@ const mockProps = {
 jest.mock('@/components/product/ColorDots', () => {
   const ColorDots = ({
     availableColors,
-    onColorSelect,
   }: {
     availableColors: ColorOption[];
-    onColorSelect: (color: ColorOption) => void;
   }) => (
     <div data-testid='color-dots'>
       {availableColors.map((colorOption) => (
         <div
           key={colorOption.color}
           data-testid={`color-dot-${colorOption.color}`}
-          onClick={() => onColorSelect(colorOption)}
         >
           {colorOption.color}
         </div>

@@ -1,3 +1,7 @@
+/* eslint-disable no-console */
+// to prevent failed build due to console.log
+// TODO: remove the console log once the backend is ready to accept data
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
