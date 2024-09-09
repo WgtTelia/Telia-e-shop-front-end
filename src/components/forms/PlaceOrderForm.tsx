@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { nameRegex, phoneRegex } from '@/lib/formRegex';
-import { SuccessMessage } from '@/components/forms/SuccessMessage';
+import { OrderSuccessMessage } from '@/components/forms/OrderSuccessMessage';
 
 interface PlaceOrderFormProps {
   onClose: () => void;
@@ -45,7 +45,7 @@ export const PlaceOrderForm: React.FC<PlaceOrderFormProps> = ({
   if (isSubmitted) {
     return (
       <div className='mt-4'>
-        <SuccessMessage />
+        <OrderSuccessMessage />
         <Button variant='outline' className='mt-12' onClick={onClose}>
           Close
         </Button>

@@ -1,6 +1,6 @@
 import { FaCircleCheck } from 'react-icons/fa6';
 
-export const SuccessMessage = () => {
+export const OrderSuccessMessage = () => {
   return (
     <div className='success-message border-success-medium border-2 p-4'>
       <div className='text-success-medium flex items-center gap-2'>

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { OrderNowBtn } from '@/components/OrderNowBtn';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { PlaceOrderForm } from '@/components/forms/PlaceOrderForm';
+import { FaArrowRight } from 'react-icons/fa6';
 
 interface PlaceOrderModalProps {
   isOpen: boolean;
@@ -27,12 +28,12 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
   modelName,
   selectedColor,
 }) => {
-  // const [isOpen, setIsOpen] = useState(false);
-
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <OrderNowBtn />
+        <Button icon={<FaArrowRight />} iconPosition='right'>
+          Order now
+        </Button>
       </DialogTrigger>
       <DialogContent className='order-modal h-full w-full md:flex md:gap-0 md:border-0 md:p-0'>
         <div
@@ -48,7 +49,7 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
             <DialogTitle className='order-modal-title'>
               Finalise Your Order
             </DialogTitle>
-            <DialogDescription className='hidden'>
+            <DialogDescription className='sr-only' role="label">
               Please fill in the form below to complete your order.
             </DialogDescription>
           </DialogHeader>
