@@ -1,6 +1,12 @@
 import { Input } from '@/components/ui/input';
-import { FormItem, FormControl, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  FormItem,
+  FormControl,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { FieldValues, UseFormRegister, Path } from 'react-hook-form';
+import { FaTriangleExclamation } from 'react-icons/fa6';
 
 interface TextInputProps<T extends FieldValues> {
   label: string;
@@ -23,7 +29,12 @@ export const TextInput = <T extends FieldValues>({
       <FormControl>
         <Input placeholder={placeholder} {...register(name)} />
       </FormControl>
-      {error && <FormMessage className="text-danger">{error}</FormMessage>}
+      {error && (
+          <FormMessage className='text-danger-medium'>
+            <FaTriangleExclamation className="inline align-middle mb-1 mr-1"/>
+            {error}
+          </FormMessage>
+      )}
     </FormItem>
   );
 };

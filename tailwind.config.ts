@@ -67,6 +67,7 @@ const config = {
         warning: '#FFA500', //low stock color
         'warning-light': '#FFF2CC', //low stock, halo color
         danger: '#980233', //out of stock color
+        'danger-medium': '#BE0040', //error text
         'danger-light': '#FFDDE8', //out of stock, halo color
         'off-black': '#1E1E20', //for the modal X and header
       },

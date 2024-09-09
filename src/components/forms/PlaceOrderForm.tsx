@@ -67,18 +67,21 @@ export const PlaceOrderForm: React.FC<PlaceOrderFormProps> = ({
           <TextInput
             label='* Name and surname'
             name='nameAndSurname'
+            placeholder='John Smith'
             register={form.register}
             error={form.formState.errors.nameAndSurname?.message}
           />
           <TextInput
             label='* Email'
             name='email'
+            placeholder='john.smith@gmail.com'
             register={form.register}
             error={form.formState.errors.email?.message}
           />
           <TextInput
             label='* Phone number'
             name='phoneNumber'
+            placeholder='+37064588162'
             register={form.register}
             error={form.formState.errors.phoneNumber?.message}
           />
