@@ -1,5 +1,5 @@
+import { OrderNowBtn } from '@/components/product/OrderNowBtn';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { OrderNowBtn } from './OrderNowBtn';
 
 describe('OrderNowBtn', () => {
   it('renders the button text', () => {
