@@ -87,7 +87,8 @@ export const PlaceOrderForm: React.FC<PlaceOrderFormProps> = ({
           />
           <Button
             type='submit'
-            className='bg-primary-dark mt-3 max-w-[156px] md:mt-7'
+            variant='secondary'
+            className='mt-3 max-w-[156px] md:mt-7'
           >
             Place order
           </Button>

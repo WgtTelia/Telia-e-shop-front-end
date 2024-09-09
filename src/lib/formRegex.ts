@@ -1,4 +1,6 @@
 // at least 2 characters followed by a space and at least another 2 characters
+// p{L}/u matches any unicode letter
+// this allows for both extended latin, cyrillic and other unicode letter characters
 export const nameRegex = /^\p{L}{2,}\s\p{L}{2,}$/u;
 
 // phone numbers can be tricky, this regex only checks for phone numbers valid in US and EU (but not worldwide, and also EU phone numbers also widely vary from coutry to country.
