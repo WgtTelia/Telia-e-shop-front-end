@@ -1,13 +1,25 @@
 import React from 'react';
-import { getImageProps } from 'next/image';
+import { getImageProps, ImageProps, StaticImageData } from 'next/image';
 import { bannerImages } from 'public/banners/bannerImages';
 import smallBannerImage from 'public/banners/BreakpointSmall.webp';
 
-export const BannerImage = () => {
-  const commonProps = { alt: 'Banner Image', sizes: '100vw' };
+interface BannerImageData {
+  media: string;
+  src: StaticImageData;
+  width: number;
+  height: number;
+  quality: number;
+  dataTestId: string;
+}
+
+export const BannerImage: React.FC = () => {
+  const commonProps: Pick<ImageProps, 'alt' | 'sizes'> = {
+    alt: 'Banner Image',
+    sizes: '100vw',
+  };
 
   const sources = bannerImages.map(
-    ({ media, src, width, height, quality, dataTestId }) => {
+    ({ media, src, width, height, quality, dataTestId }: BannerImageData) => {
       const {
         props: { srcSet },
       } = getImageProps({
