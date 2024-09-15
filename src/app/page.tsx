@@ -4,6 +4,7 @@ import { Header } from '@/components/header/Header';
 import { Filters } from '@/components/filters/Filters';
 import { FilterButtonsContainer } from '@/components/filters/FilterButtonsContainer';
 import type { Metadata } from 'next';
+import { SortProvider } from '@/context/SortContext';
 
 export const metadata: Metadata = {
   title: 'Mobile Phones & Accessories | Telia',
@@ -21,11 +22,13 @@ export default function Home() {
           description='Discover the latest mobile phones and accessories to enhance your digital lifestyle. From sleek designs to powerful features, our selection offers something for everyone.'
         />
         <section className='w-full'>
+          <SortProvider> 
           <FilterButtonsContainer />
           <div className='w-full md:grid md:grid-cols-1 lg:grid-cols-[1fr_4fr]'>
             <Filters />
             <ProductGrid />
           </div>
+          </SortProvider> 
         </section>
       </main>
     </>

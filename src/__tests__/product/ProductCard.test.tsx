@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ProductCard } from '@/components/product/ProductCard';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

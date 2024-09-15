@@ -21,10 +21,11 @@ const buttonVariants = cva(
           'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
         link: 'text-slate-900 underline-offset-4 hover:underline dark:text-slate-50',
         filter:
-          'border border-primary-light text-primary-light hover:bg-primary-active',
+          'border border-primary-light text-primary-light hover:bg-primary-active px-5 w-full flex-1 min-w-fit sm:w-auto md:max-w-fit',
         close:
           'border border-primary-dark text-primary-dark hover:bg-primary-active',
         results: 'bg-primary-dark text-white hover:bg-primary',
+        done: 'absolute right-3 top-2.5 text-white underline-offset-4 opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-800',
       },
       size: {
         default: 'h-10 px-6 py-4',

@@ -18,3 +18,8 @@ declare interface HeroSectionProps {
   title: string;
   description: string;
 }
+
+declare type SortOption =
+  | 'Most popular'
+  | 'Price: lowest to highest'
+  | 'Price: highest to lowest';

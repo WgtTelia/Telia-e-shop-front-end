@@ -3,23 +3,27 @@ import React from 'react';
 import { useSort } from '@/context/SortContext';
 import { Button } from '@/components/ui/button';
 import { LuArrowDownUp } from 'react-icons/lu';
+import { SortSheet } from '@/components/filters/SortSheet';
+
 
 export const SortButton: React.FC = () => {
-  const { sortOption } = useSort();
+  const { sortOption, setIsSheetOpen } = useSort();
 
   const handleSortClick = () => {
-    alert('Sort button clicked');
+    setIsSheetOpen(true);
   };
 
   return (
-    <Button
-      variant='filter'
-      icon={<LuArrowDownUp />}
-      iconPosition='left'
-      className='px-5'
-      onClick={handleSortClick}
-    >
-      {sortOption}
-    </Button>
+    <>
+      <Button
+        variant='filter'
+        icon={<LuArrowDownUp />}
+        iconPosition='left'
+        onClick={handleSortClick}
+      >
+        {sortOption}
+      </Button>
+      <SortSheet />
+    </>
   );
 };

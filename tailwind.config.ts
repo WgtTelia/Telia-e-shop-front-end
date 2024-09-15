@@ -56,8 +56,11 @@ const config = {
         'primary-light': '#6D02A3', // for filters
         'primary-dark': '#29003E', // close and results button
         'primary-active': '#E4B6FB', // filters and sort active
+        'gray-950': '#464847', // sheet header and sheet title name
         'grey-900': '#313132', // for price text and model name
         'grey-800': '#5D5D5F', // for brand names
+        'gray-850': '#474748', //
+        'gray-600': '#707071', // for the selected options in the sheet
         'grey-200': '#D6D6D6', // for card outline
         'grey-100': '#F5F5FA', // for card background
         success: '#02562B', //in stock color
@@ -65,8 +68,14 @@ const config = {
         warning: '#FFA500', //low stock color
         'warning-light': '#FFF2CC', //low stock, halo color
         danger: '#980233', //out of stock color
-        'danger-light': '#FFDDE8', //out of stock, halo color
+        'danger-light': '#FFDDE8', //out of stock, halo color,
+
+
       },
+      backgroundImage: {
+        'sheet-gradient': 'linear-gradient(180deg, #7A7A7A 0%, #4A4A4A 100%)',
+      },
+    
     },
   },
   plugins: [tailwindcssAnimate],

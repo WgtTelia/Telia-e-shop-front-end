@@ -1,14 +1,12 @@
 'use client';
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
-type SortOption =
-  | 'Most popular'
-  | 'Price: lowest to highest'
-  | 'Price: highest to lowest';
-
 interface SortContextProps {
   sortOption: SortOption;
   setSortOption: (option: SortOption) => void;
+  isSheetOpen: boolean;
+  setIsSheetOpen: (open: boolean) => void;
+
 }
 
 interface SortProviderProps {
@@ -19,9 +17,12 @@ const SortContext = createContext<SortContextProps | undefined>(undefined);
 
 export const SortProvider: React.FC<SortProviderProps> = ({ children }) => {
   const [sortOption, setSortOption] = useState<SortOption>('Most popular');
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+
 
   return (
-    <SortContext.Provider value={{ sortOption, setSortOption }}>
+    <SortContext.Provider value={{ sortOption, setSortOption, isSheetOpen, setIsSheetOpen }}>
       {children}
     </SortContext.Provider>
   );

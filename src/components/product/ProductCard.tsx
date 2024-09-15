@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { OrderNowBtn } from '@/components/product/OrderNowBtn';
 import { ColorDots } from '@/components/product/ColorDots';
