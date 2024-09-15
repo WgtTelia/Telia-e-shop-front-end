@@ -10,7 +10,8 @@ import {
 } from '@/components/ui/sheet';
 import { useSort } from '@/context/SortContext';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import WheelPicker from './WheelPicker';
+import { Picker } from '@/components/filters/Picker';
+
 
 const SORT_OPTIONS: SortOption[] = [
   'Most popular',
@@ -28,7 +29,7 @@ export const SortSheet: React.FC = () => {
     setSortOption(typedOption);
     setIsSheetOpen(false);
   };
-
+//TODO: style the icons and fix SheetTitle; 
   return (
     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
       <SheetTrigger asChild>
@@ -50,7 +51,7 @@ export const SortSheet: React.FC = () => {
           <SheetTitle>Choose...</SheetTitle>
         </SheetHeader>
         <div className='grid gap-1 py-1 w-full '>
-        <WheelPicker
+        <Picker
             options={SORT_OPTIONS}
             selectedOption={selectedOption}
             onChange={handleSortOptionChange}

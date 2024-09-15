@@ -60,7 +60,8 @@ const config = {
         'grey-900': '#313132', // for price text and model name
         'grey-800': '#5D5D5F', // for brand names
         'gray-850': '#474748', //
-        'gray-600': '#707071', // for the selected options in the sheet
+        'gray-600': '#707071', // for  selected btn background  in the sheet
+        'gray-550': '#A0A0A0',
         'grey-200': '#D6D6D6', // for card outline
         'grey-100': '#F5F5FA', // for card background
         success: '#02562B', //in stock color
@@ -75,7 +76,7 @@ const config = {
       backgroundImage: {
         'sheet-gradient': 'linear-gradient(180deg, #7A7A7A 0%, #4A4A4A 100%)',
       },
-    
+
     },
   },
   plugins: [tailwindcssAnimate],
