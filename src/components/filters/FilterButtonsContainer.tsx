@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { PiSlidersHorizontalBold } from 'react-icons/pi';
 import { SortButton } from '@/components/filters/SortButton';
 
-
 export const FilterButtonsContainer: React.FC = () => {
   const handleFilterClick = () => {
     alert('Filter button clicked');

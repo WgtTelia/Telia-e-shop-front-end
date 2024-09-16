@@ -6,7 +6,6 @@ interface SortContextProps {
   setSortOption: (option: SortOption) => void;
   isSheetOpen: boolean;
   setIsSheetOpen: (open: boolean) => void;
-
 }
 
 interface SortProviderProps {
@@ -19,10 +18,10 @@ export const SortProvider: React.FC<SortProviderProps> = ({ children }) => {
   const [sortOption, setSortOption] = useState<SortOption>('Most popular');
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
-
-
   return (
-    <SortContext.Provider value={{ sortOption, setSortOption, isSheetOpen, setIsSheetOpen }}>
+    <SortContext.Provider
+      value={{ sortOption, setSortOption, isSheetOpen, setIsSheetOpen }}
+    >
       {children}
     </SortContext.Provider>
   );
