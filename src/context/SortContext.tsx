@@ -1,27 +1,69 @@
 'use client';
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useReducer,
+  Dispatch,
+} from 'react';
+
+type SortOption =
+  | 'Most popular'
+  | 'Price: lowest to highest'
+  | 'Price: highest to lowest';
+
+interface SortState {
+  sortOption: SortOption;
+  isSheetOpen: boolean;
+}
+
+type SortAction =
+  | { type: 'SET_SORT_OPTION'; payload: SortOption }
+  | { type: 'SET_SHEET_OPEN'; payload: boolean };
+
+const SET_SORT_OPTION = 'SET_SORT_OPTION';
+const SET_SHEET_OPEN = 'SET_SHEET_OPEN';
+
+const setSortOption = (option: SortOption): SortAction => ({
+  type: SET_SORT_OPTION,
+  payload: option,
+});
+
+const setIsSheetOpen = (open: boolean): SortAction => ({
+  type: SET_SHEET_OPEN,
+  payload: open,
+});
 
 interface SortContextProps {
-  sortOption: SortOption;
-  setSortOption: (option: SortOption) => void;
-  isSheetOpen: boolean;
-  setIsSheetOpen: (open: boolean) => void;
+  state: SortState;
+  dispatch: Dispatch<SortAction>;
 }
 
-interface SortProviderProps {
-  children: ReactNode;
-}
+const initialState: SortState = {
+  sortOption: 'Most popular',
+  isSheetOpen: false,
+};
 
 const SortContext = createContext<SortContextProps | undefined>(undefined);
 
-export const SortProvider: React.FC<SortProviderProps> = ({ children }) => {
-  const [sortOption, setSortOption] = useState<SortOption>('Most popular');
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
+function sortReducer(state: SortState, action: SortAction): SortState {
+  switch (action.type) {
+    case 'SET_SORT_OPTION':
+      return { ...state, sortOption: action.payload };
+    case 'SET_SHEET_OPEN':
+      return { ...state, isSheetOpen: action.payload };
+    default:
+      return state;
+  }
+}
+
+export const SortProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [state, dispatch] = useReducer(sortReducer, initialState);
 
   return (
-    <SortContext.Provider
-      value={{ sortOption, setSortOption, isSheetOpen, setIsSheetOpen }}
-    >
+    <SortContext.Provider value={{ state, dispatch }}>
       {children}
     </SortContext.Provider>
   );
@@ -32,5 +74,10 @@ export const useSort = () => {
   if (!context) {
     throw new Error('useSort must be used within a SortProvider');
   }
-  return context;
+  return {
+    ...context.state,
+    setSortOption: (option: SortOption) =>
+      context.dispatch(setSortOption(option)),
+    setIsSheetOpen: (open: boolean) => context.dispatch(setIsSheetOpen(open)),
+  };
 };

@@ -5,11 +5,11 @@ import { Button } from '@/components/ui/button';
 import { LuArrowDownUp } from 'react-icons/lu';
 import { SelectMenu } from '@/components/filters/SelectMenu';
 
-
 export const SortButton: React.FC = () => {
   const { sortOption, setIsSheetOpen } = useSort();
 
   const handleSortClick = () => {
+    // Dispatches action to open the sheet
     setIsSheetOpen(true);
   };
 

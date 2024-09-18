@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import { SelectMenu, SORT_OPTIONS } from '@/components/filters/SelectMenu';
-import { SortProvider, useSort } from '@/context/SortContext';
+
 import '@testing-library/jest-dom';
+import { SortProvider, useSort } from '@/context/SortContext';
 
 // Mocking icons
 jest.mock('react-icons/fa', () => ({
