@@ -6,6 +6,7 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
+    "target": "es6",
     "module": "esnext",
     "moduleResolution": "bundler",
     "baseUrl": "./",
