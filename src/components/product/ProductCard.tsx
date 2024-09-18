@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { OrderNowBtn } from '@/components/product/OrderNowBtn';
 import { ColorDots } from '@/components/product/ColorDots';
 import { StockStatus } from '@/components/product/StockStatus';
+import { PlaceOrderModal } from '@/components/modals/PlaceOrderModal';
 import Image from 'next/image';
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -17,6 +17,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [selectedColor, setSelectedColor] = useState<ColorOption>(
     availableColors[0]
   );
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className='ratio:[318/336] w-[318px] rounded-lg bg-grey-100 outline outline-1 outline-grey-200'>
@@ -48,12 +50,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             />
           </figcaption>
         </figure>
-        <p className='min-h-[72px]'>{shortDescription}</p>
+        <p className="min-h-[72px]">{shortDescription}</p>
         <div className='flex items-center justify-between'>
           <p className='font-base font-bold text-grey-900'>
             {pricePerMonth}€/month
           </p>
-          <OrderNowBtn onClick={() => alert('Added to cart')} />
+          <PlaceOrderModal
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            brandName={brandName}
+            modelName={modelName}
+            selectedColor={selectedColor}
+          />
         </div>
       </div>
       <hr />

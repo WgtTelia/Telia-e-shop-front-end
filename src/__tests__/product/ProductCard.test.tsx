@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ProductCard } from '@/components/product/ProductCard';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -17,24 +16,17 @@ const mockProps = {
   productType: 'phone',
 };
 
-jest.mock('@/components/product/OrderNowBtn', () => ({
-  OrderNowBtn: () => <div data-testid='order-now-btn'>Order now</div>,
-}));
-
 jest.mock('@/components/product/ColorDots', () => {
   const ColorDots = ({
     availableColors,
-    onColorSelect,
   }: {
     availableColors: ColorOption[];
-    onColorSelect: (color: ColorOption) => void;
   }) => (
     <div data-testid='color-dots'>
       {availableColors.map((colorOption) => (
         <div
           key={colorOption.color}
           data-testid={`color-dot-${colorOption.color}`}
-          onClick={() => onColorSelect(colorOption)}
         >
           {colorOption.color}
         </div>
@@ -59,7 +51,7 @@ describe('ProductCard', () => {
   it('renders the OrderNowBtn, ColorDots, and StockStatus components', () => {
     render(<ProductCard {...mockProps} />);
 
-    const orderNowBtn = screen.getByTestId('order-now-btn');
+    const orderNowBtn = screen.getByText('Order now');
     const colorDots = screen.getByTestId('color-dots');
     const stockStatus = screen.getByTestId('stock-status');
 
@@ -118,5 +110,15 @@ describe('ProductCard', () => {
         );
       });
     });
+  });
+
+  it('opens the PlaceOrderModal when the OrderNowBtn is clicked', async () => {
+    render(<ProductCard {...mockProps} />);
+
+    const orderNowBtn = screen.getByText('Order now');
+    await userEvent.click(orderNowBtn);
+
+    const placeOrderModal = screen.getByText('Finalise Your Order');
+    expect(placeOrderModal).toBeInTheDocument();
   });
 });

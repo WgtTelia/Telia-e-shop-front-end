@@ -1,4 +1,4 @@
-import { mapColorToHex } from './colorUtils';
+import { mapColorToHex } from '@/lib/colorUtils';
 
 describe('mapColorToHex', () => {
   it('returns the hex code for a valid color', () => {
