@@ -17,7 +17,7 @@ export const Picker: React.FC<PickerProps> = ({
   const scrollToOption = (index: number) => {
     const container = containerRef.current;
     if (container) {
-      const scrollPosition = index * 28;
+      const scrollPosition = index * 24;
       container.scrollTo({ top: scrollPosition, behavior: 'smooth' });
     }
   };
@@ -34,7 +34,7 @@ export const Picker: React.FC<PickerProps> = ({
 
   return (
     <div
-      className='max-h-76 relative w-full overflow-y-auto scroll-smooth'
+      className='relative max-h-20 w-full overflow-y-auto scroll-smooth'
       ref={containerRef}
       role='listbox'
     >
@@ -44,6 +44,8 @@ export const Picker: React.FC<PickerProps> = ({
             key={option}
             variant='ghost'
             role='option'
+            size='picker'
+            test-id='picker-option-Price'
             onClick={() => handleOptionClick(option)}
             className={`w-full rounded-none border-none transition-colors duration-150 ease-in-out hover:text-white ${
               selectedOption === option

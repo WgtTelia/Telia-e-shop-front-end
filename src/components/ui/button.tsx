@@ -26,13 +26,14 @@ const buttonVariants = cva(
           'border border-primary-dark text-primary-dark hover:bg-primary-active',
         results: 'bg-primary-dark text-white hover:bg-primary',
         done: 'absolute right-3 top-2.5 text-white underline-offset-4 opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-800',
-        action: 'text-white opacity-70 transition-opacity hover:opacity-100',
+        action: 'text-white opacity-70 transition-opacity hover:opacity-100 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0',
       },
       size: {
         default: 'h-10 px-6 py-4',
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
+        picker: 'h-7',
       },
     },
     defaultVariants: {

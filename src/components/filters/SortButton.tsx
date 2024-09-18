@@ -3,7 +3,7 @@ import React from 'react';
 import { useSort } from '@/context/SortContext';
 import { Button } from '@/components/ui/button';
 import { LuArrowDownUp } from 'react-icons/lu';
-import { SortSheet } from '@/components/filters/SortSheet';
+import { SelectMenu } from '@/components/filters/SelectMenu';
 
 
 export const SortButton: React.FC = () => {
@@ -23,7 +23,7 @@ export const SortButton: React.FC = () => {
       >
         {sortOption}
       </Button>
-      <SortSheet />
+      <SelectMenu />
     </>
   );
 };
