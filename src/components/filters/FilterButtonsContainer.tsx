@@ -17,7 +17,7 @@ export const FilterButtonsContainer: React.FC = () => {
   return (
     <div className='mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:flex md:justify-start lg:hidden'>
       <Button
-        variant='filter'
+        variant='outline'
         icon={<PiSlidersHorizontalBold />}
         iconPosition='left'
         className='px-5'
@@ -26,7 +26,7 @@ export const FilterButtonsContainer: React.FC = () => {
         Filter by
       </Button>
       <Button
-        variant='filter'
+        variant='outline'
         icon={<LuArrowDownUp />}
         iconPosition='left'
         className='px-5'

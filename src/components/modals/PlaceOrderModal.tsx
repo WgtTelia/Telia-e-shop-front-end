@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -36,14 +37,15 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
         </Button>
       </DialogTrigger>
       <DialogContent className='md:w-9/10 h-full w-full max-w-full rounded-none sm:rounded-none md:flex md:max-h-[640px] md:max-w-[888px] md:gap-0 md:rounded-md md:border-0 md:p-0'>
-        <div
-          className='hidden min-w-[300px] md:block'
-          style={{
-            backgroundImage: 'url("/form-decoration.png")',
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-          }}
-        ></div>
+        <div className='relative hidden md:block md:w-[300px]'>
+          <Image
+            src='/form-decoration.png'
+            alt='Form decoration'
+            layout='fill'
+            objectFit='cover'
+            objectPosition='center'
+          />
+        </div>
         <div className='md:p-6 md:px-12'>
           <DialogHeader>
             <DialogTitle className='text-modal-title mt-2'>

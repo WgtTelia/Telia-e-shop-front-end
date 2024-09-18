@@ -50,7 +50,7 @@ export const PlaceOrderForm: React.FC<PlaceOrderFormProps> = ({
     return (
       <div className='mt-4'>
         <OrderSuccessMessage />
-        <Button variant='outline' className='mt-12' onClick={onClose}>
+        <Button variant='secondary' className='mt-12' onClick={onClose}>
           Close
         </Button>
       </div>

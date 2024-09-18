@@ -20,10 +20,6 @@ const buttonVariants = cva(
         ghost:
           'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
         link: 'text-slate-900 underline-offset-4 hover:underline dark:text-slate-50',
-        filter:
-          'border border-primary-light text-primary-light hover:bg-primary-active',
-        close:
-          'border border-primary-dark text-primary-dark hover:bg-primary-active',
         results: 'bg-primary-dark text-white hover:bg-primary',
       },
       size: {
