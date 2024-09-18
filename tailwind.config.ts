@@ -42,6 +42,7 @@ const config = {
         'hero-title': '2rem',
         'hero-title-md': '2.625rem',
         'hero-title-lg': '3rem',
+        'modal-title': '1.75rem',
       },
       fontFamily: {
         sans: ['var(--font-helvetica-neue)', ...fontFamily.sans],
