@@ -30,10 +30,10 @@ export const TextInput = <T extends FieldValues>({
         <Input placeholder={placeholder} {...register(name)} />
       </FormControl>
       {error && (
-          <FormMessage className='text-danger-medium'>
-            <FaTriangleExclamation className="inline align-middle mb-1 mr-1"/>
-            {error}
-          </FormMessage>
+        <FormMessage className='text-danger-medium'>
+          <FaTriangleExclamation className='mb-1 mr-1 inline align-middle' />
+          {error}
+        </FormMessage>
       )}
     </FormItem>
   );

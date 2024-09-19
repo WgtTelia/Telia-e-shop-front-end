@@ -61,8 +61,6 @@ const config = {
         danger: '#980233', //out of stock color
         'danger-medium': '#BE0040', //error text
         'danger-light': '#FFDDE8', //out of stock, halo color,
-
-
       },
       backgroundImage: {
         'sheet-gradient': 'linear-gradient(180deg, #7A7A7A 0%, #4A4A4A 100%)',
@@ -77,7 +75,6 @@ const config = {
       maxWidth: {
         'dialog-content': '888px',
       },
-
     },
   },
   plugins: [tailwindcssAnimate],

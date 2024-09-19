@@ -3,6 +3,7 @@
     "next",
     "next/core-web-vitals",
     "plugin:react/recommended",
+    "plugin:tailwindcss/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended",
@@ -22,8 +23,19 @@
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-unused-vars": "warn",
-    "no-console": ["warn", { "allow": ["warn", "error"] }]
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "react/no-unescaped-entities": "warn",
+    "react/style-prop-object": "warn", //  about using inline style objects
+    "tailwindcss/no-arbitrary-value": "warn" //  about using arbitrary values instead of Tailwind utilities
   },
+  "overrides": [
+    {
+      "files": ["./src/component/ui/**/*.{ts,tsx}"],
+      "rules": {
+        "tailwindcss/*": "off"
+      }
+    }
+  ],
   "env": {
     "jest": true
   },

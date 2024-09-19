@@ -16,7 +16,7 @@ export const ColorDots: React.FC<ColorDotsProps> = ({
         <div
           key={colorOption.color}
           title={colorOption.color}
-          className='h-[12px] w-[12px] cursor-pointer rounded-full outline outline-grey-200 hover:outline-2 hover:outline-primary'
+          className='size-[12px] cursor-pointer rounded-full outline outline-grey-200 hover:outline-2 hover:outline-primary'
           style={{ backgroundColor: mapColorToHex(colorOption.color) }}
           onClick={() => onColorSelect(colorOption)}
         />

@@ -6,7 +6,11 @@ const mockProps = {
   onClose: jest.fn(),
   brandName: 'Apple',
   modelName: 'iPhone 13',
-  selectedColor: { color: 'black', stockAmount: 10, image: '/black-iphone.jpg' },
+  selectedColor: {
+    color: 'black',
+    stockAmount: 10,
+    image: '/black-iphone.jpg',
+  },
 };
 
 describe('PlaceOrderForm', () => {
@@ -40,7 +44,7 @@ describe('PlaceOrderForm', () => {
     await userEvent.type(phoneInput, '+37064588162');
     await userEvent.click(submitButton);
 
-    const successMessage = await screen.findByText('We\'ve received your order');
+    const successMessage = await screen.findByText("We've received your order");
     expect(successMessage).toBeInTheDocument();
   });
 });

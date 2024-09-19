@@ -50,11 +50,11 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   return createPortal(
     <div
-      className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-10'
+      className='fixed inset-0 z-50 flex items-center justify-center bg-black/10 bg-opacity-10'
       onClick={onClose}
     >
       <div
-        className='relative h-full w-full bg-white p-6 md:h-auto md:max-w-xl md:p-0 lg:rounded-lg lg:shadow-lg'
+        className='relative size-full bg-white p-6 md:h-auto md:max-w-xl md:p-0 lg:rounded-lg lg:shadow-lg'
         ref={modalRef}
         tabIndex={-1}
         role='dialog'
@@ -68,7 +68,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
           aria-label='Close modal'
         >
           <svg
-            className='h-6 w-6'
+            className='size-6'
             fill='none'
             stroke='currentColor'
             viewBox='0 0 24 24'

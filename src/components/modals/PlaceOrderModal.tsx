@@ -36,7 +36,7 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
           Order now
         </Button>
       </DialogTrigger>
-      <DialogContent className='md:w-9/10 h-full w-full max-w-full rounded-none sm:rounded-none md:flex md:max-h-dialog-content md:max-w-dialog-content md:gap-0 md:rounded-md md:border-0 md:p-0'>
+      <DialogContent className='size-full max-w-full rounded-none sm:rounded-none md:flex md:max-h-dialog-content md:max-w-dialog-content md:gap-0 md:rounded-md md:border-0 md:p-0'>
         <div className='relative hidden md:block md:w-image-container'>
           <Image
             src='/form-decoration.png'

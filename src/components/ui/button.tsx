@@ -10,29 +10,30 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-primary text-white hover:bg-primary-light dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90 focus-visible:ring-primary-light focus-visible:ring-offset-2',
+          'bg-primary text-white hover:bg-primary-light focus-visible:ring-primary-light focus-visible:ring-offset-2 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90',
         destructive:
           'bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90',
         outline:
-          'border border-primary-dark bg-white hover:bg-primary-active hover:text-primary-dark dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50 focus-visible:ring-primary-light focus-visible:ring-offset-2',
+          'border border-primary-dark bg-white hover:bg-primary-active hover:text-primary-dark focus-visible:ring-primary-light focus-visible:ring-offset-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50',
         secondary:
-          'bg-primary-dark text-white hover:bg-primary dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80 focus-visible:ring-primary-light focus-visible:ring-offset-2',
+          'bg-primary-dark text-white hover:bg-primary focus-visible:ring-primary-light focus-visible:ring-offset-2 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
         ghost:
           ' hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
         link: 'text-slate-900 underline-offset-4 hover:underline dark:text-slate-50',
         filter:
-          'border border-primary-light text-primary-light hover:bg-primary-active px-5 w-full flex-1 min-w-fit sm:w-auto md:max-w-fit',
+          'w-full min-w-fit flex-1 border border-primary-light px-5 text-primary-light hover:bg-primary-active sm:w-auto md:max-w-fit',
         close:
           'border border-primary-dark text-primary-dark hover:bg-primary-active',
         results: 'bg-primary-dark text-white hover:bg-primary',
         done: 'absolute right-3 top-2.5 text-white underline-offset-4 opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-800',
-        action: 'text-white opacity-70 transition-opacity hover:opacity-100 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0',
+        action:
+          'bg-transparent text-white opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0',
       },
       size: {
         default: 'h-10 px-6 py-4',
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
-        icon: 'h-10 w-10',
+        icon: 'size-10',
         picker: 'h-7',
       },
     },

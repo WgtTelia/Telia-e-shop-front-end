@@ -35,7 +35,7 @@ export const StockStatus: React.FC<StockStatusProps> = ({ stockAmount }) => {
   return (
     <div className='flex items-center justify-center gap-2 py-2'>
       <div
-        className='h-[8px] w-[8px] rounded-full outline outline-2'
+        className='size-[8px] rounded-full outline outline-2'
         style={{
           backgroundColor: stockStyles.backgroundColor,
           outlineColor: stockStyles.outlineColor,

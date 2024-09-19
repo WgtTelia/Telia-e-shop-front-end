@@ -7,7 +7,11 @@ const mockProps = {
   setIsOpen: jest.fn(),
   brandName: 'Apple',
   modelName: 'iPhone 13',
-  selectedColor: { color: 'black', stockAmount: 10, image: '/black-iphone.jpg' },
+  selectedColor: {
+    color: 'black',
+    stockAmount: 10,
+    image: '/black-iphone.jpg',
+  },
 };
 
 describe('PlaceOrderModal', () => {
