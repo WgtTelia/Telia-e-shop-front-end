@@ -42,7 +42,7 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
             src='/form-decoration.png'
             alt='Form decoration'
             fill
-            sizes='300px'
+            sizes='(min-width: 768px) 33vw, 100vw'
           />
         </div>
         <div className='md:p-6 md:px-12'>
