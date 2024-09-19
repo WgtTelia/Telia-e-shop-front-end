@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { nameRegex, phoneRegex } from '@/lib/formRegex';
 import { OrderSuccessMessage } from '@/components/forms/OrderSuccessMessage';
+import { OrderErrorMessage } from '@/components/forms/OrderErrorMessage';
 
 interface PlaceOrderFormProps {
   onClose: () => void;
@@ -37,22 +38,59 @@ export const PlaceOrderForm: React.FC<PlaceOrderFormProps> = ({
   selectedColor,
 }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isError, setIsError] = useState(false);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    console.log({ brandName, modelName, selectedColor, ...data });
-    setIsSubmitted(true);
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    try {
+      // simulating backend request which fails half the time
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const random = Math.random();
+          if (random > 0.5) {
+            resolve(null);
+          } else {
+            reject(new Error('Simulated backend error'));
+          }
+        }, 1000);
+      });
+
+      console.log({ brandName, modelName, selectedColor, ...data });
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    }
   };
 
   if (isSubmitted) {
     return (
       <div className='mt-4'>
         <OrderSuccessMessage />
-        <Button variant='secondary' className='mt-12' onClick={onClose}>
-          Close
-        </Button>
+        <div className='mt-12'>
+          <Button variant='secondary' onClick={onClose}>
+            Close
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className='mt-4'>
+        <OrderErrorMessage />
+        <div className='mt-12 flex flex-row gap-4'>
+          <Button variant='default' onClick={() => setIsError(false)}>
+            Fill the form again
+          </Button>
+          <Button variant='secondary' onClick={onClose}>
+            Close
+          </Button>
+        </div>
       </div>
     );
   }
