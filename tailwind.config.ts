@@ -1,6 +1,6 @@
-import type { Config } from 'tailwindcss';
-import tailwindcssAnimate from 'tailwindcss-animate';
-import { fontFamily } from 'tailwindcss/defaultTheme';
+import type { Config } from 'tailwindcss'
+import tailwindcssAnimate from 'tailwindcss-animate'
+import { fontFamily } from 'tailwindcss/defaultTheme'
 
 const config = {
   darkMode: ['class'],
@@ -64,6 +64,8 @@ const config = {
       },
       backgroundImage: {
         'sheet-gradient': 'linear-gradient(180deg, #7A7A7A 0%, #4A4A4A 100%)',
+        'error-medium': '#E4175C', // technical error icon
+        'error-strong': '#980233', //technical error text
         'off-black': '#1E1E20', //for the modal X and header
       },
       width: {
@@ -78,6 +80,6 @@ const config = {
     },
   },
   plugins: [tailwindcssAnimate],
-} satisfies Config;
+} satisfies Config
 
-export default config;
+export default config
