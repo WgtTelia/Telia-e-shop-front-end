@@ -66,76 +66,65 @@ export const PlaceOrderForm: React.FC<PlaceOrderFormProps> = ({
     }
   };
 
-  if (isSubmitted) {
-    return (
-      <div className='mt-4'>
-        <OrderSuccessMessage />
-        <div className='mt-12'>
-          <Button variant='secondary' onClick={onClose}>
-            Close
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
-  if (isError) {
-    return (
-      <div className='mt-4'>
-        <OrderErrorMessage />
-        <div className='mt-12 flex flex-row gap-4'>
-          <Button variant='default' onClick={() => setIsError(false)}>
-            Fill the form again
-          </Button>
-          <Button variant='secondary' onClick={onClose}>
-            Close
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <>
-      <p className='mt-8'>
-        Please leave your contact details below. We&apos;ll contact you very
-        shortly to finalise your order.
-      </p>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className='mt-4 flex flex-col gap-[20px]'
-        >
-          <TextInput
-            label='* Name and surname'
-            name='nameAndSurname'
-            placeholder='John Smith'
-            register={form.register}
-            error={form.formState.errors.nameAndSurname?.message}
-          />
-          <TextInput
-            label='* Email'
-            name='email'
-            placeholder='john.smith@gmail.com'
-            register={form.register}
-            error={form.formState.errors.email?.message}
-          />
-          <TextInput
-            label='* Phone number'
-            name='phoneNumber'
-            placeholder='+37064588162'
-            register={form.register}
-            error={form.formState.errors.phoneNumber?.message}
-          />
-          <Button
-            type='submit'
-            variant='secondary'
-            className='mt-3 max-w-[156px] md:mt-7'
-          >
-            Place order
-          </Button>
-        </form>
-      </Form>
+      {isSubmitted || isError ? (
+        <div className='mt-4'>
+          {isSubmitted ? <OrderSuccessMessage /> : <OrderErrorMessage />}
+          <div className='mt-12 flex flex-row gap-4'>
+            {isError ? (
+              <Button variant='default' onClick={() => setIsError(false)}>
+                Fill the form again
+              </Button>
+            ) : null}
+            <Button variant='secondary' onClick={onClose}>
+              Close
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <p className='mt-8'>
+            Please leave your contact details below. We&apos;ll contact you very
+            shortly to finalise your order.
+          </p>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className='mt-4 flex flex-col gap-[20px]'
+            >
+              <TextInput
+                label='* Name and surname'
+                name='nameAndSurname'
+                placeholder='John Smith'
+                register={form.register}
+                error={form.formState.errors.nameAndSurname?.message}
+              />
+              <TextInput
+                label='* Email'
+                name='email'
+                placeholder='john.smith@gmail.com'
+                register={form.register}
+                error={form.formState.errors.email?.message}
+              />
+              <TextInput
+                label='* Phone number'
+                name='phoneNumber'
+                placeholder='+37064588162'
+                register={form.register}
+                error={form.formState.errors.phoneNumber?.message}
+              />
+              <Button
+                type='submit'
+                variant='secondary'
+                className='mt-3 max-w-[156px] md:mt-7'
+              >
+                Place order
+              </Button>
+            </form>
+          </Form>
+        </>
+      )}
     </>
   );
 };
