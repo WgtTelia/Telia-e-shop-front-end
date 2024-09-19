@@ -24,10 +24,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     <div className='ratio:[318/336] w-[318px] rounded-lg bg-grey-100 outline outline-1 outline-grey-200'>
       <div className='flex flex-col gap-4 p-6'>
         <figure className='grid h-[116px] grid-cols-2 items-center justify-center'>
-          <div className='mx-auto max-h-[116px] max-w-[100px]'>
+          <div className='relative mx-auto h-[116px] w-[100px]'>
             <Image
-              width={100}
-              height={116}
+              fill
+              sizes='100px'
               src={
                 selectedColor && typeof selectedColor.image === 'string'
                   ? selectedColor.image
@@ -36,7 +36,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               alt={`${brandName} ${modelName} ${
                 selectedColor ? selectedColor.color : availableColors[0]
               }`}
-              className='max-h-[116px]'
+              className='object-contain'
             />
           </div>
           <figcaption className='flex flex-col gap-3'>
@@ -50,7 +50,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             />
           </figcaption>
         </figure>
-        <p className="min-h-[72px]">{shortDescription}</p>
+        <p className='min-h-[72px]'>{shortDescription}</p>
         <div className='flex items-center justify-between'>
           <p className='font-base font-bold text-grey-900'>
             {pricePerMonth}€/month
