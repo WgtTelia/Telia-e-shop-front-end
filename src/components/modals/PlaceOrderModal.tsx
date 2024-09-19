@@ -36,19 +36,18 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
           Order now
         </Button>
       </DialogTrigger>
-      <DialogContent className='md:w-9/10 md:max-h-dialog-content md:max-w-dialog-content h-full w-full max-w-full rounded-none sm:rounded-none md:flex md:gap-0 md:rounded-md md:border-0 md:p-0'>
-        <div className='md:w-image-container relative hidden md:block'>
+      <DialogContent className='md:w-9/10 h-full w-full max-w-full rounded-none sm:rounded-none md:flex md:max-h-dialog-content md:max-w-dialog-content md:gap-0 md:rounded-md md:border-0 md:p-0'>
+        <div className='relative hidden md:block md:w-image-container'>
           <Image
             src='/form-decoration.png'
             alt='Form decoration'
-            layout='fill'
-            objectFit='cover'
-            objectPosition='center'
+            fill
+            sizes='(min-width: 768px) 33vw, 100vw'
           />
         </div>
         <div className='md:p-6 md:px-12'>
           <DialogHeader>
-            <DialogTitle className='text-modal-title mt-2'>
+            <DialogTitle className='mt-2 text-modal-title'>
               Finalise Your Order
             </DialogTitle>
             <DialogDescription className='sr-only' role='label'>
