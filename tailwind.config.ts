@@ -57,6 +57,8 @@ const config = {
         danger: '#980233', //out of stock color
         'danger-medium': '#BE0040', //error text
         'danger-light': '#FFDDE8', //out of stock, halo color
+        'error-medium': '#E4175C', // technical error icon
+        'error-strong': '#980233', //technical error text
         'off-black': '#1E1E20', //for the modal X and header
       },
       width: {
