@@ -32,7 +32,11 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button icon={<FaArrowRight />} iconPosition='right'>
+        <Button
+          icon={<FaArrowRight />}
+          iconPosition='right'
+          disabled={selectedColor.stockAmount === 0}
+        >
           Order now
         </Button>
       </DialogTrigger>
