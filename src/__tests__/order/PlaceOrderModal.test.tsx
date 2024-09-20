@@ -7,10 +7,32 @@ const mockProps = {
   setIsOpen: jest.fn(),
   brandName: 'Apple',
   modelName: 'iPhone 13',
-  selectedColor: { color: 'black', stockAmount: 10, image: '/black-iphone.jpg' },
+  selectedColor: {
+    color: 'black',
+    stockAmount: 10,
+    image: '/black-iphone.jpg',
+  },
+};
+
+const mockPropsOutOfStock = {
+  isOpen: true,
+  setIsOpen: jest.fn(),
+  brandName: 'Sony',
+  modelName: 'Xperia 10 V',
+  selectedColor: {
+    color: 'green',
+    stockAmount: 0,
+    image: '/green-sony_Xperia.png',
+  },
 };
 
 describe('PlaceOrderModal', () => {
+  it('is not opened because button is disabled when the stock amount is 0', () => {
+    render(<PlaceOrderModal {...mockPropsOutOfStock} />);
+    const orderNowBtn = screen.getByText('Order now');
+    expect(orderNowBtn).toBeDisabled();
+  });
+
   it('renders the header with the text "Finalise Your Order"', () => {
     render(<PlaceOrderModal {...mockProps} />);
 
