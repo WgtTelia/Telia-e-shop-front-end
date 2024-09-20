@@ -21,10 +21,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className='ratio:[318/336] w-[318px] rounded-lg bg-grey-100 outline outline-1 outline-grey-200'>
+    <div className='aspect-card w-card-width rounded-lg bg-grey-100 outline outline-1 outline-grey-200'>
       <div className='flex flex-col gap-4 p-6'>
-        <figure className='grid h-[116px] grid-cols-2 items-center justify-center'>
-          <div className='relative mx-auto h-[116px] w-[100px]'>
+        <figure className='h-card-img-height grid grid-cols-2 items-center justify-center'>
+          <div className='h-card-img-height w-card-img-width relative mx-auto'>
             <Image
               fill
               sizes='100px'
@@ -50,7 +50,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             />
           </figcaption>
         </figure>
-        <p className='min-h-[72px]'>{shortDescription}</p>
+        <p className='min-h-card-description'>{shortDescription}</p>
         <div className='flex items-center justify-between'>
           <p className='font-base font-bold text-grey-900'>
             {pricePerMonth}€/month

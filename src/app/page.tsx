@@ -22,7 +22,7 @@ export default function Home() {
         />
         <section className='w-full'>
           <FilterButtonsContainer />
-          <div className='w-full md:grid md:grid-cols-1 lg:grid-cols-[1fr_4fr]'>
+          <div className='w-full md:grid md:grid-cols-1 lg:grid-cols-main-app'>
             <Filters />
             <ProductGrid />
           </div>
