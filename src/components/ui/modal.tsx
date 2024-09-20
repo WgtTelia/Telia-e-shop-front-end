@@ -1,56 +1,56 @@
 // this not from a shadcn, but a custom component.
 
-import React, { useState, useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useState, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 
 interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
+  isOpen: boolean
+  onClose: () => void
+  children: React.ReactNode
 }
 
 export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  const [mounted, setMounted] = useState(false);
-  const modalRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false)
+  const modalRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setMounted(true);
-    document.body.style.overflow = 'hidden';
+    setMounted(true)
+    document.body.style.overflow = 'hidden'
 
     return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
+      document.body.style.overflow = ''
+    }
+  }, [])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        onClose();
+        onClose()
       }
-    };
+    }
 
     if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('keydown', handleKeyDown)
     }
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, onClose]);
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isOpen, onClose])
 
   useEffect(() => {
     if (isOpen) {
-      modalRef.current?.focus();
+      modalRef.current?.focus()
     }
-  }, [isOpen]);
+  }, [isOpen])
 
   if (!mounted) {
-    return null;
+    return null
   }
 
   return createPortal(
     <div
-      className='fixed inset-0 z-50 flex items-center justify-center bg-black/10 bg-opacity-10'
+      className='fixed inset-0 z-50 flex items-center justify-center bg-black/10'
       onClick={onClose}
     >
       <div
@@ -86,7 +86,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       </div>
     </div>,
     document.body
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal

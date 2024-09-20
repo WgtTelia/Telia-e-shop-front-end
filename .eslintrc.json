@@ -26,7 +26,8 @@
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "react/no-unescaped-entities": "warn",
     "react/style-prop-object": "warn", //  about using inline style objects
-    "tailwindcss/no-arbitrary-value": "warn" //  about using arbitrary values instead of Tailwind utilities
+    "tailwindcss/no-arbitrary-value": "warn", //  about using arbitrary values instead of Tailwind utilities
+    "tailwindcss/no-custom-classname": "off" //rule that flags custom Tailwind classes
   },
   "overrides": [
     {

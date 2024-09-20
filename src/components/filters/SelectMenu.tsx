@@ -1,5 +1,5 @@
-'use client';
-import React from 'react';
+'use client'
+import React from 'react'
 import {
   Sheet,
   SheetContent,
@@ -8,37 +8,32 @@ import {
   SheetTrigger,
   SheetClose,
   SheetDescription,
-} from '@/components/ui/sheet';
-import { useSort } from '@/context/SortContext';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { Picker } from '@/components/filters/Picker';
-import { Button } from '@/components/ui/button';
-import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-
-export const SORT_OPTIONS: SortOption[] = [
-  'Most popular',
-  'Price: lowest to highest',
-  'Price: highest to lowest',
-];
+} from '@/components/ui/sheet'
+import { useSort } from '@/context/SortContext'
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
+import { Picker } from '@/components/filters/Picker'
+import { Button } from '@/components/ui/button'
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
+import { SORT_OPTIONS } from '@/data/sortOption'
 
 export const SelectMenu: React.FC = () => {
-  const { setSortOption, isSheetOpen, setIsSheetOpen, sortOption } = useSort();
+  const { setSortOption, isSheetOpen, setIsSheetOpen, sortOption } = useSort()
 
   const moveSelection = (direction: 'up' | 'down') => {
-    const currentIndex = SORT_OPTIONS.indexOf(sortOption);
+    const currentIndex = SORT_OPTIONS.indexOf(sortOption)
     const newIndex =
       direction === 'up'
         ? (currentIndex - 1 + SORT_OPTIONS.length) % SORT_OPTIONS.length
-        : (currentIndex + 1) % SORT_OPTIONS.length;
+        : (currentIndex + 1) % SORT_OPTIONS.length
 
-    const newOption = SORT_OPTIONS[newIndex];
-    setSortOption(newOption);
-  };
+    const newOption = SORT_OPTIONS[newIndex]
+    setSortOption(newOption)
+  }
 
   const handleSortOptionChange = (option: string) => {
-    setSortOption(option as SortOption);
-    setIsSheetOpen(false);
-  };
+    setSortOption(option as SortOption)
+    setIsSheetOpen(false)
+  }
 
   return (
     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -48,6 +43,7 @@ export const SelectMenu: React.FC = () => {
       <SheetContent>
         <SheetTitle className='pt-10'>Choose...</SheetTitle>
         <SheetHeader>
+          {/*This is important to have shadcn sheet component works  */}
           <VisuallyHidden.Root>
             <SheetDescription />
           </VisuallyHidden.Root>
@@ -86,5 +82,5 @@ export const SelectMenu: React.FC = () => {
         </div>
       </SheetContent>
     </Sheet>
-  );
-};
+  )
+}

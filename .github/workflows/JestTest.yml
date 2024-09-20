@@ -1,5 +1,5 @@
 name: Jest Tests
-
+# TODO: Configure prettier lintening; refactor
 on:
   push:
     branches: [main]

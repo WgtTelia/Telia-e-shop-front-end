@@ -1,18 +1,26 @@
-'use client';
-import React from 'react';
-import { useSort } from '@/context/SortContext';
-import { Button } from '@/components/ui/button';
-import { LuArrowDownUp } from 'react-icons/lu';
-import { SelectMenu } from '@/components/filters/SelectMenu';
+'use client'
+import React from 'react'
+import { useSort } from '@/context/SortContext'
+import { Button } from '@/components/ui/button'
+import { LuArrowDownUp } from 'react-icons/lu'
+import { SelectMenu } from '@/components/filters/SelectMenu'
+import { SortDropdown } from './SortDropdown'
 
 export const SortButton: React.FC = () => {
-  const { sortOption, setIsSheetOpen } = useSort();
+  const { sortOption, setIsSheetOpen, setIsDropDownOpen, isDropDownOpen } =
+    useSort()
 
   const handleSortClick = () => {
-    // Dispatches action to open the sheet
-    setIsSheetOpen(true);
-  };
+    const screenWidth = window.innerWidth
 
+    if (screenWidth <= 768) {
+      setIsSheetOpen(true)
+    } else if (screenWidth > 769 && screenWidth <= 1439) {
+      setIsDropDownOpen(!isDropDownOpen)
+    }
+  }
+
+  //test based on screen size - slect shown
   return (
     <>
       <Button
@@ -24,6 +32,8 @@ export const SortButton: React.FC = () => {
         {sortOption}
       </Button>
       <SelectMenu />
+      {/* Show SortDropdown on medium screens */}
+      {isDropDownOpen && <SortDropdown />}
     </>
-  );
-};
+  )
+}
