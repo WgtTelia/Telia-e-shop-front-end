@@ -5,17 +5,22 @@ import { Button } from '@/components/ui/button'
 import { LuArrowDownUp } from 'react-icons/lu'
 import { SelectMenu } from '@/components/filters/SelectMenu'
 import { SortDropdown } from './SortDropdown'
+import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 
 export const SortButton: React.FC = () => {
   const { sortOption, setIsSheetOpen, setIsDropDownOpen, isDropDownOpen } =
     useSort()
+
+  const isMediumScreen = useMediaQuery(
+    '(min-width: 768px) and (max-width: 1439px)'
+  )
 
   const handleSortClick = () => {
     const screenWidth = window.innerWidth
 
     if (screenWidth <= 768) {
       setIsSheetOpen(true)
-    } else if (screenWidth > 769 && screenWidth <= 1439) {
+    } else if (isMediumScreen) {
       setIsDropDownOpen(!isDropDownOpen)
     }
   }
@@ -33,7 +38,7 @@ export const SortButton: React.FC = () => {
       </Button>
       <SelectMenu />
       {/* Show SortDropdown on medium screens */}
-      {isDropDownOpen && <SortDropdown />}
+      {isMediumScreen && isDropDownOpen && <SortDropdown />}
     </>
   )
 }
