@@ -1,19 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from 'public/logo.svg';
-import BannerImage from '@/components/header/BannerImage';
 
 export const Header = () => {
     return (
-        <>
-            <header className='sticky top-0 z-10'>
-                <nav className='mx-auto flex bg-white p-4 lg:ps-16'>
-                    <Link href='/'>
-                        <Image src={logo} alt='Company logo' loading='lazy' />
-                    </Link>
-                </nav>
-            </header>
-            <BannerImage />
-        </>
+        <header className='sticky top-0 z-10'>
+            <nav className='mx-auto flex bg-white p-4 lg:ps-16'>
+                <Link href='/'>
+                    <Image src={logo} alt='Company logo' loading='lazy' />
+                </Link>
+            </nav>
+        </header>
     );
 };

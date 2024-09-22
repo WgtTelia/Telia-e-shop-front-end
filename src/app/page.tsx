@@ -5,6 +5,7 @@ import { Filters } from '@/components/filters/Filters';
 import { FilterButtonsContainer } from '@/components/filters/FilterButtonsContainer';
 import type { Metadata } from 'next';
 import { SortProvider } from '@/context/SortContext';
+import BannerImage from '@/components/header/BannerImage';
 
 export const metadata: Metadata = {
     title: 'Mobile Phones & Accessories | Telia',
@@ -16,6 +17,7 @@ export default function Home() {
     return (
         <>
             <Header />
+            <BannerImage />
             <main className='flex min-h-screen w-full flex-col items-center gap-y-10 p-main-content md:p-main-content-md lg:gap-y-12 lg:p-main-content-lg'>
                 <HeroSection
                     title='Mobile Phones & Accessories'
