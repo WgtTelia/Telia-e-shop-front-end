@@ -91,7 +91,7 @@ export const PlaceOrderForm: React.FC<PlaceOrderFormProps> = ({
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className='mt-4 flex flex-col gap-[20px]'
+              className='mt-4 flex flex-col gap-5'
             >
               <TextInput
                 label='* Name and surname'
@@ -117,7 +117,7 @@ export const PlaceOrderForm: React.FC<PlaceOrderFormProps> = ({
               <Button
                 type='submit'
                 variant='secondary'
-                className='mt-3 max-w-[156px] md:mt-7'
+                className='mt-3 max-w-btn-order md:mt-7'
               >
                 Place order
               </Button>

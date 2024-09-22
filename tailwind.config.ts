@@ -61,14 +61,29 @@ const config = {
         'error-strong': '#980233', //technical error text
         'off-black': '#1E1E20', //for the modal X and header
       },
+      aspectRatio: {
+        card: '318 / 336',
+      },
       width: {
         'image-container': '300px',
+        'card-width': '318px',
+        'card-img-width': '100px',
+      },
+      maxWidth: {
+        'dialog-content': '888px',
+        'btn-order': '156px',
+      },
+      height: {
+        'card-img-height': '116px',
+      },
+      minHeight: {
+        'card-description': '72px',
       },
       maxHeight: {
         'dialog-content': '640px',
       },
-      maxWidth: {
-        'dialog-content': '888px',
+      gridTemplateColumns: {
+        'main-app': '1fr 4fr',
       },
     },
   },
