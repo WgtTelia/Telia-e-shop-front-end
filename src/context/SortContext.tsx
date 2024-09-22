@@ -87,10 +87,13 @@ export const useSort = () => {
   }
   return {
     ...context.state,
-    setSortOption: (option: SortOption) =>
+    setSortOption: (option: SortOption) => 
       context.dispatch(setSortOption(option)),
-    setIsSheetOpen: (open: boolean) => context.dispatch(setIsSheetOpen(open)),
-    setIsDropDownOpen: (open: boolean) =>
-      context.dispatch(setIsDropDownOpen(open)),
+
+    setIsSheetOpen: (open: boolean) => 
+      context.dispatch(setIsSheetOpen(open)),
+    
+    setIsDropDownOpen: (open: boolean) => 
+      context.dispatch(setIsDropDownOpen(open))
   }
 }
