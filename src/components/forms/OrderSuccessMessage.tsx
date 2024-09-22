@@ -7,7 +7,7 @@ export const OrderSuccessMessage = () => {
       style={{ borderLeftWidth: '6px' }}
     >
       <div className='flex items-center gap-2 text-success-medium'>
-        <FaCircleCheck />
+        <FaCircleCheck data-testid='check-icon' />
         <p className='font-medium text-success'>
           We&apos;ve received your order
         </p>

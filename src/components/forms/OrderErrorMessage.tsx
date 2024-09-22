@@ -4,7 +4,7 @@ export const OrderErrorMessage = () => {
   return (
     <div className='border-error-medium rounded-lg border-2 border-l-4 p-4'>
       <div className='text-error-medium flex items-center gap-2'>
-        <FaTriangleExclamation />
+        <FaTriangleExclamation data-testid='triangle-icon' />
         <p className='text-error-strong font-medium'>
           Your order hasn&apos;t been placed
         </p>

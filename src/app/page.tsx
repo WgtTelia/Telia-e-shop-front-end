@@ -5,7 +5,7 @@ import { Filters } from '@/components/filters/Filters';
 import { FilterButtonsContainer } from '@/components/filters/FilterButtonsContainer';
 import type { Metadata } from 'next';
 import { SortProvider } from '@/context/SortContext';
-import BannerImage from '@/components/header/BannerImage';
+import { BannerImage } from '@/components/header/BannerImage';
 
 export const metadata: Metadata = {
     title: 'Mobile Phones & Accessories | Telia',
