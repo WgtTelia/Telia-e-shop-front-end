@@ -4,6 +4,7 @@ import { useSort } from '@/context/SortContext'
 import { Button } from '@/components/ui/button'
 import { SORT_OPTIONS } from '@/data/sortOption'
 import { IoCheckmarkSharp } from 'react-icons/io5'
+import { getPosition } from '@/lib/utils'
 
 interface SortDropdownProps {
   buttonRef: React.RefObject<HTMLButtonElement>
@@ -26,18 +27,12 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({ buttonRef }) => {
     setHoveredOption(null)
   }
 
-  const getPosition = () => {
-    if (!buttonRef.current) return { top: 0, left: 0 }
-    return {
-      top: buttonRef.current.offsetTop + buttonRef.current.offsetHeight,
-      left: buttonRef.current.offsetLeft,
-    }
-  }
-
   return (
     <div
       className='absolute left-0 z-50 mt-2 min-w-dropdown-min rounded-lg border border-gray-800 bg-gray-650 px-0.5 py-1.5 shadow-lg'
-      style={getPosition()}
+      style={getPosition(buttonRef)}
+      data-testid='dropdown'
+      role='listbox'
     >
       <div className='flex flex-col'>
         <label className='pl-dropdown-label text-grey-50'>Choose...</label>
@@ -54,7 +49,10 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({ buttonRef }) => {
             icon={
               <span className='mr-0.5 inline-block w-2 pt-1'>
                 {(sortOption === option || hoveredOption === option) && (
-                  <IoCheckmarkSharp className='text-gray-850' />
+                  <IoCheckmarkSharp
+                    className='text-gray-850'
+                    test-id='checkmark'
+                  />
                 )}
               </span>
             }

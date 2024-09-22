@@ -39,7 +39,6 @@ jest.mock('@/components/filters/Picker', () => ({
   ),
 }))
 
-// Mocking useSort hook
 jest.mock('@/context/SortContext', () => ({
   ...jest.requireActual('@/context/SortContext'),
   useSort: jest.fn(),
