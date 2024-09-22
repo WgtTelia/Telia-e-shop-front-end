@@ -8,11 +8,12 @@ export const SortRadioGroup = () => {
 
     return (
         <>
-            <h3 className='text-gray-750 mb-3 font-medium'>Sort by</h3>
+            <h3 className='mb-3 font-medium text-gray-750'>Sort by</h3>
             <RadioGroup
                 value={sortOption}
                 onValueChange={(value) => {
                     setSortOption(value as SortOption);
+                    // eslint-disable-next-line no-console
                     console.log('Selected sort option:', value); // Temp. to see selected option
                 }}
             >

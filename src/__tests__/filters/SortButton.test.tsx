@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, screen, waitFor } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import { SortButton } from '@/components/filters/SortButton';
 import { useSort } from '@/context/SortContext';
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
