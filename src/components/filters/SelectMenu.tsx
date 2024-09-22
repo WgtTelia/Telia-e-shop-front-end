@@ -43,7 +43,7 @@ export const SelectMenu: React.FC = () => {
       <SheetContent>
         <SheetTitle className='pt-10'>Choose...</SheetTitle>
         <SheetHeader>
-          {/*This is important to have shadcn sheet component works  */}
+          {/*VisuallyHidden is important to have shadcn sheet component works without the errors  */}
           <VisuallyHidden.Root>
             <SheetDescription />
           </VisuallyHidden.Root>

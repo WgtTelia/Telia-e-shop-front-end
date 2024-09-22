@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react';
-import { products } from '@/data/mockData';
-import { ProductGrid } from '@/components/product/ProductGrid';
+import { render, screen } from '@testing-library/react'
+import { products } from '@/data/mockData'
+import { ProductGrid } from '@/components/product/ProductGrid'
 
 jest.mock('@/components/product/ProductCard', () => {
   const ProductCard = ({
@@ -11,19 +11,19 @@ jest.mock('@/components/product/ProductCard', () => {
     <div data-testid={`product-card-${productId}`}>
       {brandName} {modelName}
     </div>
-  );
-  return { ProductCard };
-});
+  )
+  return { ProductCard }
+})
 
 describe('ProductGrid', () => {
   it('renders a product card for each product', () => {
-    render(<ProductGrid />);
+    render(<ProductGrid />)
 
     products.forEach((product) => {
       const productCard = screen.getByTestId(
         `product-card-${product.productId}`
-      );
-      expect(productCard).toBeInTheDocument();
-    });
-  });
-});
+      )
+      expect(productCard).toBeInTheDocument()
+    })
+  })
+})

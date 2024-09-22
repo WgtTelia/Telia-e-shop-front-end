@@ -1,4 +1,4 @@
-import { FaCircleCheck } from 'react-icons/fa6';
+import { FaCircleCheck } from 'react-icons/fa6'
 
 export const OrderSuccessMessage = () => {
   return (
@@ -17,5 +17,5 @@ export const OrderSuccessMessage = () => {
         with one of our agents.
       </p>
     </div>
-  );
-};
+  )
+}

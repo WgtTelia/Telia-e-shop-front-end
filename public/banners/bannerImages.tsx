@@ -1,6 +1,6 @@
-import smallBannerImage from 'public/banners/BreakpointSmall.webp';
-import mediumBannerImage from 'public/banners/BreakpointMedium.webp';
-import largeBannerImage from 'public/banners/BreakpointLarge.webp';
+import smallBannerImage from 'public/banners/BreakpointSmall.webp'
+import mediumBannerImage from 'public/banners/BreakpointMedium.webp'
+import largeBannerImage from 'public/banners/BreakpointLarge.webp'
 
 export const bannerImages = [
   {
@@ -27,4 +27,4 @@ export const bannerImages = [
     quality: 60,
     dataTestId: 'mobile',
   },
-];
+]

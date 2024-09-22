@@ -7,8 +7,8 @@ export const colorMapping: { [key: string]: string } = {
   lavender: '#B9B9FB',
   white: '#FAFAFA',
   grey: '#808080',
-};
+}
 
 export const mapColorToHex = (color: string): string => {
-  return colorMapping[color.toLowerCase()] || '#000000';
-};
+  return colorMapping[color.toLowerCase()] || '#000000'
+}

@@ -47,7 +47,7 @@ interface SortContextProps {
   dispatch: Dispatch<SortAction>
 }
 
-const initialState: SortState = {
+export const initialState: SortState = {
   sortOption: 'Most popular',
   isDropDownOpen: false,
   isSheetOpen: false,

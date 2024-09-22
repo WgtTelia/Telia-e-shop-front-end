@@ -149,4 +149,4 @@ export const products = [
     pricePerMonth: 15,
     productType: 'Mobile phone',
   },
-];
+]

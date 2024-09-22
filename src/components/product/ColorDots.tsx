@@ -1,9 +1,9 @@
-import React from 'react';
-import { mapColorToHex } from '@/lib/colorUtils';
+import React from 'react'
+import { mapColorToHex } from '@/lib/colorUtils'
 
 interface ColorDotsProps {
-  availableColors: ColorOption[];
-  onColorSelect: (color: ColorOption) => void;
+  availableColors: ColorOption[]
+  onColorSelect: (color: ColorOption) => void
 }
 
 export const ColorDots: React.FC<ColorDotsProps> = ({
@@ -22,5 +22,5 @@ export const ColorDots: React.FC<ColorDotsProps> = ({
         />
       ))}
     </div>
-  );
-};
+  )
+}

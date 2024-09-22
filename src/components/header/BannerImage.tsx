@@ -1,22 +1,22 @@
-import React from 'react';
-import { getImageProps, ImageProps, StaticImageData } from 'next/image';
-import { bannerImages } from 'public/banners/bannerImages';
-import smallBannerImage from 'public/banners/BreakpointSmall.webp';
+import React from 'react'
+import { getImageProps, ImageProps, StaticImageData } from 'next/image'
+import { bannerImages } from 'public/banners/bannerImages'
+import smallBannerImage from 'public/banners/BreakpointSmall.webp'
 
 interface BannerImageData {
-  media: string;
-  src: StaticImageData;
-  width: number;
-  height: number;
-  quality: number;
-  dataTestId: string;
+  media: string
+  src: StaticImageData
+  width: number
+  height: number
+  quality: number
+  dataTestId: string
 }
 
 export const BannerImage: React.FC = () => {
   const commonProps: Pick<ImageProps, 'alt' | 'sizes'> = {
     alt: 'Banner Image',
     sizes: '100vw',
-  };
+  }
 
   const sources = bannerImages.map(
     ({ media, src, width, height, quality, dataTestId }: BannerImageData) => {
@@ -28,7 +28,7 @@ export const BannerImage: React.FC = () => {
         height,
         quality,
         src,
-      });
+      })
 
       return (
         <source
@@ -37,9 +37,9 @@ export const BannerImage: React.FC = () => {
           srcSet={srcSet}
           data-testid={dataTestId}
         />
-      );
+      )
     }
-  );
+  )
 
   const {
     props: { srcSet: mobileSrcSet, ...restProps },
@@ -49,7 +49,7 @@ export const BannerImage: React.FC = () => {
     height: 300,
     quality: 60,
     src: smallBannerImage,
-  });
+  })
 
   return (
     <picture>
@@ -62,7 +62,7 @@ export const BannerImage: React.FC = () => {
         loading='eager'
       />
     </picture>
-  );
-};
+  )
+}
 
-export default BannerImage;
+export default BannerImage

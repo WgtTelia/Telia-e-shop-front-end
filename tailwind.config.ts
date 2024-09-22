@@ -37,6 +37,7 @@ const config = {
         'main-content': '2.5rem 1rem 4rem',
         'main-content-md': '2.5rem 1.5rem 5rem',
         'main-content-lg': '3rem 3rem 6rem',
+        'dropdown-label': '1.094rem',
       },
       colors: {
         primary: '#4E0174', // for main CTA button
@@ -48,11 +49,14 @@ const config = {
         'grey-800': '#5D5D5F', // for brand names
         'grey-400': '#222222', //for input text
         'grey-300': '#7A7A7A', //for input outline
-        'gray-850': '#474748', //
+        'gray-850': '#4E4E4D', //for the SortDropdown check-mark
+        'gray-800': '#585757', //for SortDropdown border and icon colors
+        'gray-650': '#868685', // for SortDropdown background
         'gray-600': '#707071', // for  selected btn background  in the sheet
         'gray-550': '#A0A0A0',
         'grey-200': '#D6D6D6', // for card outline
         'grey-100': '#F5F5FA', // for card background
+        'grey-50': '#C3C3C2', // for the SortDropdown title
         success: '#02562B', //in stock color
         'success-medium': '#018842', //success text
         'success-light': '#C5EFD9', //in stock, halo color
@@ -70,6 +74,9 @@ const config = {
       },
       width: {
         'image-container': '300px',
+      },
+      minWidth: {
+        'dropdown-min': '296px',
       },
       maxHeight: {
         'dialog-content': '640px',

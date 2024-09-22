@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
-import React from 'react';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
+import React from 'react'
+import Image from 'next/image'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -10,16 +10,16 @@ import {
   DialogDescription,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { PlaceOrderForm } from '@/components/forms/PlaceOrderForm';
-import { FaArrowRight } from 'react-icons/fa6';
+} from '@/components/ui/dialog'
+import { PlaceOrderForm } from '@/components/forms/PlaceOrderForm'
+import { FaArrowRight } from 'react-icons/fa6'
 
 interface PlaceOrderModalProps {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  brandName: string;
-  modelName: string;
-  selectedColor: ColorOption;
+  isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  brandName: string
+  modelName: string
+  selectedColor: ColorOption
 }
 
 export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
@@ -63,5 +63,5 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
         </div>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}

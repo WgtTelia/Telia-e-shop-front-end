@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   title,
@@ -11,5 +11,5 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </h1>
       <p className='text-base lg:text-2xl'>{description}</p>
     </section>
-  );
-};
+  )
+}

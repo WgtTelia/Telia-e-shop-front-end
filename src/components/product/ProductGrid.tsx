@@ -1,6 +1,6 @@
-import React from 'react';
-import { ProductCard } from '@/components/product/ProductCard';
-import { products } from '@/data/mockData';
+import React from 'react'
+import { ProductCard } from '@/components/product/ProductCard'
+import { products } from '@/data/mockData'
 
 export const ProductGrid: React.FC = () => {
   return (
@@ -9,5 +9,5 @@ export const ProductGrid: React.FC = () => {
         <ProductCard key={product.productId} {...product} />
       ))}
     </div>
-  );
-};
+  )
+}

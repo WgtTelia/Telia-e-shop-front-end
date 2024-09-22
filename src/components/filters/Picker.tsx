@@ -1,10 +1,10 @@
-import React, { useCallback, useRef } from 'react';
-import { Button } from '@/components/ui/button';
+import React, { useCallback, useRef } from 'react'
+import { Button } from '@/components/ui/button'
 
 interface PickerProps {
-  options: string[];
-  selectedOption: string;
-  onChange: (option: string) => void;
+  options: string[]
+  selectedOption: string
+  onChange: (option: string) => void
 }
 
 export const Picker: React.FC<PickerProps> = ({
@@ -12,25 +12,28 @@ export const Picker: React.FC<PickerProps> = ({
   selectedOption,
   onChange,
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const scrollToOption = (index: number) => {
-    const container = containerRef.current;
+    const container = containerRef.current
     if (container) {
-      const scrollPosition = index * 24;
-      container.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+      const scrollPosition = index * 24
+      container.scrollTo({
+        top: scrollPosition,
+        behavior: 'smooth',
+      })
     }
-  };
+  }
 
   //Callback here prevents it from being recreated every time the component renders, improving performance by preventing unnecessary re-renders of child components(button)
   const handleOptionClick = useCallback(
     (option: string) => {
-      onChange(option);
-      const optionIndex = options.indexOf(option);
-      scrollToOption(optionIndex);
+      onChange(option)
+      const optionIndex = options.indexOf(option)
+      scrollToOption(optionIndex)
     },
     [onChange, options]
-  );
+  )
 
   return (
     <div
@@ -59,5 +62,5 @@ export const Picker: React.FC<PickerProps> = ({
         ))}
       </div>
     </div>
-  );
-};
+  )
+}

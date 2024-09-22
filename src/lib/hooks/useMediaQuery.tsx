@@ -1,6 +1,4 @@
-// hooks/useMediaQuery.ts
-'use client' // This hook will be used on the client-side
-
+'use client'
 import { useState, useEffect } from 'react'
 
 export const useMediaQuery = (query: string): boolean => {

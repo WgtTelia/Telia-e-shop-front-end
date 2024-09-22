@@ -1,9 +1,9 @@
-'use client';
-import React, { useState } from 'react';
-import { ColorDots } from '@/components/product/ColorDots';
-import { StockStatus } from '@/components/product/StockStatus';
-import { PlaceOrderModal } from '@/components/modals/PlaceOrderModal';
-import Image from 'next/image';
+'use client'
+import React, { useState } from 'react'
+import { ColorDots } from '@/components/product/ColorDots'
+import { StockStatus } from '@/components/product/StockStatus'
+import { PlaceOrderModal } from '@/components/modals/PlaceOrderModal'
+import Image from 'next/image'
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   brandName,
@@ -15,9 +15,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const [selectedColor, setSelectedColor] = useState<ColorOption>(
     availableColors[0]
-  );
+  )
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div className='ratio:[318/336] w-[318px] rounded-lg bg-grey-100 outline outline-1 outline-grey-200'>
@@ -64,5 +64,5 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <hr />
       <StockStatus stockAmount={selectedColor.stockAmount} />
     </div>
-  );
-};
+  )
+}

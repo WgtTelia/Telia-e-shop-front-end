@@ -1,55 +1,65 @@
-//TODO:
-
-// //1. Location of the [      <DropdownMenuTrigger asChild>
-//         <Button variant="outline">Open</Button> // display none  -
-//         </DropdownMenuTrigger>
-//   ] // query selector for the id
-
-//regular div, relative and absolute  positing, z-index need, selected should go to the state (sortOption);  this wont apply
-
-//test: click on the button, if clicked btn text changed;
-//check mark in from of select option
-//
-
-//axios || React Query ;
-//watch for the sort changes in the product; - Product should use the SOrt State  (listen )
-
-//localstorage - for the selected options; (filters and sort) -optional;
-
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { useSort } from '@/context/SortContext'
 import { Button } from '@/components/ui/button'
 import { SORT_OPTIONS } from '@/data/sortOption'
 import { IoCheckmarkSharp } from 'react-icons/io5'
 
-export const SortDropdown: React.FC = () => {
+interface SortDropdownProps {
+  buttonRef: React.RefObject<HTMLButtonElement>
+}
+
+export const SortDropdown: React.FC<SortDropdownProps> = ({ buttonRef }) => {
   const { sortOption, setSortOption, setIsDropDownOpen } = useSort()
+  const [hoveredOption, setHoveredOption] = useState<SortOption | null>(null)
 
   const handleSortOptionChange = (option: string) => {
     setSortOption(option as SortOption)
-    setIsDropDownOpen(false) // Close dropdown after selecting option
+    setIsDropDownOpen(false)
+  }
+
+  const handleMouseEnter = (option: string) => {
+    setHoveredOption(option as SortOption)
+  }
+
+  const handleMouseLeave = () => {
+    setHoveredOption(null)
+  }
+
+  const getPosition = () => {
+    if (!buttonRef.current) return { top: 0, left: 0 }
+    return {
+      top: buttonRef.current.offsetTop + buttonRef.current.offsetHeight,
+      left: buttonRef.current.offsetLeft,
+    }
   }
 
   return (
-    <div className='absolute left-0 z-50 mt-2 w-[296px] rounded-md bg-[#868685] p-3 shadow-lg'>
-      {' '}
-      {/* Apply styles here */}
-      {/* Sort Options List */}
-      <div className='flex flex-col gap-1'>
+    <div
+      className='absolute left-0 z-50 mt-2 min-w-dropdown-min rounded-lg border border-gray-800 bg-gray-650 px-0.5 py-1.5 shadow-lg'
+      style={getPosition()}
+    >
+      <div className='flex flex-col'>
+        <label className='pl-dropdown-label text-grey-50'>Choose...</label>
         {SORT_OPTIONS.map((option) => (
           <Button
             key={option}
-            variant={sortOption === option ? 'default' : 'ghost'}
+            variant='ghost'
+            role='option'
+            size='picker'
             onClick={() => handleSortOptionChange(option)}
-            className={`w-full justify-start px-4 py-2 text-left ${
-              sortOption === option
-                ? 'bg-gray-600 font-semibold text-white'
-                : 'hover:bg-gray-100'
-            }`}
+            onMouseEnter={() => handleMouseEnter(option)}
+            onMouseLeave={handleMouseLeave}
+            className='w-full justify-start rounded-none border-none text-white transition-colors duration-150 ease-in-out hover:text-white'
+            icon={
+              <span className='mr-0.5 inline-block w-2 pt-1'>
+                {(sortOption === option || hoveredOption === option) && (
+                  <IoCheckmarkSharp className='text-gray-850' />
+                )}
+              </span>
+            }
+            iconPosition='left'
           >
-            {sortOption === option && <IoCheckmarkSharp className='mr-2' />}{' '}
-            {/* Checkmark for selected option */}
             {option}
           </Button>
         ))}

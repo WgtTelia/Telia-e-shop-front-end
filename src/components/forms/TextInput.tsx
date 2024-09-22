@@ -1,19 +1,19 @@
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui/input'
 import {
   FormItem,
   FormControl,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { FieldValues, UseFormRegister, Path } from 'react-hook-form';
-import { FaTriangleExclamation } from 'react-icons/fa6';
+} from '@/components/ui/form'
+import { FieldValues, UseFormRegister, Path } from 'react-hook-form'
+import { FaTriangleExclamation } from 'react-icons/fa6'
 
 interface TextInputProps<T extends FieldValues> {
-  label: string;
-  name: Path<T>;
-  placeholder?: string;
-  register: UseFormRegister<T>;
-  error?: string;
+  label: string
+  name: Path<T>
+  placeholder?: string
+  register: UseFormRegister<T>
+  error?: string
 }
 
 export const TextInput = <T extends FieldValues>({
@@ -36,5 +36,5 @@ export const TextInput = <T extends FieldValues>({
         </FormMessage>
       )}
     </FormItem>
-  );
-};
+  )
+}

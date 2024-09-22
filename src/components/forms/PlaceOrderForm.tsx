@@ -2,22 +2,22 @@
 // to prevent failed build due to console.log
 // TODO: remove the console log once the backend is ready to accept data
 
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Form } from '@/components/ui/form';
-import { TextInput } from '@/components/forms/TextInput';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { nameRegex, phoneRegex } from '@/lib/formRegex';
-import { OrderSuccessMessage } from '@/components/forms/OrderSuccessMessage';
-import { OrderErrorMessage } from '@/components/forms/OrderErrorMessage';
+import React, { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Form } from '@/components/ui/form'
+import { TextInput } from '@/components/forms/TextInput'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { nameRegex, phoneRegex } from '@/lib/formRegex'
+import { OrderSuccessMessage } from '@/components/forms/OrderSuccessMessage'
+import { OrderErrorMessage } from '@/components/forms/OrderErrorMessage'
 
 interface PlaceOrderFormProps {
-  onClose: () => void;
-  brandName: string;
-  modelName: string;
-  selectedColor: ColorOption;
+  onClose: () => void
+  brandName: string
+  modelName: string
+  selectedColor: ColorOption
 }
 
 const FormSchema = z.object({
@@ -29,7 +29,7 @@ const FormSchema = z.object({
   phoneNumber: z.string().refine((value) => phoneRegex.test(value), {
     message: 'Invalid phone number',
   }),
-});
+})
 
 export const PlaceOrderForm: React.FC<PlaceOrderFormProps> = ({
   onClose,
@@ -37,34 +37,34 @@ export const PlaceOrderForm: React.FC<PlaceOrderFormProps> = ({
   modelName,
   selectedColor,
 }) => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isError, setIsError] = useState(false)
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-  });
+  })
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
       // simulating backend request which fails half the time
       await new Promise((resolve, reject) => {
         setTimeout(() => {
-          const random = Math.random();
+          const random = Math.random()
           if (random > 0.5) {
-            resolve(null);
+            resolve(null)
           } else {
-            reject(new Error('Simulated backend error'));
+            reject(new Error('Simulated backend error'))
           }
-        }, 1000);
-      });
+        }, 1000)
+      })
 
-      console.log({ brandName, modelName, selectedColor, ...data });
-      setIsSubmitted(true);
+      console.log({ brandName, modelName, selectedColor, ...data })
+      setIsSubmitted(true)
     } catch (error) {
-      console.error(error);
-      setIsError(true);
+      console.error(error)
+      setIsError(true)
     }
-  };
+  }
 
   return (
     <>
@@ -126,5 +126,5 @@ export const PlaceOrderForm: React.FC<PlaceOrderFormProps> = ({
         </>
       )}
     </>
-  );
-};
+  )
+}

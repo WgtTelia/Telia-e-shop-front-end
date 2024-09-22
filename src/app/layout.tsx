@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import React from 'react';
-import localFont from 'next/font/local';
+import type { Metadata } from 'next'
+import './globals.css'
+import React from 'react'
+import localFont from 'next/font/local'
 
 const helveticaNeue = localFont({
   src: [
@@ -58,22 +58,22 @@ const helveticaNeue = localFont({
   ],
   variable: '--font-helvetica-neue',
   display: 'swap',
-});
+})
 
 export const metadata: Metadata = {
   title: 'Portfolio Project powered by Telia',
   description:
     'This group assignment is tailored for back-end, front-end, and QA specialists. The objective is to collaboratively create a simple, functional e-shop while honing essential teamwork and collaboration skills',
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang='en' className={`${helveticaNeue.variable} font-sans`}>
       <body>{children}</body>
     </html>
-  );
+  )
 }
