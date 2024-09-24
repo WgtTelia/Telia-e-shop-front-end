@@ -72,8 +72,11 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang='en' className={`${helveticaNeue.variable} font-sans`}>
-            <body>{children}</body>
+        <html
+            lang='en'
+            className={`${helveticaNeue.variable} scrollbar overflow-y-scroll scroll-smooth font-sans`}
+        >
+            <body className="scroll-smooth">{children}</body>
         </html>
     );
 }

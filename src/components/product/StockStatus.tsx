@@ -17,7 +17,7 @@ export const StockStatus: React.FC<StockStatusProps> = ({ stockAmount }) => {
             return {
                 backgroundColor: '#FFA500',
                 outlineColor: '#FFF2CC',
-                textColor: '#FFA500',
+                textColor: '#A36A00',
                 text: 'Low stock',
             };
         } else {
