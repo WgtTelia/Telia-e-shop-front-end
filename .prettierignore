@@ -16,6 +16,7 @@ public/
 
 # Configuration files 
 .prettierrc.js
+package-lock.json
 jest.config.ts
 .github
 next-env.d.ts 
