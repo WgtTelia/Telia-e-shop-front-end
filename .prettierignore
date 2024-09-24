@@ -1,0 +1,23 @@
+# Ignore files/folders in the specified paths
+./src/components/ui/**/*.{ts,tsx}
+./src/lib/formRegex.ts
+
+# Other common exclusions
+node_modules/
+.next/
+dist/ 
+coverage/
+public/
+
+# Specific file types you might want to exclude
+*.d.ts 
+*.min.js 
+*.map 
+
+# Configuration files 
+.prettierrc.js
+package-lock.json
+jest.config.ts
+.github
+next-env.d.ts 
+.next/types/**/*.ts 

@@ -17,9 +17,9 @@ const buttonVariants = cva(
                     'border border-primary-dark bg-white hover:bg-primary-active hover:text-primary-dark focus-visible:ring-primary-light focus-visible:ring-offset-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50',
                 secondary:
                     'bg-primary-dark text-white hover:bg-primary focus-visible:ring-primary-light focus-visible:ring-offset-2 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
-                ghost: ' hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
+                ghost: 'hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
                 link: 'text-slate-900 underline-offset-4 hover:underline dark:text-slate-50',
-                filter: 'w-full min-w-fit flex-1 border border-primary-light px-5 text-primary-light hover:border-primary-dark  hover:bg-primary-active hover:text-primary-dark active:border-primary-dark  active:bg-primary-active active:text-primary-dark sm:w-auto md:max-w-fit',
+                filter: 'w-full min-w-fit flex-1 border border-primary-light px-5 text-primary-light hover:border-primary-dark hover:bg-primary-active hover:text-primary-dark active:border-primary-dark active:bg-primary-active active:text-primary-dark sm:w-auto md:max-w-fit',
                 close: 'border border-primary-dark text-primary-dark hover:bg-primary-active',
                 results: 'bg-primary-dark text-white hover:bg-primary',
                 done: 'absolute right-3 top-2.5 text-white underline-offset-4 opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-800',

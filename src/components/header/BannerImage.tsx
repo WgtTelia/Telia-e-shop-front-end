@@ -65,8 +65,7 @@ export const BannerImage: React.FC = () => {
             <source media='(min-width: 375px)' srcSet={mobileSrcSet} />
             <img
                 {...restProps}
-                style={{ width: '100%', height: 'auto' }}
-                className=''
+                className='h-auto w-full'
                 alt='Fallback banner image'
                 loading='eager'
                 //new tag -fetchPriority provides a hint to the browser that this image is of high importance and should be fetched sooner than other resources

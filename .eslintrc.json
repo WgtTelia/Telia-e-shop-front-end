@@ -27,7 +27,17 @@
         "react/no-unescaped-entities": "warn",
         "react/style-prop-object": "warn", //  about using inline style objects
         "tailwindcss/no-arbitrary-value": "warn", //  about using arbitrary values instead of Tailwind utilities
-        "tailwindcss/no-custom-classname": "off" //rule that flags custom Tailwind classes,
+        "tailwindcss/no-custom-classname": "off", //rule that flags custom Tailwind classes,
+        "max-len": [
+            // line length rule
+            "warn",
+            {
+                "code": 120,
+                "ignoreComments": true,
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true
+            }
+        ]
     },
     "overrides": [
         {
@@ -35,11 +45,33 @@
             "rules": {
                 "tailwindcss/*": "off"
             }
+        },
+        {
+            "files": [
+                "./src/components/ui/**/*.{ts,tsx}",
+                "./src/lib/formRegex.ts",
+                "node_modules/**",
+                ".next/**",
+                "dist/**",
+                "coverage/**",
+                "public/**",
+                "*.d.ts",
+                "*.min.js",
+                "*.map",
+                ".prettierrc.js",
+                "jest.config.ts",
+                ".github/**",
+                "next-env.d.ts",
+                ".next/types/**/*.ts"
+            ],
+            "rules": {
+                "max-len": "off"
+            }
         }
     ],
     "env": {
         "jest": true
     },
     "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint", "jest"]
+    "plugins": ["@typescript-eslint", "jest", "prettier"]
 }
