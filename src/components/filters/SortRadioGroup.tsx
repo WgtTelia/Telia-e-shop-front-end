@@ -23,7 +23,12 @@ export const SortRadioGroup = () => {
                         className='flex items-center space-x-2 text-base font-light'
                     >
                         <RadioGroupItem value={option} id={option} />
-                        <label htmlFor={option}>{option}</label>
+                        <label
+                            htmlFor={option}
+                            className='hover:cursor-pointer'
+                        >
+                            {option}
+                        </label>
                     </div>
                 ))}
             </RadioGroup>

@@ -1,4 +1,4 @@
-import { SortRadioGroup } from './SortRadioGroup';
+import { SortRadioGroup } from '@/components/filters/SortRadioGroup';
 
 export const Filters = () => {
     return (
