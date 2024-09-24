@@ -27,8 +27,8 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+-   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
@@ -36,10 +36,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 This project leverages the [App Directory](https://nextjs.org/docs/getting-started/project-structure), utilizing features like:
 
-- React Server Components
-- Nested, Grouped, and Parallel routes
-- [Suspense loading states](https://react.dev/reference/react/Suspense)
-- Error boundaries
+-   React Server Components
+-   Nested, Grouped, and Parallel routes
+-   [Suspense loading states](https://react.dev/reference/react/Suspense)
+-   Error boundaries
 
 Absolute imports are configured (see [Next.js docs](https://nextjs.org/docs/pages/building-your-application/configuring/absolute-imports-and-module-aliases))
 
@@ -62,10 +62,10 @@ Run linting with: `npm run lint`
 This project uses Jest and Testing Library for unit and integration tests.
 Key libraries:
 
-- `jest`
-- `@testing-library/react`
-- `@testing-library/jest-dom`
-- `@testing-library/user-event`
+-   `jest`
+-   `@testing-library/react`
+-   `@testing-library/jest-dom`
+-   `@testing-library/user-event`
 
 [Jest](https://testing-library.com/docs/ecosystem-jest-dom/) with [Next.js](https://nextjs.org/docs/app/building-your-application/testing/jest#creating-your-first-test)
 
@@ -73,12 +73,12 @@ Custom Jest matchers are used ([see](https://github.com/testing-library/jest-dom
 
 ### Run tests:
 
-- **All tests with verbose output:** `npm run test`
+-   **All tests with verbose output:** `npm run test`
 
-  - _Verbose mode provides more detailed information about each test, including any console logs and other debugging output._
+    -   _Verbose mode provides more detailed information about each test, including any console logs and other debugging output._
 
-- **Watch mode:** `npm run test:watch`
-  - _Reruns tests automatically whenever you make changes to your code._
+-   **Watch mode:** `npm run test:watch`
+    -   _Reruns tests automatically whenever you make changes to your code._
 
 ## Deploy on Vercel
 

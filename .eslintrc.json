@@ -1,32 +1,45 @@
 {
-  "extends": [
-    "next",
-    "next/core-web-vitals",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:testing-library/react",
-    "plugin:jest-dom/recommended",
-    "plugin:jest/recommended",
-    "prettier"
-  ],
-  "rules": {
-    "no-unused-vars": "warn",
-    "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off",
-    "import/no-unresolved": "error",
-    "import/named": "error",
-    "import/namespace": "error",
-    "import/default": "error",
-    "import/export": "error",
-    "@definitelytyped/no-single-element-tuple-type": "off",
-    "@typescript-eslint/ban-types": "off",
-    "@typescript-eslint/no-empty-interface": "off",
-    "@typescript-eslint/no-explicit-any": "warn",
-    "no-console": ["warn", { "allow": ["warn", "error"] }]
-  },
-  "env": {
-    "jest": true
-  },
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "jest"]
+    "extends": [
+        "next",
+        "next/core-web-vitals",
+        "plugin:react/recommended",
+        "plugin:tailwindcss/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:testing-library/react",
+        "plugin:jest-dom/recommended",
+        "plugin:jest/recommended",
+        "prettier"
+    ],
+    "rules": {
+        "react/prop-types": "off",
+        "react/react-in-jsx-scope": "off",
+        "import/no-unresolved": "error",
+        "import/named": "error",
+        "import/namespace": "error",
+        "import/default": "error",
+        "import/export": "error",
+        "@definitelytyped/no-single-element-tuple-type": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "no-console": ["warn", { "allow": ["warn", "error"] }],
+        "react/no-unescaped-entities": "warn",
+        "react/style-prop-object": "warn", //  about using inline style objects
+        "tailwindcss/no-arbitrary-value": "warn", //  about using arbitrary values instead of Tailwind utilities
+        "tailwindcss/no-custom-classname": "off" //rule that flags custom Tailwind classes,
+    },
+    "overrides": [
+        {
+            "files": ["./src/component/ui/**/*.{ts,tsx}"],
+            "rules": {
+                "tailwindcss/*": "off"
+            }
+        }
+    ],
+    "env": {
+        "jest": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "jest"]
 }
