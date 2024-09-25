@@ -22,7 +22,7 @@
         "@typescript-eslint/ban-types": "off",
         "@typescript-eslint/no-empty-interface": "off",
         "@typescript-eslint/no-explicit-any": "warn",
-        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "warn",
         "no-console": ["warn", { "allow": ["warn", "error"] }],
         "react/no-unescaped-entities": "warn",
         "react/style-prop-object": "warn", //  about using inline style objects
