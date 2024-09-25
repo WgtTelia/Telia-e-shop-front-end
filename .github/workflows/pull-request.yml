@@ -1,8 +1,6 @@
-name: Jest Tests
+name: Pull Request checks
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
@@ -14,13 +12,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install
-      - name: Run Linting
-        run: |
-          echo "Running Linting Test..."
-          npm run lint
-        env:
-          CI: true
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: ESLint
+        run: npm run lint:ci
+
+      - name: Prettier
+        run: npm run format:ci
 
   test:
     runs-on: ubuntu-latest
@@ -30,6 +30,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install
+          cache: 'npm'
+
+      - run: npm ci
+
       - name: Run Jest tests
         run: npm test

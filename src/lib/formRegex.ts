@@ -10,4 +10,4 @@ export const nameRegex = /^\p{L}{2,}\s\p{L}{2,}$/u;
 // phone number
 // optional separators (-, space)
 export const phoneRegex =
-  /^(\+\d{1,3}\s?)?(\(\d{1,3}\)\s?)?\d{1,3}[-\s]?\d{1,4}[-\s]?\d{1,4}$/;
+    /^(\+\d{1,3}\s?)?(\(\d{1,3}\)\s?)?\d{1,3}[-\s]?\d{1,4}[-\s]?\d{1,4}$/;
