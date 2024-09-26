@@ -19,7 +19,8 @@ interface PlaceOrderModalProps {
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     brandName: string;
     modelName: string;
-    selectedColor: ColorOption;
+    selectedColor: string; //define it better, maybe?
+    stockAmount: number;
 }
 
 export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
@@ -28,6 +29,7 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
     brandName,
     modelName,
     selectedColor,
+    stockAmount,
 }) => {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -35,7 +37,7 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
                 <Button
                     icon={<FaArrowRight />}
                     iconPosition='right'
-                    disabled={selectedColor.stockAmount === 0}
+                    disabled={stockAmount === 0}
                 >
                     Order now
                 </Button>
