@@ -6,16 +6,13 @@ import { PlaceOrderModal } from '@/components/modals/PlaceOrderModal';
 import Image from 'next/image';
 
 export const ProductCard: React.FC<ProductCardProps> = ({
-    brandName,
-    modelName,
-    productImage,
-    availableColors,
+    brand,
+    id,
+    name,
+    productVariants,
     shortDescription,
-    pricePerMonth,
 }) => {
-    const [selectedColor, setSelectedColor] = useState<ColorOption>(
-        availableColors[0]
-    );
+    const [selectedVariantIndex, setSelectedVariantIndex] = useState<number>(0);
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -27,51 +24,63 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         <Image
                             fill
                             sizes='100px'
-                            src={
-                                selectedColor &&
-                                typeof selectedColor.image === 'string'
-                                    ? selectedColor.image
-                                    : productImage
-                            }
-                            alt={`${brandName} ${modelName} ${
-                                selectedColor
-                                    ? selectedColor.color
-                                    : availableColors[0]
-                            }`}
+                            // src={productVariants[0].imgUrl}
+                            // alt={productVariants[0].imgUrl}
+                            // src={
+                            //     selectedVariant &&
+                            //     typeof selectedVariant.imgUrl === 'string'
+                            //         ? selectedVariant.imgUrl
+                            //         : selectedVariant.imgUrl
+                            // }
+                            // alt={`${brand} ${name} ${
+                            //     selectedVariant
+                            //         ? selectedVariant.color
+                            //         : productVariants[0]
+                            // }`}
+                            src={productVariants[selectedVariantIndex].imgUrl}
+                            alt={`${brand} ${name} ${productVariants[selectedVariantIndex].color}`}
                             className='object-contain'
                         />
                     </div>
                     <figcaption className='flex flex-col gap-3'>
                         <div className='flex flex-col gap-1'>
                             <h2 className='text-sm uppercase text-grey-800'>
-                                {brandName}
+                                {brand}
                             </h2>
                             <h3 className='text-xl font-bold text-grey-900'>
-                                {modelName}
+                                {name}
                             </h3>
                         </div>
                         <ColorDots
-                            availableColors={availableColors}
-                            onColorSelect={setSelectedColor}
+                            availableColors={productVariants.map(
+                                (variant, index) => ({ ...variant, index })
+                            )}
+                            onColorSelect={(index) =>
+                                setSelectedVariantIndex(index)
+                            }
                         />
                     </figcaption>
                 </figure>
                 <p className='min-h-card-description'>{shortDescription}</p>
                 <div className='flex items-center justify-between'>
                     <p className='font-bold text-grey-900'>
-                        {pricePerMonth}€/month
+                        {productVariants[selectedVariantIndex].monthlyPrice} €
+                        /month
                     </p>
                     <PlaceOrderModal
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
-                        brandName={brandName}
-                        modelName={modelName}
-                        selectedColor={selectedColor}
+                        brandName={brand}
+                        modelName={name}
+                        selectedColor={productVariants[selectedVariantIndex].color}
+                        stockAmount={productVariants[selectedVariantIndex].qtyInStock}
                     />
                 </div>
             </div>
             <hr />
-            <StockStatus stockAmount={selectedColor.stockAmount} />
+            <StockStatus
+                stockAmount={productVariants[selectedVariantIndex].qtyInStock}
+            />
         </div>
     );
 };
