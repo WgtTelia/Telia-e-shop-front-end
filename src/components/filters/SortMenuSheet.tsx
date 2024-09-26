@@ -11,12 +11,12 @@ import {
 } from '@/components/ui/sheet';
 import { useSort } from '@/context/SortContext';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { Picker } from '@/components/filters/Picker';
+import { OptionPicker } from '@/components/filters/OptionPicker';
 import { Button } from '@/components/ui/button';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { SORT_OPTIONS } from '@/data/sortOption';
 
-export const SelectMenu: React.FC = () => {
+export const SortMenuSheet: React.FC = () => {
     const { setSortOption, isSheetOpen, setIsSheetOpen, sortOption } =
         useSort();
 
@@ -75,7 +75,7 @@ export const SelectMenu: React.FC = () => {
                     </SheetClose>
                 </div>
                 <div className='grid w-full gap-1 py-1'>
-                    <Picker
+                    <OptionPicker
                         options={SORT_OPTIONS}
                         selectedOption={sortOption}
                         onChange={handleSortOptionChange}

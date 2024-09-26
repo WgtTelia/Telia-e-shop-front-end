@@ -1,13 +1,13 @@
 import React, { useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 
-interface PickerProps {
+interface OptionPickerProps {
     options: string[];
     selectedOption: string;
     onChange: (option: string) => void;
 }
 
-export const Picker: React.FC<PickerProps> = ({
+export const OptionPicker: React.FC<OptionPickerProps> = ({
     options,
     selectedOption,
     onChange,

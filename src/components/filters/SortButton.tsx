@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { useSort } from '@/context/SortContext';
 import { Button } from '@/components/ui/button';
 import { LuArrowDownUp } from 'react-icons/lu';
-import { SelectMenu } from '@/components/filters/SelectMenu';
+import { SortMenuSheet } from '@/components/filters/SortMenuSheet';
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
 import { createPortal } from 'react-dom';
 import { SortDropdown } from '@/components/filters/SortDropdown';
@@ -39,7 +39,7 @@ export const SortButton: React.FC = () => {
             >
                 {sortOption}
             </Button>
-            {isMobileScreen && <SelectMenu data-testid='select-menu' />}
+            {isMobileScreen && <SortMenuSheet data-testid='select-menu' />}
             {isMediumScreen &&
                 isDropDownOpen &&
                 createPortal(
