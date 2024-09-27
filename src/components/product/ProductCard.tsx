@@ -24,19 +24,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         <Image
                             fill
                             sizes='100px'
-                            // src={productVariants[0].imgUrl}
-                            // alt={productVariants[0].imgUrl}
-                            // src={
-                            //     selectedVariant &&
-                            //     typeof selectedVariant.imgUrl === 'string'
-                            //         ? selectedVariant.imgUrl
-                            //         : selectedVariant.imgUrl
-                            // }
-                            // alt={`${brand} ${name} ${
-                            //     selectedVariant
-                            //         ? selectedVariant.color
-                            //         : productVariants[0]
-                            // }`}
                             src={productVariants[selectedVariantIndex].imgUrl}
                             alt={`${brand} ${name} ${productVariants[selectedVariantIndex].color}`}
                             className='object-contain'
@@ -72,8 +59,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         setIsOpen={setIsOpen}
                         brandName={brand}
                         modelName={name}
-                        selectedColor={productVariants[selectedVariantIndex].color}
-                        stockAmount={productVariants[selectedVariantIndex].qtyInStock}
+                        selectedColor={
+                            productVariants[selectedVariantIndex].color
+                        }
+                        stockAmount={
+                            productVariants[selectedVariantIndex].qtyInStock
+                        }
                     />
                 </div>
             </div>

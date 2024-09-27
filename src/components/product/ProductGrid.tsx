@@ -31,7 +31,6 @@ export const ProductGrid: React.FC = () => {
 
     return (
         <div className='flex flex-wrap justify-center gap-4 md:justify-start'>
-            {/* TODO add error component */}
             {loading && <Loader />}
             {error && <Error>{error}</Error>}
             {products.map((product: ProductCardProps) => (
