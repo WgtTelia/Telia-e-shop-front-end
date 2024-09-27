@@ -1,27 +1,28 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
+
+import { CanceledError } from '@/lib/services/apiClient';
 import { ProductCard } from '@/components/product/ProductCard';
-import { products } from '@/data/mockData';
-import axios from 'axios';
+import productService from '@/lib/services/productService';
 
 export const ProductGrid: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState<ProductData[]>([]);
 
     useEffect(() => {
-        axios
-            .get(
-                'http://henrika.eu-central-1.elasticbeanstalk.com/api/shop/products'
-                //'http://henrika.eu-central-1.elasticbeanstalk.com/api/shop/products?page=0&size=20&sort=id'
-            )
+        const { request, cancel } = productService.getAll<ProductData>();
+        request
             .then((response) => {
                 setProducts(response.data);
             })
             .catch((error) => {
+                if (error instanceof CanceledError) return;
                 setError(error.message);
             })
             .finally(() => setLoading(false));
+        return () => cancel();
     }, []);
 
     return (
