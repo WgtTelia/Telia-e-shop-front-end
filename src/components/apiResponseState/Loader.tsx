@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export const Loader = () => {
+export const Loader: React.FC = () => {
     useEffect(() => {
         document.body.style.overflow = 'hidden';
 
