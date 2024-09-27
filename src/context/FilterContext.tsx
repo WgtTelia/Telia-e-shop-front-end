@@ -7,16 +7,7 @@ import React, {
     Dispatch,
 } from 'react';
 
-type Type = 'Mobile phones' | 'Accessories';
-type Brand = 'Samsung' | 'Xiaomi' | 'Apple' | 'OnePlus' | 'Sony';
-type PriceRange =
-    | '0 - 100 Eur/month'
-    | '100 - 500 Eur/month'
-    | '500 - 1000 Eur/month'
-    | '1000 - 1500 Eur/month'
-    | '1500 - 2000 Eur/month';
-type Color = 'Black' | 'Yellow' | 'Blue' | 'Pink' | 'Silver';
-type Stock = 'In stock' | 'Out of stock';
+//TODO: add a sort function for the fetch data
 
 interface FilterState {
     selectedTypes: Type[];

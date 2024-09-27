@@ -1,10 +1,10 @@
 import { SortButton } from '@/components/filters/SortButton';
-import { FilterButton } from './FilterButton';
+import { FilterModal } from '@/components/modals/FilterModal';
 
 export const FilterButtonsContainer: React.FC = () => {
     return (
         <div className='mb-6 flex flex-wrap gap-4 lg:hidden'>
-            <FilterButton />
+            <FilterModal />
             <SortButton />
         </div>
     );

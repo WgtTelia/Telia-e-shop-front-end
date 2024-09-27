@@ -4,7 +4,7 @@ import { Header } from '@/components/header/Header';
 import { Filters } from '@/components/filters/Filters';
 import { FilterButtonsContainer } from '@/components/filters/FilterButtonsContainer';
 import type { Metadata } from 'next';
-import { CombinedProvider } from '@/context/CombinedProvider';
+import { FilterAndSortProvider } from '@/context/FilterAndSortProvider';
 import { BannerImage } from '@/components/header/BannerImage';
 
 export const metadata: Metadata = {
@@ -24,13 +24,13 @@ export default function Home() {
                     description='Discover the latest mobile phones and accessories to enhance your digital lifestyle. From sleek designs to powerful features, our selection offers something for everyone.'
                 />
                 <section className='w-full'>
-                    <CombinedProvider>
+                    <FilterAndSortProvider>
                         <FilterButtonsContainer />
                         <div className='w-full md:grid md:grid-cols-1 lg:grid-cols-main-app'>
                             <Filters />
                             <ProductGrid />
                         </div>
-                    </CombinedProvider>
+                    </FilterAndSortProvider>
                 </section>
             </main>
         </>

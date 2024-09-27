@@ -2,11 +2,11 @@ import React, { ReactNode } from 'react';
 import { FilterProvider } from '@/context/FilterContext';
 import { SortProvider } from '@/context/SortContext';
 
-interface CombinedProviderProps {
+interface FilterAndSortProviderProps {
     children: ReactNode;
 }
 
-export const CombinedProvider: React.FC<CombinedProviderProps> = ({
+export const FilterAndSortProvider: React.FC<FilterAndSortProviderProps> = ({
     children,
 }) => {
     return (
