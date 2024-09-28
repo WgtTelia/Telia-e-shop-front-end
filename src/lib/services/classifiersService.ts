@@ -1,3 +1,3 @@
 import create from '@/lib/services/httpService';
 
-export default create('/shop/products');
+export default create('/classifiers');
