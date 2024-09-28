@@ -17,7 +17,7 @@ interface PlaceOrderFormProps {
     onClose: () => void;
     brandName: string;
     modelName: string;
-    selectedColor: ColorOption;
+    selectedColor: string;
 }
 
 const FormSchema = z.object({

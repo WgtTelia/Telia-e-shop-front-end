@@ -51,7 +51,7 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
                         sizes='(min-width: 768px) 33vw, 100vw'
                     />
                 </div>
-                <div className='md:p-6 md:px-12'>
+                <div className='md:w-form-container md:p-6 md:px-12'>
                     <DialogHeader>
                         <DialogTitle className='mt-2 text-modal-title'>
                             Finalise Your Order
