@@ -81,6 +81,7 @@ const config = {
                 'image-container': '300px',
                 'card-width': '318px',
                 'card-img-width': '100px',
+                'form-container': 'calc(100%-image-container)',
             },
             maxWidth: {
                 'dialog-content': '888px',
