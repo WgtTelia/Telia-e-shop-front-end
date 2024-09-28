@@ -63,13 +63,18 @@ export const FilterModal = () => {
                     icon={<PiSlidersHorizontalBold />}
                     iconPosition='left'
                     aria-label='Filter'
+                    data-testid='filter-modal-trigger'
                 >
                     Filter by
                 </Button>
             </DialogTrigger>
-            <DialogContent className='overflow-y-auto sm:max-h-[85vh]'>
+            <DialogContent
+                className='overflow-y-auto sm:max-h-[85vh]'
+                data-testid='filter-modal-content'
+            >
                 <DialogTitle>Filter By</DialogTitle>
                 <DialogDescription>
+                    {/* //TODO: outsource the Checkbox content into separate component */}
                     <div>
                         <h3 className='font-semibold text-black'>Type</h3>
                         {filterOptions.types.map((type) => (
