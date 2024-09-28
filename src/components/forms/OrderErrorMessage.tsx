@@ -2,10 +2,10 @@ import { FaTriangleExclamation } from 'react-icons/fa6';
 
 export const OrderErrorMessage = () => {
     return (
-        <div className='border-error-medium rounded-lg border-2 border-l-4 p-4'>
-            <div className='text-error-medium flex items-center gap-2'>
+        <div className='rounded-lg border-2 border-l-4 border-error-medium p-4'>
+            <div className='flex items-center gap-2 text-error-medium'>
                 <FaTriangleExclamation data-testid='triangle-icon' />
-                <p className='text-error-strong font-medium'>
+                <p className='font-medium text-error-strong'>
                     Your order hasn&apos;t been placed
                 </p>
             </div>
