@@ -7,7 +7,6 @@ import Image from 'next/image';
 
 export const ProductCard: React.FC<ProductCardProps> = ({
     brand,
-    id,
     name,
     productVariants,
     shortDescription,
