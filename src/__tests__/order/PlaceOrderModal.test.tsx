@@ -7,11 +7,9 @@ const mockProps = {
     setIsOpen: jest.fn(),
     brandName: 'Apple',
     modelName: 'iPhone 13',
-    selectedColor: {
-        color: 'black',
-        stockAmount: 10,
-        image: '/black-iphone.jpg',
-    },
+    selectedColor: 'black',
+    image: '/black-iphone.jpg',
+    stockAmount: 10,
 };
 
 const mockPropsOutOfStock = {
@@ -19,11 +17,9 @@ const mockPropsOutOfStock = {
     setIsOpen: jest.fn(),
     brandName: 'Sony',
     modelName: 'Xperia 10 V',
-    selectedColor: {
-        color: 'green',
-        stockAmount: 0,
-        image: '/green-sony_Xperia.png',
-    },
+    selectedColor: 'green',
+    image: '/green-sony_Xperia.png',
+    stockAmount: 0,
 };
 
 describe('PlaceOrderModal', () => {

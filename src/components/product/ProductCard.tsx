@@ -7,6 +7,7 @@ import Image from 'next/image';
 
 export const ProductCard: React.FC<ProductCardProps> = ({
     brand,
+    id,
     name,
     productVariants,
     shortDescription,
@@ -16,7 +17,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className='aspect-card w-card-width rounded-lg bg-grey-100 outline outline-1 outline-grey-200'>
+        <div
+            data-testid={`product-card-${id}`}
+            className='aspect-card w-card-width rounded-lg bg-grey-100 outline outline-1 outline-grey-200'
+        >
             <div className='flex flex-col gap-4 p-6'>
                 <figure className='grid h-card-img-height grid-cols-2 items-center justify-center'>
                     <div className='relative mx-auto h-card-img-height w-card-img-width'>
@@ -50,8 +54,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 <p className='min-h-card-description'>{shortDescription}</p>
                 <div className='flex items-center justify-between'>
                     <p className='font-bold text-grey-900'>
-                        {productVariants[selectedVariantIndex].monthlyPrice} €
-                        /month
+                        {productVariants[selectedVariantIndex].monthlyPrice}{' '}
+                        €/month
                     </p>
                     <PlaceOrderModal
                         isOpen={isOpen}
