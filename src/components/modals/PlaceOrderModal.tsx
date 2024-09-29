@@ -19,7 +19,7 @@ interface PlaceOrderModalProps {
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     brandName: string;
     modelName: string;
-    selectedColor: string; //define it better, maybe?
+    selectedColor: string;
     stockAmount: number;
 }
 
