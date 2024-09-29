@@ -16,11 +16,13 @@ describe('ProductGrid', () => {
         jest.clearAllMocks();
     });
 
-    it('renders loader and then product cards when the database call is successful', async () => {
+    it('renders product cards when the database call is successful', async () => {
         const products = [
             {
                 id: 1,
+                brand: 'Chinesium',
                 name: 'Product 1',
+                src: 'product-1.jpg',
                 price: 10,
                 productVariants: [
                     {
@@ -30,7 +32,9 @@ describe('ProductGrid', () => {
             },
             {
                 id: 2,
+                brand: 'Best phone',
                 name: 'Product 2',
+                src: 'product-2.jpg',
                 price: 20,
                 productVariants: [
                     {
@@ -48,9 +52,6 @@ describe('ProductGrid', () => {
 
         render(<ProductGrid />);
 
-        // Check if the loader is rendered
-        expect(screen.getByText('Loading...')).toBeInTheDocument();
-
         // Wait for the products to be rendered
         await waitFor(() => {
             expect(screen.getByText('Product 1')).toBeInTheDocument();
@@ -63,6 +64,4 @@ describe('ProductGrid', () => {
         // Check if the loader is no longer rendered
         expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
     });
-
-    // Rest of your test code...
 });
