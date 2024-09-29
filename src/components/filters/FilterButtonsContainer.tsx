@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { SortButton } from '@/components/filters/SortButton';
 
 export const FilterButtonsContainer: React.FC = () => {
+
     const handleFilterClick = () => {
         alert('Filter button clicked');
         // logic to open the filter modal here or modalContext
