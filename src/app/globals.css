@@ -6,16 +6,7 @@
     .text-balance {
         text-wrap: balance;
     }
-    .loader-container {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        p {
-            margin-top: 185px;
-        }
-    }
+
     /* From Uiverse.io by Nawsome */
     .loader {
         position: absolute;

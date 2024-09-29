@@ -1,17 +1,30 @@
-import { ProductGrid } from '@/components/product/ProductGrid';
-import { HeroSection } from '@/components/header/HeroSection';
-import { Header } from '@/components/header/Header';
+import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+
+import { Loader } from '@/components/apiResponseState/Loader';
 import { Filters } from '@/components/filters/Filters';
 import { FilterButtonsContainer } from '@/components/filters/FilterButtonsContainer';
-import type { Metadata } from 'next';
-import { SortProvider } from '@/context/SortContext';
 import { BannerImage } from '@/components/header/BannerImage';
+import { HeroSection } from '@/components/header/HeroSection';
+import { Header } from '@/components/header/Header';
+import { SortProvider } from '@/context/SortContext';
 
 export const metadata: Metadata = {
     title: 'Mobile Phones & Accessories | Telia',
     description:
         'Discover the latest mobile phones and accessories to enhance your digital lifestyle. From sleek designs to powerful features, our selection offers something for everyone.',
 };
+
+const DynamicProductGrid = dynamic(
+    () =>
+        import('@/components/product/ProductGrid').then(
+            (mod) => mod.ProductGrid
+        ),
+    {
+        loading: () => <Loader />,
+        ssr: false,
+    }
+);
 
 export default function Home() {
     return (
@@ -28,7 +41,7 @@ export default function Home() {
                         <FilterButtonsContainer />
                         <div className='w-full md:grid md:grid-cols-1 lg:grid-cols-main-app'>
                             <Filters />
-                            <ProductGrid />
+                            <DynamicProductGrid />
                         </div>
                     </SortProvider>
                 </section>
