@@ -12,8 +12,9 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { PiSlidersHorizontalBold } from 'react-icons/pi';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
+import { FilterState, useFilter } from '@/context/FilterContext';
 
 // Zod Schema for validation
 const FilterSchema = z.object({
@@ -25,7 +26,7 @@ const FilterSchema = z.object({
 });
 
 // Mock filter options
-const filterOptions = {
+export const filterOptions = {
     types: ['Mobile phones', 'Accessories'],
     brands: ['Samsung', 'Xiaomi', 'Apple', 'OnePlus', 'Sony'],
     priceRanges: [
@@ -42,25 +43,25 @@ const filterOptions = {
 type FilterFormType = z.infer<typeof FilterSchema>;
 
 export const FilterModal: React.FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { selectedFilters, handleFilterChange, setIsModalOpen, isModalOpen } =
+        useFilter();
 
     // react-hook-form for state management and form validation
     const form = useForm<FilterFormType>({
         resolver: zodResolver(FilterSchema),
         defaultValues: {
-            types: [],
-            brands: [],
-            priceRanges: [],
-            colors: [],
-            stock: [],
+            types: selectedFilters.types,
+            brands: selectedFilters.brands,
+            priceRanges: selectedFilters.priceRanges,
+            colors: selectedFilters.colors,
+            stock: selectedFilters.stock,
         },
     });
 
-    const handleFilterChange = () => {
-        const filterValues = form.getValues();
-        console.log('Selected Filters:', filterValues);
-        //  trigger a side effect like a data fetch and filter.
-    };
+    useEffect(() => {
+        // Fetch data , should be moved to the main screen
+        console.log('Filters changed:', selectedFilters);
+    }, [selectedFilters]);
 
     const handleSubmit = (data: FilterFormType) => {
         console.log('Selected Filters:', data);
@@ -68,15 +69,31 @@ export const FilterModal: React.FC = () => {
     };
 
     const filterSections = [
-        { name: 'types', title: 'Type', options: filterOptions.types },
-        { name: 'brands', title: 'Brand', options: filterOptions.brands },
         {
-            name: 'priceRanges',
+            name: 'types' as keyof FilterState,
+            title: 'Type',
+            options: filterOptions.types,
+        },
+        {
+            name: 'brands' as keyof FilterState,
+            title: 'Brand',
+            options: filterOptions.brands,
+        },
+        {
+            name: 'priceRanges' as keyof FilterState,
             title: 'Price',
             options: filterOptions.priceRanges,
         },
-        { name: 'colors', title: 'Color', options: filterOptions.colors },
-        { name: 'stock', title: 'Stock', options: filterOptions.stock },
+        {
+            name: 'colors' as keyof FilterState,
+            title: 'Color',
+            options: filterOptions.colors,
+        },
+        {
+            name: 'stock' as keyof FilterState,
+            title: 'Stock',
+            options: filterOptions.stock,
+        },
     ];
 
     return (
@@ -91,9 +108,12 @@ export const FilterModal: React.FC = () => {
                     Filter by
                 </Button>
             </DialogTrigger>
-            <DialogContent className='max-h-[90vh] overflow-y-auto p-4'>
+            <DialogContent className='max-h-[100vh] overflow-y-auto p-4'>
                 <DialogTitle>Filter By</DialogTitle>
-                <DialogDescription>
+                <DialogDescription className='sr-only'>
+                    Filters options
+                </DialogDescription>
+                <div>
                     <Form {...form}>
                         <form
                             onSubmit={form.handleSubmit(handleSubmit)}
@@ -107,7 +127,7 @@ export const FilterModal: React.FC = () => {
                             <Button type='submit'>See results</Button>
                         </form>
                     </Form>
-                </DialogDescription>
+                </div>
             </DialogContent>
         </Dialog>
     );

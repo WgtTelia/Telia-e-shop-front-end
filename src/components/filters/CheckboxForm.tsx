@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/form';
 import { Checkbox } from '@/components/ui/checkbox';
 
-interface CheckboxGroupProps {
+interface CheckboxFormProps {
     form: any;
     name: string;
     title: string;
@@ -15,7 +15,7 @@ interface CheckboxGroupProps {
     onChange: () => void;
 }
 
-export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
+export const CheckboxForm: React.FC<CheckboxFormProps> = ({
     form,
     name,
     title,
@@ -30,7 +30,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
                     <FormLabel>{title}</FormLabel>
                     <div className='space-y-2'>
                         {options.map((option) => (
-                            <FormItem
+                            <div
                                 key={option}
                                 className='flex flex-row items-start space-x-3 space-y-0'
                             >
@@ -55,7 +55,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
                                 <FormLabel className='font-normal'>
                                     {option}
                                 </FormLabel>
-                            </FormItem>
+                            </div>
                         ))}
                     </div>
                     <FormMessage />
