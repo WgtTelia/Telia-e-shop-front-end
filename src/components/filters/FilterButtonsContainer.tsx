@@ -1,6 +1,8 @@
 'use client';
-import { Button } from '@/components/ui/button';
+
 import { PiSlidersHorizontalBold } from 'react-icons/pi';
+
+import { Button } from '@/components/ui/button';
 import { SortButton } from '@/components/filters/SortButton';
 
 export const FilterButtonsContainer: React.FC = () => {
