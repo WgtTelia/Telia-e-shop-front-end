@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Error } from '@/components/apiResponseState/Error';
 
 describe('Error', () => {
@@ -8,7 +8,6 @@ describe('Error', () => {
 
         render(<Error>{errorMessage}</Error>);
 
-        // Check if the error message is rendered
         expect(screen.getByText(errorMessage)).toBeInTheDocument();
     });
 
@@ -17,7 +16,6 @@ describe('Error', () => {
 
         render(<Error>{errorMessage}</Error>);
 
-        // Check if the button is rendered with the correct text
         expect(
             screen.getByRole('button', { name: /try again/i })
         ).toBeInTheDocument();
