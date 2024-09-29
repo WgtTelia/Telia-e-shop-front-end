@@ -1,59 +1,83 @@
 'use client';
-import React from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
+import { Form } from '@/components/ui/form';
 import {
     Dialog,
     DialogContent,
     DialogDescription,
     DialogTitle,
     DialogTrigger,
-} from '../ui/dialog';
-import { Button } from '@/components/ui/button';
+} from '@/components/ui/dialog';
 import { PiSlidersHorizontalBold } from 'react-icons/pi';
-import { useFilter } from '@/context/FilterContext';
-import { Checkbox } from '@/components/ui/checkbox';
+import { useState } from 'react';
+import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 
-export const FilterModal = () => {
-    const {
-        isModalOpen,
-        setIsModalOpen,
-        selectedTypes,
-        setSelectedTypes,
-        selectedBrands,
-        setSelectedBrands,
-        selectedPriceRanges,
-        setSelectedPriceRanges,
-        selectedColors,
-        setSelectedColors,
-        selectedStock,
-        setSelectedStock,
-    } = useFilter();
+// Zod Schema for validation
+const FilterSchema = z.object({
+    types: z.array(z.string()).optional(),
+    brands: z.array(z.string()).optional(),
+    priceRanges: z.array(z.string()).optional(),
+    colors: z.array(z.string()).optional(),
+    stock: z.array(z.string()).optional(),
+});
 
-    const filterOptions = {
-        types: ['Mobile phones', 'Accessories'] as Type[],
-        brands: ['Samsung', 'Xiaomi', 'Apple', 'OnePlus', 'Sony'] as Brand[],
-        priceRanges: [
-            '0 - 100 €/month',
-            '100 - 500 €/month',
-            '500 - 1000 €/month',
-            '1000 - 1500 €/month',
-            '1500 - 2000 €/month',
-        ] as PriceRange[],
-        colors: ['Black', 'Yellow', 'Blue', 'Pink', 'Silver'] as Color[],
-        stock: ['In stock', 'Out of stock'] as Stock[],
+// Mock filter options
+const filterOptions = {
+    types: ['Mobile phones', 'Accessories'],
+    brands: ['Samsung', 'Xiaomi', 'Apple', 'OnePlus', 'Sony'],
+    priceRanges: [
+        '0 - 100 €/month',
+        '100 - 500 €/month',
+        '500 - 1000 €/month',
+        '1000 - 1500 €/month',
+        '1500 - 2000 €/month',
+    ],
+    colors: ['Black', 'Yellow', 'Blue', 'Pink', 'Silver'],
+    stock: ['In stock', 'Out of stock'],
+};
+
+type FilterFormType = z.infer<typeof FilterSchema>;
+
+export const FilterModal: React.FC = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // react-hook-form for state management and form validation
+    const form = useForm<FilterFormType>({
+        resolver: zodResolver(FilterSchema),
+        defaultValues: {
+            types: [],
+            brands: [],
+            priceRanges: [],
+            colors: [],
+            stock: [],
+        },
+    });
+
+    const handleFilterChange = () => {
+        const filterValues = form.getValues();
+        console.log('Selected Filters:', filterValues);
+        //  trigger a side effect like a data fetch and filter.
     };
 
-    const handleCheckboxChange = (
-        value: string,
-        checked: boolean,
-        setter: (values: any[]) => void,
-        currentValues: any[]
-    ) => {
-        if (checked) {
-            setter([...currentValues, value]);
-        } else {
-            setter(currentValues.filter((v) => v !== value));
-        }
+    const handleSubmit = (data: FilterFormType) => {
+        console.log('Selected Filters:', data);
+        setIsModalOpen(false);
     };
+
+    const filterSections = [
+        { name: 'types', title: 'Type', options: filterOptions.types },
+        { name: 'brands', title: 'Brand', options: filterOptions.brands },
+        {
+            name: 'priceRanges',
+            title: 'Price',
+            options: filterOptions.priceRanges,
+        },
+        { name: 'colors', title: 'Color', options: filterOptions.colors },
+        { name: 'stock', title: 'Stock', options: filterOptions.stock },
+    ];
 
     return (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -63,120 +87,26 @@ export const FilterModal = () => {
                     icon={<PiSlidersHorizontalBold />}
                     iconPosition='left'
                     aria-label='Filter'
-                    data-testid='filter-modal-trigger'
                 >
                     Filter by
                 </Button>
             </DialogTrigger>
-            <DialogContent
-                className='overflow-y-auto sm:max-h-[85vh]'
-                data-testid='filter-modal-content'
-            >
+            <DialogContent className='max-h-[90vh] overflow-y-auto p-4'>
                 <DialogTitle>Filter By</DialogTitle>
                 <DialogDescription>
-                    {/* //TODO: outsource the Checkbox content into separate component */}
-                    <div>
-                        <h3 className='font-semibold text-black'>Type</h3>
-                        {filterOptions.types.map((type) => (
-                            <div key={type}>
-                                <Checkbox
-                                    checked={selectedTypes.includes(type)}
-                                    onChange={(e) =>
-                                        handleCheckboxChange(
-                                            type,
-                                            e.target.checked,
-                                            setSelectedTypes,
-                                            selectedTypes
-                                        )
-                                    }
-                                >
-                                    {type}
-                                </Checkbox>
-                            </div>
-                        ))}
-                    </div>
-                    <div>
-                        <h3 className='font-semibold text-black'>Brand</h3>
-                        {filterOptions.brands.map((brand) => (
-                            <div key={brand}>
-                                <Checkbox
-                                    checked={selectedBrands.includes(brand)}
-                                    onChange={(e) =>
-                                        handleCheckboxChange(
-                                            brand,
-                                            e.target.checked,
-                                            setSelectedBrands,
-                                            selectedBrands
-                                        )
-                                    }
-                                >
-                                    {brand}
-                                </Checkbox>
-                            </div>
-                        ))}
-                    </div>
-                    <div>
-                        <h3 className='font-semibold text-black'>Price</h3>
-                        {filterOptions.priceRanges.map((priceRange) => (
-                            <div key={priceRange}>
-                                <Checkbox
-                                    checked={selectedPriceRanges.includes(
-                                        priceRange
-                                    )}
-                                    onChange={(e) =>
-                                        handleCheckboxChange(
-                                            priceRange,
-                                            e.target.checked,
-                                            setSelectedPriceRanges,
-                                            selectedPriceRanges
-                                        )
-                                    }
-                                >
-                                    {priceRange}
-                                </Checkbox>
-                            </div>
-                        ))}
-                    </div>
-                    <div>
-                        <h3 className='font-semibold text-black'>Color</h3>
-                        {filterOptions.colors.map((color) => (
-                            <div key={color}>
-                                <Checkbox
-                                    checked={selectedColors.includes(color)}
-                                    onChange={(e) =>
-                                        handleCheckboxChange(
-                                            color,
-                                            e.target.checked,
-                                            setSelectedColors,
-                                            selectedColors
-                                        )
-                                    }
-                                >
-                                    {color}
-                                </Checkbox>
-                            </div>
-                        ))}
-                    </div>
-                    <div>
-                        <h3 className='font-semibold text-black'>Stock</h3>
-                        {filterOptions.stock.map((stock) => (
-                            <div key={stock}>
-                                <Checkbox
-                                    checked={selectedStock.includes(stock)}
-                                    onChange={(e) =>
-                                        handleCheckboxChange(
-                                            stock,
-                                            e.target.checked,
-                                            setSelectedStock,
-                                            selectedStock
-                                        )
-                                    }
-                                >
-                                    {stock}
-                                </Checkbox>
-                            </div>
-                        ))}
-                    </div>
+                    <Form {...form}>
+                        <form
+                            onSubmit={form.handleSubmit(handleSubmit)}
+                            className='space-y-6'
+                        >
+                            <FilterCheckboxGroup
+                                form={form}
+                                filterSections={filterSections}
+                                handleFilterChange={handleFilterChange}
+                            />
+                            <Button type='submit'>See results</Button>
+                        </form>
+                    </Form>
                 </DialogDescription>
             </DialogContent>
         </Dialog>
