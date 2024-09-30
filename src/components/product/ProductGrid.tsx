@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 
 import { CanceledError } from '@/lib/services/apiClient';
 import { Error } from '@/components/apiResponseState/Error';
-import { Loader } from '@/components/apiResponseState/Loader';
 import { ProductCard } from '@/components/product/ProductCard';
 import productService from '@/lib/services/productService';
 
@@ -31,7 +30,6 @@ export const ProductGrid: React.FC = () => {
 
     return (
         <div className='flex flex-wrap justify-center gap-4 md:justify-start'>
-            {loading && <Loader />}
             {error && <Error>{error}</Error>}
             {products.map((product: ProductCardProps) => (
                 <ProductCard key={product.id} {...product} />
