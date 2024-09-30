@@ -7,7 +7,6 @@ import { FilterAndSortProvider } from '@/context/FilterAndSortProvider';
 import { BannerImage } from '@/components/header/BannerImage';
 import { HeroSection } from '@/components/header/HeroSection';
 import { Header } from '@/components/header/Header';
-import { SortProvider } from '@/context/SortContext';
 
 export const metadata: Metadata = {
     title: 'Mobile Phones & Accessories | Telia',
