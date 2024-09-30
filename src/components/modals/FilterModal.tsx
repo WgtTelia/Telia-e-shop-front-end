@@ -113,7 +113,7 @@ export const FilterModal: React.FC = () => {
                     Filter by
                 </Button>
             </DialogTrigger>
-            <DialogContent className='flex max-h-screen flex-col overflow-y-auto p-4 [&>button]:hidden'>
+            <DialogContent className='flex max-h-screen flex-col p-4 [&>button]:hidden'>
                 <DialogTitle>Filter By</DialogTitle>
                 <DialogDescription className='sr-only'>
                     Filter options
