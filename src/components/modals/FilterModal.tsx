@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+// to prevent failed build due to console.log
+// TODO: remove the console log once the backend is ready to accept data
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -110,12 +113,12 @@ export const FilterModal: React.FC = () => {
                     Filter by
                 </Button>
             </DialogTrigger>
-            <DialogContent className='flex max-h-[100vh] flex-col overflow-y-auto p-4 [&>button]:hidden'>
+            <DialogContent className='flex max-h-screen flex-col overflow-y-auto p-4 [&>button]:hidden'>
                 <DialogTitle>Filter By</DialogTitle>
                 <DialogDescription className='sr-only'>
                     Filter options
                 </DialogDescription>
-                <div className='flex flex-grow flex-col overflow-y-auto pb-16'>
+                <div className='flex grow flex-col overflow-y-auto pb-16'>
                     <Form {...form}>
                         <form
                             onSubmit={form.handleSubmit(handleSubmit)}
@@ -126,7 +129,7 @@ export const FilterModal: React.FC = () => {
                                 filterSections={filterSections}
                                 handleFilterChange={handleFilterChange}
                             />
-                            <div className='absolute bottom-0 left-0 right-0 z-50 flex flex-wrap justify-between gap-4 border-t border-slate-200 bg-grey-100 p-4'>
+                            <div className='absolute inset-x-0 bottom-0 z-50 flex flex-wrap justify-between gap-4 border-t border-slate-200 bg-grey-100 p-4'>
                                 <Button
                                     variant='close'
                                     onClick={() => setIsModalOpen(false)}

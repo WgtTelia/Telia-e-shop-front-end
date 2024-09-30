@@ -1,11 +1,5 @@
 'use client';
-import React, {
-    createContext,
-    useContext,
-    useReducer,
-    Dispatch,
-    ReactNode,
-} from 'react';
+import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 
 export interface FilterState {
     types: string[];
@@ -25,6 +19,32 @@ const initialState: FilterState = {
     isModalOpen: false,
 };
 
+interface SetFilterAction {
+    type: 'SET_FILTER';
+    payload: {
+        category: keyof FilterState;
+        selected: string[];
+    };
+}
+
+interface SetImmediateFilterAction {
+    type: 'SET_IMMEDIATE_FILTER';
+    payload: {
+        category: keyof FilterState;
+        selected: string[];
+    };
+}
+
+interface ToggleModalAction {
+    type: 'TOGGLE_MODAL';
+    payload: boolean;
+}
+
+type FilterAction =
+    | SetFilterAction
+    | SetImmediateFilterAction
+    | ToggleModalAction;
+
 interface FilterContextProps {
     selectedFilters: FilterState;
     handleFilterChange: (
@@ -43,7 +63,7 @@ const FilterContext = createContext<FilterContextProps | undefined>(undefined);
 
 const filterReducer = (
     state: FilterState,
-    action: { type: string; payload?: any }
+    action: FilterAction
 ): FilterState => {
     switch (action.type) {
         case 'SET_FILTER':

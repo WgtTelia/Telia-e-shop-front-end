@@ -4,7 +4,7 @@ import { CheckBoxLargeScrn } from '@/components/filters/CheckBoxLargeScrn';
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
 
 interface FilterCheckboxGroupProps<T extends FieldValues> {
-    form: UseFormReturn<T>;
+    form?: UseFormReturn<T>;
     filterSections: {
         name: keyof FilterState;
         title: string;

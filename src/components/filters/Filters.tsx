@@ -39,7 +39,7 @@ export const Filters = () => {
         <div className='hidden space-y-5 lg:col-span-1 lg:block'>
             <SortRadioGroup />
             <FilterCheckboxGroup
-                form={null}
+                form={undefined}
                 filterSections={filterSections}
                 onImmediateChange={handleImmediateChange}
             />
