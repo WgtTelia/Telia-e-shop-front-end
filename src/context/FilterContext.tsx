@@ -38,24 +38,15 @@ type FilterAction =
 
 interface FilterContextProps {
     selectedFilters: Filter;
-    handleFilterChange: (
-        category: keyof Filter,
-        selected: string[]
-    ) => void;
-    handleImmediateChange: (
-        category: keyof Filter,
-        selected: string[]
-    ) => void;
+    handleFilterChange: (category: keyof Filter, selected: string[]) => void;
+    handleImmediateChange: (category: keyof Filter, selected: string[]) => void;
     setIsModalOpen: (isOpen: boolean) => void;
     isModalOpen: boolean;
 }
 
 const FilterContext = createContext<FilterContextProps | undefined>(undefined);
 
-const filterReducer = (
-    state: Filter,
-    action: FilterAction
-): Filter => {
+const filterReducer = (state: Filter, action: FilterAction): Filter => {
     switch (action.type) {
         case 'SET_FILTER':
         case 'SET_IMMEDIATE_FILTER':
@@ -75,10 +66,7 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
     const [state, dispatch] = useReducer(filterReducer, initialState);
 
-    const handleFilterChange = (
-        category: keyof Filter,
-        selected: string[]
-    ) => {
+    const handleFilterChange = (category: keyof Filter, selected: string[]) => {
         dispatch({ type: 'SET_FILTER', payload: { category, selected } });
     };
 
