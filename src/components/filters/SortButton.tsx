@@ -1,11 +1,12 @@
 'use client';
 import React, { useRef } from 'react';
+import { createPortal } from 'react-dom';
+import { LuArrowDownUp } from 'react-icons/lu';
 import { useSort } from '@/context/SortContext';
 import { Button } from '@/components/ui/button';
-import { LuArrowDownUp } from 'react-icons/lu';
 import { SortMenuSheet } from '@/components/filters/SortMenuSheet';
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
-import { createPortal } from 'react-dom';
+
 import { SortDropdown } from '@/components/filters/SortDropdown';
 
 export const SortButton: React.FC = () => {
