@@ -45,6 +45,7 @@ type FilterFormType = z.infer<typeof FilterSchema>;
 export const FilterModal: React.FC = () => {
     const { selectedFilters, handleFilterChange, setIsModalOpen, isModalOpen } =
         useFilter();
+    const [resultCount, setResultCount] = useState(0);
 
     // react-hook-form for state management and form validation
     const form = useForm<FilterFormType>({
@@ -59,8 +60,9 @@ export const FilterModal: React.FC = () => {
     });
 
     useEffect(() => {
-        // Fetch data , should be moved to the main screen
+        // Mock result count, replace this with a future backend API call.
         console.log('Filters changed:', selectedFilters);
+        setResultCount(21);
     }, [selectedFilters]);
 
     const handleSubmit = (data: FilterFormType) => {
@@ -108,23 +110,39 @@ export const FilterModal: React.FC = () => {
                     Filter by
                 </Button>
             </DialogTrigger>
-            <DialogContent className='max-h-[100vh] overflow-y-auto p-4'>
+            <DialogContent className='flex max-h-[100vh] flex-col overflow-y-auto p-4 [&>button]:hidden'>
                 <DialogTitle>Filter By</DialogTitle>
                 <DialogDescription className='sr-only'>
-                    Filters options
+                    Filter options
                 </DialogDescription>
-                <div>
+                <div className='flex flex-grow flex-col overflow-y-auto pb-20'>
                     <Form {...form}>
                         <form
                             onSubmit={form.handleSubmit(handleSubmit)}
-                            className='space-y-6'
+                            className='w-full space-y-6 overflow-y-auto'
                         >
                             <FilterCheckboxGroup
                                 form={form}
                                 filterSections={filterSections}
                                 handleFilterChange={handleFilterChange}
                             />
-                            <Button type='submit'>See results</Button>
+                            <div className='absolute bottom-0 left-0 right-0 z-50 flex flex-wrap justify-between gap-4 border-t border-slate-200 bg-grey-100 p-4'>
+                                <Button
+                                    variant='close'
+                                    onClick={() => setIsModalOpen(false)}
+                                    className='flex-1'
+                                >
+                                    Close
+                                </Button>
+                                <Button
+                                    type='submit'
+                                    variant='secondary'
+                                    onClick={form.handleSubmit(handleSubmit)}
+                                    className='flex-1'
+                                >
+                                    See results ({resultCount})
+                                </Button>
+                            </div>
                         </form>
                     </Form>
                 </div>
