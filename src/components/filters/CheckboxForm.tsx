@@ -32,34 +32,44 @@ export const CheckboxForm = <T extends FieldValues>({
                         {title}
                     </FormLabel>
                     <div className='space-y-4 pt-2 text-gray-750'>
-                        {options.map((option) => (
-                            <div
-                                key={option}
-                                className='flex flex-row items-center space-x-2 align-middle text-base'
-                            >
-                                <FormControl>
-                                    <Checkbox
-                                        checked={field.value?.includes(option)}
-                                        onCheckedChange={(checked) => {
-                                            return checked
-                                                ? field.onChange([
-                                                      ...field.value,
-                                                      option,
-                                                  ])
-                                                : field.onChange(
-                                                      field.value?.filter(
-                                                          (value: string) =>
-                                                              value !== option
-                                                      )
-                                                  );
-                                        }}
-                                    />
-                                </FormControl>
-                                <FormLabel className='font-light after:hover:cursor-pointer'>
-                                    {option}
-                                </FormLabel>
-                            </div>
-                        ))}
+                        {options.map((option, index) => {
+                            const checkboxId = `${name}-${index}`;
+                            return (
+                                <div
+                                    key={option}
+                                    className='flex flex-row items-center space-x-2 align-middle text-base'
+                                >
+                                    <FormControl>
+                                        <Checkbox
+                                            id={checkboxId}
+                                            checked={field.value?.includes(
+                                                option
+                                            )}
+                                            onCheckedChange={(checked) => {
+                                                return checked
+                                                    ? field.onChange([
+                                                          ...field.value,
+                                                          option,
+                                                      ])
+                                                    : field.onChange(
+                                                          field.value?.filter(
+                                                              (value: string) =>
+                                                                  value !==
+                                                                  option
+                                                          )
+                                                      );
+                                            }}
+                                        />
+                                    </FormControl>
+                                    <FormLabel
+                                        className='font-light after:hover:cursor-pointer'
+                                        htmlFor={checkboxId}
+                                    >
+                                        {option}
+                                    </FormLabel>
+                                </div>
+                            );
+                        })}
                     </div>
                     <FormMessage />
                 </FormItem>
