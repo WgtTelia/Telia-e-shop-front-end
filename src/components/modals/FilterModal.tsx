@@ -20,13 +20,22 @@ import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 import { FilterState, useFilter } from '@/context/FilterContext';
 
 // Zod Schema for validation
-const FilterSchema = z.object({
-    types: z.array(z.string()).optional(),
-    brands: z.array(z.string()).optional(),
-    priceRanges: z.array(z.string()).optional(),
-    colors: z.array(z.string()).optional(),
-    stock: z.array(z.string()).optional(),
-});
+const filterArraySchema = z.array(z.string()).optional();
+const filterCategories = [
+    'types',
+    'brands',
+    'priceRanges',
+    'colors',
+    'stock',
+] as const;
+
+const FilterSchema = z.object(
+    Object.fromEntries(
+        filterCategories.map((field) => [field, filterArraySchema])
+    )
+);
+
+type FilterFormType = z.infer<typeof FilterSchema>;
 
 // Mock filter options
 export const filterOptions = {
@@ -42,8 +51,6 @@ export const filterOptions = {
     colors: ['Black', 'Yellow', 'Blue', 'Pink', 'Silver'],
     stock: ['In stock', 'Out of stock'],
 };
-
-type FilterFormType = z.infer<typeof FilterSchema>;
 
 export const FilterModal: React.FC = () => {
     const { selectedFilters, handleFilterChange, setIsModalOpen, isModalOpen } =
