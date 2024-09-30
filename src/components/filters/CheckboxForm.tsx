@@ -6,21 +6,22 @@ import {
     FormMessage,
 } from '@/components/ui/form';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Control, FieldValues, Path } from 'react-hook-form';
 
-interface CheckboxFormProps {
-    form: any;
-    name: string;
+interface CheckboxFormProps<T extends FieldValues> {
+    form: { control: Control<T> };
+    name: Path<T>;
     title: string;
     options: string[];
     onChange: () => void;
 }
 
-export const CheckboxForm: React.FC<CheckboxFormProps> = ({
+export const CheckboxForm = <T extends FieldValues>({
     form,
     name,
     title,
     options,
-}) => {
+}: CheckboxFormProps<T>) => {
     return (
         <FormField
             control={form.control}
