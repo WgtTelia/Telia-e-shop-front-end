@@ -27,12 +27,14 @@ export const CheckboxForm: React.FC<CheckboxFormProps> = ({
             name={name}
             render={({ field }) => (
                 <FormItem>
-                    <FormLabel>{title}</FormLabel>
-                    <div className='space-y-2'>
+                    <FormLabel className='text-base font-medium text-gray-750'>
+                        {title}
+                    </FormLabel>
+                    <div className='space-y-4 pt-2 text-gray-750'>
                         {options.map((option) => (
                             <div
                                 key={option}
-                                className='flex flex-row items-start space-x-3 space-y-0'
+                                className='flex flex-row items-center space-x-2 align-middle text-base'
                             >
                                 <FormControl>
                                     <Checkbox
@@ -52,7 +54,7 @@ export const CheckboxForm: React.FC<CheckboxFormProps> = ({
                                         }}
                                     />
                                 </FormControl>
-                                <FormLabel className='font-normal'>
+                                <FormLabel className='font-light after:hover:cursor-pointer'>
                                     {option}
                                 </FormLabel>
                             </div>

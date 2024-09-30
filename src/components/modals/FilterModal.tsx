@@ -115,11 +115,11 @@ export const FilterModal: React.FC = () => {
                 <DialogDescription className='sr-only'>
                     Filter options
                 </DialogDescription>
-                <div className='flex flex-grow flex-col overflow-y-auto pb-20'>
+                <div className='flex flex-grow flex-col overflow-y-auto pb-16'>
                     <Form {...form}>
                         <form
                             onSubmit={form.handleSubmit(handleSubmit)}
-                            className='w-full space-y-6 overflow-y-auto'
+                            className='w-full space-y-4 overflow-y-auto'
                         >
                             <FilterCheckboxGroup
                                 form={form}

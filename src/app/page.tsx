@@ -28,7 +28,10 @@ export default function Home() {
                         <FilterButtonsContainer />
                         <div className='w-full md:grid md:grid-cols-1 lg:grid-cols-main-app'>
                             <Filters />
-                            <ProductGrid />
+                            <div className='lg:overflow-y-auto lg:p-1'>
+                                {/*To prevent the ProductGrid from being affected by the Filters components height changes */}
+                                <ProductGrid />
+                            </div>
                         </div>
                     </FilterAndSortProvider>
                 </section>

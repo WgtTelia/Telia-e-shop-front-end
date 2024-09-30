@@ -36,7 +36,7 @@ export const Filters = () => {
     ];
 
     return (
-        <div className='hidden lg:col-span-1 lg:block'>
+        <div className='hidden space-y-5 lg:col-span-1 lg:block'>
             <SortRadioGroup />
             <FilterCheckboxGroup
                 form={null}

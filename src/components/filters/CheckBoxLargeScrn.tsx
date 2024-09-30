@@ -26,12 +26,12 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
     };
 
     return (
-        <div>
-            <h3 className='font-semibold'>{title}</h3>
+        <div className='space-y-4'>
+            <h3 className='mb-3 font-medium text-gray-750'>{title}</h3>
             {options.map((option) => (
                 <div
                     key={option}
-                    className='flex flex-row items-start space-x-3 space-y-0'
+                    className='flex flex-row items-center space-x-2 align-middle text-base'
                 >
                     <Checkbox
                         checked={selectedValues.includes(option)}
@@ -39,7 +39,10 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
                             handleCheckboxChange(option, checked);
                         }}
                     />
-                    <label htmlFor={option} className='font-normal'>
+                    <label
+                        htmlFor={option}
+                        className='font-light hover:cursor-pointer'
+                    >
                         {option}
                     </label>
                 </div>
