@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { mapColorToHex } from '@/lib/colorUtils';
 
 interface ColorDotsProps {
-    availableColors: ColorOption[];
-    onColorSelect: (color: ColorOption) => void;
+    availableColors: { color: string; index: number }[];
+    onColorSelect: (index: number) => void;
 }
 
 export const ColorDots: React.FC<ColorDotsProps> = ({
@@ -21,7 +20,7 @@ export const ColorDots: React.FC<ColorDotsProps> = ({
                     style={{
                         backgroundColor: mapColorToHex(colorOption.color),
                     }}
-                    onClick={() => onColorSelect(colorOption)}
+                    onClick={() => onColorSelect(colorOption.index)}
                 />
             ))}
         </div>

@@ -11,9 +11,9 @@ jest.mock('@/lib/colorUtils', () => ({
 
 const mockProps = {
     availableColors: [
-        { color: 'red', stockAmount: 10 },
-        { color: 'green', stockAmount: 5 },
-        { color: 'blue', stockAmount: 0 },
+        { color: 'red', index: 0 },
+        { color: 'green', index: 1 },
+        { color: 'blue', index: 2 },
     ],
     onColorSelect: jest.fn(),
 };
@@ -37,10 +37,7 @@ describe('ColorDots', () => {
         const greenDot = screen.getByTitle(/green/i);
         fireEvent.click(greenDot);
 
-        expect(mockProps.onColorSelect).toHaveBeenCalledWith({
-            color: 'green',
-            stockAmount: 5,
-        });
+        expect(mockProps.onColorSelect).toHaveBeenCalledWith(1);
     });
 
     it('sets the background color of each dot based on the color mapping', () => {

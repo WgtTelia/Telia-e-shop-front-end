@@ -8,7 +8,7 @@ describe('mapColorToHex', () => {
     });
 
     it('returns the default hex code for an invalid color', () => {
-        expect(mapColorToHex('purple')).toBe('#000000');
+        expect(mapColorToHex('pretty')).toBe('#000000');
         expect(mapColorToHex('')).toBe('#000000');
         expect(mapColorToHex('unknown')).toBe('#000000');
     });

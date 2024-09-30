@@ -19,7 +19,8 @@ interface PlaceOrderModalProps {
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     brandName: string;
     modelName: string;
-    selectedColor: ColorOption;
+    selectedColor: string;
+    stockAmount: number;
 }
 
 export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
@@ -28,6 +29,7 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
     brandName,
     modelName,
     selectedColor,
+    stockAmount,
 }) => {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -35,7 +37,7 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
                 <Button
                     icon={<FaArrowRight />}
                     iconPosition='right'
-                    disabled={selectedColor.stockAmount === 0}
+                    disabled={stockAmount === 0}
                 >
                     Order now
                 </Button>
@@ -49,7 +51,7 @@ export const PlaceOrderModal: React.FC<PlaceOrderModalProps> = ({
                         sizes='(min-width: 768px) 33vw, 100vw'
                     />
                 </div>
-                <div className='md:p-6 md:px-12'>
+                <div className='md:w-form-container md:p-6 md:px-12'>
                     <DialogHeader>
                         <DialogTitle className='mt-2 text-modal-title'>
                             Finalise Your Order

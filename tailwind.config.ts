@@ -66,13 +66,13 @@ const config = {
                 danger: '#980233', //out of stock color
                 'danger-medium': '#BE0040', //error text
                 'danger-light': '#FFDDE8', //out of stock, halo color,
+                'error-medium': '#E4175C', // technical error icon
+                'error-strong': '#980233', //technical error text
+                'off-black': '#1E1E20', //for the modal X and header
             },
             backgroundImage: {
                 'sheet-gradient':
                     'linear-gradient(180deg, #7A7A7A 0%, #4A4A4A 100%)',
-                'error-medium': '#E4175C', // technical error icon
-                'error-strong': '#980233', //technical error text
-                'off-black': '#1E1E20', //for the modal X and header
             },
             aspectRatio: {
                 card: '318 / 336',
@@ -81,6 +81,7 @@ const config = {
                 'image-container': '300px',
                 'card-width': '318px',
                 'card-img-width': '100px',
+                'form-container': 'calc(100%-image-container)',
             },
             maxWidth: {
                 'dialog-content': '888px',
