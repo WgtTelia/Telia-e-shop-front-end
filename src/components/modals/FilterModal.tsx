@@ -17,7 +17,8 @@ import {
 import { PiSlidersHorizontalBold } from 'react-icons/pi';
 import { useEffect, useState } from 'react';
 import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
-import { FilterState, useFilter } from '@/context/FilterContext';
+import { useFilter } from '@/context/FilterContext';
+import { formatPriceRange } from '@/lib/utils';
 
 // Zod Schema for validation
 const filterArraySchema = z.array(z.string()).optional();
@@ -40,16 +41,39 @@ type FilterFormType = z.infer<typeof FilterSchema>;
 // Mock filter options
 export const filterOptions = {
     types: ['Mobile phones', 'Accessories'],
-    brands: ['Samsung', 'Xiaomi', 'Apple', 'OnePlus', 'Sony'],
-    priceRanges: [
-        '0 - 100 €/month',
-        '100 - 500 €/month',
-        '500 - 1000 €/month',
-        '1000 - 1500 €/month',
-        '1500 - 2000 €/month',
+    brands: [
+        'Samsung',
+        'Xiaomi',
+        'Apple',
+        'POCO',
+        'Nokia',
+        'Sony',
+        'Redmi',
+        'LG',
     ],
-    colors: ['Black', 'Yellow', 'Blue', 'Pink', 'Silver'],
-    stock: ['In stock', 'Out of stock'],
+    price_intervals: [
+        'price_monthly_0_10',
+        'price_monthly_10_50',
+        'price_monthly_50_100',
+        'price_monthly_100_150',
+        'price_monthly_150_200',
+    ],
+    colors: [
+        'Black',
+        'Blue',
+        'White',
+        'Green',
+        'Purple',
+        'Grey',
+        'Yellow',
+        'Silver',
+        'Pink',
+        'Red',
+        'Almond',
+        'Lavender',
+        'Orange',
+    ],
+    stock: ['In Stock', 'Out of Stock'],
 };
 
 export const FilterModal: React.FC = () => {
@@ -82,27 +106,27 @@ export const FilterModal: React.FC = () => {
 
     const filterSections = [
         {
-            name: 'types' as keyof FilterState,
+            name: 'types' as keyof Filter,
             title: 'Type',
             options: filterOptions.types,
         },
         {
-            name: 'brands' as keyof FilterState,
+            name: 'brands' as keyof Filter,
             title: 'Brand',
             options: filterOptions.brands,
         },
         {
-            name: 'priceRanges' as keyof FilterState,
+            name: 'priceRanges' as keyof Filter,
             title: 'Price',
-            options: filterOptions.priceRanges,
+            options: filterOptions.price_intervals.map(formatPriceRange),
         },
         {
-            name: 'colors' as keyof FilterState,
+            name: 'colors' as keyof Filter,
             title: 'Color',
             options: filterOptions.colors,
         },
         {
-            name: 'stock' as keyof FilterState,
+            name: 'stock' as keyof Filter,
             title: 'Stock',
             options: filterOptions.stock,
         },

@@ -1,9 +1,9 @@
 'use client';
 import { Checkbox } from '@/components/ui/checkbox';
-import { FilterState, useFilter } from '@/context/FilterContext';
+import { useFilter } from '@/context/FilterContext';
 
 interface CheckBoxLargeScrnProps {
-    name: keyof FilterState;
+    name: keyof Filter;
     title: string;
     options: string[];
 }

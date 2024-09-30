@@ -1,4 +1,3 @@
-import { FilterState } from '@/context/FilterContext';
 import { CheckboxForm } from '@/components/filters/CheckboxForm';
 import { CheckBoxLargeScrn } from '@/components/filters/CheckBoxLargeScrn';
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
@@ -6,18 +5,12 @@ import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
 interface FilterCheckboxGroupProps<T extends FieldValues> {
     form?: UseFormReturn<T>;
     filterSections: {
-        name: keyof FilterState;
+        name: keyof Filter;
         title: string;
         options: string[];
     }[];
-    handleFilterChange?: (
-        category: keyof FilterState,
-        selected: string[]
-    ) => void;
-    onImmediateChange?: (
-        category: keyof FilterState,
-        selected: string[]
-    ) => void;
+    handleFilterChange?: (category: keyof Filter, selected: string[]) => void;
+    onImmediateChange?: (category: keyof Filter, selected: string[]) => void;
 }
 
 export const FilterCheckboxGroup = <T extends FieldValues>({
@@ -26,10 +19,7 @@ export const FilterCheckboxGroup = <T extends FieldValues>({
     handleFilterChange,
     onImmediateChange,
 }: FilterCheckboxGroupProps<T>) => {
-    const handleCheckboxChange = (
-        name: keyof FilterState,
-        selected: string[]
-    ) => {
+    const handleCheckboxChange = (name: keyof Filter, selected: string[]) => {
         handleFilterChange?.(name, selected);
         onImmediateChange?.(name, selected);
     };

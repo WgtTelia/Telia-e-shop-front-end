@@ -1,16 +1,7 @@
 'use client';
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 
-export interface FilterState {
-    types: string[];
-    brands: string[];
-    priceRanges: string[];
-    colors: string[];
-    stock: string[];
-    isModalOpen: boolean;
-}
-
-const initialState: FilterState = {
+const initialState: Filter = {
     types: [],
     brands: [],
     priceRanges: [],
@@ -22,7 +13,7 @@ const initialState: FilterState = {
 interface SetFilterAction {
     type: 'SET_FILTER';
     payload: {
-        category: keyof FilterState;
+        category: keyof Filter;
         selected: string[];
     };
 }
@@ -30,7 +21,7 @@ interface SetFilterAction {
 interface SetImmediateFilterAction {
     type: 'SET_IMMEDIATE_FILTER';
     payload: {
-        category: keyof FilterState;
+        category: keyof Filter;
         selected: string[];
     };
 }
@@ -46,13 +37,13 @@ type FilterAction =
     | ToggleModalAction;
 
 interface FilterContextProps {
-    selectedFilters: FilterState;
+    selectedFilters: Filter;
     handleFilterChange: (
-        category: keyof FilterState,
+        category: keyof Filter,
         selected: string[]
     ) => void;
     handleImmediateChange: (
-        category: keyof FilterState,
+        category: keyof Filter,
         selected: string[]
     ) => void;
     setIsModalOpen: (isOpen: boolean) => void;
@@ -62,9 +53,9 @@ interface FilterContextProps {
 const FilterContext = createContext<FilterContextProps | undefined>(undefined);
 
 const filterReducer = (
-    state: FilterState,
+    state: Filter,
     action: FilterAction
-): FilterState => {
+): Filter => {
     switch (action.type) {
         case 'SET_FILTER':
         case 'SET_IMMEDIATE_FILTER':
@@ -85,14 +76,14 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
     const [state, dispatch] = useReducer(filterReducer, initialState);
 
     const handleFilterChange = (
-        category: keyof FilterState,
+        category: keyof Filter,
         selected: string[]
     ) => {
         dispatch({ type: 'SET_FILTER', payload: { category, selected } });
     };
 
     const handleImmediateChange = (
-        category: keyof FilterState,
+        category: keyof Filter,
         selected: string[]
     ) => {
         dispatch({

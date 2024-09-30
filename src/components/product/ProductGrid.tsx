@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useEffect, useState } from 'react';
 
 import { CanceledError } from '@/lib/services/apiClient';

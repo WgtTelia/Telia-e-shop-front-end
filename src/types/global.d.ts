@@ -31,21 +31,27 @@ declare type SortOption =
     | 'Price: highest to lowest';
 
 
-    type Type = 'Mobile phones' | 'Accessories';
+type Type = string;
 
 //mock data type,  this will be defined as an interface for Backend Data
-declare type Brand = 'Samsung' | 'Xiaomi' | 'Apple' | 'OnePlus' | 'Sony';
+declare type Brand =string;
 
 //mock data type
-declare type PriceRange =
-    | '0 - 100 €/month'
-    | '100 - 500 €/month'
-    | '500 - 1000 €/month'
-    | '1000 - 1500 €/month'
-    | '1500 - 2000 €/month';
+declare type PriceRange = string;
 
 //mock data type,  this will be defined as an interface for Backend Data
-declare type Color = 'Black' | 'Yellow' | 'Blue' | 'Pink' | 'Silver';
+declare type Color =  string;
 
 //mock data type,  this will be defined as an interface for Backend Data
-declare type Stock = 'In stock' | 'Out of stock';
+declare type Stock = string;
+
+
+declare interface Filter {
+    types: Type[];
+    brands: Brand[];
+    priceRanges: PriceRange[];
+    colors: Color[];
+    stock: Stock[];
+    isModalOpen: boolean;
+
+}
