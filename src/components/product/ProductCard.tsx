@@ -13,8 +13,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     shortDescription,
 }) => {
     const [selectedVariantIndex, setSelectedVariantIndex] = useState<number>(0);
-
+    const [imageError, setImageError] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+
+    const handleImageError = () => {
+        setImageError(true);
+    };
 
     return (
         <div
@@ -27,9 +31,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         <Image
                             fill
                             sizes='100px'
-                            src={productVariants[selectedVariantIndex].imgUrl}
+                            src={
+                                imageError
+                                    ? '/no_image.png'
+                                    : productVariants[selectedVariantIndex]
+                                          .imgUrl
+                            }
                             alt={`${brand} ${name} ${productVariants[selectedVariantIndex].color}`}
-                            className='object-contain'
+                            onError={handleImageError}
+                            className={`object-contain ${
+                                imageError ? 'opacity-20' : ''
+                            }`}
                         />
                     </div>
                     <figcaption className='flex flex-col gap-3'>
