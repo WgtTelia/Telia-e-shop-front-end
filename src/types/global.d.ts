@@ -29,3 +29,29 @@ declare type SortOption =
     | 'Most popular'
     | 'Price: lowest to highest'
     | 'Price: highest to lowest';
+
+
+type Type = string;
+
+//mock data type,  this will be defined as an interface for Backend Data
+declare type Brand =string;
+
+//mock data type
+declare type PriceRange = string;
+
+//mock data type,  this will be defined as an interface for Backend Data
+declare type Color =  string;
+
+//mock data type,  this will be defined as an interface for Backend Data
+declare type Stock = string;
+
+
+declare interface Filter {
+    types: Type[];
+    brands: Brand[];
+    priceRanges: PriceRange[];
+    colors: Color[];
+    stock: Stock[];
+    isModalOpen: boolean;
+
+}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
-import { SelectMenu } from '@/components/filters/SelectMenu';
-
+import { SortMenuSheet } from '@/components/filters/SortMenuSheet';
 import '@testing-library/jest-dom';
 import { SortProvider, useSort } from '@/context/SortContext';
 import { SORT_OPTIONS } from '@/data/sortOption';
@@ -11,8 +10,8 @@ jest.mock('react-icons/fa', () => ({
     FaChevronDown: () => <span data-testid='chevron-down' />,
 }));
 
-jest.mock('@/components/filters/Picker', () => ({
-    Picker: ({
+jest.mock('@/components/filters/OptionPicker', () => ({
+    OptionPicker: ({
         options,
         selectedOption,
         onChange,
@@ -46,7 +45,7 @@ jest.mock('@/context/SortContext', () => ({
     useSort: jest.fn(),
 }));
 
-describe('SelectMenu', () => {
+describe('SortMenuSheet', () => {
     const mockSetSortOption = jest.fn();
     const mockSetIsSheetOpen = jest.fn();
     let currentSortOption = 'Most popular';
@@ -64,7 +63,7 @@ describe('SelectMenu', () => {
 
         return render(
             <SortProvider>
-                <SelectMenu />
+                <SortMenuSheet />
             </SortProvider>
         );
     };
@@ -86,7 +85,7 @@ describe('SelectMenu', () => {
         jest.clearAllMocks();
     });
 
-    it('renders SelectMenu with initial state', () => {
+    it('renders SortMenuSheet with initial state', () => {
         renderComponent();
         expect(screen.getByText('Choose...')).toBeInTheDocument();
         expect(screen.getByText('Most popular')).toBeInTheDocument();

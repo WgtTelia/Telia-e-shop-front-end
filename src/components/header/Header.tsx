@@ -7,7 +7,7 @@ export const Header = () => {
         <header className='sticky top-0 z-10'>
             <nav className='mx-auto flex bg-white p-4 lg:ps-16'>
                 <Link href='/'>
-                    <Image src={logo} alt='Company logo' loading='lazy' />
+                    <Image src={logo} alt='Company logo' priority />
                 </Link>
             </nav>
         </header>

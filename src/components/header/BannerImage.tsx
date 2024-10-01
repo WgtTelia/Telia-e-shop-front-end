@@ -68,8 +68,6 @@ export const BannerImage: React.FC = () => {
                 className='h-auto w-full'
                 alt='Fallback banner image'
                 loading='eager'
-                //new tag -fetchPriority provides a hint to the browser that this image is of high importance and should be fetched sooner than other resources
-                fetchPriority='high'
                 decoding='async'
             />
         </picture>

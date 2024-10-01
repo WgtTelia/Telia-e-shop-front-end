@@ -8,7 +8,7 @@ export const SortRadioGroup = () => {
 
     return (
         <>
-            <h3 className='mb-3 font-medium text-gray-750'>Sort by</h3>
+            <h3 className='font-medium text-gray-750'>Sort by</h3>
             <RadioGroup
                 value={sortOption}
                 onValueChange={(value) => {
@@ -20,7 +20,7 @@ export const SortRadioGroup = () => {
                 {SORT_OPTIONS.map((option) => (
                     <div
                         key={option}
-                        className='flex items-center space-x-2 text-base font-light'
+                        className='cursor:pointer flex items-center space-x-2 text-base font-light'
                     >
                         <RadioGroupItem value={option} id={option} />
                         <label

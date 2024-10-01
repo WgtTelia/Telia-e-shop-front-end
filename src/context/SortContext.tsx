@@ -7,6 +7,8 @@ import React, {
     Dispatch,
 } from 'react';
 
+//TODO: add a sort function for the fetch data
+
 type SortOption =
     | 'Most popular'
     | 'Price: lowest to highest'
