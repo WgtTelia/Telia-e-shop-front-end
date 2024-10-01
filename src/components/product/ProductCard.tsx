@@ -20,7 +20,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         setImageError(true);
     };
 
-
     return (
         <div
             data-testid={`product-card-${id}`}
@@ -79,14 +78,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                             productVariants[selectedVariantIndex].color
                         }
                         stockAmount={
-                            productVariants[selectedVariantIndex].qtyInStock
+                            productVariants[selectedVariantIndex].stock[0].qtyInStock
                         }
                     />
                 </div>
             </div>
             <hr />
             <StockStatus
-                stockAmount={productVariants[selectedVariantIndex].qtyInStock}
+                stockAmount={
+                    productVariants[selectedVariantIndex].stock[0].qtyInStock
+                }
             />
         </div>
     );

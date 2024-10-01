@@ -20,10 +20,12 @@ declare interface APIProductData {
 
 declare interface ProductVariant {
     color: string;
-    defaultVariant: boolean;
     imgUrl: string;
     monthlyPrice: number;
-    qtyInStock: number;
+    defaultVariant: boolean;
+    stock: {
+        qtyInStock: number;
+    }[];
 }
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 declare interface ProductCardProps extends Omit<ProductData, 'code' | 'orderCount' | 'productGroup'> {

@@ -8,11 +8,7 @@ const mockProps = {
     onClose: jest.fn(),
     brandName: 'Apple',
     modelName: 'iPhone 13',
-    selectedColor: {
-        color: 'black',
-        stockAmount: 10,
-        image: '/black-iphone.jpg',
-    },
+    selectedColor: 'black',
 };
 
 describe('PlaceOrderForm', () => {
