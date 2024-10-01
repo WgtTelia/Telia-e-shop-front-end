@@ -20,6 +20,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         setImageError(true);
     };
 
+
     return (
         <div
             data-testid={`product-card-${id}`}
