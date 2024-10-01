@@ -78,7 +78,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                             productVariants[selectedVariantIndex].color
                         }
                         stockAmount={
-                            productVariants[selectedVariantIndex].stock[0].qtyInStock
+                            productVariants[selectedVariantIndex].stock[0]
+                                .qtyInStock
                         }
                     />
                 </div>
