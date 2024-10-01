@@ -1,14 +1,14 @@
-import { Picker } from '@/components/filters/Picker';
+import { OptionPicker } from '@/components/filters/OptionPicker';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const mockOptions = ['Option 1', 'Option 2', 'Option 3'];
 const mockOnChange = jest.fn();
 
-describe('Picker Component', () => {
+describe('OptionPicker Component', () => {
     it('renders all options', () => {
         render(
-            <Picker
+            <OptionPicker
                 options={mockOptions}
                 selectedOption='Option 1'
                 onChange={mockOnChange}
@@ -22,7 +22,7 @@ describe('Picker Component', () => {
 
     it('applies correct styles for selected option', () => {
         render(
-            <Picker
+            <OptionPicker
                 options={mockOptions}
                 selectedOption='Option 2'
                 onChange={mockOnChange}
@@ -41,7 +41,7 @@ describe('Picker Component', () => {
         window.HTMLElement.prototype.scrollTo = scrollToMock;
 
         render(
-            <Picker
+            <OptionPicker
                 options={mockOptions}
                 selectedOption='Option 1'
                 onChange={mockOnChange}
@@ -58,7 +58,7 @@ describe('Picker Component', () => {
     });
     it('calls onChange and scrolls to the selected option on click', async () => {
         render(
-            <Picker
+            <OptionPicker
                 options={mockOptions}
                 selectedOption='Option 1'
                 onChange={mockOnChange}

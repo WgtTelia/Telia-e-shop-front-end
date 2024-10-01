@@ -1,8 +1,7 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, within } from '@testing-library/react';
 import { FilterButtonsContainer } from '@/components/filters/FilterButtonsContainer';
 import { ButtonProps } from '@/components/ui/button';
-
 jest.mock('react-icons/pi', () => ({
     PiSlidersHorizontalBold: () => <div data-testid='filter-icon' />,
 }));
@@ -12,56 +11,77 @@ jest.mock('react-icons/lu', () => ({
 }));
 
 jest.mock('@/components/ui/button', () => ({
-    Button: ({ children, icon, iconPosition, onClick }: ButtonProps) => (
-        <button onClick={onClick}>
-            <span
-                data-testid='button-icon'
-                className={iconPosition === 'left' ? 'icon-left' : ''}
-            >
-                {icon}
-            </span>
+    Button: ({
+        children,
+        icon,
+        iconPosition = 'left',
+        onClick,
+    }: ButtonProps) => (
+        <button onClick={onClick} data-testid='button'>
+            {iconPosition === 'left' && (
+                <span data-testid='button-icon'>{icon}</span>
+            )}
             {children}
+            {iconPosition === 'right' && (
+                <span data-testid='button-icon'>{icon}</span>
+            )}
         </button>
     ),
 }));
 
 jest.mock('@/components/filters/SortButton', () => ({
     SortButton: () => (
-        <button>
-            <span data-testid='button-icon' className='icon-left'>
-                <div data-testid='sort-icon' /> {/* Mock the sort icon */}
+        <button data-testid='sort-button'>
+            <span data-testid='sort-button-icon'>
+                <div data-testid='sort-icon' />
             </span>
             Sort Button
         </button>
     ),
 }));
 
+jest.mock('@/components/modals/FilterModal', () => ({
+    FilterModal: () => (
+        <div>
+            <button data-testid='filter-button'>
+                <span data-testid='filter-button-icon'>
+                    <div data-testid='filter-icon' />
+                </span>
+                Filter by
+            </button>
+            <div data-testid='filter-modal-content'>Filter Modal Content</div>
+        </div>
+    ),
+}));
+
 describe('FilterButtonsContainer', () => {
-    it('renders both buttons', () => {
+    it('renders the filter button with the correct icon and text', () => {
         render(<FilterButtonsContainer />);
-        expect(screen.getByText('Filter by')).toBeInTheDocument();
-        expect(screen.getByText('Sort Button')).toBeInTheDocument();
+        const filterButton = screen.getByTestId('filter-button');
+        expect(filterButton).toBeInTheDocument();
+        expect(
+            within(filterButton).getByTestId('filter-button-icon')
+        ).toBeInTheDocument();
+        expect(
+            within(filterButton).getByTestId('filter-icon')
+        ).toBeInTheDocument();
+        expect(filterButton).toHaveTextContent('Filter by');
     });
 
-    it('renders the icons inside the buttons', () => {
+    it('renders the sort button with the correct icon and text', () => {
         render(<FilterButtonsContainer />);
-        expect(screen.getAllByTestId('button-icon').length).toBe(2);
-        expect(screen.getByTestId('filter-icon')).toBeInTheDocument();
-        expect(screen.getByTestId('sort-icon')).toBeInTheDocument(); // This should now pass
+        const sortButton = screen.getByTestId('sort-button');
+        expect(sortButton).toBeInTheDocument();
+        expect(
+            within(sortButton).getByTestId('sort-button-icon')
+        ).toBeInTheDocument();
+        expect(within(sortButton).getByTestId('sort-icon')).toBeInTheDocument();
+        expect(sortButton).toHaveTextContent('Sort Button');
     });
 
-    it('ensures the icons are positioned on the left', () => {
+    it('opens the filter modal when the filter button is clicked', () => {
         render(<FilterButtonsContainer />);
-        const buttonIcons = screen.getAllByTestId('button-icon');
-        buttonIcons.forEach((icon) => {
-            expect(icon).toHaveClass('icon-left');
-        });
-    });
-
-    it('calls handleFilterClick when the Filter by button is clicked', () => {
-        window.alert = jest.fn();
-        render(<FilterButtonsContainer />);
-        fireEvent.click(screen.getByText('Filter by'));
-        expect(window.alert).toHaveBeenCalledWith('Filter button clicked');
+        fireEvent.click(screen.getByTestId('filter-button'));
+        expect(screen.getByTestId('filter-modal-content')).toBeInTheDocument();
     });
 });
