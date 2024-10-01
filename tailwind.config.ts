@@ -91,7 +91,7 @@ const config = {
                 'card-img-height': '116px',
             },
             minHeight: {
-                'card-description': '72px',
+                'card-description': '96px',
             },
             minWidth: {
                 'dropdown-min': '296px',
