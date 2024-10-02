@@ -42,6 +42,7 @@ export const CheckboxForm = <T extends FieldValues>({
                                     <FormControl>
                                         <Checkbox
                                             id={checkboxId}
+                                            aria-label={option}
                                             checked={field.value?.includes(
                                                 option
                                             )}
@@ -62,6 +63,7 @@ export const CheckboxForm = <T extends FieldValues>({
                                         />
                                     </FormControl>
                                     <FormLabel
+                                        aria-label={option}
                                         className='font-light after:hover:cursor-pointer'
                                         htmlFor={checkboxId}
                                     >

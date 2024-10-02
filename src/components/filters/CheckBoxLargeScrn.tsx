@@ -37,12 +37,14 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
                     >
                         <Checkbox
                             id={checkboxId}
+                            aria-label={option}
                             checked={selectedValues.includes(option)}
                             onCheckedChange={(checked: boolean) => {
                                 handleCheckboxChange(option, checked);
                             }}
                         />
                         <label
+                            aria-label={option}
                             htmlFor={checkboxId}
                             className='font-light hover:cursor-pointer'
                         >
