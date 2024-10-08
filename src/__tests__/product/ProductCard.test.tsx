@@ -72,7 +72,6 @@ jest.mock('@/components/product/ColorDots', () => {
     return { ColorDots };
 });
 
-
 jest.mock('@/components/product/StockStatus', () => ({
     StockStatus: () => <div data-testid='stock-status'>Stock Status</div>,
 }));
