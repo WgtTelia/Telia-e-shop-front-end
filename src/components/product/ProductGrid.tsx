@@ -30,7 +30,7 @@ export const ProductGrid: React.FC = () => {
     return (
         <div
             data-testid='product-grid'
-            className='xxl:grid-cols-4 grid grid-cols-1 justify-center gap-6 sm:grid-cols-2 md:justify-start lg:grid-cols-3'
+            className='grid grid-cols-1 justify-center gap-6 sm:grid-cols-2 md:justify-start lg:grid-cols-3 xxl:grid-cols-4'
         >
             {error && <Error>{error}</Error>}
             {products.map((product: ProductCardProps) => (
