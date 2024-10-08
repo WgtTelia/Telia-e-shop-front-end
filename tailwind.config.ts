@@ -13,9 +13,12 @@ const config = {
     prefix: '',
     theme: {
         screens: {
-            sm: '375px',
+            xs: '375px',
+            sm: '576px',
             md: '768px',
-            lg: '1440px',
+            lg: '876px',
+            xl: '1440px',
+            xxl: '1920px',
         },
         container: {
             center: true,
@@ -74,12 +77,8 @@ const config = {
                 'sheet-gradient':
                     'linear-gradient(180deg, #7A7A7A 0%, #4A4A4A 100%)',
             },
-            aspectRatio: {
-                card: '318 / 336',
-            },
             width: {
                 'image-container': '300px',
-                'card-width': '318px',
                 'card-img-width': '100px',
                 'form-container': 'calc(100%-image-container)',
             },
