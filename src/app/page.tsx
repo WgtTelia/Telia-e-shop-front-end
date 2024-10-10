@@ -18,11 +18,11 @@ const DynamicProductGrid = dynamic(
     () =>
         import('@/components/product/ProductGrid').then(
             (mod) => mod.ProductGrid
-        ),
-    {
-        loading: () => <Loader />,
-        ssr: false,
-    }
+        )
+    // {
+    //     loading: () => <Loader />,
+    //     ssr: false,
+    // }
 );
 
 export default function Home() {
