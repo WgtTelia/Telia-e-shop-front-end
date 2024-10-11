@@ -100,7 +100,8 @@ const config = {
                 'dialog-content': '640px',
             },
             gridTemplateColumns: {
-                'main-app': '1fr 4fr',
+                'card-grid': 'repeat(auto-fit, minmax(300px, 1fr))',
+                'main-app': 'max-content auto',
             },
             borderWidth: {
                 DEFAULT: '1px',

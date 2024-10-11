@@ -38,8 +38,10 @@ export default function Home() {
                 <section className='w-full'>
                     <FilterAndSortProvider>
                         <FilterButtonsContainer />
-                        <div className='w-full md:grid md:grid-cols-1 xl:grid-cols-main-app'>
-                            <Filters />
+                        <div className='w-full gap-8 xl:grid xl:grid-cols-main-app'>
+                            <div className='hidden space-y-5 xl:block'>
+                                <Filters />
+                            </div>
                             <div className='xl:overflow-y-auto xl:p-1'>
                                 {/*To prevent the ProductGrid from being affected by the Filters components height changes */}
                                 <DynamicProductGrid />
