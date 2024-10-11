@@ -83,6 +83,7 @@ const config = {
                 'form-container': 'calc(100%-image-container)',
             },
             maxWidth: {
+                'main-app': '1800px',
                 'dialog-content': '888px',
                 'btn-order': '156px',
             },

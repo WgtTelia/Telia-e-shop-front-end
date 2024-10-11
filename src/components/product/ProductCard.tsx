@@ -49,7 +49,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                             <h2 className='text-sm uppercase text-grey-800'>
                                 {brand}
                             </h2>
-                            <h3 className='text-xl font-bold text-grey-900'>
+                            <h3 className='text-balance text-xl font-bold text-grey-900'>
                                 {name}
                             </h3>
                         </div>

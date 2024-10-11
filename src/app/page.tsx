@@ -30,7 +30,7 @@ export default function Home() {
         <>
             <Header />
             <BannerImage />
-            <main className='flex min-h-screen w-full flex-col items-center gap-y-10 p-main-content md:p-main-content-md xl:gap-y-12 xl:p-main-content-lg'>
+            <main className='m-auto flex min-h-screen w-full max-w-main-app flex-col items-center gap-y-10 p-main-content md:p-main-content-md xl:gap-y-12 xl:p-main-content-lg'>
                 <HeroSection
                     title='Mobile Phones & Accessories'
                     description='Discover the latest mobile phones and accessories to enhance your digital lifestyle. From sleek designs to powerful features, our selection offers something for everyone.'
