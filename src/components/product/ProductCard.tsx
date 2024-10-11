@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { ColorDots } from '@/components/product/ColorDots';
 import { StockStatus } from '@/components/product/StockStatus';
-// import { PlaceOrderModal } from '@/components/modals/PlaceOrderModal';
 
 const DynamicPlaceOrderModal = dynamic(
     () =>
