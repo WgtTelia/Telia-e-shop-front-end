@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-// to prevent failed build due to console.log
-// TODO: remove the console log once the backend is ready to accept data
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -15,7 +12,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { PiSlidersHorizontalBold } from 'react-icons/pi';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 import { useFilter } from '@/context/FilterContext';
 import { formatPriceRange } from '@/lib/utils';
@@ -38,44 +35,6 @@ const FilterSchema = z.object(
 
 type FilterFormType = z.infer<typeof FilterSchema>;
 
-// Mock filter options
-export const filterOptions = {
-    types: ['Mobile phones', 'Accessories'],
-    brands: [
-        'Samsung',
-        'Xiaomi',
-        'Apple',
-        'POCO',
-        'Nokia',
-        'Sony',
-        'Redmi',
-        'LG',
-    ],
-    price_intervals: [
-        'price_monthly_0_10',
-        'price_monthly_10_50',
-        'price_monthly_50_100',
-        'price_monthly_100_150',
-        'price_monthly_150_200',
-    ],
-    colors: [
-        'Black',
-        'Blue',
-        'White',
-        'Green',
-        'Purple',
-        'Grey',
-        'Yellow',
-        'Silver',
-        'Pink',
-        'Red',
-        'Almond',
-        'Lavender',
-        'Orange',
-    ],
-    stock: ['In Stock', 'Out of Stock'],
-};
-
 export const FilterModal: React.FC = () => {
     const { selectedFilters, handleFilterChange, setIsModalOpen, isModalOpen } =
         useFilter();
@@ -93,14 +52,12 @@ export const FilterModal: React.FC = () => {
         },
     });
 
-    useEffect(() => {
-        // Mock result count, replace this with a future backend API call.
-        console.log('Filters changed:', selectedFilters);
-        setResultCount(21);
-    }, [selectedFilters]);
-
     const handleSubmit = (data: FilterFormType) => {
-        console.log('Selected Filters:', data);
+        handleFilterChange('types', data.types || []);
+        handleFilterChange('brands', data.brands || []);
+        handleFilterChange('priceRanges', data.priceRanges || []);
+        handleFilterChange('colors', data.colors || []);
+        handleFilterChange('stock', data.stock || []);
         setIsModalOpen(false);
     };
 
@@ -108,27 +65,30 @@ export const FilterModal: React.FC = () => {
         {
             name: 'types' as keyof Filter,
             title: 'Type',
-            options: filterOptions.types,
+            options: selectedFilters.availableOptions?.types || [],
         },
         {
             name: 'brands' as keyof Filter,
             title: 'Brand',
-            options: filterOptions.brands,
+            options: selectedFilters.availableOptions?.brands || [],
         },
         {
             name: 'priceRanges' as keyof Filter,
             title: 'Price',
-            options: filterOptions.price_intervals.map(formatPriceRange),
+            options:
+                selectedFilters.availableOptions?.priceRanges.map(
+                    formatPriceRange
+                ) || [],
         },
         {
             name: 'colors' as keyof Filter,
             title: 'Color',
-            options: filterOptions.colors,
+            options: selectedFilters.availableOptions?.colors || [],
         },
         {
             name: 'stock' as keyof Filter,
             title: 'Stock',
-            options: filterOptions.stock,
+            options: ['In Stock', 'Out of Stock'],
         },
     ];
 
