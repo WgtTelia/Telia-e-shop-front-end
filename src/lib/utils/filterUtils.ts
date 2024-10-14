@@ -27,6 +27,23 @@ export const getFilterSections = (selectedFilters: Filter) => [
     {
         name: 'stock' as keyof Filter,
         title: 'Stock',
-        options: ['In Stock', 'Out of Stock'],
+        options: getStockOptions(selectedFilters.availableOptions?.stock) || [],
     },
 ];
+
+export const getStockOptions = (stockOptions?: StockOption[]): string[] => {
+    const options = new Set<string>();
+
+    if (stockOptions) {
+        stockOptions.forEach((stockOption) => {
+            if (stockOption.qtyInStock > 0) {
+                options.add('In Stock');
+            } else {
+                options.add('Out of Stock');
+            }
+        });
+    }
+
+    const optionsTest = Array.from(options);
+    return optionsTest;
+};

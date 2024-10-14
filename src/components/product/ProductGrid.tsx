@@ -26,6 +26,7 @@ export const ProductGrid: React.FC = () => {
             .finally(() => {
                 setLoading(false);
             });
+
         return () => cancel();
     }, []);
 
