@@ -1,7 +1,6 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import {
@@ -16,23 +15,11 @@ import { useState } from 'react';
 import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 import { useFilter } from '@/context/FilterContext';
 import { getFilterSections } from '@/lib/utils/filterUtils';
-
-const filterArraySchema = z.array(z.string()).optional();
-const filterCategories = [
-    'types',
-    'brands',
-    'priceRanges',
-    'colors',
-    'stock',
-] as const;
-
-const FilterSchema = z.object(
-    Object.fromEntries(
-        filterCategories.map((field) => [field, filterArraySchema])
-    )
-);
-
-type FilterFormType = z.infer<typeof FilterSchema>;
+import {
+    filterCategories,
+    FilterFormType,
+    FilterSchema,
+} from '@/lib/utils/validationSchemas';
 
 export const FilterModal: React.FC = () => {
     const { selectedFilters, handleFilterChange, setIsModalOpen, isModalOpen } =
@@ -51,11 +38,9 @@ export const FilterModal: React.FC = () => {
     });
 
     const handleSubmit = (data: FilterFormType) => {
-        handleFilterChange('types', data.types || []);
-        handleFilterChange('brands', data.brands || []);
-        handleFilterChange('priceRanges', data.priceRanges || []);
-        handleFilterChange('colors', data.colors || []);
-        handleFilterChange('stock', data.stock || []);
+        filterCategories.forEach((category) => {
+            handleFilterChange(category, data[category] || []);
+        });
         setIsModalOpen(false);
     };
 
