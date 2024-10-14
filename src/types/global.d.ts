@@ -64,5 +64,11 @@ declare interface Filter {
     colors: Color[];
     stock: Stock[];
     isModalOpen: boolean;
+    availableOptions?: { 
+        types: string[];
+        brands: string[];
+        priceRanges: string[];
+        colors: string[];
+    }
 
 }

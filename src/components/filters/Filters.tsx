@@ -1,49 +1,53 @@
 'use client';
 import { SortRadioGroup } from '@/components/filters/SortRadioGroup';
 import { useFilter } from '@/context/FilterContext';
-import { filterOptions } from '@/components/modals/FilterModal';
 import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 import { formatPriceRange } from '@/lib/utils';
 
 export const Filters = () => {
-    const { handleImmediateChange } = useFilter();
+    const { handleFilterChange, selectedFilters } = useFilter();
 
     const filterSections = [
         {
             name: 'types' as keyof Filter,
             title: 'Type',
-            options: filterOptions.types,
+            options: selectedFilters.availableOptions?.types || [],
         },
         {
             name: 'brands' as keyof Filter,
             title: 'Brand',
-            options: filterOptions.brands,
+            options: selectedFilters.availableOptions?.brands || [],
         },
         {
             name: 'priceRanges' as keyof Filter,
             title: 'Price',
-            options: filterOptions.price_intervals.map(formatPriceRange),
+            options:
+                selectedFilters.availableOptions?.priceRanges.map(
+                    formatPriceRange
+                ) || [],
         },
         {
             name: 'colors' as keyof Filter,
             title: 'Color',
-            options: filterOptions.colors,
+            options: selectedFilters.availableOptions?.colors || [],
         },
         {
             name: 'stock' as keyof Filter,
             title: 'Stock',
-            options: filterOptions.stock,
+            options: ['In Stock', 'Out of Stock'],
         },
     ];
 
     return (
         <>
             <SortRadioGroup />
-            <FilterCheckboxGroup
-                form={undefined}
-                filterSections={filterSections}
-                onImmediateChange={handleImmediateChange}
-            />
-        </>
+            {selectedFilters.availableOptions && (
+                <FilterCheckboxGroup
+                    form={undefined}
+                    filterSections={filterSections}
+                    handleFilterChange={handleFilterChange}
+                />
+            )}
+        </div>
     );
 };

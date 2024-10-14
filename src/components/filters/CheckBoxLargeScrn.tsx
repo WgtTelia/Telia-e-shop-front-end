@@ -1,4 +1,3 @@
-'use client';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useFilter } from '@/context/FilterContext';
 
@@ -8,21 +7,16 @@ interface CheckBoxLargeScrnProps {
     options: string[];
 }
 
+//For the fetched data only, the behavior like this
 export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
     name,
     title,
     options,
 }) => {
-    const { selectedFilters, handleImmediateChange } = useFilter();
-
-    const selectedValues = selectedFilters[name] as string[];
+    const { selectedFilters, toggleCheckbox } = useFilter();
 
     const handleCheckboxChange = (value: string, checked: boolean) => {
-        const updatedValues = checked
-            ? [...selectedValues, value] // Add value if checked
-            : selectedValues.filter((v) => v !== value); // Remove value if unchecked
-
-        handleImmediateChange(name, updatedValues);
+        toggleCheckbox(name, value, checked);
     };
 
     return (
@@ -38,10 +32,12 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
                         <Checkbox
                             id={checkboxId}
                             aria-label={option}
-                            checked={selectedValues.includes(option)}
-                            onCheckedChange={(checked: boolean) => {
-                                handleCheckboxChange(option, checked);
-                            }}
+                            checked={(
+                                (selectedFilters[name] as string[]) || []
+                            ).includes(option)}
+                            onCheckedChange={(checked) =>
+                                handleCheckboxChange(option, checked === true)
+                            }
                         />
                         <label
                             aria-label={option}
