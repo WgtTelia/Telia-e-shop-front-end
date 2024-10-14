@@ -77,6 +77,14 @@ const filterReducer = (state: Filter, action: FilterAction): Filter => {
                     brands: action.payload.brands || [],
                     priceRanges: action.payload.priceIntervals || [],
                     colors: action.payload.colors || [],
+                    stock:
+                        action.payload.productVariants?.map((variant) => ({
+                            qtyInStock: variant.stock.some(
+                                (stock) => stock.qtyInStock > 0
+                            )
+                                ? 1
+                                : 0,
+                        })) || [],
                 },
             };
         case 'SET_FILTER':

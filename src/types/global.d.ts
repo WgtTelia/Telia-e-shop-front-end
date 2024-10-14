@@ -23,9 +23,7 @@ declare interface ProductVariant {
     imgUrl: string;
     monthlyPrice: number;
     defaultVariant: boolean;
-    stock: {
-        qtyInStock: number;
-    }[];
+    stock:StockOption[];
 }
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 declare interface ProductCardProps extends Omit<ProductData, 'code' | 'orderCount' | 'productGroup'> {
@@ -41,34 +39,24 @@ declare type SortOption =
     | 'Price: lowest to highest'
     | 'Price: highest to lowest';
 
+declare interface StockOption {
+    qtyInStock: number;
+    }    
 
-type Type = string;
-
-//mock data type,  this will be defined as an interface for Backend Data
-declare type Brand =string;
-
-//mock data type
-declare type PriceRange = string;
-
-//mock data type,  this will be defined as an interface for Backend Data
-declare type Color =  string;
-
-//mock data type,  this will be defined as an interface for Backend Data
-declare type Stock = string;
-
-
-declare interface Filter {
-    types: Type[];
-    brands: Brand[];
-    priceRanges: PriceRange[];
-    colors: Color[];
-    stock: Stock[];
-    isModalOpen: boolean;
-    availableOptions?: { 
-        types: string[];
-        brands: string[];
-        priceRanges: string[];
-        colors: string[];
+declare interface AvailableOptions {
+    types: string[];
+    brands: string[];
+    priceRanges: string[];
+    colors: string[];
+    stock: StockOption[];
     }
 
+declare interface Filter {
+    types: string[];
+    brands: string[];
+    priceRanges: string[];
+    colors: string[];
+    stock: StockOption[];
+    isModalOpen: boolean;
+    availableOptions?: AvailableOptions;
 }

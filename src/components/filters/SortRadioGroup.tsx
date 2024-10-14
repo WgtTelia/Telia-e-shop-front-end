@@ -13,8 +13,6 @@ export const SortRadioGroup = () => {
                 value={sortOption}
                 onValueChange={(value) => {
                     setSortOption(value as SortOption);
-                    // eslint-disable-next-line no-console
-                    console.log('Selected sort option:', value); // Temp. to see selected option
                 }}
             >
                 {SORT_OPTIONS.map((option) => (
