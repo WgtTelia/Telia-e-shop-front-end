@@ -15,7 +15,7 @@ import { PiSlidersHorizontalBold } from 'react-icons/pi';
 import { useState } from 'react';
 import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 import { useFilter } from '@/context/FilterContext';
-import { getFilterSections } from '@/lib/filterUtils';
+import { getFilterSections } from '@/lib/utils/filterUtils';
 
 const filterArraySchema = z.array(z.string()).optional();
 const filterCategories = [
