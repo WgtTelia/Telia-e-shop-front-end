@@ -1,5 +1,5 @@
 import create from '@/lib/services/httpService';
-import productService from './productService';
+import productService from '@/lib/services/productService';
 
 const classifiersService = create('/classifiers');
 ///classifiers endpoint doesn't provide productVariants
@@ -8,20 +8,24 @@ export interface ClassifiersData {
     brands: string[];
     colors: string[];
     priceIntervals: string[];
-    productVariants?: ProductVariant[];
+    productVariants: ProductVariant[];
 }
 
 export const getAllClassifiers = async (): Promise<ClassifiersData> => {
     const { request: classifiersRequest } =
         classifiersService.getAll<ClassifiersData>();
-    const classifiersResponse = await classifiersRequest;
+    const { request: productsRequest } =
+        productService.getObject<APIProductData>();
+
+    const [classifiersResponse, productsResponse] = await Promise.all([
+        classifiersRequest,
+        productsRequest,
+    ]);
+
     const classifiersData = Array.isArray(classifiersResponse.data)
         ? classifiersResponse.data[0]
         : classifiersResponse.data;
 
-    const { request: productsRequest } =
-        productService.getObject<APIProductData>();
-    const productsResponse = await productsRequest;
     const productVariants = productsResponse.data.content.flatMap(
         (product) => product.productVariants
     );
