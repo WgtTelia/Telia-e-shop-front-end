@@ -29,7 +29,7 @@ jest.mock('@/components/filters/CheckboxForm', () => ({
     ),
 }));
 
-describe('FilterCheckboxGroup', () => {
+describe('Filter CheckboxGroup', () => {
     const mockFilterSections: {
         name: keyof Filter;
         title: string;

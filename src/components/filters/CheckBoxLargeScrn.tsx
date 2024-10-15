@@ -7,7 +7,6 @@ interface CheckBoxLargeScrnProps {
     options: string[];
 }
 
-//For the fetched data only, the behavior like this
 export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
     name,
     title,
