@@ -1,9 +1,17 @@
 'use client';
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { ColorDots } from '@/components/product/ColorDots';
 import { StockStatus } from '@/components/product/StockStatus';
-import { PlaceOrderModal } from '@/components/modals/PlaceOrderModal';
-import Image from 'next/image';
+
+const DynamicPlaceOrderModal = dynamic(
+    () =>
+        import('@/components/modals/PlaceOrderModal').then(
+            (mod) => mod.PlaceOrderModal
+        ),
+    { ssr: false }
+);
 
 export const ProductCard: React.FC<ProductCardProps> = ({
     brand,
@@ -49,7 +57,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                             <h2 className='text-sm uppercase text-grey-800'>
                                 {brand}
                             </h2>
-                            <h3 className='text-xl font-bold text-grey-900'>
+                            <h3 className='text-balance text-xl font-bold text-grey-900'>
                                 {name}
                             </h3>
                         </div>
@@ -69,7 +77,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         {productVariants[selectedVariantIndex].monthlyPrice}{' '}
                         €/month
                     </p>
-                    <PlaceOrderModal
+                    <DynamicPlaceOrderModal
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                         brandName={brand}

@@ -83,6 +83,7 @@ const config = {
                 'form-container': 'calc(100%-image-container)',
             },
             maxWidth: {
+                'main-app': '1800px',
                 'dialog-content': '888px',
                 'btn-order': '156px',
             },
@@ -99,7 +100,8 @@ const config = {
                 'dialog-content': '640px',
             },
             gridTemplateColumns: {
-                'main-app': '1fr 4fr',
+                'card-grid': 'repeat(auto-fit, minmax(300px, 1fr))',
+                'main-app': 'max-content auto',
             },
             borderWidth: {
                 DEFAULT: '1px',

@@ -94,14 +94,12 @@ describe('ProductCard', () => {
         } as const;
     });
 
-    it('renders the OrderNowBtn, ColorDots, and StockStatus components', () => {
+    it('renders the ColorDots, and StockStatus components', async () => {
         render(<ProductCard {...mockProps} />);
 
-        const orderNowBtn = screen.getByText('Order now');
         const colorDots = screen.getByTestId('color-dots');
         const stockStatus = screen.getByTestId('stock-status');
 
-        expect(orderNowBtn).toBeInTheDocument();
         expect(colorDots).toBeInTheDocument();
         expect(stockStatus).toBeInTheDocument();
     });
@@ -170,7 +168,7 @@ describe('ProductCard', () => {
         const orderNowBtn = screen.getByText('Order now');
         await userEvent.click(orderNowBtn);
 
-        const placeOrderModal = screen.getByText('Finalise Your Order');
+        const placeOrderModal = await screen.findByText('Finalise Your Order');
         expect(placeOrderModal).toBeInTheDocument();
     });
 });
