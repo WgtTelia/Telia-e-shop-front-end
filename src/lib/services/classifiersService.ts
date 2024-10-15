@@ -2,7 +2,7 @@ import create from '@/lib/services/httpService';
 import productService from '@/lib/services/productService';
 
 const classifiersService = create('/classifiers');
-///classifiers endpoint doesn't provide productVariants
+
 export interface ClassifiersData {
     productGroups: string[];
     brands: string[];
