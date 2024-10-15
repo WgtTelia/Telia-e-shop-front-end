@@ -43,6 +43,7 @@ export const CheckboxForm = <T extends FieldValues>({
                                         <Checkbox
                                             id={checkboxId}
                                             aria-label={option}
+                                            data-testid={`checkbox-${option}`}
                                             checked={field.value?.includes(
                                                 option
                                             )}
