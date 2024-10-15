@@ -69,7 +69,7 @@ export const SortMenuSheet: React.FC = () => {
                         </Button>
                     </div>
                     <SheetClose asChild>
-                        <Button variant='action' role='button' size='sm'>
+                        <Button variant='action' role='button' size='xs'>
                             Done
                         </Button>
                     </SheetClose>

@@ -13,9 +13,12 @@ const config = {
     prefix: '',
     theme: {
         screens: {
-            sm: '375px',
+            xs: '375px',
+            sm: '576px',
             md: '768px',
-            lg: '1440px',
+            lg: '876px',
+            xl: '1440px',
+            xxl: '1920px',
         },
         container: {
             center: true,
@@ -74,16 +77,13 @@ const config = {
                 'sheet-gradient':
                     'linear-gradient(180deg, #7A7A7A 0%, #4A4A4A 100%)',
             },
-            aspectRatio: {
-                card: '318 / 336',
-            },
             width: {
                 'image-container': '300px',
-                'card-width': '318px',
                 'card-img-width': '100px',
                 'form-container': 'calc(100%-image-container)',
             },
             maxWidth: {
+                'main-app': '1800px',
                 'dialog-content': '888px',
                 'btn-order': '156px',
             },
@@ -100,7 +100,8 @@ const config = {
                 'dialog-content': '640px',
             },
             gridTemplateColumns: {
-                'main-app': '1fr 4fr',
+                'card-grid': 'repeat(auto-fit, minmax(300px, 1fr))',
+                'main-app': 'max-content auto',
             },
             borderWidth: {
                 DEFAULT: '1px',

@@ -6,10 +6,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
     return (
         <section className='flex w-full flex-col gap-y-5'>
-            <h1 className='text-hero-title font-bold md:text-hero-title-md lg:text-hero-title-lg'>
+            <h1 className='text-hero-title font-bold md:text-hero-title-md xl:text-hero-title-lg'>
                 {title}
             </h1>
-            <p className='text-base lg:text-2xl'>{description}</p>
+            <p className='text-base xl:text-2xl'>{description}</p>
         </section>
     );
 };

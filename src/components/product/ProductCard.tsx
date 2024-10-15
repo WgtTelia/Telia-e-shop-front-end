@@ -31,7 +31,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     return (
         <div
             data-testid={`product-card-${id}`}
-            className='aspect-card w-card-width rounded-lg bg-grey-100 outline outline-1 outline-grey-200'
+            className='rounded-lg bg-grey-100 outline outline-1 outline-grey-200 sm:w-full'
         >
             <div className='flex flex-col gap-4 p-6'>
                 <figure className='grid h-card-img-height grid-cols-2 items-center justify-center'>
@@ -57,7 +57,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                             <h2 className='text-sm uppercase text-grey-800'>
                                 {brand}
                             </h2>
-                            <h3 className='text-xl font-bold text-grey-900'>
+                            <h3 className='text-balance text-xl font-bold text-grey-900'>
                                 {name}
                             </h3>
                         </div>

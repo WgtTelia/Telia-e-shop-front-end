@@ -30,7 +30,7 @@ export default function Home() {
         <>
             <Header />
             <BannerImage />
-            <main className='flex min-h-screen w-full flex-col items-center gap-y-10 p-main-content md:p-main-content-md lg:gap-y-12 lg:p-main-content-lg'>
+            <main className='m-auto flex min-h-screen w-full max-w-main-app flex-col items-center gap-y-10 p-main-content md:p-main-content-md xl:gap-y-12 xl:p-main-content-lg'>
                 <HeroSection
                     title='Mobile Phones & Accessories'
                     description='Discover the latest mobile phones and accessories to enhance your digital lifestyle. From sleek designs to powerful features, our selection offers something for everyone.'
@@ -38,9 +38,11 @@ export default function Home() {
                 <section className='w-full'>
                     <FilterAndSortProvider>
                         <FilterButtonsContainer />
-                        <div className='w-full md:grid md:grid-cols-1 lg:grid-cols-main-app'>
-                            <Filters />
-                            <div className='lg:overflow-y-auto lg:p-1'>
+                        <div className='w-full gap-8 xl:grid xl:grid-cols-main-app'>
+                            <div className='hidden space-y-5 xl:block'>
+                                <Filters />
+                            </div>
+                            <div className='xl:overflow-y-auto xl:p-1'>
                                 {/*To prevent the ProductGrid from being affected by the Filters components height changes */}
                                 <DynamicProductGrid />
                             </div>

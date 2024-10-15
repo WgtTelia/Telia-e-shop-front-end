@@ -43,6 +43,6 @@ describe('BannerSection component', () => {
         });
 
         const titleElement = screen.getByRole('heading', { level: 1 });
-        expect(titleElement).toHaveClass(/lg:text-hero-title-lg/);
+        expect(titleElement).toHaveClass(/xl:text-hero-title-lg/);
     });
 });

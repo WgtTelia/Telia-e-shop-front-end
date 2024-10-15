@@ -30,7 +30,7 @@ export const ProductGrid: React.FC = () => {
     return (
         <div
             data-testid='product-grid'
-            className='flex flex-wrap justify-center gap-4 md:justify-start'
+            className='grid grid-cols-card-grid justify-center gap-6'
         >
             {error && <Error>{error}</Error>}
             {products.map((product: ProductCardProps) => (
