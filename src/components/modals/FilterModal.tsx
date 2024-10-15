@@ -68,6 +68,7 @@ export const FilterModal: React.FC = () => {
                         <form
                             onSubmit={form.handleSubmit(handleSubmit)}
                             className='w-full space-y-4 overflow-y-auto'
+                            data-testid='filter-modal-form'
                         >
                             <FilterCheckboxGroup
                                 form={form}
@@ -79,6 +80,7 @@ export const FilterModal: React.FC = () => {
                                     variant='close'
                                     onClick={() => setIsModalOpen(false)}
                                     className='flex-1'
+                                    data-testid='modal-close'
                                 >
                                     Close
                                 </Button>
