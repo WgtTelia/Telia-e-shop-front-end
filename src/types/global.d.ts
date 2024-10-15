@@ -1,20 +1,31 @@
 declare interface ProductData {
+    id: number;
+    productGroup: string; // define enum from product group?
     brand: string; // define enum from brand list?
     code: string;
-    id: number;
     name: string;
-    orderCount: number; 
-    productGroup: string; // define enum from product group?
-    productVariants: ProductVariant[];
     shortDescription: string;
+    orderCount: number; 
+    productVariants: ProductVariant[];
 }
+declare interface APIProductData {
+    content: ProductData[];
+    page: {
+      size: number;
+      number: number;
+      totalElements: number;
+      totalPages: number;
+    };
+  }
 
 declare interface ProductVariant {
     color: string;
-    defaultVariant: boolean;
     imgUrl: string;
     monthlyPrice: number;
-    qtyInStock: number;
+    defaultVariant: boolean;
+    stock: {
+        qtyInStock: number;
+    }[];
 }
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 declare interface ProductCardProps extends Omit<ProductData, 'code' | 'orderCount' | 'productGroup'> {

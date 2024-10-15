@@ -1,9 +1,17 @@
 'use client';
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { ColorDots } from '@/components/product/ColorDots';
 import { StockStatus } from '@/components/product/StockStatus';
-import { PlaceOrderModal } from '@/components/modals/PlaceOrderModal';
-import Image from 'next/image';
+
+const DynamicPlaceOrderModal = dynamic(
+    () =>
+        import('@/components/modals/PlaceOrderModal').then(
+            (mod) => mod.PlaceOrderModal
+        ),
+    { ssr: false }
+);
 
 export const ProductCard: React.FC<ProductCardProps> = ({
     brand,
@@ -13,8 +21,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     shortDescription,
 }) => {
     const [selectedVariantIndex, setSelectedVariantIndex] = useState<number>(0);
-
+    const [imageError, setImageError] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+
+    const handleImageError = () => {
+        setImageError(true);
+    };
 
     return (
         <div
@@ -27,9 +39,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         <Image
                             fill
                             sizes='100px'
-                            src={productVariants[selectedVariantIndex].imgUrl}
+                            src={
+                                imageError
+                                    ? '/no_image.png'
+                                    : productVariants[selectedVariantIndex]
+                                          .imgUrl
+                            }
                             alt={`${brand} ${name} ${productVariants[selectedVariantIndex].color}`}
-                            className='object-contain'
+                            onError={handleImageError}
+                            className={`object-contain ${
+                                imageError ? 'opacity-20' : ''
+                            }`}
                         />
                     </div>
                     <figcaption className='flex flex-col gap-3'>
@@ -57,7 +77,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         {productVariants[selectedVariantIndex].monthlyPrice}{' '}
                         €/month
                     </p>
-                    <PlaceOrderModal
+                    <DynamicPlaceOrderModal
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                         brandName={brand}
@@ -66,14 +86,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                             productVariants[selectedVariantIndex].color
                         }
                         stockAmount={
-                            productVariants[selectedVariantIndex].qtyInStock
+                            productVariants[selectedVariantIndex].stock[0]
+                                .qtyInStock
                         }
                     />
                 </div>
             </div>
             <hr />
             <StockStatus
-                stockAmount={productVariants[selectedVariantIndex].qtyInStock}
+                stockAmount={
+                    productVariants[selectedVariantIndex].stock[0].qtyInStock
+                }
             />
         </div>
     );

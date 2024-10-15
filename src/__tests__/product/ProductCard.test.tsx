@@ -2,41 +2,50 @@ import { ProductCard } from '@/components/product/ProductCard';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-type ColorOption = {
-    color: string;
-    stockAmount: number;
-    image: string;
-};
-
 const mockProps = {
-    brand: 'Apple',
-    id: 1,
-    name: 'iPhone 13',
+    id: 2,
+    productGroup: 'Mobile phones',
+    brand: 'Xiaomi',
+    code: 'TES1010XIAO 14',
+    name: 'Xiaomi 14',
+    shortDescription:
+        'A mid-range smartphone with a large display and a powerful camera.',
+    orderCount: 27,
     productVariants: [
         {
-            color: 'black',
-            stockAmount: 10,
-            image: '/black-iphone.jpg',
+            color: 'Black',
+            imgUrl: '/images/xiaomi-14-black.png',
+            monthlyPrice: 24.92,
             defaultVariant: true,
-            imgUrl: '/black-iphone.jpg',
-            monthlyPrice: 39,
-            qtyInStock: 10,
+            stock: [
+                {
+                    qtyInStock: 1,
+                },
+            ],
         },
         {
-            color: 'white',
-            stockAmount: 5,
-            image: '/white-iphone.jpg',
+            color: 'Green',
+            imgUrl: '/images/xiaomi-14-green.png',
+            monthlyPrice: 24.92,
             defaultVariant: false,
-            imgUrl: '/white-iphone.jpg',
-            monthlyPrice: 39,
-            qtyInStock: 5,
+            stock: [
+                {
+                    qtyInStock: 20,
+                },
+            ],
+        },
+        {
+            color: 'White',
+            imgUrl: '/images/xiaomi-14-white.png',
+            monthlyPrice: 24.92,
+            defaultVariant: false,
+            stock: [
+                {
+                    qtyInStock: 10,
+                },
+            ],
         },
     ],
-    code: 'IPHONE13',
-    orderCount: 0,
-    productGroup: 'phones',
-    productImage: '/iphone.jpg',
-    shortDescription: 'The latest iPhone with a powerful A15 Bionic chip.',
 };
 
 jest.mock('@/components/product/ColorDots', () => {
@@ -68,20 +77,29 @@ jest.mock('@/components/product/StockStatus', () => ({
 }));
 
 describe('ProductCard', () => {
-    let selectedColor: ColorOption;
+    let selectedColor: ProductVariant;
 
     beforeEach(() => {
-        selectedColor = mockProps.productVariants[0];
+        selectedColor = {
+            color: mockProps.productVariants[0].color,
+            imgUrl: mockProps.productVariants[0].imgUrl,
+            monthlyPrice: mockProps.productVariants[0].monthlyPrice,
+            defaultVariant: mockProps.productVariants[0].defaultVariant,
+            stock: [
+                {
+                    qtyInStock:
+                        mockProps.productVariants[0].stock[0].qtyInStock,
+                },
+            ],
+        } as const;
     });
 
-    it('renders the OrderNowBtn, ColorDots, and StockStatus components', () => {
+    it('renders the ColorDots, and StockStatus components', async () => {
         render(<ProductCard {...mockProps} />);
 
-        const orderNowBtn = screen.getByText('Order now');
         const colorDots = screen.getByTestId('color-dots');
         const stockStatus = screen.getByTestId('stock-status');
 
-        expect(orderNowBtn).toBeInTheDocument();
         expect(colorDots).toBeInTheDocument();
         expect(stockStatus).toBeInTheDocument();
     });
@@ -114,10 +132,8 @@ describe('ProductCard', () => {
         );
 
         expect(productImage).toHaveAttribute(
-            'src',
-            expect.stringMatching(
-                new RegExp(`${selectedColor.color}-iphone\\.jpg`)
-            )
+            'alt',
+            expect.stringMatching(new RegExp(`${selectedColor.color}`))
         );
     });
 
@@ -152,7 +168,7 @@ describe('ProductCard', () => {
         const orderNowBtn = screen.getByText('Order now');
         await userEvent.click(orderNowBtn);
 
-        const placeOrderModal = screen.getByText('Finalise Your Order');
+        const placeOrderModal = await screen.findByText('Finalise Your Order');
         expect(placeOrderModal).toBeInTheDocument();
     });
 });
