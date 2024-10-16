@@ -19,6 +19,6 @@ export const Filters = () => {
                     handleFilterChange={handleFilterChange}
                 />
             )}
-        </div>
+        </>
     );
 };
