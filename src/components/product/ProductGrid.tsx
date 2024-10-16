@@ -8,7 +8,7 @@ import { ProductCardSkeleton } from '@/components/product/ProductCardSkeleton';
 import productService from '@/lib/services/productService';
 
 export const ProductGrid: React.FC = () => {
-    const [_loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [products, setProducts] = useState<ProductData[]>([]);
     const skeletons = [1, 2, 3, 4, 5, 6];

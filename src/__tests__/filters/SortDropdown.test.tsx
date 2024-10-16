@@ -75,7 +75,7 @@ describe('SortDropdown', () => {
     });
 
     it('displays the checkmark when an option is hovered over', () => {
-        renderComponent();
+        renderComponent('Price: lowest to highest');
         fireEvent.mouseEnter(screen.getByText('Price: lowest to highest'));
         expect(
             within(screen.getByText('Price: lowest to highest')).getByTestId(
