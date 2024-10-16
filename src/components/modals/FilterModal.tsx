@@ -24,7 +24,7 @@ import {
 export const FilterModal: React.FC = () => {
     const { selectedFilters, handleFilterChange, setIsModalOpen, isModalOpen } =
         useFilter();
-    const [resultCount] = useState(0);
+    const [resultCount, _setResultCount] = useState(0);
 
     const form = useForm<FilterFormType>({
         resolver: zodResolver(FilterSchema),
