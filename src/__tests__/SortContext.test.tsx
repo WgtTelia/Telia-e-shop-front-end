@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { SortProvider, useSort, initialState } from '@/context/SortContext'; // adjust the import path as needed
+import { SortProvider, useSort, initialState } from '@/context/SortContext';
 
 describe('SortContext', () => {
     it('provides the initial state', () => {

@@ -1,49 +1,24 @@
 'use client';
 import { SortRadioGroup } from '@/components/filters/SortRadioGroup';
 import { useFilter } from '@/context/FilterContext';
-import { filterOptions } from '@/components/modals/FilterModal';
 import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
-import { formatPriceRange } from '@/lib/utils';
+import { getFilterSections } from '@/lib/utils/filterUtils';
 
 export const Filters = () => {
-    const { handleImmediateChange } = useFilter();
+    const { handleFilterChange, selectedFilters } = useFilter();
 
-    const filterSections = [
-        {
-            name: 'types' as keyof Filter,
-            title: 'Type',
-            options: filterOptions.types,
-        },
-        {
-            name: 'brands' as keyof Filter,
-            title: 'Brand',
-            options: filterOptions.brands,
-        },
-        {
-            name: 'priceRanges' as keyof Filter,
-            title: 'Price',
-            options: filterOptions.price_intervals.map(formatPriceRange),
-        },
-        {
-            name: 'colors' as keyof Filter,
-            title: 'Color',
-            options: filterOptions.colors,
-        },
-        {
-            name: 'stock' as keyof Filter,
-            title: 'Stock',
-            options: filterOptions.stock,
-        },
-    ];
+    const filterSections = getFilterSections(selectedFilters);
 
     return (
         <>
             <SortRadioGroup />
-            <FilterCheckboxGroup
-                form={undefined}
-                filterSections={filterSections}
-                onImmediateChange={handleImmediateChange}
-            />
+            {selectedFilters.availableOptions && (
+                <FilterCheckboxGroup
+                    form={undefined}
+                    filterSections={filterSections}
+                    handleFilterChange={handleFilterChange}
+                />
+            )}
         </>
     );
 };
