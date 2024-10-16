@@ -49,7 +49,6 @@ describe('Filter Modal', () => {
 
         expect(screen.getByRole('dialog')).toBeVisible();
         expect(screen.getByText('Filter by')).toBeInTheDocument();
-        expect(screen.getByText('Filter By')).toBeInTheDocument();
         expect(screen.getByText('Type')).toBeInTheDocument();
     });
 
