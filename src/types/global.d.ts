@@ -60,3 +60,11 @@ declare interface Filter {
     isModalOpen: boolean;
     availableOptions?: AvailableOptions;
 }
+
+declare interface ClassifiersData {
+    productGroups: string[];
+    brands: string[];
+    colors: string[];
+    priceIntervals: string[];
+    productVariants: ProductVariant[];
+}

@@ -3,14 +3,6 @@ import productService from '@/lib/services/productService';
 
 const classifiersService = create('/classifiers');
 
-export interface ClassifiersData {
-    productGroups: string[];
-    brands: string[];
-    colors: string[];
-    priceIntervals: string[];
-    productVariants: ProductVariant[];
-}
-
 export const getAllClassifiers = async (): Promise<ClassifiersData> => {
     const { request: classifiersRequest } =
         classifiersService.getAll<ClassifiersData>();
