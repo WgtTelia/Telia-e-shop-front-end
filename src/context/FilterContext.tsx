@@ -6,10 +6,8 @@ import React, {
     ReactNode,
     useEffect,
 } from 'react';
-import {
-    ClassifiersData,
-    getAllClassifiers,
-} from '@/lib/services/classifiersService';
+import classifiersService from '@/lib/services/classifiersService';
+import { CanceledError } from 'axios';
 
 const initialState: Filter = {
     types: [],
@@ -70,6 +68,10 @@ const FilterContext = createContext<FilterContextProps | undefined>(undefined);
 const filterReducer = (state: Filter, action: FilterAction): Filter => {
     switch (action.type) {
         case 'SET_CLASSIFIERS':
+            const stockOptions =
+                action.payload.productVariants?.flatMap(
+                    (variant) => variant.stock
+                ) || [];
             return {
                 ...state,
                 availableOptions: {
@@ -77,14 +79,7 @@ const filterReducer = (state: Filter, action: FilterAction): Filter => {
                     brands: action.payload.brands || [],
                     priceRanges: action.payload.priceIntervals || [],
                     colors: action.payload.colors || [],
-                    stock:
-                        action.payload.productVariants?.map((variant) => ({
-                            qtyInStock: variant.stock.some(
-                                (stock) => stock.qtyInStock > 0
-                            )
-                                ? 1
-                                : 0,
-                        })) || [],
+                    stock: stockOptions || [],
                 },
             };
         case 'SET_FILTER':
@@ -118,15 +113,18 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
     const [state, dispatch] = useReducer(filterReducer, initialState);
 
     useEffect(() => {
-        const fetchClassifiers = async () => {
-            try {
-                const data = await getAllClassifiers();
-                dispatch({ type: 'SET_CLASSIFIERS', payload: data });
-            } catch (error) {
+        const { request, cancel } =
+            classifiersService.getObject<ClassifiersData>();
+        request
+            .then((response) => {
+                console.log('Fetched classifiers data:', response.data);
+                dispatch({ type: 'SET_CLASSIFIERS', payload: response.data });
+            })
+            .catch((error) => {
+                if (error instanceof CanceledError) return;
                 console.error('Error fetching classifiers:', error);
-            }
-        };
-        fetchClassifiers();
+            });
+        return () => cancel();
     }, []);
 
     const handleFilterChange = (category: keyof Filter, selected: string[]) => {

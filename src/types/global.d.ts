@@ -66,5 +66,5 @@ declare interface ClassifiersData {
     brands: string[];
     colors: string[];
     priceIntervals: string[];
-    productVariants: ProductVariant[];
+    productVariants?: ProductVariant[];
 }
