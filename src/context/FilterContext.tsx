@@ -16,6 +16,7 @@ const initialState: Filter = {
     colors: [],
     stockOptions: [],
     isModalOpen: false,
+    isLoading: true,
 };
 
 interface FilterContextProps {
