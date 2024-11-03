@@ -44,7 +44,6 @@ interface ToggleCheckboxAction {
         checked: boolean;
     };
 }
-
 type FilterAction =
     | SetFilterAction
     | SetClassifiersAction
@@ -117,7 +116,6 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
             classifiersService.getObject<ClassifiersData>();
         request
             .then((response) => {
-                console.log('Fetched classifiers data:', response.data);
                 dispatch({ type: 'SET_CLASSIFIERS', payload: response.data });
             })
             .catch((error) => {

@@ -62,6 +62,7 @@ declare interface Filter {
 }
 
 declare interface ClassifiersData {
+    id: number;
     productGroups: string[];
     brands: string[];
     colors: string[];
