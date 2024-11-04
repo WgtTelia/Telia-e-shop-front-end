@@ -16,6 +16,7 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
 
     return (
         <div className='space-y-4'>
+            <h2 className='text-gray-750'>THIS IS TEST</h2>
             <h3 className='mb-3 font-medium text-gray-750'>{title}</h3>
             {options.map((option) => {
                 const checkboxId = `${name}-${option}`;

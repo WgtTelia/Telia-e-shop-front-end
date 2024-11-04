@@ -28,17 +28,12 @@ export const FilterCheckboxGroup = <T extends FieldValues>({
                         <div key={section.name} className='p-4'>
                             <Skeleton className='h-10 w-32' />
                             <div className='mt-2 space-y-2'>
-                                {Array.from({ length: 3 }).map(
-                                    (
-                                        _,
-                                        index // adjust the number (3) to match the number of checkboxes you expect
-                                    ) => (
-                                        <Skeleton
-                                            key={index}
-                                            className='h-4 w-20'
-                                        />
-                                    )
-                                )}
+                                {Array.from({ length: 3 }).map((_, index) => (
+                                    <Skeleton
+                                        key={index}
+                                        className='h-4 w-20'
+                                    />
+                                ))}
                             </div>
                         </div>
                     ))}
