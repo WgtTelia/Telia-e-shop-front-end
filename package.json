@@ -13,7 +13,8 @@
         "format:check": "prettier --check .",
         "format:ci": "prettier --check .",
         "test": "jest",
-        "test:watch": "jest --watch"
+        "test:watch": "jest --watch",
+        "build-zip": "npm run build && zip -r my-nextjs-app.zip . -x \"node_modules/*\" \".git/*\" \"*.env\" \"README.md\""
     },
     "dependencies": {
         "@hookform/resolvers": "^3.9.0",

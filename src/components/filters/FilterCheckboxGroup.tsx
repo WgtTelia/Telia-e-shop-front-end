@@ -3,7 +3,7 @@ import { CheckboxForm } from '@/components/filters/CheckboxForm';
 import { CheckBoxLargeScrn } from '@/components/filters/CheckBoxLargeScrn';
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
 import { useFilter } from '@/context/FilterContext';
-import { Skeleton } from '@/components/ui/skeleton';
+import { CheckboxGroupSkeleton } from './CheckboxGroupSkeleton';
 
 interface FilterCheckboxGroupProps<T extends FieldValues> {
     form?: UseFormReturn<T>;
@@ -23,23 +23,8 @@ export const FilterCheckboxGroup = <T extends FieldValues>({
     return (
         <>
             {isLoading ? (
-                <div className='space-y-4'>
-                    {filterSections.map((section) => (
-                        <div key={section.name} className='p-4'>
-                            <Skeleton className='h-10 w-32' />
-                            <div className='mt-2 space-y-2'>
-                                {Array.from({ length: 3 }).map((_, index) => (
-                                    <Skeleton
-                                        key={index}
-                                        className='h-4 w-20'
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                <CheckboxGroupSkeleton rows={2} cols={3} />
             ) : (
-                // Render the actual checkboxes when isLoading is false
                 filterSections.map((section) =>
                     form ? (
                         <CheckboxForm
