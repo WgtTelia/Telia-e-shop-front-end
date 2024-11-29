@@ -1,7 +1,11 @@
 import axios, { CanceledError } from 'axios';
 
 export default axios.create({
-    baseURL: 'http://henrika.eu-central-1.elasticbeanstalk.com/api/',
+    baseURL: '/api',
+    auth: {
+        username: process.env.NEXT_PUBLIC_API_USERNAME ?? '',
+        password: process.env.NEXT_PUBLIC_API_PASSWORD ?? '',
+    },
 });
 
 export { CanceledError };
