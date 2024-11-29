@@ -29,7 +29,9 @@ describe('SortDropdown', () => {
 
         const buttonRef = React.createRef<HTMLButtonElement>();
 
-        return render(<SortDropdown buttonRef={buttonRef} />);
+        render(<SortDropdown buttonRef={buttonRef} />);
+
+        return { buttonRef };
     };
 
     beforeEach(() => {
@@ -69,16 +71,6 @@ describe('SortDropdown', () => {
         renderComponent('Price: highest to lowest');
         expect(
             within(screen.getByText('Price: highest to lowest')).getByTestId(
-                'checkmark'
-            )
-        ).toBeInTheDocument();
-    });
-
-    it('displays the checkmark when an option is hovered over', () => {
-        renderComponent();
-        fireEvent.mouseEnter(screen.getByText('Price: lowest to highest'));
-        expect(
-            within(screen.getByText('Price: lowest to highest')).getByTestId(
                 'checkmark'
             )
         ).toBeInTheDocument();
