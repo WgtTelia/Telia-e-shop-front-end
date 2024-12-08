@@ -18,37 +18,17 @@ const initialState: Filter = {
     isModalOpen: false,
 };
 
-interface SetFilterAction {
-    type: 'SET_FILTER';
-    payload: {
-        category: keyof Filter;
-        selected: string[];
-    };
-}
-
-interface SetClassifiersAction {
-    type: 'SET_CLASSIFIERS';
-    payload: ClassifiersData;
-}
-
-interface ToggleModalAction {
-    type: 'TOGGLE_MODAL';
-    payload: boolean;
-}
-
-interface ToggleCheckboxAction {
-    type: 'TOGGLE_CHECKBOX';
-    payload: {
-        category: keyof Filter;
-        value: string;
-        checked: boolean;
-    };
-}
 type FilterAction =
-    | SetFilterAction
-    | SetClassifiersAction
-    | ToggleModalAction
-    | ToggleCheckboxAction;
+    | { type: 'SET_CLASSIFIERS'; payload: ClassifiersData }
+    | {
+          type: 'SET_FILTER';
+          payload: { category: keyof Filter; selected: string[] };
+      }
+    | { type: 'TOGGLE_MODAL'; payload: boolean }
+    | {
+          type: 'TOGGLE_CHECKBOX';
+          payload: { category: keyof Filter; value: string; checked: boolean };
+      };
 
 interface FilterContextProps {
     selectedFilters: Filter;
