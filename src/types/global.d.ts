@@ -48,7 +48,7 @@ declare interface AvailableOptions {
     brands: string[];
     priceRanges: string[];
     colors: string[];
-    stock: StockOption[];
+    stock: string[];
     }
 
 declare interface Filter {
@@ -56,16 +56,16 @@ declare interface Filter {
     brands: string[];
     priceRanges: string[];
     colors: string[];
-    stock: StockOption[];
+    stock: string[];
     isModalOpen: boolean;
     availableOptions?: AvailableOptions;
+    
 }
 
 declare interface ClassifiersData {
-    id: number;
     productGroups: string[];
     brands: string[];
     colors: string[];
     priceIntervals: string[];
-    productVariants?: ProductVariant[];
+    stockOptions: string[];
 }

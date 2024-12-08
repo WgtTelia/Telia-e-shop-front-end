@@ -14,7 +14,7 @@ import { PiSlidersHorizontalBold } from 'react-icons/pi';
 import { useState } from 'react';
 import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 import { useFilter } from '@/context/FilterContext';
-import { getFilterSections, getStockOptions } from '@/lib/utils/filterUtils';
+import { getFilterSections } from '@/lib/utils/filterUtils';
 import {
     filterCategories,
     FilterFormType,
@@ -33,7 +33,7 @@ export const FilterModal: React.FC = () => {
             brands: selectedFilters.brands,
             priceRanges: selectedFilters.priceRanges,
             colors: selectedFilters.colors,
-            stock: getStockOptions(selectedFilters.availableOptions?.stock),
+            stock: selectedFilters.stock,
         },
     });
 

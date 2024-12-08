@@ -67,10 +67,6 @@ const FilterContext = createContext<FilterContextProps | undefined>(undefined);
 const filterReducer = (state: Filter, action: FilterAction): Filter => {
     switch (action.type) {
         case 'SET_CLASSIFIERS':
-            const stockOptions =
-                action.payload.productVariants?.flatMap(
-                    (variant) => variant.stock
-                ) || [];
             return {
                 ...state,
                 availableOptions: {
@@ -78,7 +74,7 @@ const filterReducer = (state: Filter, action: FilterAction): Filter => {
                     brands: action.payload.brands || [],
                     priceRanges: action.payload.priceIntervals || [],
                     colors: action.payload.colors || [],
-                    stock: stockOptions || [],
+                    stock: action.payload.stockOptions || [],
                 },
             };
         case 'SET_FILTER':
