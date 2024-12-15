@@ -1,4 +1,3 @@
-'use client';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useFilter } from '@/context/FilterContext';
 
@@ -13,17 +12,7 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
     title,
     options,
 }) => {
-    const { selectedFilters, handleImmediateChange } = useFilter();
-
-    const selectedValues = selectedFilters[name] as string[];
-
-    const handleCheckboxChange = (value: string, checked: boolean) => {
-        const updatedValues = checked
-            ? [...selectedValues, value] // Add value if checked
-            : selectedValues.filter((v) => v !== value); // Remove value if unchecked
-
-        handleImmediateChange(name, updatedValues);
-    };
+    const { selectedFilters, toggleCheckbox } = useFilter();
 
     return (
         <div className='space-y-4'>
@@ -38,9 +27,11 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
                         <Checkbox
                             id={checkboxId}
                             aria-label={option}
-                            checked={selectedValues.includes(option)}
-                            onCheckedChange={(checked: boolean) => {
-                                handleCheckboxChange(option, checked);
+                            checked={(
+                                (selectedFilters[name] as string[]) || []
+                            ).includes(option)}
+                            onCheckedChange={(checked) => {
+                                toggleCheckbox(name, option, checked === true);
                             }}
                         />
                         <label
