@@ -7,6 +7,7 @@ import {
 } from '@/components/ui/form';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Control, FieldValues, Path } from 'react-hook-form';
+import { useFilter } from '@/context/FilterContext';
 
 interface CheckboxFormProps<T extends FieldValues> {
     form: { control: Control<T> };
@@ -21,6 +22,8 @@ export const CheckboxForm = <T extends FieldValues>({
     title,
     options,
 }: CheckboxFormProps<T>) => {
+    const { selectedFilters, toggleCheckbox } = useFilter();
+
     return (
         <FormField
             control={form.control}
@@ -43,22 +46,17 @@ export const CheckboxForm = <T extends FieldValues>({
                                             id={checkboxId}
                                             aria-label={option}
                                             data-testid={`checkbox-${option}`}
-                                            checked={field.value?.includes(
-                                                option
-                                            )}
+                                            checked={(
+                                                (selectedFilters[
+                                                    name as keyof Filter
+                                                ] as string[]) || []
+                                            ).includes(option)}
                                             onCheckedChange={(checked) => {
-                                                return checked
-                                                    ? field.onChange([
-                                                          ...field.value,
-                                                          option,
-                                                      ])
-                                                    : field.onChange(
-                                                          field.value?.filter(
-                                                              (value: string) =>
-                                                                  value !==
-                                                                  option
-                                                          )
-                                                      );
+                                                toggleCheckbox(
+                                                    name as keyof Filter,
+                                                    option,
+                                                    checked as boolean
+                                                );
                                             }}
                                         />
                                     </FormControl>

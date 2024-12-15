@@ -11,7 +11,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { PiSlidersHorizontalBold } from 'react-icons/pi';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 import { useFilter } from '@/context/FilterContext';
 import { getFilterSections } from '@/lib/utils/filterUtils';
@@ -28,13 +28,6 @@ export const FilterModal: React.FC = () => {
 
     const form = useForm<FilterFormType>({
         resolver: zodResolver(FilterSchema),
-        defaultValues: {
-            types: selectedFilters.productGroups,
-            brands: selectedFilters.brands,
-            priceRanges: selectedFilters.priceIntervals,
-            colors: selectedFilters.colors,
-            stock: selectedFilters.stockOptions,
-        },
     });
 
     const handleSubmit = (data: FilterFormType) => {
@@ -45,6 +38,16 @@ export const FilterModal: React.FC = () => {
     };
 
     const filterSections = getFilterSections(selectedFilters);
+
+    useEffect(() => {
+        if (isModalOpen) {
+            form.setValue('types', selectedFilters.productGroups);
+            form.setValue('brands', selectedFilters.brands);
+            form.setValue('priceRanges', selectedFilters.priceIntervals);
+            form.setValue('colors', selectedFilters.colors);
+            form.setValue('stock', selectedFilters.stockOptions);
+        }
+    }, [isModalOpen, selectedFilters, form]);
 
     return (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>

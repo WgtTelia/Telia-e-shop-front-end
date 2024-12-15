@@ -10,11 +10,11 @@ import classifiersService from '@/lib/services/classifiersService';
 import { CanceledError } from 'axios';
 
 const initialState: Filter = {
-    types: [],
+    productGroups: [],
     brands: [],
-    priceRanges: [],
+    priceIntervals: [],
     colors: [],
-    stock: [],
+    stockOptions: [],
     isModalOpen: false,
 };
 
@@ -68,7 +68,8 @@ const filterReducer = (state: Filter, action: FilterAction): Filter => {
                 isModalOpen: action.payload,
             };
         case 'TOGGLE_CHECKBOX':
-            const currentValues = state[action.payload.category] as string[];
+            const currentValues =
+                (state[action.payload.category] as string[]) || [];
             const updatedValues = action.payload.checked
                 ? [...currentValues, action.payload.value]
                 : currentValues.filter((v) => v !== action.payload.value);
