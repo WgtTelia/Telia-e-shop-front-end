@@ -1,12 +1,12 @@
 import { z } from 'zod';
 
 const filterArraySchema = z.array(z.string()).optional();
-export const filterCategories = [
-    'types',
+export const filterCategories: Array<keyof FilterOptions> = [
+    'productGroups',
     'brands',
-    'priceRanges',
+    'priceIntervals',
     'colors',
-    'stock',
+    'stockOptions',
 ] as const;
 
 export const FilterSchema = z.object(

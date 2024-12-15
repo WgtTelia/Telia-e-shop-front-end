@@ -43,29 +43,16 @@ declare interface StockOption {
     qtyInStock: number;
     }    
 
-declare interface AvailableOptions {
-    types: string[];
-    brands: string[];
-    priceRanges: string[];
-    colors: string[];
-    stock: string[];
-    }
-
-declare interface Filter {
-    types: string[];
-    brands: string[];
-    priceRanges: string[];
-    colors: string[];
-    stock: string[];
-    isModalOpen: boolean;
-    availableOptions?: AvailableOptions;
-    
-}
-
-declare interface ClassifiersData {
+declare interface FilterOptions {
     productGroups: string[];
     brands: string[];
     colors: string[];
     priceIntervals: string[];
     stockOptions: string[];
+    }
+
+declare interface Filter extends FilterOptions {
+    isModalOpen: boolean;
+    availableOptions?: FilterOptions;   
 }
+

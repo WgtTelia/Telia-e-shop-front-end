@@ -19,7 +19,7 @@ const initialState: Filter = {
 };
 
 type FilterAction =
-    | { type: 'SET_CLASSIFIERS'; payload: ClassifiersData }
+    | { type: 'SET_CLASSIFIERS'; payload: FilterOptions }
     | {
           type: 'SET_FILTER';
           payload: { category: keyof Filter; selected: string[] };
@@ -50,11 +50,11 @@ const filterReducer = (state: Filter, action: FilterAction): Filter => {
             return {
                 ...state,
                 availableOptions: {
-                    types: action.payload.productGroups || [],
+                    productGroups: action.payload.productGroups || [],
                     brands: action.payload.brands || [],
-                    priceRanges: action.payload.priceIntervals || [],
+                    priceIntervals: action.payload.priceIntervals || [],
                     colors: action.payload.colors || [],
-                    stock: action.payload.stockOptions || [],
+                    stockOptions: action.payload.stockOptions || [],
                 },
             };
         case 'SET_FILTER':
@@ -87,9 +87,17 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
     const [state, dispatch] = useReducer(filterReducer, initialState);
 
+    // query string = filter ; Cashing policy  - server component only; search params could be shared between component , by using params, instead.
+
+    // instead of having state in a useEffect, we use the useQuery hook from react-query for better performance and state management.
+
+    // use query params to show filters and fetch  and get results, and setTimeout for displaying results. (no more then half a second delay);
+
+    //sort could be implemented after filters;
+
     useEffect(() => {
         const { request, cancel } =
-            classifiersService.getObject<ClassifiersData>();
+            classifiersService.getObject<FilterOptions>();
         request
             .then((response) => {
                 dispatch({ type: 'SET_CLASSIFIERS', payload: response.data });

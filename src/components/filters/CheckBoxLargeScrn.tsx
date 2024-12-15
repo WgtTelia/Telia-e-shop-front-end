@@ -14,10 +14,6 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
 }) => {
     const { selectedFilters, toggleCheckbox } = useFilter();
 
-    const handleCheckboxChange = (value: string, checked: boolean) => {
-        toggleCheckbox(name, value, checked);
-    };
-
     return (
         <div className='space-y-4'>
             <h3 className='mb-3 font-medium text-gray-750'>{title}</h3>
@@ -34,9 +30,9 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
                             checked={(
                                 (selectedFilters[name] as string[]) || []
                             ).includes(option)}
-                            onCheckedChange={(checked) =>
-                                handleCheckboxChange(option, checked === true)
-                            }
+                            onCheckedChange={(checked) => {
+                                toggleCheckbox(name, option, checked === true);
+                            }}
                         />
                         <label
                             aria-label={option}

@@ -13,7 +13,6 @@ interface CheckboxFormProps<T extends FieldValues> {
     name: Path<T>;
     title: string;
     options: string[];
-    onChange: () => void;
 }
 
 export const CheckboxForm = <T extends FieldValues>({

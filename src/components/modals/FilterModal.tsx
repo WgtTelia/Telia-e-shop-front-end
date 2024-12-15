@@ -29,11 +29,11 @@ export const FilterModal: React.FC = () => {
     const form = useForm<FilterFormType>({
         resolver: zodResolver(FilterSchema),
         defaultValues: {
-            types: selectedFilters.types,
+            types: selectedFilters.productGroups,
             brands: selectedFilters.brands,
-            priceRanges: selectedFilters.priceRanges,
+            priceRanges: selectedFilters.priceIntervals,
             colors: selectedFilters.colors,
-            stock: selectedFilters.stock,
+            stock: selectedFilters.stockOptions,
         },
     });
 
