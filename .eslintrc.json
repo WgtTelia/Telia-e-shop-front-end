@@ -8,6 +8,7 @@
         "plugin:testing-library/react",
         "plugin:jest-dom/recommended",
         "plugin:jest/recommended",
+        "plugin:@tanstack/query/recommended", //https://tanstack.com/query/latest/docs/eslint/eslint-plugin-query#installation
         "prettier"
     ],
     "rules": {
