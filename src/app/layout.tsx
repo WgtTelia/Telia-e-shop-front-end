@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import React from 'react';
 import localFont from 'next/font/local';
+import Providers from './providers';
 
 const helveticaNeue = localFont({
     src: [
@@ -73,7 +74,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en' className={`${helveticaNeue.variable} font-sans`}>
-            <body>{children}</body>
+            <body>
+                <Providers>{children}</Providers>
+            </body>
         </html>
     );
 }
