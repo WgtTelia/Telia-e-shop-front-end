@@ -56,3 +56,9 @@ declare interface Filter extends FilterOptions {
     availableOptions?: FilterOptions;   
 }
 
+
+
+declare type FilterAction =
+    | { type: 'SET_FILTER'; payload: { category: keyof Filter; selected: string[] } }
+    | { type: 'TOGGLE_MODAL'; payload: boolean }
+    | { type: 'TOGGLE_CHECKBOX'; payload: { category: keyof Filter; value: string; checked: boolean } };
