@@ -28,7 +28,7 @@ export const CheckboxForm = <T extends FieldValues>({
         <FormField
             control={form.control}
             name={name}
-            render={({ field }) => (
+            render={({ field: _field }) => (
                 <FormItem>
                     <FormLabel className='text-base font-medium text-gray-750'>
                         {title}

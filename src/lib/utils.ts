@@ -27,3 +27,11 @@ export const formatPriceRange = (interval: string): string => {
     }
     return interval;
 };
+
+export function formatAsTitleCase(str: string): string {
+    return str
+        .toLowerCase()
+        .split('_')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}

@@ -1,8 +1,8 @@
-import { formatPriceRange } from '@/lib/utils';
+import { formatAsTitleCase, formatPriceRange } from '@/lib/utils';
 
 export const getFilterSections = (selectedFilters: Filter) => [
     {
-        name: 'types' as keyof FilterOptions,
+        name: 'productGroups' as keyof FilterOptions,
         title: 'Type',
         options: selectedFilters.availableOptions?.productGroups || [],
     },
@@ -12,7 +12,7 @@ export const getFilterSections = (selectedFilters: Filter) => [
         options: selectedFilters.availableOptions?.brands || [],
     },
     {
-        name: 'priceRanges' as keyof FilterOptions,
+        name: 'priceIntervals' as keyof FilterOptions,
         title: 'Price',
         options:
             selectedFilters.availableOptions?.priceIntervals.map(
@@ -25,8 +25,11 @@ export const getFilterSections = (selectedFilters: Filter) => [
         options: selectedFilters.availableOptions?.colors || [],
     },
     {
-        name: 'stock' as keyof FilterOptions,
+        name: 'stockOptions' as keyof FilterOptions,
         title: 'Stock',
-        options: selectedFilters.availableOptions?.stockOptions || [],
+        options:
+            selectedFilters.availableOptions?.stockOptions.map(
+                formatAsTitleCase
+            ) || [],
     },
 ];

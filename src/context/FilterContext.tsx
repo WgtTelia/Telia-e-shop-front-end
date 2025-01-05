@@ -33,29 +33,69 @@ interface FilterContextProps {
 
 const FilterContext = createContext<FilterContextProps | undefined>(undefined);
 
+type FilterCategoryAction = {
+    type: 'SET_FILTER';
+    payload: { category: keyof Filter; selected: string[] };
+};
+
+type ToggleModalAction = {
+    type: 'TOGGLE_MODAL';
+    payload: boolean;
+};
+
+type ToggleCheckboxAction = {
+    type: 'TOGGLE_CHECKBOX';
+    payload: { category: keyof Filter; value: string; checked: boolean };
+};
+
+// Union of all possible action types
+type FilterAction =
+    | FilterCategoryAction
+    | ToggleModalAction
+    | ToggleCheckboxAction;
+
+// Reducer for handling filter categories
+const filterCategoryReducer = (
+    state: Filter,
+    action: FilterCategoryAction
+): Filter => {
+    return {
+        ...state,
+        [action.payload.category]: action.payload.selected,
+    };
+};
+
+// Reducer for toggling the modal
+const modalReducer = (state: Filter, action: ToggleModalAction): Filter => {
+    return {
+        ...state,
+        isModalOpen: action.payload,
+    };
+};
+
+const checkboxReducer = (
+    state: Filter,
+    action: ToggleCheckboxAction
+): Filter => {
+    const currentValues = (state[action.payload.category] as string[]) || [];
+    const updatedValues = action.payload.checked
+        ? [...currentValues, action.payload.value]
+        : currentValues.filter((v) => v !== action.payload.value);
+    return {
+        ...state,
+        [action.payload.category]: updatedValues,
+    };
+};
+
+// Main reducer to delegate actions to sub-reducers
 const filterReducer = (state: Filter, action: FilterAction): Filter => {
     switch (action.type) {
         case 'SET_FILTER':
-            return {
-                ...state,
-                [action.payload.category]: action.payload.selected,
-            };
+            return filterCategoryReducer(state, action);
         case 'TOGGLE_MODAL':
-            return {
-                ...state,
-                isModalOpen: action.payload,
-            };
-        case 'TOGGLE_CHECKBOX': {
-            const currentValues =
-                (state[action.payload.category] as string[]) || [];
-            const updatedValues = action.payload.checked
-                ? [...currentValues, action.payload.value]
-                : currentValues.filter((v) => v !== action.payload.value);
-            return {
-                ...state,
-                [action.payload.category]: updatedValues,
-            };
-        }
+            return modalReducer(state, action);
+        case 'TOGGLE_CHECKBOX':
+            return checkboxReducer(state, action);
         default:
             return state;
     }
@@ -81,7 +121,7 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
                 });
             }
         });
-    }, [getInitialFilters]);
+    }, []);
 
     useEffect(() => {
         const filterState = {
@@ -101,6 +141,7 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
         updateUrl,
     ]);
 
+    //// Dispatch actions to update state
     const handleFilterChange = (category: keyof Filter, selected: string[]) => {
         dispatch({ type: 'SET_FILTER', payload: { category, selected } });
     };
@@ -126,9 +167,9 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
                 selectedFilters: {
                     ...state,
                     availableOptions:
-                        typeof classifiers === 'function'
-                            ? undefined
-                            : classifiers,
+                        classifiers && typeof classifiers === 'object'
+                            ? classifiers
+                            : undefined,
                 },
                 handleFilterChange,
                 setIsModalOpen,
