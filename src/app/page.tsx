@@ -6,6 +6,7 @@ import { FilterAndSortProvider } from '@/context/FilterAndSortProvider';
 import { BannerImage } from '@/components/header/BannerImage';
 import { HeroSection } from '@/components/header/HeroSection';
 import { Header } from '@/components/header/Header';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
     title: 'Mobile Phones & Accessories | Telia',
@@ -32,7 +33,11 @@ export default function Home() {
                         <FilterButtonsContainer />
                         <div className='w-full gap-8 xl:grid xl:grid-cols-main-app'>
                             <div className='hidden space-y-5 xl:block'>
-                                <Filters />
+                                <Suspense
+                                    fallback={<div>Loading Filters...</div>}
+                                >
+                                    <Filters />
+                                </Suspense>
                             </div>
                             <div className='xl:overflow-y-auto xl:p-1'>
                                 <DynamicProductGrid />
