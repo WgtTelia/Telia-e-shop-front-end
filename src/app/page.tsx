@@ -29,21 +29,19 @@ export default function Home() {
                     description='Discover the latest mobile phones and accessories to enhance your digital lifestyle. From sleek designs to powerful features, our selection offers something for everyone.'
                 />
                 <section className='w-full'>
-                    <FilterAndSortProvider>
-                        <FilterButtonsContainer />
-                        <div className='w-full gap-8 xl:grid xl:grid-cols-main-app'>
-                            <div className='hidden space-y-5 xl:block'>
-                                <Suspense
-                                    fallback={<div>Loading Filters...</div>}
-                                >
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <FilterAndSortProvider>
+                            <FilterButtonsContainer />
+                            <div className='w-full gap-8 xl:grid xl:grid-cols-main-app'>
+                                <div className='hidden space-y-5 xl:block'>
                                     <Filters />
-                                </Suspense>
+                                </div>
+                                <div className='xl:overflow-y-auto xl:p-1'>
+                                    <DynamicProductGrid />
+                                </div>
                             </div>
-                            <div className='xl:overflow-y-auto xl:p-1'>
-                                <DynamicProductGrid />
-                            </div>
-                        </div>
-                    </FilterAndSortProvider>
+                        </FilterAndSortProvider>
+                    </Suspense>
                 </section>
             </main>
         </>
