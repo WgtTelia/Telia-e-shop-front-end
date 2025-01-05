@@ -1,10 +1,14 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { CheckBoxLargeScrn } from '@/components/filters/CheckBoxLargeScrn';
 
 const mockUseFilter = jest.fn();
 jest.mock('@/context/FilterContext', () => ({
     useFilter: () => mockUseFilter(),
+}));
+
+jest.mock('@/components/product/ProductGrid', () => ({
+    ProductGrid: () => <div>Product Grid</div>,
 }));
 
 describe('Checkbox for Larger Screens', () => {
@@ -14,45 +18,45 @@ describe('Checkbox for Larger Screens', () => {
         jest.clearAllMocks();
         mockUseFilter.mockReturnValue({
             selectedFilters: {
-                types: [],
+                productGroups: [],
                 brands: [],
-                priceRanges: [],
+                priceIntervals: [],
                 colors: [],
-                stock: [],
+                stockOptions: [],
                 isModalOpen: false,
             },
             toggleCheckbox: mockToggleCheckbox,
         });
     });
 
-    it('renders checkboxes with labels correctly', () => {
+    it('renders checkboxes with labels correctly', async () => {
         render(
             <CheckBoxLargeScrn
-                name='types'
-                title='Type'
-                options={['Type 1', 'Type 2']}
+                name='productGroups'
+                title='Product Groups'
+                options={['Group 1', 'Group 2']}
             />
         );
 
         expect(
-            screen.getByRole('heading', { name: /Type/i })
+            await screen.findByRole('heading', { name: /Product Groups/i })
         ).toBeInTheDocument();
         expect(
-            screen.getByRole('checkbox', { name: /Type 1/i })
+            await screen.findByRole('checkbox', { name: /Group 1/i })
         ).toBeInTheDocument();
         expect(
-            screen.getByRole('checkbox', { name: /Type 2/i })
+            await screen.findByRole('checkbox', { name: /Group 2/i })
         ).toBeInTheDocument();
     });
 
-    it('displays the correct checkbox state based on selectedFilters', () => {
+    it('displays the correct checkbox state based on selectedFilters', async () => {
         mockUseFilter.mockReturnValueOnce({
             selectedFilters: {
-                types: ['Type 1'],
+                productGroups: ['Group 1'],
                 brands: [],
-                priceRanges: [],
+                priceIntervals: [],
                 colors: [],
-                stock: [],
+                stockOptions: [],
                 isModalOpen: false,
             },
             toggleCheckbox: mockToggleCheckbox,
@@ -60,45 +64,51 @@ describe('Checkbox for Larger Screens', () => {
 
         render(
             <CheckBoxLargeScrn
-                name='types'
-                title='Type'
-                options={['Type 1', 'Type 2']}
+                name='productGroups'
+                title='Product Groups'
+                options={['Group 1', 'Group 2']}
             />
         );
-
-        expect(screen.getByRole('checkbox', { name: /Type 1/i })).toBeChecked();
-        expect(
-            screen.getByRole('checkbox', { name: /Type 2/i })
-        ).not.toBeChecked();
+        await waitFor(() =>
+            expect(
+                screen.getByRole('checkbox', { name: /Group 1/i })
+            ).toBeChecked()
+        );
+        await waitFor(() =>
+            expect(
+                screen.getByRole('checkbox', { name: /Group 2/i })
+            ).not.toBeChecked()
+        );
     });
 
-    it('calls toggleCheckbox with correct arguments when a checkbox is checked', () => {
+    it('calls toggleCheckbox with correct arguments when a checkbox is checked', async () => {
         render(
             <CheckBoxLargeScrn
-                name='types'
-                title='Type'
-                options={['Type 1', 'Type 2']}
+                name='productGroups'
+                title='Product Groups'
+                options={['Group 1', 'Group 2']}
             />
         );
 
-        const checkbox = screen.getByRole('checkbox', { name: /Type 1/i });
+        const checkbox = screen.getByRole('checkbox', { name: /Group 1/i });
         fireEvent.click(checkbox);
 
-        expect(mockToggleCheckbox).toHaveBeenCalledWith(
-            'types',
-            'Type 1',
-            true
+        await waitFor(() =>
+            expect(mockToggleCheckbox).toHaveBeenCalledWith(
+                'productGroups',
+                'Group 1',
+                true
+            )
         );
     });
 
-    it('calls toggleCheckbox with correct arguments when a checkbox is unchecked', () => {
+    it('calls toggleCheckbox with correct arguments when a checkbox is unchecked', async () => {
         mockUseFilter.mockReturnValueOnce({
             selectedFilters: {
-                types: ['Type 1'],
-                brands: [],
-                priceRanges: [],
+                productGroups: ['Group 1'],
+                priceIntervals: [],
                 colors: [],
-                stock: [],
+                stockOptions: [],
                 isModalOpen: false,
             },
             toggleCheckbox: mockToggleCheckbox,
@@ -106,25 +116,35 @@ describe('Checkbox for Larger Screens', () => {
 
         render(
             <CheckBoxLargeScrn
-                name='types'
-                title='Type'
-                options={['Type 1', 'Type 2']}
+                name='productGroups'
+                title='Product Groups'
+                options={['Group 1', 'Group 2']}
             />
         );
 
-        const checkbox = screen.getByRole('checkbox', { name: /Type 1/i });
+        const checkbox = screen.getByRole('checkbox', { name: /Group 1/i });
         fireEvent.click(checkbox);
 
-        expect(mockToggleCheckbox).toHaveBeenCalledWith(
-            'types',
-            'Type 1',
-            false
+        await waitFor(() =>
+            expect(mockToggleCheckbox).toHaveBeenCalledWith(
+                'productGroups',
+                'Group 1',
+                false
+            )
         );
     });
 
-    it('renders nothing when no options are provided', () => {
-        render(<CheckBoxLargeScrn name='types' title='Type' options={[]} />);
+    it('renders nothing when no options are provided', async () => {
+        render(
+            <CheckBoxLargeScrn
+                name='productGroups'
+                title='Product Groups'
+                options={[]}
+            />
+        );
 
-        expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
+        await waitFor(() =>
+            expect(screen.queryByRole('checkbox')).not.toBeInTheDocument()
+        );
     });
 });

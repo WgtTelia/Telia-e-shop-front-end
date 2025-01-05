@@ -48,13 +48,11 @@ type ToggleCheckboxAction = {
     payload: { category: keyof Filter; value: string; checked: boolean };
 };
 
-// Union of all possible action types
 type FilterAction =
     | FilterCategoryAction
     | ToggleModalAction
     | ToggleCheckboxAction;
 
-// Reducer for handling filter categories
 const filterCategoryReducer = (
     state: Filter,
     action: FilterCategoryAction
@@ -65,7 +63,6 @@ const filterCategoryReducer = (
     };
 };
 
-// Reducer for toggling the modal
 const modalReducer = (state: Filter, action: ToggleModalAction): Filter => {
     return {
         ...state,
@@ -87,7 +84,6 @@ const checkboxReducer = (
     };
 };
 
-// Main reducer to delegate actions to sub-reducers
 const filterReducer = (state: Filter, action: FilterAction): Filter => {
     switch (action.type) {
         case 'SET_FILTER':
@@ -100,7 +96,6 @@ const filterReducer = (state: Filter, action: FilterAction): Filter => {
             return state;
     }
 };
-
 export const FilterProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
@@ -121,7 +116,7 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
                 });
             }
         });
-    }, []);
+    }, [getInitialFilters]);
 
     useEffect(() => {
         const filterState = {
@@ -141,7 +136,6 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
         updateUrl,
     ]);
 
-    //// Dispatch actions to update state
     const handleFilterChange = (category: keyof Filter, selected: string[]) => {
         dispatch({ type: 'SET_FILTER', payload: { category, selected } });
     };

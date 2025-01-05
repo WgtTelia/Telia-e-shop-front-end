@@ -19,11 +19,14 @@ describe('Filters', () => {
             handleFilterChange: jest.fn(),
             selectedFilters: {
                 availableOptions: {
-                    types: ['Type1', 'Type2'],
+                    productGroups: ['Type1', 'Type2'],
                     brands: ['Brand1', 'Brand2'],
-                    priceRanges: [],
-                    colors: [],
-                    stock: [],
+                    priceIntervals: [
+                        'price_monthly_0_50',
+                        'price_monthly_50_100',
+                    ], // Corrected to priceIntervals
+                    colors: ['red', 'blue'],
+                    stockOptions: ['In Stock', 'Out of Stock'],
                 },
             },
         });
@@ -32,6 +35,7 @@ describe('Filters', () => {
         expect(screen.getByTestId('sort-radio-group')).toBeInTheDocument();
         expect(screen.getByTestId('filter-checkbox-group')).toBeInTheDocument();
     });
+
     it('does not render FilterCheckboxGroup when availableOptions are absent', () => {
         (useFilter as jest.Mock).mockReturnValue({
             handleFilterChange: jest.fn(),

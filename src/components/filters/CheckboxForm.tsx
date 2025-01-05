@@ -36,6 +36,13 @@ export const CheckboxForm = <T extends FieldValues>({
                     <div className='space-y-4 pt-2 text-gray-750'>
                         {options.map((option, index) => {
                             const checkboxId = `${name}-${index}`;
+                            const handleCheckboxChange = (checked: boolean) => {
+                                toggleCheckbox(
+                                    name as keyof Filter,
+                                    option,
+                                    checked as boolean
+                                );
+                            };
                             return (
                                 <div
                                     key={option}
@@ -51,13 +58,9 @@ export const CheckboxForm = <T extends FieldValues>({
                                                     name as keyof Filter
                                                 ] as string[]) || []
                                             ).includes(option)}
-                                            onCheckedChange={(checked) => {
-                                                toggleCheckbox(
-                                                    name as keyof Filter,
-                                                    option,
-                                                    checked as boolean
-                                                );
-                                            }}
+                                            onCheckedChange={
+                                                handleCheckboxChange
+                                            }
                                         />
                                     </FormControl>
                                     <FormLabel

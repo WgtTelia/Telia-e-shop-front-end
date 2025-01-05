@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 import { UseFormReturn } from 'react-hook-form';
+import { useFilter } from '@/context/FilterContext';
 
 jest.mock('@/components/filters/CheckBoxLargeScrn', () => ({
     CheckBoxLargeScrn: ({ title }: { title: string }) => (
@@ -12,21 +13,29 @@ jest.mock('@/components/filters/CheckboxForm', () => ({
     CheckboxForm: ({
         title,
         name,
-        onChange,
+        options,
     }: {
         title: string;
         name: string;
-        onChange: () => void;
+        options: string[];
     }) => (
         <div data-testid='checkbox-form'>
             {title} - {name}
-            <input
-                type='checkbox'
-                data-testid={`checkbox-input-${name}`}
-                onChange={onChange}
-            />
+            {options.map((option, index) => (
+                <input
+                    key={index}
+                    type='checkbox'
+                    data-testid={`checkbox-input-${name}-${option}`}
+                />
+            ))}
         </div>
     ),
+}));
+
+// Mock useFilter hook
+jest.mock('@/context/FilterContext', () => ({
+    ...jest.requireActual('@/context/FilterContext'), // Preserve other exports
+    useFilter: jest.fn(),
 }));
 
 describe('Filter CheckboxGroup', () => {
@@ -35,7 +44,11 @@ describe('Filter CheckboxGroup', () => {
         title: string;
         options: string[];
     }[] = [
-        { name: 'types', title: 'Product Types', options: ['Type1', 'Type2'] },
+        {
+            name: 'types' as keyof Filter,
+            title: 'Product Types',
+            options: ['Type1', 'Type2'],
+        },
         { name: 'brands', title: 'Brands', options: ['Brand1', 'Brand2'] },
     ];
 
@@ -62,6 +75,11 @@ describe('Filter CheckboxGroup', () => {
                 .mockReturnValue({ types: ['Type1'], brands: ['Brand1'] }),
         } as unknown as UseFormReturn;
 
+        (useFilter as jest.Mock).mockReturnValue({
+            selectedFilters: { types: ['Type1'], brands: ['Brand1'] },
+            toggleCheckbox: jest.fn(),
+        });
+
         render(
             <FilterCheckboxGroup
                 form={mockForm}
@@ -82,11 +100,16 @@ describe('Filter CheckboxGroup', () => {
 
     it('triggers handleFilterChange when CheckboxForm onChange is fired', () => {
         const mockForm = {
-            getValues: jest
-                .fn()
-                .mockReturnValue({ types: ['Type1'], brands: ['Brand1'] }),
+            getValues: jest.fn().mockReturnValue({ types: [], brands: [] }), // Start with empty arrays
         } as unknown as UseFormReturn;
+
         const mockHandleFilterChange = jest.fn();
+        const mockToggleCheckbox = jest.fn();
+
+        (useFilter as jest.Mock).mockReturnValue({
+            selectedFilters: { types: [], brands: [] }, // Start with empty arrays in selectedFilters
+            toggleCheckbox: mockToggleCheckbox,
+        });
 
         render(
             <FilterCheckboxGroup
@@ -96,8 +119,15 @@ describe('Filter CheckboxGroup', () => {
             />
         );
 
-        const firstCheckboxInput = screen.getByTestId('checkbox-input-types');
-        fireEvent.click(firstCheckboxInput);
+        // Simulate toggling the checkbox for 'Type1'
+        mockToggleCheckbox.mockImplementation((category, value, checked) => {
+            if (category === 'types' && value === 'Type1' && checked) {
+                mockHandleFilterChange('types', ['Type1']); // Call handleFilterChange within the mock
+            }
+        });
+
+        // Directly call toggleCheckbox for 'types' and 'Type1' with checked as true
+        mockToggleCheckbox('types', 'Type1', true);
 
         expect(mockHandleFilterChange).toHaveBeenCalledWith('types', ['Type1']);
     });

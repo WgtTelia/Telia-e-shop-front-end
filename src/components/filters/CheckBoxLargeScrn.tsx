@@ -1,7 +1,7 @@
 import { Checkbox } from '@/components/ui/checkbox';
 import { useFilter } from '@/context/FilterContext';
 
-interface CheckBoxLargeScrnProps {
+export interface CheckBoxLargeScrnProps {
     name: keyof Filter;
     title: string;
     options: string[];
@@ -19,6 +19,13 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
             <h3 className='mb-3 font-medium text-gray-750'>{title}</h3>
             {options.map((option) => {
                 const checkboxId = `${name}-${option}`;
+                const handleCheckboxChange = (checked: boolean) => {
+                    toggleCheckbox(
+                        name as keyof Filter,
+                        option,
+                        checked as boolean
+                    );
+                };
                 return (
                     <div
                         key={option}
@@ -30,9 +37,7 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
                             checked={(
                                 (selectedFilters[name] as string[]) || []
                             ).includes(option)}
-                            onCheckedChange={(checked) => {
-                                toggleCheckbox(name, option, checked === true);
-                            }}
+                            onCheckedChange={handleCheckboxChange}
                         />
                         <label
                             aria-label={option}
