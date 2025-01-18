@@ -10,20 +10,12 @@ interface FilterCheckboxGroupProps<T extends FieldValues> {
         options: string[];
     }[];
     handleFilterChange?: (category: keyof Filter, selected: string[]) => void;
-    onImmediateChange?: (category: keyof Filter, selected: string[]) => void;
 }
 
 export const FilterCheckboxGroup = <T extends FieldValues>({
     form,
     filterSections,
-    handleFilterChange,
-    onImmediateChange,
 }: FilterCheckboxGroupProps<T>) => {
-    const handleCheckboxChange = (name: keyof Filter, selected: string[]) => {
-        handleFilterChange?.(name, selected);
-        onImmediateChange?.(name, selected);
-    };
-
     return (
         <>
             {filterSections.map((section) =>
@@ -34,12 +26,6 @@ export const FilterCheckboxGroup = <T extends FieldValues>({
                         name={section.name as Path<T>}
                         title={section.title}
                         options={section.options}
-                        onChange={() =>
-                            handleCheckboxChange(
-                                section.name,
-                                form.getValues()[section.name]
-                            )
-                        }
                     />
                 ) : (
                     <CheckBoxLargeScrn

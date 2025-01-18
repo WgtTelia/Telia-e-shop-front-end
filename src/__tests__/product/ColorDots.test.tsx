@@ -1,7 +1,7 @@
 import { ColorDots } from '@/components/product/ColorDots';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-jest.mock('@/lib/colorUtils', () => ({
+jest.mock('@/lib/utils/colorUtils', () => ({
     mapColorToHex: jest.fn((color) => {
         if (color === 'red') return '#FF0000';
         if (color === 'green') return '#00FF00';
