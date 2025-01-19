@@ -24,7 +24,7 @@ describe('Filters', () => {
                     priceIntervals: [
                         'price_monthly_0_50',
                         'price_monthly_50_100',
-                    ], // Corrected to priceIntervals
+                    ],
                     colors: ['red', 'blue'],
                     stockOptions: ['In Stock', 'Out of Stock'],
                 },

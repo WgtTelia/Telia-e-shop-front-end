@@ -23,5 +23,9 @@ export const useFilterQuery = () => {
         },
         staleTime: 5 * 60 * 1000,
         gcTime: 30 * 60 * 1000,
+        //  to prevent unnecessary refetches
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
     });
 };

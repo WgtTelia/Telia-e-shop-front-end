@@ -32,9 +32,8 @@ jest.mock('@/components/filters/CheckboxForm', () => ({
     ),
 }));
 
-// Mock useFilter hook
 jest.mock('@/context/FilterContext', () => ({
-    ...jest.requireActual('@/context/FilterContext'), // Preserve other exports
+    ...jest.requireActual('@/context/FilterContext'),
     useFilter: jest.fn(),
 }));
 
@@ -53,6 +52,10 @@ describe('Filter CheckboxGroup', () => {
     ];
 
     it('renders CheckBoxLargeScrn when form is not provided', () => {
+        (useFilter as jest.Mock).mockReturnValue({
+            isLoading: false,
+        });
+
         render(
             <FilterCheckboxGroup
                 filterSections={mockFilterSections}
@@ -100,14 +103,14 @@ describe('Filter CheckboxGroup', () => {
 
     it('triggers handleFilterChange when CheckboxForm onChange is fired', () => {
         const mockForm = {
-            getValues: jest.fn().mockReturnValue({ types: [], brands: [] }), // Start with empty arrays
+            getValues: jest.fn().mockReturnValue({ types: [], brands: [] }),
         } as unknown as UseFormReturn;
 
         const mockHandleFilterChange = jest.fn();
         const mockToggleCheckbox = jest.fn();
 
         (useFilter as jest.Mock).mockReturnValue({
-            selectedFilters: { types: [], brands: [] }, // Start with empty arrays in selectedFilters
+            selectedFilters: { types: [], brands: [] },
             toggleCheckbox: mockToggleCheckbox,
         });
 
@@ -119,14 +122,12 @@ describe('Filter CheckboxGroup', () => {
             />
         );
 
-        // Simulate toggling the checkbox for 'Type1'
         mockToggleCheckbox.mockImplementation((category, value, checked) => {
             if (category === 'types' && value === 'Type1' && checked) {
-                mockHandleFilterChange('types', ['Type1']); // Call handleFilterChange within the mock
+                mockHandleFilterChange('types', ['Type1']);
             }
         });
 
-        // Directly call toggleCheckbox for 'types' and 'Type1' with checked as true
         mockToggleCheckbox('types', 'Type1', true);
 
         expect(mockHandleFilterChange).toHaveBeenCalledWith('types', ['Type1']);

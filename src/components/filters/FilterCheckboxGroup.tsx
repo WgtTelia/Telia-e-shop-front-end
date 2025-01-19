@@ -5,7 +5,7 @@ import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
 import { useFilter } from '@/context/FilterContext';
 import { CheckboxGroupSkeleton } from './CheckboxGroupSkeleton';
 
-interface FilterCheckboxGroupProps<T extends FieldValues> {
+export interface FilterCheckboxGroupProps<T extends FieldValues> {
     form?: UseFormReturn<T>;
     filterSections: {
         name: keyof Filter;

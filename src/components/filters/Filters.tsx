@@ -12,11 +12,13 @@ export const Filters = () => {
     return (
         <>
             <SortRadioGroup />
-            <FilterCheckboxGroup
-                form={undefined}
-                filterSections={filterSections}
-                handleFilterChange={handleFilterChange}
-            />
+            {selectedFilters.availableOptions && (
+                <FilterCheckboxGroup
+                    form={undefined}
+                    filterSections={filterSections}
+                    handleFilterChange={handleFilterChange}
+                />
+            )}
         </>
     );
 };

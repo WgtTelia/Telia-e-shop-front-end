@@ -28,7 +28,9 @@ export const useUrlSync = () => {
                 }
             });
 
-            router.push(`${pathname}?${params.toString()}`);
+            router.replace(`${pathname}?${params.toString()}`, {
+                scroll: false,
+            });
         },
         [pathname, router, searchParams]
     );

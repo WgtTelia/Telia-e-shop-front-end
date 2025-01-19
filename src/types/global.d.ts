@@ -54,4 +54,5 @@ declare interface FilterOptions {
 declare interface Filter extends FilterOptions {
     isModalOpen: boolean;
     availableOptions?: FilterOptions;   
+    isLoading?: boolean;
 }
