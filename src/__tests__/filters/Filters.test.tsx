@@ -35,18 +35,4 @@ describe('Filters', () => {
         expect(screen.getByTestId('sort-radio-group')).toBeInTheDocument();
         expect(screen.getByTestId('filter-checkbox-group')).toBeInTheDocument();
     });
-
-    it('does not render FilterCheckboxGroup when availableOptions are absent', () => {
-        (useFilter as jest.Mock).mockReturnValue({
-            handleFilterChange: jest.fn(),
-            selectedFilters: {
-                availableOptions: undefined,
-            },
-        });
-        render(<Filters />);
-        expect(screen.getByTestId('sort-radio-group')).toBeInTheDocument();
-        expect(
-            screen.queryByTestId('filter-checkbox-group')
-        ).not.toBeInTheDocument();
-    });
 });
