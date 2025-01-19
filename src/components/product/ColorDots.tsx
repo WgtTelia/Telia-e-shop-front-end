@@ -1,5 +1,5 @@
 import React from 'react';
-import { mapColorToHex } from '@/lib/colorUtils';
+import { mapColorToHex } from '@/lib/utils/colorUtils';
 
 interface ColorDotsProps {
     availableColors: { color: string; index: number }[];

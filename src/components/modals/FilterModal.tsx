@@ -1,10 +1,6 @@
-/* eslint-disable no-console */
-// to prevent failed build due to console.log
-// TODO: remove the console log once the backend is ready to accept data
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import {
@@ -18,119 +14,40 @@ import { PiSlidersHorizontalBold } from 'react-icons/pi';
 import { useEffect, useState } from 'react';
 import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 import { useFilter } from '@/context/FilterContext';
-import { formatPriceRange } from '@/lib/utils';
-
-// Zod Schema for validation
-const filterArraySchema = z.array(z.string()).optional();
-const filterCategories = [
-    'types',
-    'brands',
-    'priceRanges',
-    'colors',
-    'stock',
-] as const;
-
-const FilterSchema = z.object(
-    Object.fromEntries(
-        filterCategories.map((field) => [field, filterArraySchema])
-    )
-);
-
-type FilterFormType = z.infer<typeof FilterSchema>;
-
-// Mock filter options
-export const filterOptions = {
-    types: ['Mobile phones', 'Accessories'],
-    brands: [
-        'Samsung',
-        'Xiaomi',
-        'Apple',
-        'POCO',
-        'Nokia',
-        'Sony',
-        'Redmi',
-        'LG',
-    ],
-    price_intervals: [
-        'price_monthly_0_10',
-        'price_monthly_10_50',
-        'price_monthly_50_100',
-        'price_monthly_100_150',
-        'price_monthly_150_200',
-    ],
-    colors: [
-        'Black',
-        'Blue',
-        'White',
-        'Green',
-        'Purple',
-        'Grey',
-        'Yellow',
-        'Silver',
-        'Pink',
-        'Red',
-        'Almond',
-        'Lavender',
-        'Orange',
-    ],
-    stock: ['In Stock', 'Out of Stock'],
-};
+import { getFilterSections } from '@/lib/utils/filterUtils';
+import {
+    filterCategories,
+    FilterFormType,
+    FilterSchema,
+} from '@/lib/utils/validationSchemas';
 
 export const FilterModal: React.FC = () => {
     const { selectedFilters, handleFilterChange, setIsModalOpen, isModalOpen } =
         useFilter();
-    const [resultCount, setResultCount] = useState(0);
+    const [resultCount, _setResultCount] = useState(0);
 
-    // react-hook-form for state management and form validation
     const form = useForm<FilterFormType>({
         resolver: zodResolver(FilterSchema),
-        defaultValues: {
-            types: selectedFilters.types,
-            brands: selectedFilters.brands,
-            priceRanges: selectedFilters.priceRanges,
-            colors: selectedFilters.colors,
-            stock: selectedFilters.stock,
-        },
     });
 
-    useEffect(() => {
-        // Mock result count, replace this with a future backend API call.
-        console.log('Filters changed:', selectedFilters);
-        setResultCount(21);
-    }, [selectedFilters]);
-
     const handleSubmit = (data: FilterFormType) => {
-        console.log('Selected Filters:', data);
+        filterCategories.forEach((category) => {
+            handleFilterChange(category, data[category] || []);
+        });
         setIsModalOpen(false);
     };
 
-    const filterSections = [
-        {
-            name: 'types' as keyof Filter,
-            title: 'Type',
-            options: filterOptions.types,
-        },
-        {
-            name: 'brands' as keyof Filter,
-            title: 'Brand',
-            options: filterOptions.brands,
-        },
-        {
-            name: 'priceRanges' as keyof Filter,
-            title: 'Price',
-            options: filterOptions.price_intervals.map(formatPriceRange),
-        },
-        {
-            name: 'colors' as keyof Filter,
-            title: 'Color',
-            options: filterOptions.colors,
-        },
-        {
-            name: 'stock' as keyof Filter,
-            title: 'Stock',
-            options: filterOptions.stock,
-        },
-    ];
+    const filterSections = getFilterSections(selectedFilters);
+
+    useEffect(() => {
+        if (isModalOpen) {
+            form.setValue('types', selectedFilters.productGroups);
+            form.setValue('brands', selectedFilters.brands);
+            form.setValue('priceRanges', selectedFilters.priceIntervals);
+            form.setValue('colors', selectedFilters.colors);
+            form.setValue('stock', selectedFilters.stockOptions);
+        }
+    }, [isModalOpen, selectedFilters, form]);
 
     return (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -154,6 +71,7 @@ export const FilterModal: React.FC = () => {
                         <form
                             onSubmit={form.handleSubmit(handleSubmit)}
                             className='w-full space-y-4 overflow-y-auto'
+                            data-testid='filter-modal-form'
                         >
                             <FilterCheckboxGroup
                                 form={form}
@@ -165,6 +83,7 @@ export const FilterModal: React.FC = () => {
                                     variant='close'
                                     onClick={() => setIsModalOpen(false)}
                                     className='flex-1'
+                                    data-testid='modal-close'
                                 >
                                     Close
                                 </Button>

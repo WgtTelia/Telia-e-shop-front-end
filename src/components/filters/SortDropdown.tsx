@@ -61,10 +61,7 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({ buttonRef }) => {
                         icon={
                             <span className='mr-0.5 inline-block w-2 pt-1'>
                                 {sortOption === option && (
-                                    <IoCheckmarkSharp
-                                        className='text-gray-850'
-                                        test-id='checkmark'
-                                    />
+                                    <IoCheckmarkSharp className='text-gray-850' />
                                 )}
                             </span>
                         }

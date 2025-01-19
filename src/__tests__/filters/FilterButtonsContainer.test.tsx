@@ -54,7 +54,7 @@ jest.mock('@/components/modals/FilterModal', () => ({
     ),
 }));
 
-describe('FilterButtonsContainer', () => {
+describe('Filter Buttons Container', () => {
     it('renders the filter button with the correct icon and text', () => {
         render(<FilterButtonsContainer />);
         const filterButton = screen.getByTestId('filter-button');

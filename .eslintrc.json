@@ -8,6 +8,7 @@
         "plugin:testing-library/react",
         "plugin:jest-dom/recommended",
         "plugin:jest/recommended",
+        "plugin:@tanstack/query/recommended", //https://tanstack.com/query/latest/docs/eslint/eslint-plugin-query#installation
         "prettier"
     ],
     "rules": {
@@ -22,7 +23,13 @@
         "@typescript-eslint/ban-types": "off",
         "@typescript-eslint/no-empty-interface": "off",
         "@typescript-eslint/no-explicit-any": "warn",
-        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            {
+                "varsIgnorePattern": "^_",
+                "argsIgnorePattern": "^_"
+            }
+        ],
         "no-console": ["warn", { "allow": ["warn", "error"] }],
         "react/no-unescaped-entities": "warn",
         "react/style-prop-object": "warn", //  about using inline style objects
