@@ -22,8 +22,13 @@ import {
 } from '@/lib/utils/validationSchemas';
 
 export const FilterModal: React.FC = () => {
-    const { selectedFilters, handleFilterChange, setIsModalOpen, isModalOpen, filterCount } =
-        useFilter();
+    const {
+        selectedFilters,
+        handleFilterChange,
+        setIsModalOpen,
+        isModalOpen,
+        filterCount,
+    } = useFilter();
 
     const form = useForm<FilterFormType>({
         resolver: zodResolver(FilterSchema),
