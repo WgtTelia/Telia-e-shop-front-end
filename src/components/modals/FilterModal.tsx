@@ -11,7 +11,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { PiSlidersHorizontalBold } from 'react-icons/pi';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 import { useFilter } from '@/context/FilterContext';
 import { getFilterSections } from '@/lib/utils/filterUtils';
@@ -22,9 +22,8 @@ import {
 } from '@/lib/utils/validationSchemas';
 
 export const FilterModal: React.FC = () => {
-    const { selectedFilters, handleFilterChange, setIsModalOpen, isModalOpen } =
+    const { selectedFilters, handleFilterChange, setIsModalOpen, isModalOpen, filterCount } =
         useFilter();
-    const [resultCount, setResultCount] = useState(0);
 
     const form = useForm<FilterFormType>({
         resolver: zodResolver(FilterSchema),
@@ -38,16 +37,6 @@ export const FilterModal: React.FC = () => {
     };
 
     const filterSections = getFilterSections(selectedFilters);
-
-    // Calculate the number of selected filters
-    useEffect(() => {
-        const count = Object.values(selectedFilters).reduce(
-            (total, filterGroup) =>
-                total + (Array.isArray(filterGroup) ? filterGroup.length : 0),
-            0
-        );
-        setResultCount(count);
-    }, [selectedFilters]);
 
     useEffect(() => {
         if (isModalOpen) {
@@ -103,7 +92,7 @@ export const FilterModal: React.FC = () => {
                                     onClick={form.handleSubmit(handleSubmit)}
                                     className='flex-1'
                                 >
-                                    See results ({resultCount})
+                                    See results ({filterCount})
                                 </Button>
                             </div>
                         </form>
