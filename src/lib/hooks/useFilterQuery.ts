@@ -7,7 +7,7 @@ export const useFilterQuery = () => {
         queryKey: ['classifiers'],
         queryFn: async ({ signal }) => {
             const { request, cancel } =
-                classifiersService.getObject<FilterOptions>();
+                classifiersService.getAll<FilterOptions>(false);
             signal.addEventListener('abort', () => {
                 cancel();
             });

@@ -10,20 +10,12 @@ class HttpService {
     constructor(endpoint: string) {
         this.endpoint = endpoint;
     }
-    // Method for when the response is an array
-    getAll<T>() {
+
+    getAll<T>(isArray: boolean) {
         const controller = new AbortController();
-        const request = apiClient.get<T[]>(this.endpoint, {
-            signal: controller.signal,
-        });
-        return { request, cancel: () => controller.abort() };
-    }
-    //method for when the response is an object (like products in the latest API version)
-    getObject<T>() {
-        const controller = new AbortController();
-        const request = apiClient.get<T>(this.endpoint, {
-            signal: controller.signal,
-        });
+        const request = isArray
+            ? apiClient.get<T[]>(this.endpoint, { signal: controller.signal })
+            : apiClient.get<T>(this.endpoint, { signal: controller.signal });
         return { request, cancel: () => controller.abort() };
     }
 

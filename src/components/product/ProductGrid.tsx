@@ -14,10 +14,11 @@ export const ProductGrid: React.FC = () => {
     const skeletons = [1, 2, 3, 4, 5, 6];
 
     useEffect(() => {
-        const { request, cancel } = productService.getObject<APIProductData>();
+        const { request, cancel } =
+            productService.getAll<APIProductData>(false);
         request
             .then((response) => {
-                setProducts(response.data.content);
+                setProducts((response.data as APIProductData).content);
             })
             .catch((error) => {
                 if (error instanceof CanceledError) return;
