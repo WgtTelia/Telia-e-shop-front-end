@@ -65,7 +65,7 @@ export const CheckboxForm = <T extends FieldValues>({
                                     </FormControl>
                                     <FormLabel
                                         aria-label={option}
-                                        className='font-light after:hover:cursor-pointer'
+                                        className='font-light hover:cursor-pointer'
                                         htmlFor={checkboxId}
                                     >
                                         {option}
