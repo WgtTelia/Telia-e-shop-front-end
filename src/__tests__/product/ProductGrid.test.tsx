@@ -33,7 +33,7 @@ const mockProducts = [
 
 describe('<ProductGrid />', () => {
     it('renders without crashing', () => {
-        productService.getObject = jest.fn().mockReturnValue({
+        productService.getAll = jest.fn().mockReturnValue({
             request: Promise.resolve({ data: { content: [] } }),
             cancel: jest.fn(),
         });
@@ -42,7 +42,7 @@ describe('<ProductGrid />', () => {
     });
 
     it('displays products when loaded successfully', async () => {
-        productService.getObject = jest.fn().mockReturnValue({
+        productService.getAll = jest.fn().mockReturnValue({
             request: Promise.resolve({ data: { content: mockProducts } }),
             cancel: jest.fn(),
         });
@@ -56,7 +56,7 @@ describe('<ProductGrid />', () => {
 
     it('displays error message when loading fails', async () => {
         const errorMessage = 'Failed to fetch products';
-        productService.getObject = jest.fn().mockReturnValue({
+        productService.getAll = jest.fn().mockReturnValue({
             request: Promise.reject(new Error(errorMessage)),
             cancel: jest.fn(),
         });
