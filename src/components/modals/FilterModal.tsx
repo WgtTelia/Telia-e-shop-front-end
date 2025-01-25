@@ -24,7 +24,7 @@ import {
 export const FilterModal: React.FC = () => {
     const { selectedFilters, handleFilterChange, setIsModalOpen, isModalOpen } =
         useFilter();
-    const [resultCount, _setResultCount] = useState(0);
+    const [resultCount, setResultCount] = useState(0);
 
     const form = useForm<FilterFormType>({
         resolver: zodResolver(FilterSchema),
@@ -38,6 +38,16 @@ export const FilterModal: React.FC = () => {
     };
 
     const filterSections = getFilterSections(selectedFilters);
+
+    // Calculate the number of selected filters
+    useEffect(() => {
+        const count = Object.values(selectedFilters).reduce(
+            (total, filterGroup) =>
+                total + (Array.isArray(filterGroup) ? filterGroup.length : 0),
+            0
+        );
+        setResultCount(count);
+    }, [selectedFilters]);
 
     useEffect(() => {
         if (isModalOpen) {
