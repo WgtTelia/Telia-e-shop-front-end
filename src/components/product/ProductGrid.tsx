@@ -20,10 +20,10 @@ export const ProductGrid: React.FC = () => {
                 skeletons.map((skeleton) => (
                     <ProductCardSkeleton key={skeleton} />
                 ))}
-            {products && products.map((product: ProductCardProps) => (
-                <ProductCard key={product.id} {...product} />
-            ))
-            }
+            {products &&
+                products.map((product: ProductCardProps) => (
+                    <ProductCard key={product.id} {...product} />
+                ))}
         </div>
     );
 };
