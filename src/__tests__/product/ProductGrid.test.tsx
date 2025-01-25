@@ -1,9 +1,10 @@
 import React from 'react';
 import { render, waitFor, screen } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ProductGrid } from '@/components/product/ProductGrid';
-import productService from '@/lib/services/productService';
+import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
 
-jest.mock('@/lib/services/productService');
+jest.mock('@/lib/hooks/useProductsQuery.ts');
 
 const mockProducts = [
     {
@@ -31,23 +32,37 @@ const mockProducts = [
     },
 ];
 
+const queryClient = new QueryClient();
+
 describe('<ProductGrid />', () => {
     it('renders without crashing', () => {
-        productService.getAll = jest.fn().mockReturnValue({
-            request: Promise.resolve({ data: { content: [] } }),
-            cancel: jest.fn(),
+        (useProductsQuery as jest.Mock).mockReturnValue({
+            data: [],
+            isLoading: false,
+            error: null,
         });
-        render(<ProductGrid />);
+
+        render(
+            <QueryClientProvider client={queryClient}>
+                <ProductGrid />
+            </QueryClientProvider>
+        );
+
         expect(screen.getByTestId('product-grid')).toBeInTheDocument();
     });
 
     it('displays products when loaded successfully', async () => {
-        productService.getAll = jest.fn().mockReturnValue({
-            request: Promise.resolve({ data: { content: mockProducts } }),
-            cancel: jest.fn(),
+        (useProductsQuery as jest.Mock).mockReturnValue({
+            data: mockProducts,
+            isLoading: false,
+            error: null,
         });
 
-        render(<ProductGrid />);
+        render(
+            <QueryClientProvider client={queryClient}>
+                <ProductGrid />
+            </QueryClientProvider>
+        );
 
         await waitFor(() => {
             expect(screen.getByText('Samsung Galaxy S22')).toBeInTheDocument();
@@ -56,12 +71,17 @@ describe('<ProductGrid />', () => {
 
     it('displays error message when loading fails', async () => {
         const errorMessage = 'Failed to fetch products';
-        productService.getAll = jest.fn().mockReturnValue({
-            request: Promise.reject(new Error(errorMessage)),
-            cancel: jest.fn(),
+        (useProductsQuery as jest.Mock).mockReturnValue({
+            data: null,
+            isLoading: false,
+            error: new Error(errorMessage),
         });
 
-        render(<ProductGrid />);
+        render(
+            <QueryClientProvider client={queryClient}>
+                <ProductGrid />
+            </QueryClientProvider>
+        );
 
         await waitFor(() => {
             expect(screen.getByText(errorMessage)).toBeInTheDocument();
