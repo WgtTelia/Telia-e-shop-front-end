@@ -4,7 +4,7 @@ import { useFilter } from '@/context/FilterContext';
 export interface CheckBoxLargeScrnProps {
     name: keyof Filter;
     title: string;
-    options: string[];
+    options: Array<string | { value: string; label: string }>;
 }
 
 export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
@@ -17,34 +17,36 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
     return (
         <div className='space-y-4'>
             <h3 className='mb-3 font-medium text-gray-750'>{title}</h3>
-            {options.map((option) => {
-                const checkboxId = `${name}-${option}`;
+            {options.map((option, index) => {
+                const value =
+                    typeof option === 'string' ? option : option.value;
+                const label =
+                    typeof option === 'string' ? option : option.label;
+                const checkboxId = `${name}-${index}`;
+
                 const handleCheckboxChange = (checked: boolean) => {
-                    toggleCheckbox(
-                        name as keyof Filter,
-                        option,
-                        checked as boolean
-                    );
+                    toggleCheckbox(name, value, checked);
                 };
+
                 return (
                     <div
-                        key={option}
+                        key={value}
                         className='flex flex-row items-center space-x-2 align-middle text-base'
                     >
                         <Checkbox
                             id={checkboxId}
-                            aria-label={option}
+                            aria-label={label}
                             checked={(
-                                (selectedFilters[name] as string[]) || []
-                            ).includes(option)}
+                                selectedFilters[name] as string[]
+                            ).includes(value)}
                             onCheckedChange={handleCheckboxChange}
                         />
                         <label
-                            aria-label={option}
+                            aria-label={label}
                             htmlFor={checkboxId}
                             className='font-light hover:cursor-pointer'
                         >
-                            {option}
+                            {label}
                         </label>
                     </div>
                 );
