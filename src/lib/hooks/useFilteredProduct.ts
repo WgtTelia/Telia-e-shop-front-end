@@ -1,6 +1,11 @@
 import { useFilter } from '@/context/FilterContext';
 import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
 import { useMemo } from 'react';
+import {
+    getStockStatus,
+    isWithinPriceRange,
+    parsePriceInterval,
+} from '@/lib/utils';
 
 const matchesGroup = (product: ProductData, selectedFilters: FilterOptions) =>
     !selectedFilters.productGroups.length ||
@@ -10,15 +15,21 @@ const matchesBrand = (product: ProductData, selectedFilters: FilterOptions) =>
     !selectedFilters.brands.length ||
     selectedFilters.brands.includes(product.brand);
 
-const matchesPrice = (product: ProductData, selectedFilters: FilterOptions) =>
-    !selectedFilters.priceIntervals.length ||
-    selectedFilters.priceIntervals.some((interval) => {
-        const [min, max] = interval.split('-').map(Number);
-        const monthlyPrice = parseFloat(
-            product.productVariants[0].monthlyPrice.toString()
+export const matchesPrice = (
+    product: ProductData,
+    selectedFilters: FilterOptions
+): boolean => {
+    if (!selectedFilters.priceIntervals.length) return true;
+
+    return selectedFilters.priceIntervals.some((interval) => {
+        const range = parsePriceInterval(interval);
+        if (!range) return false;
+
+        return product.productVariants.some((variant) =>
+            isWithinPriceRange(variant.monthlyPrice, range)
         );
-        return monthlyPrice >= min && monthlyPrice <= max;
     });
+};
 
 const matchesColor = (product: ProductData, selectedFilters: FilterOptions) =>
     !selectedFilters.colors.length ||
@@ -26,19 +37,17 @@ const matchesColor = (product: ProductData, selectedFilters: FilterOptions) =>
         selectedFilters.colors.includes(variant.color)
     );
 
-const matchesStock = (product: ProductData, selectedFilters: FilterOptions) =>
-    !selectedFilters.stockOptions.length ||
-    selectedFilters.stockOptions.some((option) => {
-        const stockAmount = product.productVariants[0].stock[0].qtyInStock;
-        switch (option) {
-            case 'inStock':
-                return stockAmount > 0;
-            case 'outOfStock':
-                return stockAmount === 0;
-            default:
-                return true;
-        }
-    });
+export const matchesStock = (
+    product: ProductData,
+    selectedFilters: FilterOptions
+): boolean => {
+    if (!selectedFilters.stockOptions.length) return true;
+
+    const stockAmount = product.productVariants[0]?.stock[0]?.qtyInStock ?? 0;
+    const currentStockStatus = getStockStatus(stockAmount);
+
+    return selectedFilters.stockOptions.includes(currentStockStatus);
+};
 
 export const useFilteredProducts = () => {
     const { selectedFilters } = useFilter();
