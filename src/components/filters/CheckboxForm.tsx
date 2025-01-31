@@ -62,6 +62,7 @@ export const CheckboxForm = <T extends FieldValues>({
                                         <Checkbox
                                             id={checkboxId}
                                             aria-label={label}
+                                            data-testid={`checkbox-${value}`}
                                             checked={(
                                                 selectedFilters[
                                                     name as keyof Filter

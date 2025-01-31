@@ -11,10 +11,14 @@ jest.mock('next/navigation', () => ({
     useSearchParams: jest.fn(),
 }));
 
-const CheckboxFormWrapper = ({ options }: { options: string[] }) => {
+const CheckboxFormWrapper = ({
+    options,
+}: {
+    options: Array<string | { value: string; label: string }>;
+}) => {
     const formMethods = useForm({
         defaultValues: {
-            optionsField: [],
+            stockOptions: [],
         },
     });
 
@@ -22,7 +26,7 @@ const CheckboxFormWrapper = ({ options }: { options: string[] }) => {
         <FormProvider {...formMethods}>
             <CheckboxForm
                 form={{ control: formMethods.control }}
-                name='optionsField'
+                name='stockOptions'
                 title='Select Options'
                 options={options}
             />
@@ -31,37 +35,23 @@ const CheckboxFormWrapper = ({ options }: { options: string[] }) => {
 };
 
 describe('Checkbox Form', () => {
+    const mockSearchParams = new URLSearchParams();
+
+    beforeEach(() => {
+        (useRouter as jest.Mock).mockReturnValue({
+            replace: jest.fn(),
+        });
+        (usePathname as jest.Mock).mockReturnValue('/products');
+        (useSearchParams as jest.Mock).mockReturnValue(mockSearchParams);
+    });
+
     it('should check and uncheck the checkbox, and update the form state correctly', () => {
-        const testOptions = ['Option 1', 'Option 2'];
+        const testOptions = [
+            { value: 'IN_STOCK', label: 'In Stock' },
+            { value: 'OUT_OF_STOCK', label: 'Out of Stock' },
+        ];
 
         const queryClient = new QueryClient();
-
-        (useRouter as jest.Mock).mockReturnValue({
-            push: jest.fn(),
-            replace: jest.fn(),
-            prefetch: jest.fn(),
-            back: jest.fn(),
-            forward: jest.fn(),
-            refresh: jest.fn(),
-        });
-        (usePathname as jest.Mock).mockReturnValue('/mock-pathname');
-        (useSearchParams as jest.Mock).mockReturnValue({
-            get: (key: string) => {
-                if (key === 'mock-param') return 'mock-value';
-                return null;
-            },
-            entries: jest.fn(),
-            getAll: jest.fn(),
-            has: jest.fn(),
-            keys: jest.fn(),
-            values: jest.fn(),
-            forEach: jest.fn(),
-            toString: jest.fn(),
-            append: jest.fn(),
-            delete: jest.fn(),
-            set: jest.fn(),
-        });
-
         render(
             <QueryClientProvider client={queryClient}>
                 <FilterProvider>
@@ -70,28 +60,24 @@ describe('Checkbox Form', () => {
             </QueryClientProvider>
         );
 
-        const option1Checkbox = screen.getByTestId(
-            'checkbox-Option 1'
+        const inStockCheckbox = screen.getByTestId(
+            'checkbox-IN_STOCK'
         ) as HTMLInputElement;
-        const option2Checkbox = screen.getByTestId(
-            'checkbox-Option 2'
+        const outOfStockCheckbox = screen.getByTestId(
+            'checkbox-OUT_OF_STOCK'
         ) as HTMLInputElement;
 
-        expect(option1Checkbox).not.toBeChecked();
-        expect(option2Checkbox).not.toBeChecked();
+        expect(inStockCheckbox).not.toBeChecked();
+        expect(outOfStockCheckbox).not.toBeChecked();
 
-        fireEvent.click(option1Checkbox);
+        fireEvent.click(inStockCheckbox);
+        expect(inStockCheckbox).toBeChecked();
 
-        expect(option1Checkbox).toBeChecked();
+        fireEvent.click(outOfStockCheckbox);
+        expect(outOfStockCheckbox).toBeChecked();
 
-        fireEvent.click(option2Checkbox);
-
-        expect(option1Checkbox).toBeChecked();
-        expect(option2Checkbox).toBeChecked();
-
-        fireEvent.click(option1Checkbox);
-
-        expect(option1Checkbox).not.toBeChecked();
-        expect(option2Checkbox).toBeChecked();
+        fireEvent.click(inStockCheckbox);
+        expect(inStockCheckbox).not.toBeChecked();
+        expect(outOfStockCheckbox).toBeChecked();
     });
 });
