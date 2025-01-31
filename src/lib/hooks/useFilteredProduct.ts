@@ -23,10 +23,11 @@ export const matchesPrice = (
 
     return selectedFilters.priceIntervals.some((interval) => {
         const range = parsePriceInterval(interval);
-        if (!range) return false;
-
-        return product.productVariants.some((variant) =>
-            isWithinPriceRange(variant.monthlyPrice, range)
+        return (
+            range &&
+            product.productVariants.some((variant) =>
+                isWithinPriceRange(variant.monthlyPrice, range)
+            )
         );
     });
 };

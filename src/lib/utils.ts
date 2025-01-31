@@ -45,7 +45,7 @@ export const getStockStatus = (
 };
 
 export const formatPriceRange = (interval: string): string => {
-    const matches = interval.match(/price_monthly_(\d+)_(\d+)/);
+    const matches = interval.match(PRICE_INTERVAL_REGEX);
     if (matches) {
         const min = parseInt(matches[1], 10);
         const max = parseInt(matches[2], 10);
