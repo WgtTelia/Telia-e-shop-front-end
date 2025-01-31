@@ -18,6 +18,32 @@ export const getPosition = (buttonRef: React.RefObject<HTMLButtonElement>) => {
     };
 };
 
+const PRICE_INTERVAL_REGEX = /^price_monthly_(\d+)_(\d+)$/;
+
+export const parsePriceInterval = (interval: string): PriceRange | null => {
+    const matches = interval.match(PRICE_INTERVAL_REGEX);
+    if (!matches) return null;
+
+    const [_, minStr, maxStr] = matches;
+    return {
+        min: parseInt(minStr, 10),
+        max: parseInt(maxStr, 10),
+    };
+};
+
+export const isWithinPriceRange = (
+    price: number,
+    range: PriceRange
+): boolean => {
+    return price >= range.min && price <= range.max;
+};
+
+export const getStockStatus = (
+    stockAmount: number
+): keyof typeof StockStatus => {
+    return stockAmount > 0 ? 'IN_STOCK' : 'OUT_OF_STOCK';
+};
+
 export const formatPriceRange = (interval: string): string => {
     const matches = interval.match(/price_monthly_(\d+)_(\d+)/);
     if (matches) {

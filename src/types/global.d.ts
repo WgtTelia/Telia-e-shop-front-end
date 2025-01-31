@@ -43,6 +43,17 @@ declare interface StockOption {
     qtyInStock: number;
     }    
 
+declare enum StockStatus {
+    IN_STOCK = 'IN_STOCK',
+    OUT_OF_STOCK = 'OUT_OF_STOCK'
+    }
+    
+interface PriceRange {
+    min: number;
+    max: number;
+    } 
+
+
 declare interface FilterOptions {
     productGroups: string[];
     brands: string[];

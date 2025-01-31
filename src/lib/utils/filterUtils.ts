@@ -14,10 +14,8 @@ export const getFilterSections = (selectedFilters: Filter) => [
     {
         name: 'priceIntervals' as keyof FilterOptions,
         title: 'Price',
-        options:
-            selectedFilters.availableOptions?.priceIntervals.map(
-                formatPriceRange
-            ) || [],
+        options: selectedFilters.availableOptions?.priceIntervals || [],
+        formatOption: formatPriceRange,
     },
     {
         name: 'colors' as keyof FilterOptions,
@@ -27,9 +25,7 @@ export const getFilterSections = (selectedFilters: Filter) => [
     {
         name: 'stockOptions' as keyof FilterOptions,
         title: 'Stock',
-        options:
-            selectedFilters.availableOptions?.stockOptions.map(
-                formatAsTitleCase
-            ) || [],
+        options: selectedFilters.availableOptions?.stockOptions || [],
+        formatOption: formatAsTitleCase,
     },
 ];
