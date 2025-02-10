@@ -1,10 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import productService from '@/lib/services/productService';
 import { CanceledError } from 'axios';
+import { useSearchParams } from 'next/navigation';
 
 export const useProductsQuery = () => {
+    const searchParams = useSearchParams();
+
     return useQuery({
-        queryKey: ['products'],
+        queryKey: ['products', searchParams.toString()],
         queryFn: async ({ signal }) => {
             const { request, cancel } =
                 productService.getAll<APIProductData>(false);
