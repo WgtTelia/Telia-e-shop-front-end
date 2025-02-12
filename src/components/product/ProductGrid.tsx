@@ -6,7 +6,7 @@ import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
 import { useFilteredProducts } from '@/lib/hooks/useFilteredProduct';
 
 export const ProductGrid: React.FC = () => {
-    const { isLoading: loading, error, data: products } = useProductsQuery();
+    const { isLoading: loading, error } = useProductsQuery();
     const { filteredProducts } = useFilteredProducts();
     const skeletons = [1, 2, 3, 4, 5, 6];
 
