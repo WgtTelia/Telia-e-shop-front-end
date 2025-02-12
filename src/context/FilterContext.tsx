@@ -21,7 +21,6 @@ const initialState: Filter = {
 
 interface FilterContextProps {
     selectedFilters: Filter;
-    handleFilterChange: (category: keyof Filter, selected: string[]) => void;
     setIsModalOpen: (isOpen: boolean) => void;
     isModalOpen: boolean;
     toggleCheckbox: (
@@ -137,10 +136,6 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
         updateUrl,
     ]);
 
-    const handleFilterChange = (category: keyof Filter, selected: string[]) => {
-        dispatch({ type: 'SET_FILTER', payload: { category, selected } });
-    };
-
     const setIsModalOpen = (isOpen: boolean) => {
         dispatch({ type: 'TOGGLE_MODAL', payload: isOpen });
     };
@@ -166,7 +161,6 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
                             ? classifiers
                             : undefined,
                 },
-                handleFilterChange,
                 setIsModalOpen,
                 isModalOpen: state.isModalOpen,
                 toggleCheckbox,
