@@ -30,7 +30,6 @@ interface FilterContextProps {
         checked: boolean
     ) => void;
     isLoading: boolean;
-    filterCount: number;
 }
 
 const FilterContext = createContext<FilterContextProps | undefined>(undefined);
@@ -157,18 +156,6 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
         });
     };
 
-    const filterCount = Object.values({
-        productGroups: state.productGroups,
-        brands: state.brands,
-        priceIntervals: state.priceIntervals,
-        colors: state.colors,
-        stockOptions: state.stockOptions,
-    }).reduce(
-        (total, filterGroup) =>
-            total + (Array.isArray(filterGroup) ? filterGroup.length : 0),
-        0
-    );
-
     return (
         <FilterContext.Provider
             value={{
@@ -184,7 +171,6 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({
                 isModalOpen: state.isModalOpen,
                 toggleCheckbox,
                 isLoading,
-                filterCount,
             }}
         >
             {children}
