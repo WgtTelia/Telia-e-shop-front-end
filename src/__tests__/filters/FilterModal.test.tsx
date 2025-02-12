@@ -3,10 +3,17 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { FilterModal } from '@/components/modals/FilterModal';
 import { useFilter } from '@/context/FilterContext';
 import { getFilterSections } from '@/lib/utils/filterUtils';
-import { filterCategories } from '@/lib/utils/validationSchemas';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 jest.mock('@/context/FilterContext');
 jest.mock('@/lib/utils/filterUtils');
+
+jest.mock('next/navigation', () => ({
+    useSearchParams: jest.fn(() => ({
+        toString: jest.fn(() => ''),
+        get: jest.fn(),
+    })),
+}));
 
 global.ResizeObserver = class ResizeObserver {
     observe() {}
@@ -15,14 +22,12 @@ global.ResizeObserver = class ResizeObserver {
 };
 
 describe('Filter Modal', () => {
-    const mockHandleFilterChange = jest.fn();
     const mockSetIsModalOpen = jest.fn();
     const mockToggleCheckbox = jest.fn();
 
     beforeEach(() => {
         jest.clearAllMocks();
         (useFilter as jest.Mock).mockReturnValue({
-            handleFilterChange: mockHandleFilterChange,
             setIsModalOpen: mockSetIsModalOpen,
             isModalOpen: true,
             selectedFilters: {
@@ -64,7 +69,13 @@ describe('Filter Modal', () => {
     });
 
     it('renders the modal with filter options', () => {
-        render(<FilterModal />);
+        const queryClient = new QueryClient();
+
+        render(
+            <QueryClientProvider client={queryClient}>
+                <FilterModal />
+            </QueryClientProvider>
+        );
 
         expect(screen.getByRole('dialog')).toBeVisible();
         expect(screen.getByText('Filter by')).toBeInTheDocument();
@@ -75,14 +86,18 @@ describe('Filter Modal', () => {
         expect(screen.getByText('Stock')).toBeInTheDocument();
     });
 
-    it('calls handleFilterChange and setIsModalOpen when the form is submitted', async () => {
-        render(<FilterModal />);
+    it('calls toggleCheckbox and setIsModalOpen when interacting and submitting the form', async () => {
+        const queryClient = new QueryClient();
 
-        // Simulate checking 'Type 1'
+        render(
+            <QueryClientProvider client={queryClient}>
+                <FilterModal />
+            </QueryClientProvider>
+        );
+
         const checkbox = screen.getByRole('checkbox', { name: /Type 1/i });
         fireEvent.click(checkbox);
 
-        // Expect toggleCheckbox to be called
         await waitFor(() => {
             expect(mockToggleCheckbox).toHaveBeenCalledWith(
                 'productGroups',
@@ -91,23 +106,13 @@ describe('Filter Modal', () => {
             );
         });
 
-        // Submit the form
         const submitButton = screen.getByRole('button', {
             name: /See results/i,
         });
         fireEvent.click(submitButton);
 
-        // Wait for handleFilterChange to be called for each category
         await waitFor(() => {
-            filterCategories.forEach((category) => {
-                expect(mockHandleFilterChange).toHaveBeenCalledWith(
-                    category,
-                    expect.any(Array)
-                );
-            });
+            expect(mockSetIsModalOpen).toHaveBeenCalledWith(false);
         });
-
-        // Expect setIsModalOpen to be called with false after form submission
-        expect(mockSetIsModalOpen).toHaveBeenCalledWith(false);
     });
 });

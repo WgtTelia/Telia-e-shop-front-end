@@ -50,9 +50,10 @@ export const FilterModal: React.FC = () => {
             });
             form.reset(formValues);
         }
-    }, [isModalOpen, selectedFilters, form, filterCategories]);
+    }, [isModalOpen, selectedFilters, form]);
 
     const handleSubmit = (data: FilterFormType) => {
+        // eslint-disable-next-line no-console
         console.log('Form submitted with data:', data);
         setIsModalOpen(false);
     };
