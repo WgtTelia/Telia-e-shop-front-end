@@ -3,11 +3,9 @@ import { Error } from '@/components/apiResponseState/Error';
 import { ProductCard } from '@/components/product/ProductCard';
 import { ProductCardSkeleton } from '@/components/product/ProductCardSkeleton';
 import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
-import { useFilteredProducts } from '@/lib/hooks/useFilteredProduct';
 
 export const ProductGrid: React.FC = () => {
-    const { isLoading: loading, error } = useProductsQuery();
-    const { filteredProducts } = useFilteredProducts();
+    const { isLoading: loading, error, data: products } = useProductsQuery();
     const skeletons = [1, 2, 3, 4, 5, 6];
 
     return (
@@ -20,8 +18,8 @@ export const ProductGrid: React.FC = () => {
                 skeletons.map((skeleton) => (
                     <ProductCardSkeleton key={skeleton} />
                 ))}
-            {filteredProducts &&
-                filteredProducts.map((product: ProductCardProps) => (
+            {products &&
+                products.map((product: ProductCardProps) => (
                     <ProductCard key={product.id} {...product} />
                 ))}
         </div>

@@ -20,14 +20,13 @@ import {
     FilterFormType,
     FilterSchema,
 } from '@/lib/utils/validationSchemas';
-import { useFilteredProducts } from '@/lib/hooks/useFilteredProduct';
+import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
 
 export const FilterModal: React.FC = () => {
     const { selectedFilters, setIsModalOpen, isModalOpen } = useFilter();
+    const { data: products } = useProductsQuery();
 
-    const { filteredProducts } = useFilteredProducts();
-
-    const filterCount = filteredProducts.length;
+    const filterCount = products?.length;
 
     const form = useForm<FilterFormType>({
         resolver: zodResolver(FilterSchema),
