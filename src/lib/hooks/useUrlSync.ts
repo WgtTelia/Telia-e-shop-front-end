@@ -8,7 +8,16 @@ const FILTER_KEYS = [
     'colors',
     'stockOptions',
 ] as const;
+
 type FilterKey = (typeof FILTER_KEYS)[number];
+
+const BACKEND_KEY_MAP: Record<FilterKey, string> = {
+    productGroups: 'productGroup',
+    brands: 'brand',
+    priceIntervals: 'priceInterval',
+    colors: 'color',
+    stockOptions: 'stockOptions',
+};
 
 export const useUrlSync = () => {
     const router = useRouter();
@@ -19,12 +28,12 @@ export const useUrlSync = () => {
         (filters: Partial<Filter>) => {
             const params = new URLSearchParams(searchParams.toString());
 
-            FILTER_KEYS.forEach((key) => {
-                const value = filters[key];
+            Object.entries(filters).forEach(([key, value]) => {
+                const backendKey = BACKEND_KEY_MAP[key as FilterKey] || key;
                 if (Array.isArray(value) && value.length > 0) {
-                    params.set(key, value.join(','));
+                    params.set(backendKey, value.join(','));
                 } else {
-                    params.delete(key);
+                    params.delete(backendKey);
                 }
             });
 
@@ -39,7 +48,8 @@ export const useUrlSync = () => {
         const filters: Partial<Pick<Filter, FilterKey>> = {};
 
         FILTER_KEYS.forEach((key) => {
-            const value = searchParams.get(key);
+            const backendKey = BACKEND_KEY_MAP[key];
+            const value = searchParams.get(backendKey);
             if (value) {
                 filters[key] = value.split(',');
             }
