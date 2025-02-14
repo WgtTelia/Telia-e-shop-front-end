@@ -38,10 +38,8 @@ export const isWithinPriceRange = (
     return price >= range.min && price <= range.max;
 };
 
-export const getStockStatus = (
-    stockAmount: number
-): keyof typeof StockStatus => {
-    return stockAmount > 0 ? 'IN_STOCK' : 'OUT_OF_STOCK';
+export const getStockStatus = (qty: number): string => {
+    return qty > 0 ? 'In Stock' : 'Out Of Stock';
 };
 
 export const formatPriceRange = (interval: string): string => {
