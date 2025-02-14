@@ -9,16 +9,11 @@ export const useProductsQuery = () => {
     return useQuery({
         queryKey: ['products', searchParams.toString()],
         queryFn: async ({ signal }) => {
-            console.log(
-                'searchParams.toString() before API call:',
-                searchParams.toString()
-            );
             const { request, cancel } = productService.getAll<APIProductData>(
                 false,
                 new URLSearchParams(searchParams.toString())
             );
             const response = await request;
-            console.log('Raw API response data:', response.data);
             signal.addEventListener('abort', () => {
                 cancel();
             });
