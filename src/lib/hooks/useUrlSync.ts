@@ -11,14 +11,6 @@ const FILTER_KEYS = [
 
 type FilterKey = (typeof FILTER_KEYS)[number];
 
-const BACKEND_KEY_MAP: Record<FilterKey, string> = {
-    productGroups: 'productGroup',
-    brands: 'brand',
-    priceIntervals: 'priceInterval',
-    colors: 'color',
-    stockOptions: 'stockOptions',
-};
-
 export const useUrlSync = () => {
     const router = useRouter();
     const pathname = usePathname();
@@ -29,7 +21,10 @@ export const useUrlSync = () => {
             const params = new URLSearchParams(searchParams.toString());
 
             Object.entries(filters).forEach(([key, value]) => {
-                const backendKey = BACKEND_KEY_MAP[key as FilterKey] || key;
+                // We have to transform 'productGroups' to 'productGroup' to resolve the backend endpoint naming inconsistency
+                const backendKey =
+                    key === 'productGroups' ? 'productGroup' : key;
+
                 if (Array.isArray(value) && value.length > 0) {
                     params.set(backendKey, value.join(','));
                 } else {
@@ -48,8 +43,10 @@ export const useUrlSync = () => {
         const filters: Partial<Pick<Filter, FilterKey>> = {};
 
         FILTER_KEYS.forEach((key) => {
-            const backendKey = BACKEND_KEY_MAP[key];
+            // Transform 'productGroups' to 'productGroup' when reading from URL
+            const backendKey = key === 'productGroups' ? 'productGroup' : key;
             const value = searchParams.get(backendKey);
+
             if (value) {
                 filters[key] = value.split(',');
             }
