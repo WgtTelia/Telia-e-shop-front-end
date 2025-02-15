@@ -20,11 +20,11 @@ import {
     FilterFormType,
     FilterSchema,
 } from '@/lib/utils/validationSchemas';
-import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
+import { useFilteredProductsByStock } from '@/lib/hooks/useFilteredProductsByStock';
 
 export const FilterModal: React.FC = () => {
     const { selectedFilters, setIsModalOpen, isModalOpen } = useFilter();
-    const { data: products } = useProductsQuery();
+    const { filteredProducts: products } = useFilteredProductsByStock();
 
     const filterCount = products?.length;
 
