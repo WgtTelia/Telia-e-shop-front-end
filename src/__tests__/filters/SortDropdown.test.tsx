@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, fireEvent, screen, within } from '@testing-library/react';
 import { SortDropdown } from '@/components/filters/SortDropdown';
-import { useSort } from '@/context/SortContext';
-import { SORT_OPTIONS } from '@/data/sortOption';
+import { SORT_OPTIONS, useSort } from '@/context/SortContext';
+
 import '@testing-library/jest-dom';
 import { getPosition } from '@/lib/utils';
 
