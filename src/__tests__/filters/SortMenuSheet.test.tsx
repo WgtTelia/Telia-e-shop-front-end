@@ -15,24 +15,24 @@ jest.mock('@/components/filters/OptionPicker', () => ({
         selectedOption,
         onChange,
     }: {
-        options: string[];
-        selectedOption: string;
-        onChange: (option: string) => void;
+        options: SortOption[];
+        selectedOption: SortOptionValue;
+        onChange: (option: SortOption) => void;
     }) => (
         <div data-testid='picker'>
             {options.map((option) => (
                 <div
-                    key={option}
-                    data-testid={`picker-option-${option}`}
+                    key={option.value}
+                    data-testid={`picker-option-${option.value}`}
                     style={{
                         backgroundColor:
-                            option === selectedOption
+                            option.value === selectedOption
                                 ? 'yellow'
                                 : 'transparent',
                     }}
                     onClick={() => onChange(option)}
                 >
-                    {option}
+                    {option.label}
                 </div>
             ))}
         </div>
@@ -47,14 +47,14 @@ jest.mock('@/context/SortContext', () => ({
 describe('SortMenuSheet', () => {
     const mockSetSortOption = jest.fn();
     const mockSetIsSheetOpen = jest.fn();
-    let currentSortOption = 'Most popular';
+    let currentSortOptionValue: SortOptionValue = 'POPULAR_DESC';
 
     const renderComponent = (
-        sortOption = 'Most popular',
+        sortOptionValue: SortOptionValue = 'POPULAR_DESC',
         isSheetOpen = true
     ) => {
         (useSort as jest.Mock).mockReturnValue({
-            sortOption,
+            sortOption: sortOptionValue,
             setSortOption: mockSetSortOption,
             isSheetOpen,
             setIsSheetOpen: mockSetIsSheetOpen,
@@ -68,12 +68,12 @@ describe('SortMenuSheet', () => {
     };
 
     beforeEach(() => {
-        currentSortOption = 'Most popular';
+        currentSortOptionValue = 'POPULAR_DESC';
         (useSort as jest.Mock).mockImplementation(() => ({
-            sortOption: currentSortOption,
-            setSortOption: (newOption: string) => {
+            sortOption: currentSortOptionValue,
+            setSortOption: (newOption: SortOptionValue) => {
                 mockSetSortOption(newOption);
-                currentSortOption = newOption;
+                currentSortOptionValue = newOption;
             },
             isSheetOpen: true,
             setIsSheetOpen: mockSetIsSheetOpen,
@@ -103,16 +103,12 @@ describe('SortMenuSheet', () => {
 
         fireEvent.click(screen.getByTestId('chevron-up'));
         await waitFor(() => {
-            expect(mockSetSortOption).toHaveBeenCalledWith(
-                'Price: highest to lowest'
-            );
+            expect(mockSetSortOption).toHaveBeenCalledWith('PRICE_DESC');
         });
 
         fireEvent.click(screen.getByTestId('chevron-down'));
         await waitFor(() => {
-            expect(mockSetSortOption).toHaveBeenCalledWith(
-                'Price: lowest to highest'
-            );
+            expect(mockSetSortOption).toHaveBeenCalledWith('PRICE_DESC');
         });
     });
 
@@ -124,19 +120,15 @@ describe('SortMenuSheet', () => {
 
     it('triggers option change when a picker option is clicked', () => {
         renderComponent();
-        fireEvent.click(
-            screen.getByTestId('picker-option-Price: lowest to highest')
-        );
-        expect(mockSetSortOption).toHaveBeenCalledWith(
-            'Price: lowest to highest'
-        );
+        fireEvent.click(screen.getByTestId('picker-option-PRICE_ASC'));
+        expect(mockSetSortOption).toHaveBeenCalledWith('PRICE_ASC');
     });
 
     it('renders Picker component with correct options and selected option', () => {
         renderComponent();
         SORT_OPTIONS.forEach((option) => {
             expect(
-                screen.getByTestId(`picker-option-${option}`)
+                screen.getByTestId(`picker-option-${option.value}`)
             ).toBeInTheDocument();
         });
     });
