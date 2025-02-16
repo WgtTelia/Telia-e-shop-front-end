@@ -1,8 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import { SortRadioGroup } from '@/components/filters/SortRadioGroup';
-import { useSort } from '@/context/SortContext';
-import { SORT_OPTIONS } from '@/data/sortOption';
+import { SORT_OPTIONS, useSort } from '@/context/SortContext';
 
 jest.mock('@/context/SortContext', () => ({
     useSort: jest.fn(),

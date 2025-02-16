@@ -2,8 +2,7 @@ import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import { SortMenuSheet } from '@/components/filters/SortMenuSheet';
 import '@testing-library/jest-dom';
-import { SortProvider, useSort } from '@/context/SortContext';
-import { SORT_OPTIONS } from '@/data/sortOption';
+import { SORT_OPTIONS, SortProvider, useSort } from '@/context/SortContext';
 
 jest.mock('react-icons/fa', () => ({
     FaChevronUp: () => <span data-testid='chevron-up' />,
