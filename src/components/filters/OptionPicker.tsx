@@ -2,9 +2,9 @@ import React, { useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 
 interface OptionPickerProps {
-    options: string[];
+    options: SortOption[];
     selectedOption: string;
-    onChange: (option: string) => void;
+    onChange: (option: SortOption) => void;
 }
 
 export const OptionPicker: React.FC<OptionPickerProps> = ({
@@ -27,7 +27,7 @@ export const OptionPicker: React.FC<OptionPickerProps> = ({
 
     //Callback here prevents it from being recreated every time the component renders, improving performance by preventing unnecessary re-renders of child components(button)
     const handleOptionClick = useCallback(
-        (option: string) => {
+        (option: SortOption) => {
             onChange(option);
             const optionIndex = options.indexOf(option);
             scrollToOption(optionIndex);
@@ -44,20 +44,20 @@ export const OptionPicker: React.FC<OptionPickerProps> = ({
             <div className='flex flex-col items-center'>
                 {options.map((option) => (
                     <Button
-                        key={option}
+                        key={option.value}
                         variant='ghost'
                         role='option'
                         size='picker'
                         test-id='picker-option-Price'
                         onClick={() => handleOptionClick(option)}
                         className={`w-full rounded-none border-none transition-colors duration-150 ease-in-out hover:text-white ${
-                            selectedOption === option
+                            selectedOption === option.value
                                 ? 'bg-gray-600 text-white'
                                 : 'text-gray-550'
                         }`}
-                        aria-selected={selectedOption === option}
+                        aria-selected={selectedOption === option.value}
                     >
-                        {option}
+                        {option.label}
                     </Button>
                 ))}
             </div>

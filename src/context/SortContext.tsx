@@ -9,19 +9,20 @@ import React, {
 
 //TODO: add a sort function for the fetch data
 
-type SortOption =
-    | 'Most popular'
-    | 'Price: lowest to highest'
-    | 'Price: highest to lowest';
+export const SORT_OPTIONS: SortOption[] = [
+    { label: 'Most popular', value: 'POPULAR_DESC' },
+    { label: 'Price: lowest to highest', value: 'PRICE_ASC' },
+    { label: 'Price: highest to lowest', value: 'PRICE_DESC' },
+];
 
 interface SortState {
-    sortOption: SortOption;
+    sortOption: SortOptionValue;
     isSheetOpen: boolean;
     isDropDownOpen: boolean;
 }
 
 type SortAction =
-    | { type: 'SET_SORT_OPTION'; payload: SortOption }
+    | { type: 'SET_SORT_OPTION'; payload: SortOptionValue }
     | { type: 'SET_SHEET_OPEN'; payload: boolean }
     | { type: 'SET_DROPDOWN_OPEN'; payload: boolean };
 
@@ -29,7 +30,7 @@ const SET_SORT_OPTION = 'SET_SORT_OPTION';
 const SET_SHEET_OPEN = 'SET_SHEET_OPEN';
 const SET_DROPDOWN_OPEN = 'SET_DROPDOWN_OPEN';
 
-const setSortOption = (option: SortOption): SortAction => ({
+const setSortOption = (option: SortOptionValue): SortAction => ({
     type: SET_SORT_OPTION,
     payload: option,
 });
@@ -50,7 +51,7 @@ interface SortContextProps {
 }
 
 export const initialState: SortState = {
-    sortOption: 'Most popular',
+    sortOption: SORT_OPTIONS[0].value,
     isDropDownOpen: false,
     isSheetOpen: false,
 };
@@ -89,7 +90,7 @@ export const useSort = () => {
     }
     return {
         ...context.state,
-        setSortOption: (option: SortOption) =>
+        setSortOption: (option: SortOptionValue) =>
             context.dispatch(setSortOption(option)),
 
         setIsSheetOpen: (open: boolean) =>
