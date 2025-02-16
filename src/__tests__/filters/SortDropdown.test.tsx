@@ -13,6 +13,17 @@ jest.mock('react-icons/io5', () => ({
 jest.mock('@/context/SortContext', () => ({
     ...jest.requireActual('@/context/SortContext'),
     useSort: jest.fn(),
+    SORT_OPTIONS: [
+        { label: 'Most popular' as SortOptionLabel, value: 'POPULAR_DESC' },
+        {
+            label: 'Price: lowest to highest' as SortOptionLabel,
+            value: 'PRICE_ASC',
+        },
+        {
+            label: 'Price: highest to lowest' as SortOptionLabel,
+            value: 'PRICE_DESC',
+        },
+    ],
 }));
 
 describe('SortDropdown', () => {
@@ -52,21 +63,19 @@ describe('SortDropdown', () => {
         renderComponent();
         expect(screen.getByText('Choose...')).toBeInTheDocument();
         SORT_OPTIONS.forEach((option) => {
-            expect(screen.getByText(option)).toBeInTheDocument();
+            expect(screen.getByText(option.label)).toBeInTheDocument();
         });
     });
 
     it('handles sort option change when an option is clicked', () => {
         renderComponent();
         fireEvent.click(screen.getByText('Price: lowest to highest'));
-        expect(mockSetSortOption).toHaveBeenCalledWith(
-            'Price: lowest to highest'
-        );
+        expect(mockSetSortOption).toHaveBeenCalledWith('PRICE_ASC');
         expect(mockSetIsDropDownOpen).toHaveBeenCalledWith(false);
     });
 
     it('displays the checkmark for the initial sort option', () => {
-        renderComponent('Price: highest to lowest');
+        renderComponent('PRICE_DESC');
         expect(
             within(screen.getByText('Price: highest to lowest')).getByTestId(
                 'checkmark'
@@ -75,7 +84,7 @@ describe('SortDropdown', () => {
     });
 
     it('displays the checkmark when an option is hovered over', () => {
-        renderComponent('Price: lowest to highest');
+        renderComponent('PRICE_ASC');
         fireEvent.mouseEnter(screen.getByText('Price: lowest to highest'));
         expect(
             within(screen.getByText('Price: lowest to highest')).getByTestId(

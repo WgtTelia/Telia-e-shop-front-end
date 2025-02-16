@@ -48,7 +48,7 @@ export const OptionPicker: React.FC<OptionPickerProps> = ({
                         variant='ghost'
                         role='option'
                         size='picker'
-                        test-id='picker-option-Price'
+                        data-testid={`picker-option-${option.value}`}
                         onClick={() => handleOptionClick(option)}
                         className={`w-full rounded-none border-none transition-colors duration-150 ease-in-out hover:text-white ${
                             selectedOption === option.value
