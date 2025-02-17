@@ -1,10 +1,12 @@
 'use client';
+import { useUrlSync } from '@/lib/hooks/useUrlSync';
 import React, {
     createContext,
     ReactNode,
     useContext,
     useReducer,
     Dispatch,
+    useEffect,
 } from 'react';
 
 //TODO: add a sort function for the fetch data
@@ -75,6 +77,21 @@ export const SortProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
     const [state, dispatch] = useReducer(sortReducer, initialState);
+    const { updateUrl, getInitialFilters } = useUrlSync();
+
+    useEffect(() => {
+        const initialFiltersAndSort = getInitialFilters();
+        if (initialFiltersAndSort.sort) {
+            dispatch({
+                type: 'SET_SORT_OPTION',
+                payload: initialFiltersAndSort.sort,
+            });
+        }
+    }, [getInitialFilters]);
+
+    useEffect(() => {
+        updateUrl({ sort: state.sortOption });
+    }, [state.sortOption, updateUrl]);
 
     return (
         <SortContext.Provider value={{ state, dispatch }}>
