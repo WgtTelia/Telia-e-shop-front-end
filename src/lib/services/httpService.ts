@@ -11,11 +11,17 @@ class HttpService {
         this.endpoint = endpoint;
     }
 
-    getAll<T>(isArray: boolean) {
+    getAll<T>(isArray: boolean, params?: URLSearchParams) {
         const controller = new AbortController();
         const request = isArray
-            ? apiClient.get<T[]>(this.endpoint, { signal: controller.signal })
-            : apiClient.get<T>(this.endpoint, { signal: controller.signal });
+            ? apiClient.get<T[]>(this.endpoint, {
+                  signal: controller.signal,
+                  params,
+              })
+            : apiClient.get<T>(this.endpoint, {
+                  signal: controller.signal,
+                  params,
+              });
         return { request, cancel: () => controller.abort() };
     }
 

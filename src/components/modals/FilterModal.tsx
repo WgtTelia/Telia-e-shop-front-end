@@ -20,39 +20,42 @@ import {
     FilterFormType,
     FilterSchema,
 } from '@/lib/utils/validationSchemas';
+import { useFilteredProductsByStock } from '@/lib/hooks/useFilteredProductsByStock';
 
 export const FilterModal: React.FC = () => {
-    const {
-        selectedFilters,
-        handleFilterChange,
-        setIsModalOpen,
-        isModalOpen,
-        filterCount,
-    } = useFilter();
+    const { selectedFilters, setIsModalOpen, isModalOpen } = useFilter();
+    const { filteredProducts: products } = useFilteredProductsByStock();
+
+    const filterCount = products?.length;
 
     const form = useForm<FilterFormType>({
         resolver: zodResolver(FilterSchema),
+        defaultValues: {
+            productGroups: [],
+            brands: [],
+            priceIntervals: [],
+            colors: [],
+            stockOptions: [],
+        },
     });
-
-    const handleSubmit = (data: FilterFormType) => {
-        filterCategories.forEach((category) => {
-            handleFilterChange(category, data[category] || []);
-        });
-        setIsModalOpen(false);
-    };
 
     const filterSections = getFilterSections(selectedFilters);
 
     useEffect(() => {
         if (isModalOpen) {
-            form.setValue('types', selectedFilters.productGroups);
-            form.setValue('brands', selectedFilters.brands);
-            form.setValue('priceRanges', selectedFilters.priceIntervals);
-            form.setValue('colors', selectedFilters.colors);
-            form.setValue('stock', selectedFilters.stockOptions);
+            const formValues: Partial<FilterFormType> = {};
+            filterCategories.forEach((category) => {
+                formValues[category] = selectedFilters[category];
+            });
+            form.reset(formValues);
         }
     }, [isModalOpen, selectedFilters, form]);
 
+    const handleSubmit = (data: FilterFormType) => {
+        // eslint-disable-next-line no-console
+        console.log('Form submitted with data:', data);
+        setIsModalOpen(false);
+    };
     return (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
             <DialogTrigger asChild>
@@ -80,22 +83,23 @@ export const FilterModal: React.FC = () => {
                             <FilterCheckboxGroup
                                 form={form}
                                 filterSections={filterSections}
-                                handleFilterChange={handleFilterChange}
                             />
                             <div className='absolute inset-x-0 bottom-0 z-50 flex flex-wrap justify-between gap-4 border-t border-slate-200 bg-grey-100 p-4'>
                                 <Button
                                     variant='close'
-                                    onClick={() => setIsModalOpen(false)}
                                     className='flex-1'
                                     data-testid='modal-close'
+                                    type='button'
+                                    onClick={() => {
+                                        form.handleSubmit(handleSubmit)();
+                                    }}
                                 >
                                     Close
                                 </Button>
                                 <Button
-                                    type='submit'
                                     variant='secondary'
-                                    onClick={form.handleSubmit(handleSubmit)}
                                     className='flex-1'
+                                    type='submit'
                                 >
                                     See results ({filterCount})
                                 </Button>

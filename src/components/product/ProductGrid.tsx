@@ -1,14 +1,14 @@
 'use client';
-import React from 'react';
-
 import { Error } from '@/components/apiResponseState/Error';
 import { ProductCard } from '@/components/product/ProductCard';
 import { ProductCardSkeleton } from '@/components/product/ProductCardSkeleton';
+import { useFilteredProductsByStock } from '@/lib/hooks/useFilteredProductsByStock';
 import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
 
 export const ProductGrid: React.FC = () => {
-    const { data: products, isLoading: loading, error } = useProductsQuery();
+    const { isLoading: loading, error } = useProductsQuery();
     const skeletons = [1, 2, 3, 4, 5, 6];
+    const { filteredProducts } = useFilteredProductsByStock();
 
     return (
         <div
@@ -20,8 +20,8 @@ export const ProductGrid: React.FC = () => {
                 skeletons.map((skeleton) => (
                     <ProductCardSkeleton key={skeleton} />
                 ))}
-            {products &&
-                products.map((product: ProductCardProps) => (
+            {filteredProducts &&
+                filteredProducts.map((product: ProductCardProps) => (
                     <ProductCard key={product.id} {...product} />
                 ))}
         </div>

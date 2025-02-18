@@ -8,6 +8,7 @@ const FILTER_KEYS = [
     'colors',
     'stockOptions',
 ] as const;
+
 type FilterKey = (typeof FILTER_KEYS)[number];
 
 export const useUrlSync = () => {
@@ -16,15 +17,25 @@ export const useUrlSync = () => {
     const searchParams = useSearchParams();
 
     const updateUrl = useCallback(
-        (filters: Partial<Filter>) => {
+        (filtersAndSort: Partial<Filter & { sort: SortOptionValue }>) => {
             const params = new URLSearchParams(searchParams.toString());
 
-            FILTER_KEYS.forEach((key) => {
-                const value = filters[key];
-                if (Array.isArray(value) && value.length > 0) {
-                    params.set(key, value.join(','));
-                } else {
-                    params.delete(key);
+            Object.entries(filtersAndSort).forEach(([key, value]) => {
+                let backendKey = key;
+                if (key === 'productGroups') {
+                    backendKey = 'productGroup';
+                }
+
+                if (key === 'sort') {
+                    if (value) {
+                        params.set('sort', value as string);
+                    } else {
+                        params.delete('sort');
+                    }
+                } else if (Array.isArray(value) && value.length > 0) {
+                    params.set(backendKey, value.join(','));
+                } else if (FILTER_KEYS.includes(key as FilterKey)) {
+                    params.delete(backendKey);
                 }
             });
 
@@ -35,18 +46,30 @@ export const useUrlSync = () => {
         [pathname, router, searchParams]
     );
 
-    const getInitialFilters = useCallback(() => {
+    const getInitialFiltersAndSort = useCallback(() => {
         const filters: Partial<Pick<Filter, FilterKey>> = {};
+        let sort: SortOptionValue | undefined;
 
         FILTER_KEYS.forEach((key) => {
-            const value = searchParams.get(key);
+            const backendKey = key === 'productGroups' ? 'productGroup' : key;
+            const value = searchParams.get(backendKey);
             if (value) {
                 filters[key] = value.split(',');
             }
         });
 
-        return filters;
+        const sortParam = searchParams.get('sort');
+        if (
+            sortParam &&
+            (['POPULAR_DESC', 'PRICE_ASC', 'PRICE_DESC'] as string[]).includes(
+                sortParam
+            )
+        ) {
+            sort = sortParam as SortOptionValue;
+        }
+
+        return { ...filters, sort };
     }, [searchParams]);
 
-    return { updateUrl, getInitialFilters };
+    return { updateUrl, getInitialFilters: getInitialFiltersAndSort };
 };

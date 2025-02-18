@@ -1,7 +1,6 @@
 'use client';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { useSort } from '@/context/SortContext';
-import { SORT_OPTIONS } from '@/data/sortOption';
+import { SORT_OPTIONS, useSort } from '@/context/SortContext';
 
 export const SortRadioGroup = () => {
     const { sortOption, setSortOption } = useSort();
@@ -11,25 +10,25 @@ export const SortRadioGroup = () => {
             <h3 className='font-medium text-gray-750'>Sort by</h3>
             <RadioGroup
                 value={sortOption}
-                onValueChange={(value) => {
-                    setSortOption(value as SortOption);
+                onValueChange={(value: SortOptionValue) => {
+                    setSortOption(value);
                 }}
             >
-                {SORT_OPTIONS.map((option) => (
+                {SORT_OPTIONS.map((option: SortOption) => (
                     <div
-                        key={option}
+                        key={option.value}
                         className='cursor:pointer flex items-center space-x-2 text-base font-light'
                     >
                         <RadioGroupItem
-                            value={option}
-                            id={option}
-                            aria-label={option}
+                            value={option.value}
+                            id={option.label}
+                            aria-label={option.label}
                         />
                         <label
-                            htmlFor={option}
+                            htmlFor={option.label}
                             className='hover:cursor-pointer'
                         >
-                            {option}
+                            {option.label}
                         </label>
                     </div>
                 ))}
