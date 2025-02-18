@@ -1,8 +1,23 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { SortProvider, useSort, initialState } from '@/context/SortContext';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
+jest.mock('next/navigation', () => ({
+    useRouter: jest.fn(),
+    usePathname: jest.fn(),
+    useSearchParams: jest.fn(),
+}));
 
 describe('SortContext', () => {
+    beforeEach(() => {
+        (useRouter as jest.Mock).mockReturnValue({
+            replace: jest.fn(),
+        });
+        (usePathname as jest.Mock).mockReturnValue('/products');
+        (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
+    });
+
     it('provides the initial state', () => {
         const TestComponent = () => {
             const { sortOption, isSheetOpen, isDropDownOpen } = useSort();

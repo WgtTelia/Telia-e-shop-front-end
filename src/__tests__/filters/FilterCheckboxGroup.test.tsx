@@ -1,13 +1,26 @@
 import { render, screen } from '@testing-library/react';
-import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 import { UseFormReturn } from 'react-hook-form';
 import { useFilter } from '@/context/FilterContext';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 
-jest.mock('@/components/filters/CheckBoxLargeScrn', () => ({
-    CheckBoxLargeScrn: ({ title }: { title: string }) => (
-        <div data-testid='checkbox-large-scrn'>{title}</div>
-    ),
+jest.mock('next/navigation', () => ({
+    useRouter: jest.fn(),
+    usePathname: jest.fn(),
+    useSearchParams: jest.fn(),
 }));
+
+jest.mock('@/components/filters/CheckBoxLargeScrn', () => {
+    return {
+        CheckBoxLargeScrn: function MockCheckBoxLargeScrn({
+            title,
+        }: {
+            title: string;
+        }) {
+            return <div data-testid='checkbox-large-scrn'>{title}</div>;
+        },
+    };
+});
 
 jest.mock('@/components/filters/CheckboxForm', () => ({
     CheckboxForm: ({
@@ -38,6 +51,14 @@ jest.mock('@/context/FilterContext', () => ({
 }));
 
 describe('Filter CheckboxGroup', () => {
+    beforeEach(() => {
+        (useRouter as jest.Mock).mockReturnValue({
+            replace: jest.fn(),
+        });
+        (usePathname as jest.Mock).mockReturnValue('/products');
+        (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
+    });
+
     const mockFilterSections: {
         name: keyof Filter;
         title: string;
@@ -56,12 +77,7 @@ describe('Filter CheckboxGroup', () => {
             isLoading: false,
         });
 
-        render(
-            <FilterCheckboxGroup
-                filterSections={mockFilterSections}
-                handleFilterChange={jest.fn()}
-            />
-        );
+        render(<FilterCheckboxGroup filterSections={mockFilterSections} />);
 
         mockFilterSections.forEach((section) => {
             expect(screen.getByText(section.title)).toBeInTheDocument();
@@ -87,7 +103,6 @@ describe('Filter CheckboxGroup', () => {
             <FilterCheckboxGroup
                 form={mockForm}
                 filterSections={mockFilterSections}
-                handleFilterChange={jest.fn()}
             />
         );
 
@@ -118,7 +133,6 @@ describe('Filter CheckboxGroup', () => {
             <FilterCheckboxGroup
                 form={mockForm}
                 filterSections={mockFilterSections}
-                handleFilterChange={mockHandleFilterChange}
             />
         );
 
