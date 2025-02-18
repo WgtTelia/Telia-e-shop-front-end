@@ -3,6 +3,13 @@ import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import { SortMenuSheet } from '@/components/filters/SortMenuSheet';
 import '@testing-library/jest-dom';
 import { SORT_OPTIONS, SortProvider, useSort } from '@/context/SortContext';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
+jest.mock('next/navigation', () => ({
+    useRouter: jest.fn(),
+    usePathname: jest.fn(),
+    useSearchParams: jest.fn(),
+}));
 
 jest.mock('react-icons/fa', () => ({
     FaChevronUp: () => <span data-testid='chevron-up' />,
@@ -45,6 +52,13 @@ jest.mock('@/context/SortContext', () => ({
 }));
 
 describe('SortMenuSheet', () => {
+    beforeEach(() => {
+        (useRouter as jest.Mock).mockReturnValue({
+            replace: jest.fn(),
+        });
+        (usePathname as jest.Mock).mockReturnValue('/products');
+        (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
+    });
     const mockSetSortOption = jest.fn();
     const mockSetIsSheetOpen = jest.fn();
     let currentSortOptionValue: SortOptionValue = 'POPULAR_DESC';
