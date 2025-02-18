@@ -13,7 +13,7 @@ interface CheckboxFormProps<T extends FieldValues> {
     form: { control: Control<T> };
     name: Path<T>;
     title: string;
-    options: Array<string | { value: string; label: string }>;
+    options: Array<{ value: string; label: string }>;
 }
 
 export const CheckboxForm = <T extends FieldValues>({
@@ -25,11 +25,11 @@ export const CheckboxForm = <T extends FieldValues>({
     const { selectedFilters, toggleCheckbox } = useFilter();
 
     const getCheckboxOptionDetails = (
-        option: string | { value: string; label: string },
+        option: { value: string; label: string },
         index: number
     ) => {
-        const value = typeof option === 'string' ? option : option.value;
-        const label = typeof option === 'string' ? option : option.label;
+        const value = option.value;
+        const label = option.label;
         const checkboxId = `${name}-${index}`;
         return { value, label, checkboxId };
     };

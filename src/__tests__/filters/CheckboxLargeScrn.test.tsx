@@ -34,7 +34,10 @@ describe('Checkbox for Larger Screens', () => {
             <CheckboxLargeScrn
                 name='productGroups'
                 title='Product Groups'
-                options={['Group 1', 'Group 2']}
+                options={[
+                    { value: 'Group 1', label: 'Group 1' },
+                    { value: 'Group 2', label: 'Group 2' },
+                ]}
             />
         );
 
@@ -66,7 +69,10 @@ describe('Checkbox for Larger Screens', () => {
             <CheckboxLargeScrn
                 name='productGroups'
                 title='Product Groups'
-                options={['Group 1', 'Group 2']}
+                options={[
+                    { value: 'Group 1', label: 'Group 1' },
+                    { value: 'Group 2', label: 'Group 2' },
+                ]}
             />
         );
         await waitFor(() =>
@@ -86,7 +92,10 @@ describe('Checkbox for Larger Screens', () => {
             <CheckboxLargeScrn
                 name='productGroups'
                 title='Product Groups'
-                options={['Group 1', 'Group 2']}
+                options={[
+                    { value: 'Group 1', label: 'Group 1' },
+                    { value: 'Group 2', label: 'Group 2' },
+                ]}
             />
         );
 
@@ -118,7 +127,10 @@ describe('Checkbox for Larger Screens', () => {
             <CheckboxLargeScrn
                 name='productGroups'
                 title='Product Groups'
-                options={['Group 1', 'Group 2']}
+                options={[
+                    { value: 'Group 1', label: 'Group 1' },
+                    { value: 'Group 2', label: 'Group 2' },
+                ]}
             />
         );
 

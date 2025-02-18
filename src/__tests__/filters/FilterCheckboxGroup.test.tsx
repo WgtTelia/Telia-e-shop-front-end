@@ -56,14 +56,24 @@ describe('Filter CheckboxGroup', () => {
     const mockFilterSections: {
         name: keyof Filter;
         title: string;
-        options: string[];
+        options: { value: string; label: string }[];
     }[] = [
         {
             name: 'types' as keyof Filter,
             title: 'Product Types',
-            options: ['Type1', 'Type2'],
+            options: [
+                { value: 'Type1', label: 'Type 1' },
+                { value: 'Type2', label: 'Type 2' },
+            ],
         },
-        { name: 'brands', title: 'Brands', options: ['Brand1', 'Brand2'] },
+        {
+            name: 'brands',
+            title: 'Brands',
+            options: [
+                { value: 'Brand1', label: 'Brand 1' },
+                { value: 'Brand2', label: 'Brand 2' },
+            ],
+        },
     ];
 
     it('renders CheckBoxLargeScrn when form is not provided', async () => {
