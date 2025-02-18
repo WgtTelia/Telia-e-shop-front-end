@@ -1,9 +1,9 @@
 'use client';
 import { CheckboxForm } from '@/components/filters/CheckboxForm';
-import { CheckboxLargeScrn } from '@/components/filters/CheckboxLargeScrn';
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
 import { useFilter } from '@/context/FilterContext';
-import { CheckboxGroupSkeleton } from './CheckboxGroupSkeleton';
+import { CheckboxGroupSkeleton } from '@/components/filters/CheckboxGroupSkeleton';
+import { CheckboxLargeScrn } from '@/components/filters/CheckboxLargeScrn';
 
 export interface FilterCheckboxGroupProps<T extends FieldValues> {
     form?: UseFormReturn<T>;

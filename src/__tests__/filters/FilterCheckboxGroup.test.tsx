@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { UseFormReturn } from 'react-hook-form';
 import { useFilter } from '@/context/FilterContext';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -10,17 +10,11 @@ jest.mock('next/navigation', () => ({
     useSearchParams: jest.fn(),
 }));
 
-jest.mock('@/components/filters/CheckBoxLargeScrn', () => {
-    return {
-        CheckBoxLargeScrn: function MockCheckBoxLargeScrn({
-            title,
-        }: {
-            title: string;
-        }) {
-            return <div data-testid='checkbox-large-scrn'>{title}</div>;
-        },
-    };
-});
+jest.mock('@/components/filters/CheckboxLargeScrn', () => ({
+    CheckboxLargeScrn: ({ title }: { title: string }) => (
+        <div data-testid='checkbox-large-scrn'>{title}</div>
+    ),
+}));
 
 jest.mock('@/components/filters/CheckboxForm', () => ({
     CheckboxForm: ({
@@ -72,15 +66,17 @@ describe('Filter CheckboxGroup', () => {
         { name: 'brands', title: 'Brands', options: ['Brand1', 'Brand2'] },
     ];
 
-    it('renders CheckBoxLargeScrn when form is not provided', () => {
+    it('renders CheckBoxLargeScrn when form is not provided', async () => {
         (useFilter as jest.Mock).mockReturnValue({
             isLoading: false,
         });
 
         render(<FilterCheckboxGroup filterSections={mockFilterSections} />);
 
-        mockFilterSections.forEach((section) => {
-            expect(screen.getByText(section.title)).toBeInTheDocument();
+        await waitFor(() => {
+            mockFilterSections.forEach((section) => {
+                expect(screen.getByText(section.title)).toBeInTheDocument();
+            });
         });
 
         const checkboxes = screen.getAllByTestId('checkbox-large-scrn');
