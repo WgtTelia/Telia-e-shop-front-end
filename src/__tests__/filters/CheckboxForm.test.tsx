@@ -14,7 +14,7 @@ jest.mock('next/navigation', () => ({
 const CheckboxFormWrapper = ({
     options,
 }: {
-    options: Array<string | { value: string; label: string }>;
+    options: Array<{ value: string; label: string }>;
 }) => {
     const formMethods = useForm({
         defaultValues: {
