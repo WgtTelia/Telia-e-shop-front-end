@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { CheckBoxLargeScrn } from '@/components/filters/CheckBoxLargeScrn';
+import { CheckboxLargeScrn } from '@/components/filters/CheckboxLargeScrn';
 
 const mockUseFilter = jest.fn();
 jest.mock('@/context/FilterContext', () => ({
@@ -31,7 +31,7 @@ describe('Checkbox for Larger Screens', () => {
 
     it('renders checkboxes with labels correctly', async () => {
         render(
-            <CheckBoxLargeScrn
+            <CheckboxLargeScrn
                 name='productGroups'
                 title='Product Groups'
                 options={['Group 1', 'Group 2']}
@@ -63,7 +63,7 @@ describe('Checkbox for Larger Screens', () => {
         });
 
         render(
-            <CheckBoxLargeScrn
+            <CheckboxLargeScrn
                 name='productGroups'
                 title='Product Groups'
                 options={['Group 1', 'Group 2']}
@@ -83,7 +83,7 @@ describe('Checkbox for Larger Screens', () => {
 
     it('calls toggleCheckbox with correct arguments when a checkbox is checked', async () => {
         render(
-            <CheckBoxLargeScrn
+            <CheckboxLargeScrn
                 name='productGroups'
                 title='Product Groups'
                 options={['Group 1', 'Group 2']}
@@ -115,7 +115,7 @@ describe('Checkbox for Larger Screens', () => {
         });
 
         render(
-            <CheckBoxLargeScrn
+            <CheckboxLargeScrn
                 name='productGroups'
                 title='Product Groups'
                 options={['Group 1', 'Group 2']}
@@ -136,7 +136,7 @@ describe('Checkbox for Larger Screens', () => {
 
     it('renders nothing when no options are provided', async () => {
         render(
-            <CheckBoxLargeScrn
+            <CheckboxLargeScrn
                 name='productGroups'
                 title='Product Groups'
                 options={[]}

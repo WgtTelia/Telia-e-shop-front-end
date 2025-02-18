@@ -1,32 +1,48 @@
 import { Checkbox } from '@/components/ui/checkbox';
 import { useFilter } from '@/context/FilterContext';
 
-export interface CheckBoxLargeScrnProps {
+export interface CheckboxLargeScrnProps {
     name: keyof Filter;
     title: string;
     options: Array<string | { value: string; label: string }>;
 }
 
-export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
+export const CheckboxLargeScrn: React.FC<CheckboxLargeScrnProps> = ({
     name,
     title,
     options,
 }) => {
     const { selectedFilters, toggleCheckbox } = useFilter();
 
+    const getCheckboxOptionDetails = (
+        option: string | { value: string; label: string },
+        index: number
+    ) => {
+        const value = typeof option === 'string' ? option : option.value;
+        const label = typeof option === 'string' ? option : option.label;
+        const checkboxId = `${name}-${index}`;
+        return { value, label, checkboxId };
+    };
+
+    const handleCheckboxChange =
+        (optionValue: string) => (checked: boolean) => {
+            toggleCheckbox(name as keyof Filter, optionValue, checked);
+        };
+
+    const isCheckboxChecked = (optionValue: string) => {
+        return (
+            (selectedFilters[name as keyof Filter] as string[]) || []
+        ).includes(optionValue);
+    };
+
     return (
         <div className='space-y-4'>
             <h3 className='mb-3 font-medium text-gray-750'>{title}</h3>
             {options.map((option, index) => {
-                const value =
-                    typeof option === 'string' ? option : option.value;
-                const label =
-                    typeof option === 'string' ? option : option.label;
-                const checkboxId = `${name}-${index}`;
-
-                const handleCheckboxChange = (checked: boolean) => {
-                    toggleCheckbox(name, value, checked);
-                };
+                const { value, label, checkboxId } = getCheckboxOptionDetails(
+                    option,
+                    index
+                );
 
                 return (
                     <div
@@ -36,10 +52,8 @@ export const CheckBoxLargeScrn: React.FC<CheckBoxLargeScrnProps> = ({
                         <Checkbox
                             id={checkboxId}
                             aria-label={label}
-                            checked={(
-                                selectedFilters[name] as string[]
-                            ).includes(value)}
-                            onCheckedChange={handleCheckboxChange}
+                            checked={isCheckboxChecked(value)}
+                            onCheckedChange={handleCheckboxChange(value)}
                         />
                         <label
                             aria-label={label}

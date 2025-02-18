@@ -1,6 +1,6 @@
 'use client';
 import { CheckboxForm } from '@/components/filters/CheckboxForm';
-import { CheckBoxLargeScrn } from '@/components/filters/CheckBoxLargeScrn';
+import { CheckboxLargeScrn } from '@/components/filters/CheckboxLargeScrn';
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
 import { useFilter } from '@/context/FilterContext';
 import { CheckboxGroupSkeleton } from './CheckboxGroupSkeleton';
@@ -33,7 +33,7 @@ export const FilterCheckboxGroup = <T extends FieldValues>({
                             options={section.options}
                         />
                     ) : (
-                        <CheckBoxLargeScrn
+                        <CheckboxLargeScrn
                             key={section.name}
                             name={section.name}
                             title={section.title}
