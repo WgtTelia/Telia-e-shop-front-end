@@ -19,7 +19,6 @@ jest.mock('react-icons/fa', () => ({
 jest.mock('@/components/filters/OptionPicker', () => ({
     OptionPicker: ({
         options,
-        selectedOption,
         onChange,
     }: {
         options: SortOption[];
@@ -31,12 +30,6 @@ jest.mock('@/components/filters/OptionPicker', () => ({
                 <div
                     key={option.value}
                     data-testid={`picker-option-${option.value}`}
-                    style={{
-                        backgroundColor:
-                            option.value === selectedOption
-                                ? 'yellow'
-                                : 'transparent',
-                    }}
                     onClick={() => onChange(option)}
                 >
                     {option.label}
