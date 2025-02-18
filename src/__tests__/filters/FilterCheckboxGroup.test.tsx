@@ -1,4 +1,4 @@
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { UseFormReturn } from 'react-hook-form';
 import { useFilter } from '@/context/FilterContext';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
