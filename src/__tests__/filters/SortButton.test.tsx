@@ -1,12 +1,26 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import { SortButton } from '@/components/filters/SortButton';
-import { useSort } from '@/context/SortContext';
+import { SORT_OPTIONS, useSort } from '@/context/SortContext';
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
 
-jest.mock('@/context/SortContext', () => ({
-    useSort: jest.fn(),
-}));
+jest.mock('@/context/SortContext', () => {
+    const mockSortOptions: SortOption[] = [
+        { label: 'Most popular', value: 'POPULAR_DESC' },
+        { label: 'Price: lowest to highest', value: 'PRICE_ASC' },
+        { label: 'Price: highest to lowest', value: 'PRICE_DESC' },
+    ];
+
+    return {
+        useSort: jest.fn().mockReturnValue({
+            sortOption: 'POPULAR_DESC',
+            setIsSheetOpen: jest.fn(),
+            setIsDropDownOpen: jest.fn(),
+            isDropDownOpen: false,
+        }),
+        SORT_OPTIONS: mockSortOptions,
+    };
+});
 
 jest.mock('@/lib/hooks/useMediaQuery', () => ({
     useMediaQuery: jest.fn(),
@@ -19,10 +33,11 @@ describe('SortButton', () => {
     const renderComponent = (
         isMobile = false,
         isMedium = false,
-        isDropDownOpen = false
+        isDropDownOpen = false,
+        sortOptionValue = 'POPULAR_DESC'
     ) => {
         (useSort as jest.Mock).mockReturnValue({
-            sortOption: 'Most popular',
+            sortOption: sortOptionValue,
             setIsSheetOpen: mockSetIsSheetOpen,
             setIsDropDownOpen: mockSetIsDropDownOpen,
             isDropDownOpen,
@@ -42,10 +57,13 @@ describe('SortButton', () => {
         jest.clearAllMocks();
     });
 
-    it('renders a Button element with the correct props', () => {
-        renderComponent();
+    it('renders a Button element with the correct props and labels', () => {
+        renderComponent(false, false, false, 'PRICE_ASC');
         const button = screen.getByRole('button', { name: 'Sort' });
-        expect(button).toHaveTextContent('Most popular');
+        const expectedLabel =
+            SORT_OPTIONS.find((option) => option.value === 'PRICE_ASC')
+                ?.label || 'Sort';
+        expect(button).toHaveTextContent(expectedLabel);
         expect(button).toHaveAttribute('aria-label', 'Sort');
     });
 

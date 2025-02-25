@@ -2,8 +2,14 @@ import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import { SortMenuSheet } from '@/components/filters/SortMenuSheet';
 import '@testing-library/jest-dom';
-import { SortProvider, useSort } from '@/context/SortContext';
-import { SORT_OPTIONS } from '@/data/sortOption';
+import { SORT_OPTIONS, SortProvider, useSort } from '@/context/SortContext';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
+jest.mock('next/navigation', () => ({
+    useRouter: jest.fn(),
+    usePathname: jest.fn(),
+    useSearchParams: jest.fn(),
+}));
 
 jest.mock('react-icons/fa', () => ({
     FaChevronUp: () => <span data-testid='chevron-up' />,
@@ -13,27 +19,20 @@ jest.mock('react-icons/fa', () => ({
 jest.mock('@/components/filters/OptionPicker', () => ({
     OptionPicker: ({
         options,
-        selectedOption,
         onChange,
     }: {
-        options: string[];
-        selectedOption: string;
-        onChange: (option: string) => void;
+        options: SortOption[];
+        selectedOption: SortOptionValue;
+        onChange: (option: SortOption) => void;
     }) => (
         <div data-testid='picker'>
             {options.map((option) => (
                 <div
-                    key={option}
-                    data-testid={`picker-option-${option}`}
-                    style={{
-                        backgroundColor:
-                            option === selectedOption
-                                ? 'yellow'
-                                : 'transparent',
-                    }}
+                    key={option.value}
+                    data-testid={`picker-option-${option.value}`}
                     onClick={() => onChange(option)}
                 >
-                    {option}
+                    {option.label}
                 </div>
             ))}
         </div>
@@ -46,16 +45,23 @@ jest.mock('@/context/SortContext', () => ({
 }));
 
 describe('SortMenuSheet', () => {
+    beforeEach(() => {
+        (useRouter as jest.Mock).mockReturnValue({
+            replace: jest.fn(),
+        });
+        (usePathname as jest.Mock).mockReturnValue('/products');
+        (useSearchParams as jest.Mock).mockReturnValue(new URLSearchParams());
+    });
     const mockSetSortOption = jest.fn();
     const mockSetIsSheetOpen = jest.fn();
-    let currentSortOption = 'Most popular';
+    let currentSortOptionValue: SortOptionValue = 'POPULAR_DESC';
 
     const renderComponent = (
-        sortOption = 'Most popular',
+        sortOptionValue: SortOptionValue = 'POPULAR_DESC',
         isSheetOpen = true
     ) => {
         (useSort as jest.Mock).mockReturnValue({
-            sortOption,
+            sortOption: sortOptionValue,
             setSortOption: mockSetSortOption,
             isSheetOpen,
             setIsSheetOpen: mockSetIsSheetOpen,
@@ -69,12 +75,12 @@ describe('SortMenuSheet', () => {
     };
 
     beforeEach(() => {
-        currentSortOption = 'Most popular';
+        currentSortOptionValue = 'POPULAR_DESC';
         (useSort as jest.Mock).mockImplementation(() => ({
-            sortOption: currentSortOption,
-            setSortOption: (newOption: string) => {
+            sortOption: currentSortOptionValue,
+            setSortOption: (newOption: SortOptionValue) => {
                 mockSetSortOption(newOption);
-                currentSortOption = newOption;
+                currentSortOptionValue = newOption;
             },
             isSheetOpen: true,
             setIsSheetOpen: mockSetIsSheetOpen,
@@ -104,16 +110,12 @@ describe('SortMenuSheet', () => {
 
         fireEvent.click(screen.getByTestId('chevron-up'));
         await waitFor(() => {
-            expect(mockSetSortOption).toHaveBeenCalledWith(
-                'Price: highest to lowest'
-            );
+            expect(mockSetSortOption).toHaveBeenCalledWith('PRICE_DESC');
         });
 
         fireEvent.click(screen.getByTestId('chevron-down'));
         await waitFor(() => {
-            expect(mockSetSortOption).toHaveBeenCalledWith(
-                'Price: lowest to highest'
-            );
+            expect(mockSetSortOption).toHaveBeenCalledWith('PRICE_DESC');
         });
     });
 
@@ -125,19 +127,15 @@ describe('SortMenuSheet', () => {
 
     it('triggers option change when a picker option is clicked', () => {
         renderComponent();
-        fireEvent.click(
-            screen.getByTestId('picker-option-Price: lowest to highest')
-        );
-        expect(mockSetSortOption).toHaveBeenCalledWith(
-            'Price: lowest to highest'
-        );
+        fireEvent.click(screen.getByTestId('picker-option-PRICE_ASC'));
+        expect(mockSetSortOption).toHaveBeenCalledWith('PRICE_ASC');
     });
 
     it('renders Picker component with correct options and selected option', () => {
         renderComponent();
         SORT_OPTIONS.forEach((option) => {
             expect(
-                screen.getByTestId(`picker-option-${option}`)
+                screen.getByTestId(`picker-option-${option.value}`)
             ).toBeInTheDocument();
         });
     });

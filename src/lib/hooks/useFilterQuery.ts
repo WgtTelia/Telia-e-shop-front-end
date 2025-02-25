@@ -15,7 +15,7 @@ export const useFilterQuery = () => {
                 return (await request).data as FilterOptions;
             } catch (error) {
                 if (error instanceof CanceledError) {
-                    console.error('Query canceled');
+                    console.debug('Query canceled');
                 } else {
                     throw error;
                 }

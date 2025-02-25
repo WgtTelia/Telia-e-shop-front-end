@@ -2,7 +2,7 @@
 import React, { useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { LuArrowDownUp } from 'react-icons/lu';
-import { useSort } from '@/context/SortContext';
+import { SORT_OPTIONS, useSort } from '@/context/SortContext';
 import { Button } from '@/components/ui/button';
 import { SortMenuSheet } from '@/components/filters/SortMenuSheet';
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
@@ -27,6 +27,9 @@ export const SortButton: React.FC = () => {
             setIsDropDownOpen(!isDropDownOpen);
         }
     };
+    const selectedSortOption = SORT_OPTIONS.find(
+        (option) => option.value === sortOption
+    );
 
     return (
         <>
@@ -38,7 +41,7 @@ export const SortButton: React.FC = () => {
                 onClick={handleSortClick}
                 aria-label='Sort'
             >
-                {sortOption}
+                {selectedSortOption ? selectedSortOption.label : 'Sort'}
             </Button>
             {isMobileScreen && <SortMenuSheet data-testid='select-menu' />}
             {isMediumScreen &&

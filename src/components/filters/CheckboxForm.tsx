@@ -13,7 +13,7 @@ interface CheckboxFormProps<T extends FieldValues> {
     form: { control: Control<T> };
     name: Path<T>;
     title: string;
-    options: Array<string | { value: string; label: string }>;
+    options: Array<{ value: string; label: string }>;
 }
 
 export const CheckboxForm = <T extends FieldValues>({
@@ -23,6 +23,27 @@ export const CheckboxForm = <T extends FieldValues>({
     options,
 }: CheckboxFormProps<T>) => {
     const { selectedFilters, toggleCheckbox } = useFilter();
+
+    const getCheckboxOptionDetails = (
+        option: { value: string; label: string },
+        index: number
+    ) => {
+        const value = option.value;
+        const label = option.label;
+        const checkboxId = `${name}-${index}`;
+        return { value, label, checkboxId };
+    };
+
+    const handleCheckboxChange =
+        (optionValue: string) => (checked: boolean) => {
+            toggleCheckbox(name as keyof Filter, optionValue, checked);
+        };
+
+    const isCheckboxChecked = (optionValue: string) => {
+        return (
+            (selectedFilters[name as keyof Filter] as string[]) || []
+        ).includes(optionValue);
+    };
 
     return (
         <FormField
@@ -35,24 +56,8 @@ export const CheckboxForm = <T extends FieldValues>({
                     </FormLabel>
                     <div className='space-y-4 pt-2 text-gray-750'>
                         {options.map((option, index) => {
-                            const value =
-                                typeof option === 'string'
-                                    ? option
-                                    : option.value;
-                            const label =
-                                typeof option === 'string'
-                                    ? option
-                                    : option.label;
-                            const checkboxId = `${name}-${index}`;
-
-                            const handleCheckboxChange = (checked: boolean) => {
-                                toggleCheckbox(
-                                    name as keyof Filter,
-                                    value,
-                                    checked
-                                );
-                            };
-
+                            const { value, label, checkboxId } =
+                                getCheckboxOptionDetails(option, index);
                             return (
                                 <div
                                     key={value}
@@ -63,14 +68,10 @@ export const CheckboxForm = <T extends FieldValues>({
                                             id={checkboxId}
                                             aria-label={label}
                                             data-testid={`checkbox-${value}`}
-                                            checked={(
-                                                selectedFilters[
-                                                    name as keyof Filter
-                                                ] as string[]
-                                            ).includes(value)}
-                                            onCheckedChange={
-                                                handleCheckboxChange
-                                            }
+                                            checked={isCheckboxChecked(value)}
+                                            onCheckedChange={handleCheckboxChange(
+                                                value
+                                            )}
                                         />
                                     </FormControl>
                                     <FormLabel

@@ -30,7 +30,7 @@
                 "argsIgnorePattern": "^_"
             }
         ],
-        "no-console": ["warn", { "allow": ["warn", "error"] }],
+        "no-console": ["warn", { "allow": ["warn", "error", "debug"] }],
         "react/no-unescaped-entities": "warn",
         "react/style-prop-object": "warn", //  about using inline style objects
         "tailwindcss/no-arbitrary-value": "warn", //  about using arbitrary values instead of Tailwind utilities

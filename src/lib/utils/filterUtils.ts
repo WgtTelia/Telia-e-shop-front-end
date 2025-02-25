@@ -4,12 +4,16 @@ export const getFilterSections = (selectedFilters: Filter) => [
     {
         name: 'productGroups' as keyof FilterOptions,
         title: 'Type',
-        options: selectedFilters.availableOptions?.productGroups || [],
+        options: (selectedFilters.availableOptions?.productGroups || []).map(
+            (value) => ({ value, label: value })
+        ),
     },
     {
         name: 'brands' as keyof FilterOptions,
         title: 'Brand',
-        options: selectedFilters.availableOptions?.brands || [],
+        options: (selectedFilters.availableOptions?.brands || []).map(
+            (value) => ({ value, label: value })
+        ),
     },
     {
         name: 'priceIntervals' as keyof FilterOptions,
@@ -23,7 +27,9 @@ export const getFilterSections = (selectedFilters: Filter) => [
     {
         name: 'colors' as keyof FilterOptions,
         title: 'Color',
-        options: selectedFilters.availableOptions?.colors || [],
+        options: (selectedFilters.availableOptions?.colors || []).map(
+            (value) => ({ value, label: value })
+        ),
     },
     {
         name: 'stockOptions' as keyof FilterOptions,

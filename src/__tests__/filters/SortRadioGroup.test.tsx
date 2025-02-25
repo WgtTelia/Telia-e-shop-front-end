@@ -1,19 +1,25 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import { SortRadioGroup } from '@/components/filters/SortRadioGroup';
-import { useSort } from '@/context/SortContext';
-import { SORT_OPTIONS } from '@/data/sortOption';
+import { SORT_OPTIONS, useSort } from '@/context/SortContext';
 
 jest.mock('@/context/SortContext', () => ({
     useSort: jest.fn(),
+    SORT_OPTIONS: [
+        { label: 'Most popular', value: 'POPULAR_DESC' },
+        { label: 'Price: lowest to highest', value: 'PRICE_ASC' },
+        { label: 'Price: highest to lowest', value: 'PRICE_DESC' },
+    ],
 }));
 
 describe('SortRadioGroup', () => {
     const mockSetSortOption = jest.fn();
 
-    const renderComponent = (sortOption = 'Most popular') => {
+    const renderComponent = (
+        sortOptionValue: SortOptionValue = 'POPULAR_DESC'
+    ) => {
         (useSort as jest.Mock).mockReturnValue({
-            sortOption,
+            sortOption: sortOptionValue,
             setSortOption: mockSetSortOption,
         });
 
@@ -34,13 +40,11 @@ describe('SortRadioGroup', () => {
         renderComponent();
         const radioButton = screen.getByLabelText('Price: lowest to highest');
         fireEvent.click(radioButton);
-        expect(mockSetSortOption).toHaveBeenCalledWith(
-            'Price: lowest to highest'
-        );
+        expect(mockSetSortOption).toHaveBeenCalledWith('PRICE_ASC');
     });
 
     it('displays the correct radio button as selected', () => {
-        renderComponent('Price: highest to lowest');
+        renderComponent('PRICE_DESC');
         const radioButton = screen.getByLabelText('Price: highest to lowest');
         expect(radioButton).toBeChecked();
     });
@@ -49,8 +53,6 @@ describe('SortRadioGroup', () => {
         renderComponent();
         const radioButton = screen.getByLabelText('Price: lowest to highest');
         fireEvent.click(radioButton);
-        expect(mockSetSortOption).toHaveBeenCalledWith(
-            'Price: lowest to highest'
-        );
+        expect(mockSetSortOption).toHaveBeenCalledWith('PRICE_ASC');
     });
 });
