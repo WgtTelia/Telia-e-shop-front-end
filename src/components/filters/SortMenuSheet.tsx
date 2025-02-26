@@ -9,30 +9,31 @@ import {
     SheetClose,
     SheetDescription,
 } from '@/components/ui/sheet';
-import { useSort } from '@/context/SortContext';
+import { SORT_OPTIONS, useSort } from '@/context/SortContext';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { OptionPicker } from '@/components/filters/OptionPicker';
 import { Button } from '@/components/ui/button';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { SORT_OPTIONS } from '@/data/sortOption';
 
 export const SortMenuSheet: React.FC = () => {
     const { setSortOption, isSheetOpen, setIsSheetOpen, sortOption } =
         useSort();
 
     const moveSelection = (direction: 'up' | 'down') => {
-        const currentIndex = SORT_OPTIONS.indexOf(sortOption);
+        const currentIndex = SORT_OPTIONS.findIndex(
+            (opt) => opt.value === sortOption
+        );
         const newIndex =
             direction === 'up'
                 ? (currentIndex - 1 + SORT_OPTIONS.length) % SORT_OPTIONS.length
                 : (currentIndex + 1) % SORT_OPTIONS.length;
 
         const newOption = SORT_OPTIONS[newIndex];
-        setSortOption(newOption);
+        setSortOption(newOption.value);
     };
 
-    const handleSortOptionChange = (option: string) => {
-        setSortOption(option as SortOption);
+    const handleSortOptionChange = (option: SortOption) => {
+        setSortOption(option.value);
         setIsSheetOpen(false);
     };
 

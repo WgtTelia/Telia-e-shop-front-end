@@ -1,8 +1,7 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
-import { useSort } from '@/context/SortContext';
+import { SORT_OPTIONS, useSort } from '@/context/SortContext';
 import { Button } from '@/components/ui/button';
-import { SORT_OPTIONS } from '@/data/sortOption';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 import { getPosition } from '@/lib/utils';
 
@@ -33,8 +32,8 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({ buttonRef }) => {
         };
     }, [buttonRef, setIsDropDownOpen]);
 
-    const handleSortOptionChange = (option: string) => {
-        setSortOption(option as SortOption);
+    const handleSortOptionChange = (option: SortOption) => {
+        setSortOption(option.value);
         setIsDropDownOpen(false);
     };
 
@@ -50,9 +49,9 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({ buttonRef }) => {
                 <label className='pl-dropdown-label text-grey-50'>
                     Choose...
                 </label>
-                {SORT_OPTIONS.map((option) => (
+                {SORT_OPTIONS.map((option: SortOption) => (
                     <Button
-                        key={option}
+                        key={option.value}
                         variant='ghost'
                         role='option'
                         size='picker'
@@ -60,14 +59,14 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({ buttonRef }) => {
                         className='w-full justify-start rounded-none border-none text-white transition-colors duration-150 ease-in-out hover:text-white'
                         icon={
                             <span className='mr-0.5 inline-block w-2 pt-1'>
-                                {sortOption === option && (
+                                {sortOption === option.value && (
                                     <IoCheckmarkSharp className='text-gray-850' />
                                 )}
                             </span>
                         }
                         iconPosition='left'
                     >
-                        {option}
+                        {option.label}
                     </Button>
                 ))}
             </div>
