@@ -9,8 +9,6 @@ import React, {
     useEffect,
 } from 'react';
 
-//TODO: add a sort function for the fetch data
-
 export const SORT_OPTIONS: SortOption[] = [
     { label: 'Most popular', value: 'POPULAR_DESC' },
     { label: 'Price: lowest to highest', value: 'PRICE_ASC' },
