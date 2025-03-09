@@ -11,11 +11,7 @@ jest.mock('next/navigation', () => ({
     useSearchParams: jest.fn(),
 }));
 
-const CheckboxFormWrapper = ({
-    options,
-}: {
-    options: Array<{ value: string; label: string }>;
-}) => {
+const CheckboxFormWrapper = ({ options }: { options: FilterOptionType[] }) => {
     const formMethods = useForm({
         defaultValues: {
             stockOptions: [],
@@ -46,7 +42,7 @@ describe('Checkbox Form', () => {
     });
 
     it('should check and uncheck the checkbox, and update the form state correctly', () => {
-        const testOptions = [
+        const testOptions: FilterOptionType[] = [
             { value: 'IN_STOCK', label: 'In Stock' },
             { value: 'OUT_OF_STOCK', label: 'Out of Stock' },
         ];

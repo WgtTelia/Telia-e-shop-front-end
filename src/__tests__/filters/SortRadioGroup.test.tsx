@@ -16,7 +16,7 @@ describe('SortRadioGroup', () => {
     const mockSetSortOption = jest.fn();
 
     const renderComponent = (
-        sortOptionValue: SortOptionValue = 'POPULAR_DESC'
+        sortOptionValue: SortOptionValueType = 'POPULAR_DESC'
     ) => {
         (useSort as jest.Mock).mockReturnValue({
             sortOption: sortOptionValue,

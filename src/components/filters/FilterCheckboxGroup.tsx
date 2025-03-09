@@ -10,7 +10,7 @@ export interface FilterCheckboxGroupProps<T extends FieldValues> {
     filterSections: {
         name: keyof Filter;
         title: string;
-        options: Array<{ value: string; label: string }>;
+        options: FilterOptionType[];
     }[];
 }
 export const FilterCheckboxGroup = <T extends FieldValues>({

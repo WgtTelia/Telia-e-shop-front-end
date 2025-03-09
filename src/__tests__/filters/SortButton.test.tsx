@@ -5,7 +5,7 @@ import { SORT_OPTIONS, useSort } from '@/context/SortContext';
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
 
 jest.mock('@/context/SortContext', () => {
-    const mockSortOptions: SortOption[] = [
+    const mockSortOptions: SortOptionType[] = [
         { label: 'Most popular', value: 'POPULAR_DESC' },
         { label: 'Price: lowest to highest', value: 'PRICE_ASC' },
         { label: 'Price: highest to lowest', value: 'PRICE_DESC' },

@@ -2,14 +2,14 @@ import { OptionPicker } from '@/components/filters/OptionPicker';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-const mockSortOptions: SortOption[] = [
-    { label: 'Most popular' as SortOptionLabel, value: 'POPULAR_DESC' },
+const mockSortOptions: SortOptionType[] = [
+    { label: 'Most popular' as SortOptionLabelType, value: 'POPULAR_DESC' },
     {
-        label: 'Price: lowest to highest' as SortOptionLabel,
+        label: 'Price: lowest to highest' as SortOptionLabelType,
         value: 'PRICE_ASC',
     },
     {
-        label: 'Price: highest to lowest' as SortOptionLabel,
+        label: 'Price: highest to lowest' as SortOptionLabelType,
         value: 'PRICE_DESC',
     },
 ];

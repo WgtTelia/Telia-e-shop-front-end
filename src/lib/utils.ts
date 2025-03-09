@@ -20,7 +20,7 @@ export const getPosition = (buttonRef: React.RefObject<HTMLButtonElement>) => {
 
 const PRICE_INTERVAL_REGEX = /^price_monthly_(\d+)_(\d+)$/;
 
-export const parsePriceInterval = (interval: string): PriceRange | null => {
+export const parsePriceInterval = (interval: string): PriceRangeType | null => {
     const matches = interval.match(PRICE_INTERVAL_REGEX);
     if (!matches) return null;
 
@@ -33,7 +33,7 @@ export const parsePriceInterval = (interval: string): PriceRange | null => {
 
 export const isWithinPriceRange = (
     price: number,
-    range: PriceRange
+    range: PriceRangeType
 ): boolean => {
     return price >= range.min && price <= range.max;
 };

@@ -24,7 +24,7 @@ jest.mock('@/components/filters/CheckboxForm', () => ({
     }: {
         title: string;
         name: string;
-        options: string[];
+        options: FilterOptionType[];
     }) => (
         <div data-testid='checkbox-form'>
             {title} - {name}
@@ -56,7 +56,7 @@ describe('Filter CheckboxGroup', () => {
     const mockFilterSections: {
         name: keyof Filter;
         title: string;
-        options: { value: string; label: string }[];
+        options: FilterOptionType[];
     }[] = [
         {
             name: 'types' as keyof Filter,

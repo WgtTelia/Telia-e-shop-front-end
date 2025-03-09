@@ -4,7 +4,7 @@ import { useFilter } from '@/context/FilterContext';
 export interface CheckboxLargeScrnProps {
     name: keyof Filter;
     title: string;
-    options: Array<{ value: string; label: string }>;
+    options: FilterOptionType[];
 }
 
 export const CheckboxLargeScrn: React.FC<CheckboxLargeScrnProps> = ({
