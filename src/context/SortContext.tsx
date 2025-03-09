@@ -9,7 +9,7 @@ import React, {
     useEffect,
 } from 'react';
 
-export const SORT_OPTIONS: SortOption[] = [
+export const SORT_OPTIONS: SortOptionType[] = [
     { label: 'Most popular', value: 'POPULAR_DESC' },
     { label: 'Price: lowest to highest', value: 'PRICE_ASC' },
     { label: 'Price: highest to lowest', value: 'PRICE_DESC' },

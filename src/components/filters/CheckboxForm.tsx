@@ -13,7 +13,7 @@ interface CheckboxFormProps<T extends FieldValues> {
     form: { control: Control<T> };
     name: Path<T>;
     title: string;
-    options: Array<{ value: string; label: string }>;
+    options: FilterOptionType[];
 }
 
 export const CheckboxForm = <T extends FieldValues>({

@@ -2,9 +2,9 @@ import React, { useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 
 interface OptionPickerProps {
-    options: SortOption[];
+    options: SortOptionType[];
     selectedOption: string;
-    onChange: (option: SortOption) => void;
+    onChange: (option: SortOptionType) => void;
 }
 
 export const OptionPicker: React.FC<OptionPickerProps> = ({
@@ -27,7 +27,7 @@ export const OptionPicker: React.FC<OptionPickerProps> = ({
 
     //Callback here prevents it from being recreated every time the component renders, improving performance by preventing unnecessary re-renders of child components(button)
     const handleOptionClick = useCallback(
-        (option: SortOption) => {
+        (option: SortOptionType) => {
             onChange(option);
             const optionIndex = options.indexOf(option);
             scrollToOption(optionIndex);

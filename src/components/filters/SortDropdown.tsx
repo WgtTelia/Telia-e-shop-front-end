@@ -32,7 +32,7 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({ buttonRef }) => {
         };
     }, [buttonRef, setIsDropDownOpen]);
 
-    const handleSortOptionChange = (option: SortOption) => {
+    const handleSortOptionChange = (option: SortOptionType) => {
         setSortOption(option.value);
         setIsDropDownOpen(false);
     };
@@ -49,7 +49,7 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({ buttonRef }) => {
                 <label className='pl-dropdown-label text-grey-50'>
                     Choose...
                 </label>
-                {SORT_OPTIONS.map((option: SortOption) => (
+                {SORT_OPTIONS.map((option: SortOptionType) => (
                     <Button
                         key={option.value}
                         variant='ghost'

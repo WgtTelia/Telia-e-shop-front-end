@@ -23,7 +23,7 @@ declare interface ProductVariant {
     imgUrl: string;
     monthlyPrice: number;
     defaultVariant: boolean;
-    stock:StockOption[];
+    stock:StockOptionType[];
 }
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 declare interface ProductCardProps extends Omit<ProductData, 'code' | 'orderCount' | 'productGroup'> {
@@ -44,20 +44,26 @@ declare type SortOptionValue =
     | 'PRICE_ASC'
     | 'PRICE_DESC';
 
-declare interface SortOption {
+declare type SortOptionType = {
     label: SortOptionLabel;
     value: SortOptionValue;
 }
 
-declare interface StockOption {
-    qtyInStock: number;
-    }    
 
-interface PriceRange {
+declare type StockOptionType  = {
+    qtyInStock: number;
+}    
+    
+
+declare type PriceRangeType = {
     min: number;
     max: number;
-    } 
-
+} 
+    
+declare type FilterOptionType = {
+    value: string;
+    label: string;
+};
 
 declare interface FilterOptions {
     productGroups: string[];

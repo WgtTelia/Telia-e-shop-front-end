@@ -14,7 +14,7 @@ export const SortRadioGroup = () => {
                     setSortOption(value);
                 }}
             >
-                {SORT_OPTIONS.map((option: SortOption) => (
+                {SORT_OPTIONS.map((option: SortOptionType) => (
                     <div
                         key={option.value}
                         className='cursor:pointer flex items-center space-x-2 text-base font-light'

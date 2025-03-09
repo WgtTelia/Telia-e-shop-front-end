@@ -21,9 +21,9 @@ jest.mock('@/components/filters/OptionPicker', () => ({
         options,
         onChange,
     }: {
-        options: SortOption[];
+        options: SortOptionType[];
         selectedOption: SortOptionValue;
-        onChange: (option: SortOption) => void;
+        onChange: (option: SortOptionType) => void;
     }) => (
         <div data-testid='picker'>
             {options.map((option) => (

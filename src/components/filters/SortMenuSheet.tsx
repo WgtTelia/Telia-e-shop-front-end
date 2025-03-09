@@ -32,7 +32,7 @@ export const SortMenuSheet: React.FC = () => {
         setSortOption(newOption.value);
     };
 
-    const handleSortOptionChange = (option: SortOption) => {
+    const handleSortOptionChange = (option: SortOptionType) => {
         setSortOption(option.value);
         setIsSheetOpen(false);
     };
