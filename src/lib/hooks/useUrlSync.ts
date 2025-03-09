@@ -17,7 +17,7 @@ export const useUrlSync = () => {
     const searchParams = useSearchParams();
 
     const updateUrl = useCallback(
-        (filtersAndSort: Partial<Filter & { sort: SortOptionValue }>) => {
+        (filtersAndSort: Partial<Filter & { sort: SortOptionValueType }>) => {
             const params = new URLSearchParams(searchParams.toString());
 
             Object.entries(filtersAndSort).forEach(([key, value]) => {
@@ -48,7 +48,7 @@ export const useUrlSync = () => {
 
     const getInitialFiltersAndSort = useCallback(() => {
         const filters: Partial<Pick<Filter, FilterKey>> = {};
-        let sort: SortOptionValue | undefined;
+        let sort: SortOptionValueType | undefined;
 
         FILTER_KEYS.forEach((key) => {
             const backendKey = key === 'productGroups' ? 'productGroup' : key;
@@ -65,7 +65,7 @@ export const useUrlSync = () => {
                 sortParam
             )
         ) {
-            sort = sortParam as SortOptionValue;
+            sort = sortParam as SortOptionValueType;
         }
 
         return { ...filters, sort };

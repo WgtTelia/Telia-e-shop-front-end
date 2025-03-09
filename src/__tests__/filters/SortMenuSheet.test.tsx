@@ -22,7 +22,7 @@ jest.mock('@/components/filters/OptionPicker', () => ({
         onChange,
     }: {
         options: SortOptionType[];
-        selectedOption: SortOptionValue;
+        selectedOption: SortOptionValueType;
         onChange: (option: SortOptionType) => void;
     }) => (
         <div data-testid='picker'>
@@ -54,10 +54,10 @@ describe('SortMenuSheet', () => {
     });
     const mockSetSortOption = jest.fn();
     const mockSetIsSheetOpen = jest.fn();
-    let currentSortOptionValue: SortOptionValue = 'POPULAR_DESC';
+    let currentSortOptionValue: SortOptionValueType = 'POPULAR_DESC';
 
     const renderComponent = (
-        sortOptionValue: SortOptionValue = 'POPULAR_DESC',
+        sortOptionValue: SortOptionValueType = 'POPULAR_DESC',
         isSheetOpen = true
     ) => {
         (useSort as jest.Mock).mockReturnValue({
@@ -78,7 +78,7 @@ describe('SortMenuSheet', () => {
         currentSortOptionValue = 'POPULAR_DESC';
         (useSort as jest.Mock).mockImplementation(() => ({
             sortOption: currentSortOptionValue,
-            setSortOption: (newOption: SortOptionValue) => {
+            setSortOption: (newOption: SortOptionValueType) => {
                 mockSetSortOption(newOption);
                 currentSortOptionValue = newOption;
             },

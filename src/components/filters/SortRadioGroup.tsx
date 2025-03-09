@@ -10,7 +10,7 @@ export const SortRadioGroup = () => {
             <h3 className='font-medium text-gray-750'>Sort by</h3>
             <RadioGroup
                 value={sortOption}
-                onValueChange={(value: SortOptionValue) => {
+                onValueChange={(value: SortOptionValueType) => {
                     setSortOption(value);
                 }}
             >

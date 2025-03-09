@@ -14,13 +14,13 @@ jest.mock('@/context/SortContext', () => ({
     ...jest.requireActual('@/context/SortContext'),
     useSort: jest.fn(),
     SORT_OPTIONS: [
-        { label: 'Most popular' as SortOptionLabel, value: 'POPULAR_DESC' },
+        { label: 'Most popular' as SortOptionLabelType, value: 'POPULAR_DESC' },
         {
-            label: 'Price: lowest to highest' as SortOptionLabel,
+            label: 'Price: lowest to highest' as SortOptionLabelType,
             value: 'PRICE_ASC',
         },
         {
-            label: 'Price: highest to lowest' as SortOptionLabel,
+            label: 'Price: highest to lowest' as SortOptionLabelType,
             value: 'PRICE_DESC',
         },
     ],

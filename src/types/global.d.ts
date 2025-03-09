@@ -34,19 +34,19 @@ declare interface HeroSectionProps {
     description: string;
 }
 
-declare type SortOptionLabel =
+declare type SortOptionLabelType =
     | 'Most popular'
     | 'Price: lowest to highest'
     | 'Price: highest to lowest'
 
-declare type SortOptionValue =
+declare type SortOptionValueType =
     | 'POPULAR_DESC'
     | 'PRICE_ASC'
     | 'PRICE_DESC';
 
 declare type SortOptionType = {
-    label: SortOptionLabel;
-    value: SortOptionValue;
+    label: SortOptionLabelType;
+    value: SortOptionValueType;
 }
 
 

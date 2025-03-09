@@ -16,13 +16,13 @@ export const SORT_OPTIONS: SortOptionType[] = [
 ];
 
 interface SortState {
-    sortOption: SortOptionValue;
+    sortOption: SortOptionValueType;
     isSheetOpen: boolean;
     isDropDownOpen: boolean;
 }
 
 type SortAction =
-    | { type: 'SET_SORT_OPTION'; payload: SortOptionValue }
+    | { type: 'SET_SORT_OPTION'; payload: SortOptionValueType }
     | { type: 'SET_SHEET_OPEN'; payload: boolean }
     | { type: 'SET_DROPDOWN_OPEN'; payload: boolean };
 
@@ -30,7 +30,7 @@ const SET_SORT_OPTION = 'SET_SORT_OPTION';
 const SET_SHEET_OPEN = 'SET_SHEET_OPEN';
 const SET_DROPDOWN_OPEN = 'SET_DROPDOWN_OPEN';
 
-const setSortOption = (option: SortOptionValue): SortAction => ({
+const setSortOption = (option: SortOptionValueType): SortAction => ({
     type: SET_SORT_OPTION,
     payload: option,
 });
@@ -105,7 +105,7 @@ export const useSort = () => {
     }
     return {
         ...context.state,
-        setSortOption: (option: SortOptionValue) =>
+        setSortOption: (option: SortOptionValueType) =>
             context.dispatch(setSortOption(option)),
 
         setIsSheetOpen: (open: boolean) =>
