@@ -1,10 +1,10 @@
 'use client';
 import { Error } from '@/components/apiResponseState/Error';
+import { NoResults } from '@/components/filters/NoResults';
 import { ProductCard } from '@/components/product/ProductCard';
 import { ProductCardSkeleton } from '@/components/product/ProductCardSkeleton';
 import { useFilteredProductsByStock } from '@/lib/hooks/useFilteredProductsByStock';
 import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
-import { NoResults } from '@/components/filters/NoResults';
 
 export const ProductGrid: React.FC = () => {
     const { isLoading: loading, error } = useProductsQuery();

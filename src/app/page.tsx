@@ -1,11 +1,12 @@
+import { FilterButtonsContainer } from '@/components/filters/FilterButtonsContainer';
+import { Filters } from '@/components/filters/Filters';
+import { BannerImage } from '@/components/header/BannerImage';
+import { Header } from '@/components/header/Header';
+import { HeroSection } from '@/components/header/HeroSection';
+import { PaginationGroup } from '@/components/pagination/PaginationGroup';
+import { FilterAndSortProvider } from '@/context/FilterAndSortProvider';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
-import { Filters } from '@/components/filters/Filters';
-import { FilterButtonsContainer } from '@/components/filters/FilterButtonsContainer';
-import { FilterAndSortProvider } from '@/context/FilterAndSortProvider';
-import { BannerImage } from '@/components/header/BannerImage';
-import { HeroSection } from '@/components/header/HeroSection';
-import { Header } from '@/components/header/Header';
 import { Suspense } from 'react';
 
 export const metadata: Metadata = {
@@ -36,8 +37,9 @@ export default function Home() {
                                 <div className='hidden space-y-5 xl:block'>
                                     <Filters />
                                 </div>
-                                <div className='xl:overflow-y-auto xl:p-1'>
+                                <div className='flex flex-col justify-between gap-6 xl:overflow-y-auto xl:p-1'>
                                     <DynamicProductGrid />
+                                    <PaginationGroup />
                                 </div>
                             </div>
                         </FilterAndSortProvider>
