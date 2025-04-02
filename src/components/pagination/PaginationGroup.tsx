@@ -16,8 +16,7 @@ interface PaginationGroupProps {
     className?: string;
     itemsPerPage?: number;
 }
-
-const defaultItemsPerPage = 5;
+export const defaultItemsPerPage = 5;
 
 export const PaginationGroup: React.FC<PaginationGroupProps> = ({
     className,
