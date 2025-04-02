@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
 import productService from '@/lib/services/productService';
+import { useQuery } from '@tanstack/react-query';
 import { CanceledError } from 'axios';
 import { useSearchParams } from 'next/navigation';
 
@@ -18,7 +18,7 @@ export const useProductsQuery = () => {
                 cancel();
             });
             try {
-                return (response.data as APIProductData).content;
+                return response.data as APIProductData;
             } catch (error) {
                 if (error instanceof CanceledError) {
                     console.error('Query canceled');
