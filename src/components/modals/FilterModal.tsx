@@ -1,8 +1,6 @@
 'use client';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
 import { Button } from '@/components/ui/button';
-import { Form } from '@/components/ui/form';
 import {
     Dialog,
     DialogContent,
@@ -10,23 +8,28 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-import { PiSlidersHorizontalBold } from 'react-icons/pi';
-import { useEffect } from 'react';
-import { FilterCheckboxGroup } from '@/components/filters/FilterCheckboxGroup';
+import { Form } from '@/components/ui/form';
 import { useFilter } from '@/context/FilterContext';
+import { useFilteredProductsByStock } from '@/lib/hooks/useFilteredProductsByStock';
 import { getFilterSections } from '@/lib/utils/filterUtils';
 import {
     filterCategories,
     FilterFormType,
     FilterSchema,
 } from '@/lib/utils/validationSchemas';
-import { useFilteredProductsByStock } from '@/lib/hooks/useFilteredProductsByStock';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { PiSlidersHorizontalBold } from 'react-icons/pi';
 
 export const FilterModal: React.FC = () => {
     const { selectedFilters, setIsModalOpen, isModalOpen } = useFilter();
     const { filteredProducts: products } = useFilteredProductsByStock();
+    const searchParams = useSearchParams();
+    const router = useRouter();
 
-    const filterCount = products?.length;
+    const filterCount = products?.length ?? 0;
 
     const form = useForm<FilterFormType>({
         resolver: zodResolver(FilterSchema),
@@ -52,6 +55,10 @@ export const FilterModal: React.FC = () => {
     }, [isModalOpen, selectedFilters, form]);
 
     const handleSubmit = (data: FilterFormType) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set('page', '1');
+        router.push(`?${params.toString()}`, { scroll: false });
+        setIsModalOpen(false);
         // eslint-disable-next-line no-console
         console.log('Form submitted with data:', data);
         setIsModalOpen(false);
