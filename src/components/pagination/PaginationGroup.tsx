@@ -80,9 +80,6 @@ export const PaginationGroup: React.FC<PaginationGroupProps> = ({
         return null;
     }
 
-    console.log(totalProducts, 'totalProducts');
-    console.log(itemsPerPage, 'itemsPerPage');
-
     return (
         <div className={`justify-self-end ${className ?? ''}`}>
             <Pagination aria-label='Product pagination'>
