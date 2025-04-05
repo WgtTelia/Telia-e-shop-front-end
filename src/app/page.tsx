@@ -3,6 +3,7 @@ import { Filters } from '@/components/filters/Filters';
 import { BannerImage } from '@/components/header/BannerImage';
 import { Header } from '@/components/header/Header';
 import { HeroSection } from '@/components/header/HeroSection';
+import { ItemsPerPageSelector } from '@/components/pagination/ItemsPerPageSelector';
 import { PaginationGroup } from '@/components/pagination/PaginationGroup';
 import { FilterAndSortProvider } from '@/context/FilterAndSortProvider';
 import type { Metadata } from 'next';
@@ -37,9 +38,12 @@ export default function Home() {
                                 <div className='hidden space-y-5 xl:block'>
                                     <Filters />
                                 </div>
-                                <div className='flex flex-col justify-between gap-6 xl:overflow-y-auto xl:p-1'>
+                                <div className='flex flex-col xl:overflow-y-auto xl:p-1'>
                                     <DynamicProductGrid />
-                                    <PaginationGroup />
+                                    <div className='mx-auto mt-auto flex w-full justify-center gap-8 border-t-2 pt-6'>
+                                        <PaginationGroup />
+                                        <ItemsPerPageSelector />
+                                    </div>
                                 </div>
                             </div>
                         </FilterAndSortProvider>

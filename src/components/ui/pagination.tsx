@@ -8,7 +8,7 @@ const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
     <nav
         role='navigation'
         aria-label='pagination'
-        className={cn('mx-auto flex w-full justify-center', className)}
+        className={cn('flex justify-center', className)}
         {...props}
     />
 );
@@ -52,6 +52,7 @@ const PaginationLink = ({
                 variant: isActive ? 'outline' : 'ghost',
                 size,
             }),
+            isActive && 'text-primary-foreground bg-primary-active',
             className
         )}
         {...props}
@@ -64,13 +65,17 @@ const PaginationPrevious = ({
     ...props
 }: React.ComponentProps<typeof PaginationLink>) => (
     <PaginationLink
+        title='Previous Page'
         aria-label='Go to previous page'
         size='default'
-        className={cn('gap-1 pl-2.5', className)}
+        className={cn(
+            buttonVariants({ variant: 'outline', size: 'xs' }),
+            'gap-1 pr-2.5',
+            className
+        )}
         {...props}
     >
         <ChevronLeft className='size-4' />
-        <span className='text-base'>Previous</span>
     </PaginationLink>
 );
 PaginationPrevious.displayName = 'PaginationPrevious';
@@ -80,12 +85,16 @@ const PaginationNext = ({
     ...props
 }: React.ComponentProps<typeof PaginationLink>) => (
     <PaginationLink
+        title='Next Page'
         aria-label='Go to next page'
         size='default'
-        className={cn('gap-1 pr-2.5', className)}
+        className={cn(
+            buttonVariants({ variant: 'outline', size: 'xs' }),
+            'gap-1 pr-2.5',
+            className
+        )}
         {...props}
     >
-        <span className='text-base'>Next</span>
         <ChevronRight className='size-4' />
     </PaginationLink>
 );
