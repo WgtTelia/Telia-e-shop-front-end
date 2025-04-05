@@ -16,10 +16,9 @@ interface PaginationGroupProps {
     className?: string;
     itemsPerPage?: number;
 }
-export const defaultItemsPerPage = 5;
+export const defaultItemsPerPage = 2;
 
 export const PaginationGroup: React.FC<PaginationGroupProps> = ({
-    className,
     itemsPerPage = defaultItemsPerPage,
 }) => {
     const searchParams = useSearchParams();
@@ -81,7 +80,7 @@ export const PaginationGroup: React.FC<PaginationGroupProps> = ({
     }
 
     return (
-        <div className={`justify-self-end ${className ?? ''}`}>
+        <>
             <Pagination aria-label='Product pagination'>
                 <PaginationContent>
                     <PaginationItem>
@@ -92,18 +91,18 @@ export const PaginationGroup: React.FC<PaginationGroupProps> = ({
                             className={
                                 currentPage === 1
                                     ? 'pointer-events-none opacity-50'
-                                    : ''
+                                    : 'cursor-pointer'
                             }
                         />
                     </PaginationItem>
 
                     {pageNumbers.map((page, index) => {
-                        const needsEllipsisBefore =
+                        const ellipsisBefore =
                             index > 0 && pageNumbers[index - 1] !== page - 1;
 
                         return (
                             <React.Fragment key={page}>
-                                {needsEllipsisBefore && (
+                                {ellipsisBefore && (
                                     <PaginationItem>
                                         <PaginationEllipsis />
                                     </PaginationItem>
@@ -117,6 +116,7 @@ export const PaginationGroup: React.FC<PaginationGroupProps> = ({
                                             e.preventDefault();
                                             handlePageChange(page);
                                         }}
+                                        className='focus:bg-primary-active'
                                     >
                                         {page}
                                     </PaginationLink>
@@ -133,12 +133,12 @@ export const PaginationGroup: React.FC<PaginationGroupProps> = ({
                             className={
                                 currentPage === totalPages
                                     ? 'pointer-events-none opacity-50'
-                                    : ''
+                                    : 'cursor-pointer'
                             }
                         />
                     </PaginationItem>
                 </PaginationContent>
             </Pagination>
-        </div>
+        </>
     );
 };
