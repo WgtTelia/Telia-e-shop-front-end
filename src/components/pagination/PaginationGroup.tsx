@@ -11,19 +11,16 @@ import {
 import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { defaultItemsPerPage } from './ItemsPerPageSelector';
 
-interface PaginationGroupProps {
-    className?: string;
-    itemsPerPage?: number;
-}
-export const defaultItemsPerPage = 2;
-
-export const PaginationGroup: React.FC<PaginationGroupProps> = ({
-    itemsPerPage = defaultItemsPerPage,
-}) => {
+export const PaginationGroup: React.FC = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const { data } = useProductsQuery();
+    const pageSizeParam = searchParams.get('pageSize');
+    const itemsPerPage = pageSizeParam
+        ? parseInt(pageSizeParam)
+        : defaultItemsPerPage;
     const totalProducts = data?.content.length ?? 0;
     const totalPages = Math.max(1, Math.ceil(totalProducts / itemsPerPage));
 
@@ -80,65 +77,66 @@ export const PaginationGroup: React.FC<PaginationGroupProps> = ({
     }
 
     return (
-        <>
-            <Pagination aria-label='Product pagination'>
-                <PaginationContent>
-                    <PaginationItem>
-                        <PaginationPrevious
-                            onClick={() => handlePageChange(currentPage - 1)}
-                            aria-disabled={currentPage === 1}
-                            tabIndex={currentPage === 1 ? -1 : 0}
-                            className={
-                                currentPage === 1
-                                    ? 'pointer-events-none opacity-50'
-                                    : 'cursor-pointer'
-                            }
-                        />
-                    </PaginationItem>
+        <Pagination
+            aria-label='Product pagination'
+            className='mx-auto mt-auto flex w-full justify-center pt-6'
+        >
+            <PaginationContent>
+                <PaginationItem>
+                    <PaginationPrevious
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        aria-disabled={currentPage === 1}
+                        tabIndex={currentPage === 1 ? -1 : 0}
+                        className={
+                            currentPage === 1
+                                ? 'pointer-events-none opacity-50'
+                                : 'cursor-pointer'
+                        }
+                    />
+                </PaginationItem>
 
-                    {pageNumbers.map((page, index) => {
-                        const ellipsisBefore =
-                            index > 0 && pageNumbers[index - 1] !== page - 1;
+                {pageNumbers.map((page, index) => {
+                    const ellipsisBefore =
+                        index > 0 && pageNumbers[index - 1] !== page - 1;
 
-                        return (
-                            <React.Fragment key={page}>
-                                {ellipsisBefore && (
-                                    <PaginationItem>
-                                        <PaginationEllipsis />
-                                    </PaginationItem>
-                                )}
-
+                    return (
+                        <React.Fragment key={page}>
+                            {ellipsisBefore && (
                                 <PaginationItem>
-                                    <PaginationLink
-                                        href={`?page=${page}`}
-                                        isActive={currentPage === page}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            handlePageChange(page);
-                                        }}
-                                        className='focus:bg-primary-active'
-                                    >
-                                        {page}
-                                    </PaginationLink>
+                                    <PaginationEllipsis />
                                 </PaginationItem>
-                            </React.Fragment>
-                        );
-                    })}
+                            )}
 
-                    <PaginationItem>
-                        <PaginationNext
-                            onClick={() => handlePageChange(currentPage + 1)}
-                            aria-disabled={currentPage === totalPages}
-                            tabIndex={currentPage === totalPages ? -1 : 0}
-                            className={
-                                currentPage === totalPages
-                                    ? 'pointer-events-none opacity-50'
-                                    : 'cursor-pointer'
-                            }
-                        />
-                    </PaginationItem>
-                </PaginationContent>
-            </Pagination>
-        </>
+                            <PaginationItem>
+                                <PaginationLink
+                                    href={`?page=${page}`}
+                                    isActive={currentPage === page}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handlePageChange(page);
+                                    }}
+                                    className='focus:bg-primary-active'
+                                >
+                                    {page}
+                                </PaginationLink>
+                            </PaginationItem>
+                        </React.Fragment>
+                    );
+                })}
+
+                <PaginationItem>
+                    <PaginationNext
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        aria-disabled={currentPage === totalPages}
+                        tabIndex={currentPage === totalPages ? -1 : 0}
+                        className={
+                            currentPage === totalPages
+                                ? 'pointer-events-none opacity-50'
+                                : 'cursor-pointer'
+                        }
+                    />
+                </PaginationItem>
+            </PaginationContent>
+        </Pagination>
     );
 };

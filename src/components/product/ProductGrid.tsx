@@ -1,7 +1,7 @@
 'use client';
 import { Error } from '@/components/apiResponseState/Error';
 import { NoResults } from '@/components/filters/NoResults';
-import { defaultItemsPerPage } from '@/components/pagination/PaginationGroup';
+import { defaultItemsPerPage } from '@/components/pagination/ItemsPerPageSelector'; // Import the constant
 import { ProductCard } from '@/components/product/ProductCard';
 import { ProductCardSkeleton } from '@/components/product/ProductCardSkeleton';
 import { useFilteredProductsByStock } from '@/lib/hooks/useFilteredProductsByStock';
@@ -15,7 +15,10 @@ export const ProductGrid: React.FC = () => {
     const currentPage = searchParams.get('page')
         ? parseInt(searchParams.get('page') as string)
         : 1;
-    const itemsPerPage = defaultItemsPerPage;
+    const pageSizeParam = searchParams.get('pageSize');
+    const itemsPerPage = pageSizeParam
+        ? parseInt(pageSizeParam)
+        : defaultItemsPerPage;
     const skeletons = [1, 2, 3, 4, 5, 6];
 
     const startIndex = (currentPage - 1) * itemsPerPage;
