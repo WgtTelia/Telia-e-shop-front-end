@@ -39,11 +39,9 @@ export default function Home() {
                                     <Filters />
                                 </div>
                                 <div className='flex flex-col xl:overflow-y-auto xl:p-1'>
+                                    <ItemsPerPageSelector />
                                     <DynamicProductGrid />
-                                    <div className='mx-auto mt-auto flex w-full justify-center gap-8 border-t-2 pt-6'>
-                                        <PaginationGroup />
-                                        <ItemsPerPageSelector />
-                                    </div>
+                                    <PaginationGroup />
                                 </div>
                             </div>
                         </FilterAndSortProvider>
