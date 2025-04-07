@@ -80,7 +80,9 @@ export const ItemsPerPageSelector: React.FC<ItemsPerPageSelectorProps> = ({
                     title='Choose items per page'
                 >
                     {selectedItemsPerPage}
-                    <RiArrowDownSLine className='size-8' />
+                    <RiArrowDownSLine
+                        className={`size-8 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
+                    />
                 </Button>
             </div>
 

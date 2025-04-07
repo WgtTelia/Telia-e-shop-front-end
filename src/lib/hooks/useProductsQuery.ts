@@ -1,5 +1,5 @@
 import productService from '@/lib/services/productService';
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { CanceledError } from 'axios';
 import { useSearchParams } from 'next/navigation';
 
@@ -27,6 +27,7 @@ export const useProductsQuery = () => {
                 }
             }
         },
+        placeholderData: keepPreviousData,
         staleTime: 5 * 60 * 1000,
         refetchOnWindowFocus: false,
         refetchOnMount: false,

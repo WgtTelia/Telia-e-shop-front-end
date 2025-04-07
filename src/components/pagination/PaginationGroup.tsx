@@ -111,6 +111,11 @@ export const PaginationGroup: React.FC = () => {
                                 <PaginationLink
                                     href={`?page=${page}`}
                                     isActive={currentPage === page}
+                                    aria-current={
+                                        currentPage === page
+                                            ? 'page'
+                                            : undefined
+                                    }
                                     onClick={(e) => {
                                         e.preventDefault();
                                         handlePageChange(page);
