@@ -3,9 +3,9 @@ import { Filters } from '@/components/filters/Filters';
 import { BannerImage } from '@/components/header/BannerImage';
 import { Header } from '@/components/header/Header';
 import { HeroSection } from '@/components/header/HeroSection';
-import { ItemsPerPageSelector } from '@/components/pagination/ItemsPerPageSelector';
 import { PaginationGroup } from '@/components/pagination/PaginationGroup';
 import { ResultsCount } from '@/components/pagination/ResultsCount';
+import { ItemsPerPageSelector } from '@/components/pagination/ResultsPerPageSelector';
 import { FilterAndSortProvider } from '@/context/FilterAndSortProvider';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
@@ -40,7 +40,7 @@ export default function Home() {
                                     <Filters />
                                 </div>
                                 <div className='flex flex-col xl:overflow-y-auto xl:p-1'>
-                                    <div className='flex w-full flex-col items-center justify-between gap-4 xl:flex-row'>
+                                    <div className='flex w-full flex-row items-center justify-between gap-4'>
                                         <ResultsCount />
                                         <ItemsPerPageSelector />
                                     </div>

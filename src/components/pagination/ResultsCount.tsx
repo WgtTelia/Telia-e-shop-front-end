@@ -6,8 +6,6 @@ export const ResultsCount = () => {
     const totalResults = data?.content.length ?? 0;
 
     return (
-        <div className='hidden text-gray-750 lg:block'>
-            Found {totalResults} results
-        </div>
+        <div className='ps-2 text-gray-750'>Found {totalResults} results</div>
     );
 };

@@ -1,7 +1,7 @@
 'use client';
 import { Error } from '@/components/apiResponseState/Error';
 import { NoResults } from '@/components/filters/NoResults';
-import { defaultItemsPerPage } from '@/components/pagination/ItemsPerPageSelector'; // Import the constant
+import { defaultItemsPerPage } from '@/components/pagination/ResultsPerPageSelector'; // Import the constant
 import { ProductCard } from '@/components/product/ProductCard';
 import { ProductCardSkeleton } from '@/components/product/ProductCardSkeleton';
 import { useFilteredProductsByStock } from '@/lib/hooks/useFilteredProductsByStock';
