@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { getPosition } from '@/lib/utils'; //
+import { getPosition } from '@/lib/utils';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import { IoCheckmarkSharp } from 'react-icons/io5';
@@ -12,7 +12,8 @@ interface ItemsPerPageSelectorProps {
     defaultOption?: number;
 }
 
-export const defaultItemsPerPage = 3;
+//Testing purpose, when
+export const defaultItemsPerPage = 1;
 const defaultOptions = [defaultItemsPerPage, 6, 9];
 
 export const ItemsPerPageSelector: React.FC<ItemsPerPageSelectorProps> = ({
@@ -66,22 +67,25 @@ export const ItemsPerPageSelector: React.FC<ItemsPerPageSelectorProps> = ({
     };
 
     return (
-        <div className='relative my-6 inline-block self-end'>
+        <div className='my-6 inline-block self-end'>
             <div className='flex w-full flex-row items-center justify-between gap-2'>
-                <p className='font-medium text-gray-750'> Items per page:</p>
+                <p className='font-medium text-gray-750'> Results per page:</p>
                 <Button
                     data-testid='items-per-page-button'
                     ref={buttonRef}
-                    variant='outline'
+                    variant='ghost'
                     size='xs'
+                    className='border-input relative border border-primary-dark shadow-sm'
                     iconPosition='left'
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className='text-xl'
                     title='Choose items per page'
+                    aria-haspopup='listbox'
+                    aria-expanded={isDropdownOpen}
+                    aria-controls='dropdown'
                 >
                     {selectedItemsPerPage}
                     <RiArrowDownSLine
-                        className={`size-8 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
+                        className={`size-6 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
                     />
                 </Button>
             </div>
@@ -89,7 +93,7 @@ export const ItemsPerPageSelector: React.FC<ItemsPerPageSelectorProps> = ({
             {isDropdownOpen && (
                 <div
                     ref={dropdownRef}
-                    className='absolute right-0 z-50 mt-2 flex w-1/2 flex-row justify-center justify-self-end rounded-lg border border-gray-800 bg-gray-650 px-0.5 py-1.5 shadow-lg'
+                    className='absolute z-10 mt-2 flex flex-row justify-center justify-self-end rounded-lg border border-gray-800 bg-gray-650 px-3.5 shadow-lg'
                     style={getPosition(buttonRef)}
                     data-testid='dropdown'
                     role='listbox'
@@ -104,7 +108,7 @@ export const ItemsPerPageSelector: React.FC<ItemsPerPageSelectorProps> = ({
                                 onClick={() => handleItemsPerPageChange(option)}
                                 className='w-full justify-start rounded-none border-none text-white transition-colors duration-150 ease-in-out hover:text-white'
                                 icon={
-                                    <span className='mr-0.5 inline-block w-2 pt-1'>
+                                    <span className='mr-1 inline-block w-2 pt-1'>
                                         {selectedItemsPerPage === option && (
                                             <IoCheckmarkSharp className='text-gray-850' />
                                         )}

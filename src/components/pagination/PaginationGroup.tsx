@@ -11,7 +11,7 @@ import {
 import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { defaultItemsPerPage } from './ItemsPerPageSelector';
+import { defaultItemsPerPage } from './ResultsPerPageSelector';
 
 export const PaginationGroup: React.FC = () => {
     const searchParams = useSearchParams();
@@ -55,18 +55,23 @@ export const PaginationGroup: React.FC = () => {
     };
 
     const getPageNumbers = () => {
+        const maxVisible = 5;
         const pageNumbers = new Set<number>();
+
+        //To always show first and last page
         pageNumbers.add(1);
         pageNumbers.add(totalPages);
 
-        for (
-            let i = Math.max(2, currentPage - 1);
-            i <= Math.min(totalPages - 1, currentPage + 1);
-            i++
-        ) {
+        // Calculate range around current page
+        const rangeStart = Math.max(
+            2,
+            currentPage - Math.floor((maxVisible - 2) / 2)
+        );
+        const rangeEnd = Math.min(totalPages - 1, rangeStart + maxVisible - 3);
+
+        for (let i = rangeStart; i <= rangeEnd; i++) {
             pageNumbers.add(i);
         }
-
         return Array.from(pageNumbers).sort((a, b) => a - b);
     };
 
@@ -120,7 +125,7 @@ export const PaginationGroup: React.FC = () => {
                                         e.preventDefault();
                                         handlePageChange(page);
                                     }}
-                                    className='focus:bg-primary-active'
+                                    className='hover:bg-primary-active'
                                 >
                                     {page}
                                 </PaginationLink>
