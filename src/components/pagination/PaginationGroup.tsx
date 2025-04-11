@@ -8,6 +8,7 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from '@/components/ui/pagination';
+import { usePagination } from '@/lib/hooks/usePagination';
 import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -31,51 +32,32 @@ export const PaginationGroup: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(validInitialPage);
 
     useEffect(() => {
-        if (currentPageParam) {
-            const pageNum = parseInt(currentPageParam);
-            if (
-                pageNum >= 1 &&
-                pageNum <= totalPages &&
-                pageNum !== currentPage
-            ) {
-                setCurrentPage(pageNum);
-            }
-        } else if (currentPage !== 1) {
-            setCurrentPage(1);
+        const pageNumFromUrl = currentPageParam
+            ? parseInt(currentPageParam)
+            : 1;
+        const validPageNum = Math.max(1, Math.min(pageNumFromUrl, totalPages));
+
+        if (validPageNum !== currentPage) {
+            setCurrentPage(validPageNum);
         }
-    }, [currentPageParam, totalPages, currentPage]);
+    }, [currentPageParam, totalPages]);
+
+    const { pageNumbers } = usePagination({
+        totalPages,
+        currentPage,
+    });
 
     const handlePageChange = (page: number) => {
+        // Prevent navigation if page is invalid or already active
         if (page < 1 || page > totalPages || page === currentPage) {
             return;
         }
+
         const params = new URLSearchParams(searchParams);
         params.set('page', String(page));
         router.push(`?${params.toString()}`, { scroll: false });
+        // Note: The useEffect above will handle updating the local state `currentPage`
     };
-
-    const getPageNumbers = () => {
-        const maxVisible = 5;
-        const pageNumbers = new Set<number>();
-
-        //To always show first and last page
-        pageNumbers.add(1);
-        pageNumbers.add(totalPages);
-
-        // Calculate range around current page
-        const rangeStart = Math.max(
-            2,
-            currentPage - Math.floor((maxVisible - 2) / 2)
-        );
-        const rangeEnd = Math.min(totalPages - 1, rangeStart + maxVisible - 3);
-
-        for (let i = rangeStart; i <= rangeEnd; i++) {
-            pageNumbers.add(i);
-        }
-        return Array.from(pageNumbers).sort((a, b) => a - b);
-    };
-
-    const pageNumbers = getPageNumbers();
 
     if (totalPages <= 1) {
         return null;
@@ -87,6 +69,7 @@ export const PaginationGroup: React.FC = () => {
             className='mx-auto mt-auto flex w-full justify-center pt-6'
         >
             <PaginationContent>
+                {/* Previous Button */}
                 <PaginationItem>
                     <PaginationPrevious
                         onClick={() => handlePageChange(currentPage - 1)}
@@ -95,18 +78,20 @@ export const PaginationGroup: React.FC = () => {
                         className={
                             currentPage === 1
                                 ? 'pointer-events-none opacity-50'
-                                : 'cursor-pointer'
+                                : 'cursor-pointer hover:bg-primary-active'
                         }
                     />
                 </PaginationItem>
 
+                {/* Page Numbers and Ellipsis */}
                 {pageNumbers.map((page, index) => {
-                    const ellipsisBefore =
+                    // Determine if an ellipsis is needed before this page number
+                    const showEllipsisBefore =
                         index > 0 && pageNumbers[index - 1] !== page - 1;
 
                     return (
                         <React.Fragment key={page}>
-                            {ellipsisBefore && (
+                            {showEllipsisBefore && (
                                 <PaginationItem>
                                     <PaginationEllipsis />
                                 </PaginationItem>
@@ -125,7 +110,7 @@ export const PaginationGroup: React.FC = () => {
                                         e.preventDefault();
                                         handlePageChange(page);
                                     }}
-                                    className='hover:bg-primary-active'
+                                    className={`hover:bg-primary-active ${currentPage !== page ? 'cursor-pointer' : ''}`}
                                 >
                                     {page}
                                 </PaginationLink>
@@ -142,7 +127,7 @@ export const PaginationGroup: React.FC = () => {
                         className={
                             currentPage === totalPages
                                 ? 'pointer-events-none opacity-50'
-                                : 'cursor-pointer'
+                                : 'cursor-pointer hover:bg-primary-active'
                         }
                     />
                 </PaginationItem>
