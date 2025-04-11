@@ -11,13 +11,14 @@ import {
 import { usePagination } from '@/lib/hooks/usePagination';
 import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { defaultItemsPerPage } from './ResultsPerPageSelector';
 
 export const PaginationGroup: React.FC = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const { data } = useProductsQuery();
+
     const pageSizeParam = searchParams.get('pageSize');
     const itemsPerPage = pageSizeParam
         ? parseInt(pageSizeParam)
@@ -25,39 +26,29 @@ export const PaginationGroup: React.FC = () => {
     const totalProducts = data?.content.length ?? 0;
     const totalPages = Math.max(1, Math.ceil(totalProducts / itemsPerPage));
 
-    const currentPageParam = searchParams.get('page');
-    const initialPage = currentPageParam ? parseInt(currentPageParam) : 1;
-
-    const validInitialPage = Math.max(1, Math.min(initialPage, totalPages));
-    const [currentPage, setCurrentPage] = useState(validInitialPage);
-
-    useEffect(() => {
-        const pageNumFromUrl = currentPageParam
-            ? parseInt(currentPageParam)
-            : 1;
-        const validPageNum = Math.max(1, Math.min(pageNumFromUrl, totalPages));
-
-        if (validPageNum !== currentPage) {
-            setCurrentPage(validPageNum);
-        }
-    }, [currentPageParam, totalPages]);
+    const currentPage = useMemo(() => {
+        const pageParam = searchParams.get('page');
+        const pageNum = pageParam ? parseInt(pageParam, 10) : 1;
+        return Math.max(1, Math.min(pageNum, totalPages));
+    }, [searchParams, totalPages]);
 
     const { pageNumbers } = usePagination({
         totalPages,
         currentPage,
     });
 
-    const handlePageChange = (page: number) => {
-        // Prevent navigation if page is invalid or already active
-        if (page < 1 || page > totalPages || page === currentPage) {
-            return;
-        }
-
-        const params = new URLSearchParams(searchParams);
-        params.set('page', String(page));
-        router.push(`?${params.toString()}`, { scroll: false });
-        // Note: The useEffect above will handle updating the local state `currentPage`
-    };
+    const handlePageChange = useCallback(
+        (page: number) => {
+            // Prevent navigation if page is invalid or already active
+            if (page < 1 || page > totalPages || page === currentPage) {
+                return;
+            }
+            const params = new URLSearchParams(searchParams);
+            params.set('page', String(page));
+            router.replace(`?${params.toString()}`, { scroll: false });
+        },
+        [totalPages, currentPage, searchParams, router]
+    );
 
     if (totalPages <= 1) {
         return null;

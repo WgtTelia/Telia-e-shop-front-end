@@ -24,7 +24,8 @@ import { useForm } from 'react-hook-form';
 import { PiSlidersHorizontalBold } from 'react-icons/pi';
 
 export const FilterModal: React.FC = () => {
-    const { selectedFilters, setIsModalOpen, isModalOpen } = useFilter();
+    const { selectedFilters, setIsModalOpen, isModalOpen, toggleCheckbox } =
+        useFilter();
     const { filteredProducts: products } = useFilteredProductsByStock();
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -55,13 +56,27 @@ export const FilterModal: React.FC = () => {
     }, [isModalOpen, selectedFilters, form]);
 
     const handleSubmit = (data: FilterFormType) => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set('page', '1');
-        router.push(`?${params.toString()}`, { scroll: false });
+        filterCategories.forEach((category) => {
+            const currentValues = selectedFilters[category] || [];
+            const newValues = data[category] || [];
+
+            // Find values to uncheck
+            currentValues
+                .filter((val) => !newValues.includes(val))
+                .forEach((val) => {
+                    toggleCheckbox(category, val, false);
+                });
+            // Find values to check
+            newValues
+                .filter((val) => !currentValues.includes(val))
+                .forEach((val) => {
+                    toggleCheckbox(category, val, true);
+                });
+        });
+
         setIsModalOpen(false);
         // eslint-disable-next-line no-console
         console.log('Form submitted with data:', data);
-        setIsModalOpen(false);
     };
     return (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
