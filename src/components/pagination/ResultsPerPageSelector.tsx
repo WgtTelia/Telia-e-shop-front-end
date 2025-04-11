@@ -12,8 +12,8 @@ interface ItemsPerPageSelectorProps {
     defaultOption?: number;
 }
 
-//Testing purpose, when
-export const defaultItemsPerPage = 1;
+//TODO: adjust this when the backend is ready
+export const defaultItemsPerPage = 3;
 const defaultOptions = [defaultItemsPerPage, 6, 9];
 
 export const ItemsPerPageSelector: React.FC<ItemsPerPageSelectorProps> = ({
