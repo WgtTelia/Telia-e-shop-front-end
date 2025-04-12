@@ -18,7 +18,6 @@ import {
     FilterSchema,
 } from '@/lib/utils/validationSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { PiSlidersHorizontalBold } from 'react-icons/pi';
@@ -27,8 +26,6 @@ export const FilterModal: React.FC = () => {
     const { selectedFilters, setIsModalOpen, isModalOpen, toggleCheckbox } =
         useFilter();
     const { filteredProducts: products } = useFilteredProductsByStock();
-    const searchParams = useSearchParams();
-    const router = useRouter();
 
     const filterCount = products?.length ?? 0;
 
