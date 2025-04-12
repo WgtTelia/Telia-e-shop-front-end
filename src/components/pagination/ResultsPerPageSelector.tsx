@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 import { RiArrowDownSLine } from 'react-icons/ri';
 
-interface ItemsPerPageSelectorProps {
+interface ResultsPerPageSelectorProps {
     options?: number[];
     defaultOption?: number;
 }
@@ -16,7 +16,7 @@ interface ItemsPerPageSelectorProps {
 export const defaultItemsPerPage = 3;
 const defaultOptions = [defaultItemsPerPage, 6, 9];
 
-export const ItemsPerPageSelector: React.FC<ItemsPerPageSelectorProps> = ({
+export const ResultsPerPageSelector: React.FC<ResultsPerPageSelectorProps> = ({
     options = defaultOptions,
     defaultOption = defaultItemsPerPage,
 }) => {
