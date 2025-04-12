@@ -1,10 +1,10 @@
-import React from 'react';
-import { render, waitFor, screen } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ProductGrid } from '@/components/product/ProductGrid';
-import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
 import { FilterProvider } from '@/context/FilterContext';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useProductsQuery } from '@/lib/hooks/useProductsQuery';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen, waitFor } from '@testing-library/react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React from 'react';
 
 jest.mock('@/lib/hooks/useProductsQuery.ts');
 jest.mock('next/navigation', () => ({
@@ -68,7 +68,7 @@ describe('<ProductGrid />', () => {
 
     it('renders without crashing', () => {
         (useProductsQuery as jest.Mock).mockReturnValue({
-            data: [],
+            data: { content: [] },
             isLoading: false,
             error: null,
         });
@@ -85,7 +85,7 @@ describe('<ProductGrid />', () => {
 
     it('displays products when loaded successfully', async () => {
         (useProductsQuery as jest.Mock).mockReturnValue({
-            data: mockProducts,
+            data: { content: mockProducts },
             isLoading: false,
             error: null,
         });

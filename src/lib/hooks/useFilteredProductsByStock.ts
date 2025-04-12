@@ -17,7 +17,7 @@ export const useFilteredProductsByStock = () => {
         return selectedFilters.stockOptions.includes(currentStockStatus);
     };
 
-    const filteredProducts = products?.filter((product) => {
+    const filteredProducts = products?.content?.filter((product) => {
         return matchesStock(product);
     });
 

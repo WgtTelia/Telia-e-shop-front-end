@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
 import productService from '@/lib/services/productService';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { CanceledError } from 'axios';
 import { useSearchParams } from 'next/navigation';
 
@@ -18,7 +18,7 @@ export const useProductsQuery = () => {
                 cancel();
             });
             try {
-                return (response.data as APIProductData).content;
+                return response.data as APIProductData;
             } catch (error) {
                 if (error instanceof CanceledError) {
                     console.error('Query canceled');
@@ -27,6 +27,7 @@ export const useProductsQuery = () => {
                 }
             }
         },
+        placeholderData: keepPreviousData,
         staleTime: 5 * 60 * 1000,
         refetchOnWindowFocus: false,
         refetchOnMount: false,

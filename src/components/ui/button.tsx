@@ -1,11 +1,11 @@
-import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-    'inline-flex items-center justify-center whitespace-nowrap rounded-full text-base font-normal ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300',
+    'inline-flex items-center justify-center whitespace-nowrap rounded-full text-base font-normal ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300 ',
     {
         variants: {
             variant: {
@@ -14,7 +14,7 @@ const buttonVariants = cva(
                 destructive:
                     'bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90',
                 outline:
-                    'border border-primary-dark bg-white hover:bg-primary-active hover:text-primary-dark focus-visible:ring-primary-light focus-visible:ring-offset-2 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50',
+                    'border-input bg-background hover:bg-accent hover:text-accent-foreground border border-primary-dark  bg-white shadow-sm hover:bg-primary-active hover:text-primary-dark focus-visible:ring-primary-light focus-visible:ring-offset-2',
                 secondary:
                     'bg-primary-dark text-white hover:bg-primary focus-visible:ring-primary-light focus-visible:ring-offset-2 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
                 ghost: 'hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',

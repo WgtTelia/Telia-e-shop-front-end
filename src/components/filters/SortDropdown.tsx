@@ -1,9 +1,9 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
-import { SORT_OPTIONS, useSort } from '@/context/SortContext';
 import { Button } from '@/components/ui/button';
-import { IoCheckmarkSharp } from 'react-icons/io5';
+import { SORT_OPTIONS, useSort } from '@/context/SortContext';
 import { getPosition } from '@/lib/utils';
+import React, { useEffect, useRef } from 'react';
+import { IoCheckmarkSharp } from 'react-icons/io5';
 
 interface SortDropdownProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
